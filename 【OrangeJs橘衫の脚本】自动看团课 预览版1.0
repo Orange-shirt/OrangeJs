@@ -3,12 +3,12 @@ requestScreenCapture(); //请求截屏权限
 
 context_GZH = ("三秦青年"); //定义公众号名称
 context_DXX = ("“青年大学习”第七季第八期来啦！"); //定义“大学习”标题
-
+toastLog("本脚本目前仅支持陕西地区的高校");
 schoolname();
 
 function schoolname() {
-    toastLog("本脚本目前仅支持陕西地区的高校");
-    context_school = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n  —— 自动看团课 ——\n（预览版preview1.0）\n\n请输入学校全称", "陕西工业职业技术学院");
+    
+    context_school = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n  —— 自动看团课 ——\n（预览版preview1.0）\n\n请输入学校全称");
     while (context_school == "") {
         toastLog("没有输入！请输入学校名称");
         schoolname();
@@ -23,7 +23,7 @@ function schoolname() {
 }
 
 function TwolevelcollegeName() {
-    context_Twolevelcollege = dialogs.prompt("请输入二级学校名称", "航空工程学院");
+    context_Twolevelcollege = dialogs.prompt("请输入二级学校名称");
     while (context_Twolevelcollege == "") {
         toastLog("没有输入二级学院名称\n请重新输入");
         TwolevelcollegeName();
@@ -38,7 +38,7 @@ function TwolevelcollegeName() {
 }
 
 function ClassName() {
-    context_Class = dialogs.prompt("请输入班级", "机电1804班");
+    context_Class = dialogs.prompt("请输入班级");
     while (context_Class == "") {
         toastLog("没有输入班级名称\n请重新输入");
         ClassName();
