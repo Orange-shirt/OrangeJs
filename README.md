@@ -14,3 +14,5 @@
 ***一条龙服务，首次进入的用户可自动填入个人信息，可自动打开微信到“青年大学习”界面观看团课，并在团课开始时以及观看完成后自动截图并保存！同时包含自动答题，包括视频弹出来的所有测验题和课后习题!***
 
 ***很快本脚本就会支持更多分辨率以及其它省份的公众号啦～***
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
