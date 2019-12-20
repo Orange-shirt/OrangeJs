@@ -1,21 +1,112 @@
 requestScreenCapture(); //请求截屏权限
 //⚠️注意！这个函数↑只能在脚本开始使用，在其他应用界面可能会一闪而过
-
-context_GZH = ("三秦青年"); //定义公众号名称
+context_width = device.width;
+toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
+auto.waitFor();
+toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
 context_DXX = ("“青年大学习”第七季第八期来啦！"); //定义“大学习”标题
-toastLog("本脚本目前仅支持陕西地区的高校");
-schoolname();
+context_TKScript_Vesion = ("预览版preview1.0")
+//下面是悬浮窗
+var window = floaty.window(
+    <frame>
+        <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336"/>
+    </frame>
+);
+setInterval(() => {}, 1000);
+var execution = null;
+//记录按键被按下时的触摸坐标
+var x = 0,
+    y = 0;
+//记录按键被按下时的悬浮窗位置
+var windowX, windowY;
+//记录按键被按下的时间以便判断长按等动作
+var downTime;
+window.action.setOnTouchListener(function(view, event) {
+    switch (event.getAction()) {
+        case event.ACTION_DOWN:
+            x = event.getRawX();
+            y = event.getRawY();
+            windowX = window.getX();
+            windowY = window.getY();
+            downTime = new Date().getTime();
+            return true;
+        case event.ACTION_MOVE:
+            //移动手指时调整悬浮窗位置
+            window.setPosition(windowX + (event.getRawX() - x),
+                windowY + (event.getRawY() - y));
+            //如果按下的时间超过1.5秒判断为长按，提示可以移动悬浮窗位置
+            if (new Date().getTime() - downTime > 1500) {
+                toast("长按可以移动位置哦～");
+            }
+            return true;
+        case event.ACTION_UP:
+            //手指弹起时如果偏移很小则判断为点击
+            if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
+                onClick();
+            }
+            return true;
+    }
+    return true;
+});
+function onClick() {
+    dialogs.alert("已停止运行脚本！");
+    log("用户点击了停止按钮");
+    engines.stopAllAndToast();
+}
+
+//在运行时就检测是否有设置文件，没有若则进行设置
+var Script_Settings = files.exists("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt");
+log("设置文件" + Script_Settings);
+if (Script_Settings == false) {
+    GZHname();
+    context_GZH = context_Setting_gzh;
+    files.ensureDir("/storage/emulated/0/OrangeJs/团课脚本设置/"); //确保文件夹
+    files.create("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt"); //创建设置文件
+    files.write("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt", context_Setting_gzh + "\n" + context_school + "\n" + context_Twolevelcollege + "\n" + context_Class + "\n" + context_Name); //写入设置
+    Open_In();
+    mainJs();
+} else {
+    var h = open("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt"); //打开设置文件
+    var x = h.readlines();
+    context_Setting_gzh = x[0]; //公众号
+    context_GZH = context_Setting_gzh;
+    context_school = x[1]; //学校名称
+    context_Twolevelcollege = x[2]; //二级学院名称
+    context_Class = x[3]; //班级名称
+    context_Name = x[4]; //姓名
+    Confirm_information();
+    Open_In();
+    mainJs();
+}
+
+function GZHname() {
+    var GZH_Name = ["三秦青年", "青年湖南"];
+    var Setting_gzh = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请选择公众号\n1⃣ — 2 — 3 — 4 — 5", GZH_Name);
+    //将选择的公众号转换为文本
+    if (Setting_gzh >= 0) {
+        if (context_Setting_gzh == "三秦青年") {
+            context_kuaijieAN = ("青年大学习");
+        } else {
+            context_kuaijieAN = ("null");
+        }
+        context_Setting_gzh = GZH_Name[Setting_gzh];
+    } else if (Setting_gzh < 0) {
+        toastLog("没有选择！停止运行脚本！");
+        exit();
+    }
+    schoolname();
+}
 
 function schoolname() {
-    
-    context_school = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n  —— 自动看团课 ——\n（预览版preview1.0）\n\n请输入学校全称");
+
+    context_school = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n     —— 自动看团课 ——\n   （" + context_TKScript_Vesion + "）\n─────────────\n请输入学校全称\n1✔️- 2⃣ — 3 — 4 — 5");
     while (context_school == "") {
         toastLog("没有输入！请输入学校名称");
         schoolname();
     }
     if (context_school == null) {
-        toastLog("没有输入！停止运行脚本");
-        exit();
+        toastLog("没有输入!返回上一级");
+        GZHname();
     } else {
         toastLog("您输入的学校名称:\n" + context_school);
         TwolevelcollegeName();
@@ -23,7 +114,7 @@ function schoolname() {
 }
 
 function TwolevelcollegeName() {
-    context_Twolevelcollege = dialogs.prompt("请输入二级学校名称");
+    context_Twolevelcollege = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请输入二级学校名称\n1✔️-2✔️- 3⃣ — 4 — 5");
     while (context_Twolevelcollege == "") {
         toastLog("没有输入二级学院名称\n请重新输入");
         TwolevelcollegeName();
@@ -38,7 +129,7 @@ function TwolevelcollegeName() {
 }
 
 function ClassName() {
-    context_Class = dialogs.prompt("请输入班级");
+    context_Class = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请输入班级\n1✔️-2✔️-3✔️- 4⃣ — 5");
     while (context_Class == "") {
         toastLog("没有输入班级名称\n请重新输入");
         ClassName();
@@ -53,7 +144,7 @@ function ClassName() {
 }
 
 function MyName() {
-    context_Name = dialogs.prompt("请输入姓名");
+    context_Name = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请输入姓名\n1✔️-2✔️-3✔️-4✔️- 5⃣");
     while (context_Name == "") {
         toastLog("没有输入姓名！\n请输入姓名");
         MyName();
@@ -68,14 +159,20 @@ function MyName() {
 }
 
 function Confirm_information() {
-    var confirm = dialogs.confirm("请确认您输入的信息\n\n学校名称:" + context_school + "\n二级学院名称:" + context_Twolevelcollege + "\n班级名称:" + context_Class + "\n您的姓名:" + context_Name);
+    var confirm = dialogs.confirm("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n\n请确认您输入的信息\n─────────────\n团课公众号:" + context_Setting_gzh + "\n学校名称:" + context_school + "\n二级学院名称:" + context_Twolevelcollege + "\n班级名称:" + context_Class + "\n您的姓名:" + context_Name);
     if (confirm) {
+        if (context_Setting_gzh == "三秦青年") {
+            context_kuaijieAN = ("青年大学习");
+        } else {
+            context_kuaijieAN = ("null");
+        }
         toastLog("已确认信息无误！\n开始运行脚本...");
-        Open_In();
-        mainJs();
+        files.ensureDir("/storage/emulated/0/OrangeJs/团课脚本设置/"); //确保文件夹
+        files.create("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt"); //创建设置文件
+        files.write("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt", context_Setting_gzh + "\n" + context_school + "\n" + context_Twolevelcollege + "\n" + context_Class + "\n" + context_Name); //写入设置
     } else {
-        toastLog("取消了信息确认，返回上一级");
-        MyName();
+        toastLog("取消了信息确认\n重新填写信息");
+        GZHname();
     }
 }
 
@@ -160,22 +257,153 @@ function Open_In() {
         click(Dian_textGzh.centerX(), Dian_textGzh.centerY());
         sleep(1000);
     }
-    text("青年大学习").waitFor();
-    //点击“青年大学习”
-    if (text("青年大学习").exists()) {
-        text("青年大学习").findOne().click();
-        sleep(1000);
-    }
-    var deng_XuexiJM = 10;
-    for (deng_XuexiJM == 10; deng_XuexiJM > 0; deng_XuexiJM--) {
+
+    if (context_kuaijieAN == "青年大学习") {
+        qndxx_exists();
+    } else if (context_kuaijieAN == "null") {
+        className("android.view.View").text(context_Setting_gzh).waitFor();
+        var wait_View = className("android.view.View").text(context_Setting_gzh).findOne();
+        var View_bounds = wait_View.bounds(); //第十三个View控件需要为公众号名称
+        click(View_bounds.centerX(), View_bounds.centerY());
         sleep(2000);
-        toastLog("正在等待文章加载……\n剩余" + deng_XuexiJM + "秒……");
-    }
-    if (text("阅读原文").exists) {
-        text("阅读原文").findOne().click();
+        if (text("进入公众号").exists) {
+            var a = text("进入公众号").findOne().bounds();
+            click(a.centerX(), a.centerY())
+            sleep(3000);
+        } else if (text("关注公众号").exists()) {
+            var a = text("关注公众号").findOne().bounds();
+            click(a.centerX(), a.centerY())
+            sleep(3000);
+        }
+        id("ko").waitFor();
+        var ko_text = id("ko").className("android.widget.TextView").findOne();
+        var ko_textF = ko_text.text();
+        if (ko_textF == "青年湖南") {
+            var DXX = id("an0").className("android.widget.TextView").find();
+            var DXXid = DXX[1]; //第二个按钮为“大学习”
+            var DXXbounds = DXXid.bounds();
+            click(DXXbounds.centerX(), DXXbounds.centerY());
+            text("签到学习").waitFor();
+            if (text("签到学习").exists()) {
+                var t = text("签到学习").findOne().bounds();
+                click(t.centerX(), t.centerY());
+                dengdaiWebkit();
+                if (text("开始我的学习").exists()) {
+                    var StartXue = text("开始我的学习").findOne().bounds();
+                    click(StartXue.centerX(), StartXue.centerY());
+                } else if (text("省属高校").exists()) {
+                    var SsGx = text("省属高校").findOne().bounds();
+                    click(SsGx.centerX(), SsGx.centerY());
+                    sleep(3000);
+                    var M = className("android.widget.Spinner").find();
+                    var Spinner_school = M[0].bounds();
+                    click(Spinner_school.centerX(), Spinner_school.centerY());
+                    sleep(1000);
+                    if (text(context_school).exists()) {
+                        textContains(context_school).findOne().click();
+                        sleep(1000);
+                    } else {
+                        context_loop = 1;
+                        while (context_loop == 1) {
+                            var G = className("android.widget.ListView").findOne().bounds();
+                            swipe(G.centerX(), G.centerY(), G.centerX(), G.centerY() - 200, 500);
+                            if (text(context_school).exists()) {
+                                textContains(context_school).findOne().click();
+                                context_loop = 0;
+                                sleep(1000);
+                            }
+                        }
+                    }
+                    var Spinner_TwoSchool = M[1].bounds();
+                    click(Spinner_TwoSchool.centerX(), Spinner_TwoSchool.centerY());
+                    sleep(1000);
+                    if (text(context_Twolevelcollege).exists()) {
+                        textContains(context_Twolevelcollege).findOne().click();
+                        sleep(1000);
+                    } else {
+                        context_loop = 1;
+                        while (context_loop == 1) {
+                            var G = className("android.widget.ListView").findOne().bounds();
+                            swipe(G.centerX(), G.centerY(), G.centerX(), G.centerY() - 200, 500);
+                            if (text(context_Twolevelcollege).exists()) {
+                                textContains(context_Twolevelcollege).findOne().click();
+                                context_loop = 0;
+                                sleep(1000);
+                            }
+                        }
+                    }
+                    var Spinner_class = M[2].bounds();
+                    click(Spinner_class.centerX(), Spinner_class.centerY());
+                    sleep(1000);
+                    if (text(context_Class).exists()) {
+                        textContains(context_Class).findOne().click();
+                        sleep(1000);
+                    } else {
+                        context_loop = 1;
+                        while (context_loop == 1) {
+                            var G = className("android.widget.ListView").findOne().bounds();
+                            swipe(G.centerX(), G.centerY(), G.centerX(), G.centerY() - 200, 500);
+                            if (text(context_Class).exists()) {
+                                textContains(context_Class).findOne().click();
+                                context_loop = 0;
+                                sleep(1000);
+                            }
+                        }
+                    }
+                    //截屏
+                    files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+                    images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图1.png");
+                    toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
+                    text("下一步").findOne().click();
+                    sleep(2000);
+                    setText(context_Name);
+                    //截屏
+                    files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+                    images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图2.png");
+                    toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
+                    sleep(1000);
+                    text("提交").findOne().click();
+                    text("开始我的学习").waitFor();
+                    //截屏
+                    files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+                    images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图3.png");
+                    toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
+                    if (text("开始我的学习").exists()) {
+                        textContains("开始我的学习").findOne().click();
+                        sleep(1000);
+                    }
+                } //青年湖南“省属高校”判断首次进入并填写信息
+            }
+        } //公众号为“青年湖南”的点击
+    } //没有快捷入口的点击
+
+    //qndxx_exists()为青年大学习按钮存在且点击后有文章通过阅读原文跳转或直接跳转
+    function qndxx_exists() {
+        text("青年大学习").waitFor();
+        //点击“青年大学习”
+        if (text("青年大学习").exists()) {
+            text("青年大学习").findOne().click();
+            sleep(3000);
+            dengdaiWebkit();
+            if (text("阅读原文").exists) {
+                text("阅读原文").findOne().click();
+            }
+        }
     }
 
-
+    function dengdaiWebkit() {
+        sleep(3000);
+        var One_WebView = className("android.webkit.WebView").find();
+        var Two_WebView = One_WebView[1].text();
+        //如果点击非大学习标题则进行等待
+        if (Two_WebView != context_DXX) {
+            var deng_XuexiJM = 10;
+            for (deng_XuexiJM == 10; deng_XuexiJM > 0; deng_XuexiJM--) {
+                sleep(2000);
+                toastLog("正在等待页面加载……\n剩余" + deng_XuexiJM + "秒……");
+            }
+        }
+    }
     toastLog("打开“大学习界面”执行完毕\n执行学习任务……");
 }
 
@@ -190,7 +418,6 @@ function mainJs() {
     var One_WebView = className("android.webkit.WebView").find();
     var Two_WebView = One_WebView[1].text();
     if (Two_WebView == "陕西省青年大学习") {
-
         //判断“各高校”是否存在，如果存在则填入信息
         if (textContains("陕西省青年大学习").exists) {
             sleep(3000);
@@ -224,6 +451,7 @@ function mainJs() {
                                 //截屏
                                 files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
                                 images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图.png");
+                                toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
                                 sleep(3000);
                                 if (text("确定").exists()) {
                                     text("确定").findOne().click();
@@ -279,11 +507,13 @@ function mainJs() {
         }
         var One = className("android.view.View").find();
         var Two = One[9].bounds();
-        swipe(Two.centerX(), Two.centerY(), Two.centerX() + 250, Two.centerY() - 685, 500);
         var three = One[13].bounds();
-        swipe(three.centerX(), three.centerY(), three.centerX() - 485, three.centerY() - 730, 500);
         var four = One[10].bounds();
-        swipe(four.centerX(), four.centerY(), four.centerX() + 230, four.centerY() - 560, 500);
+        if (context_width == 1080) {
+            swipe(Two.centerX(), Two.centerY(), Two.centerX() + 250, 530, 500);
+            swipe(three.centerX(), three.centerY(), three.centerX() - 485, 650, 500);
+            swipe(four.centerX(), four.centerY(), four.centerX() + 230, 650, 500);
+        }
         var five = One[14].bounds();
         click(five.centerX(), five.centerY());
 
