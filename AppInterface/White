@@ -111,7 +111,8 @@ function mainUi() {
         //水平线性布局
         <linear orientation="horizontal" align="center" margin="5">
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30" margin="10 175 0 0" tint="{{context_textColor}}" bg="{{context_textBg}}"/>
-            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD" margin="110 185 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
+            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD" margin="90 185 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
+            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD" margin="10 185 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
         </linear>
         <text bg="{{context_textBg}}" marginTop="200"/>
         </vertical>
@@ -120,46 +121,78 @@ function mainUi() {
     );
 
     ui.ScriptOne_tip.click(() => {
-        engines.execScript("自动看团课","runScriptOne();\n"+runScriptOne.toString());
+        engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
     });
-    function runScriptOne() {
-            var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0"; //第一个脚本网址
-            var res_script = http.get(ScriptOne_Url, {
-                headers: {
-                    'Accept-Language': 'en-us,en;q=0.5',
-                    'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-                }
-            });
 
-            if (res_script.statusCode == 200) {
-                toastLog("脚本获取成功");
-                var OrangeJs = res_script.body.string();
-                engines.execScript("自动看团课", OrangeJs);
-            } else {
-                toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+    function runScriptOne() {
+        var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0"; //第一个脚本网址
+        var res_script = http.get(ScriptOne_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
             }
+        });
+
+        if (res_script.statusCode == 200) {
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动看团课", OrangeJs);
+        } else {
+            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
+    }
     ui.ScriptTwo_tip.click(() => {
-        engines.execScript("自动集福气","runScriptTwo();\n"+runScriptTwo.toString());
+        engines.execScript("自动集福气", "runScriptTwo();\n" + runScriptTwo.toString());
     });
+
     function runScriptTwo() {
-            var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94"; //第二个脚本网址
-            var res_script = http.get(ScriptTwo_Url, {
-                headers: {
-                    'Accept-Language': 'en-us,en;q=0.5',
-                    'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-                }
-            });
-            if (res_script.statusCode == 200) {
-                toastLog("脚本获取成功");
-                var OrangeJs = res_script.body.string();
-                engines.execScript("自动集福气", OrangeJs);
-            } else {
-                toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94"; //第二个脚本网址
+        var res_script = http.get(ScriptTwo_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
             }
+        });
+        if (res_script.statusCode == 200) {
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动集福气", OrangeJs);
+        } else {
+            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
+    }
+    ui.TalktoDeveloper.click(() => {
+        engines.execScript(TalkToDeveloper());
+    });
+
+    function TalkToDeveloper() {
+        events.removeAllListeners();
+        ui.layout(
+            <frame>
+                <vertical align="left">
+                <linear orientation="horizontal" align="left" margin="0" >
+                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
+                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
+                    <text text="问题反馈" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
+                    <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
+                </linear>
+                    <ScrollView>
+                        <webview id="webview"/> 
+                    </ScrollView>
+                    
+                </vertical>
+                <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
+                margin="16" layout_gravity="bottom|right" tint="#ffffff" />
+            </frame>
+        );
+        ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
+        ui.Back.click(() => {
+            engines.execScript(mainUi());
+        });
+    }
 
     ui.ScriptOne_tip.text("脚本分辨率支持：1920*1080");
+
 
     ui.text.text("权限设置");
 
@@ -177,8 +210,9 @@ function mainUi() {
         } else {
             ui.xfc_text.text("急停悬浮按钮：关");
         }*/
-            engines.stopAllAndToast();
+        engines.stopAllAndToast();
     });
+
 
     ui.changeColor.click(() => { //更换主题(仅可更换10次)
         if (context_DayOrNight == 1) {
@@ -232,6 +266,7 @@ function mainUi() {
 
 function SP() {
 
+    events.removeAllListeners();
     ui.statusBarColor("#2196F3"); //通知栏颜色
     //Not pink色是#DFC8C6
     ui.layout(
@@ -243,7 +278,7 @@ function SP() {
                 </linear>
                 <ScrollView>
                     <linear orientation="vertical" align="left" margin="0" paddingTop="0">
-                        <text text="隐私与安全" textSize="20" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
+                        <text text="隐私与安全（完善中……）" textSize="20" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
                         <text text="文档日期:2020年1月4日" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans"/>
                         <text id="Privacy" color="#F5F5F5" textStyle="bold" typeface="sans">
                         </text>
@@ -257,6 +292,8 @@ function SP() {
                     </linear>
                 </ScrollView>
             </vertical>
+            <fab id="back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
+            margin="16" layout_gravity="bottom|right" tint="#ffffff" />
         </frame>
     );
 
@@ -268,6 +305,9 @@ function SP() {
             "\n\n“悬浮窗权限”是为了显示“停止运行脚本”等需要此权限才能使用的悬浮控件" +
             "\n\n“联网权限”是本软件最重要的权限，软件的所有源码存储在网络，您必须联网获取后才能正常运行。这样的设计是为了方便更新以及提升体验，因此您无需操作即可同步最新代码");
 
+    });
+    ui.back.click(() => {
+        engines.execScript(mainUi());
     });
     ui.Q1.click(() => { //为什么要收集信息？
         ui.A1.text("");
