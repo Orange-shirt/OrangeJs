@@ -91,7 +91,7 @@ function mainUi() {
         <vertical padding="0 0" h="auto">
         </vertical>
         <View bg="#FFEF5350" h="*" w="*"/>//打底卡片颜色1
-        <text id="ScriptTwo" text="自动集福气" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
+        <text id="ScriptTwo" text="自动集福气（淘宝）" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
         </text>
         <text id="ScriptTwo_tip"  textStyle="bold" color="#FFFFFF" bg="#1E88E5" gravity="center" size="10" marginTop="100" h="35">
         </text>
@@ -101,8 +101,19 @@ function mainUi() {
         cardElevation="0dp" gravity="center_vertical">
         <vertical padding="0 0" h="auto">
         </vertical>
+        <View bg="#FF00BCD4" h="*" w="*"/>//打底卡片颜色1
+        <text id="ScriptThree" text="自动炸年兽（京东）" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
+        </text>
+        <text id="ScriptThree_tip"  textStyle="bold" color="#FFFFFF" bg="#81C784" gravity="center" size="10" marginTop="100" h="35">
+        </text>
+        </card>
+        //第三个可运行脚本
+        <card h="100" margin="5 8" cardCornerRadius="2dp"
+        cardElevation="0dp" gravity="center_vertical">
+        <vertical padding="0 0" h="auto">
+        </vertical>
         <View bg="#FF2BB75E" h="*" w="*"/>//打底卡片颜色1
-        <text id="ScriptOne" text="自动看团课" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
+        <text id="ScriptOne" text="自动看团课（微信）" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
         </text>
         <text id="ScriptOne_tip"  textStyle="bold" color="#FFFFFF" bg="#81C784" gravity="center" size="10" marginTop="100" h="35">
         </text>
@@ -110,9 +121,10 @@ function mainUi() {
         
         //水平线性布局
         <linear orientation="horizontal" align="center" margin="5">
-            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30" margin="10 175 0 0" tint="{{context_textColor}}" bg="{{context_textBg}}"/>
-            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD" margin="90 185 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
-            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD" margin="10 185 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
+            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30" margin="10 60 0 0" tint="{{context_textColor}}" bg="{{context_textBg}}"/>
+            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD" margin="60 70 0 0" bg="{{context_textBg}}" gravity="center_vertical" textSize="12sp"/>
+            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD" margin="10 70 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
+            <text id="TalktoDeveloper" text="关于软件" color="#BDBDBD" margin="10 70 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
         </linear>
         <text bg="{{context_textBg}}" marginTop="200"/>
         </vertical>
@@ -141,6 +153,11 @@ function mainUi() {
             toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
+    ui.ScriptThree.on('click', () => { 
+        animator = ObjectAnimator.ofFloat(ui.ScriptThree_tip, "translationY", 0, -200, -200, -200);  
+        animator.setDuration(3000); //动画时间      
+        animator.start();
+    });
     ui.ScriptTwo_tip.click(() => {
         engines.execScript("自动集福气", "runScriptTwo();\n" + runScriptTwo.toString());
     });
@@ -161,6 +178,27 @@ function mainUi() {
             toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
+    ui.ScriptThree_tip.click(() => {
+        engines.execScript("自动炸年兽", "runScriptThree();\n" + runScriptThree.toString());
+    });
+
+    function runScriptThree() {
+        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E7%82%B8%E5%B9%B4%E5%85%BD-%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC"; //第三个脚本网址
+        var res_script = http.get(ScriptTwo_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动炸年兽", OrangeJs);
+        } else {
+            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
     ui.TalktoDeveloper.click(() => {
         engines.execScript(TalkToDeveloper());
     });
@@ -170,14 +208,14 @@ function mainUi() {
         ui.layout(
             <frame>
                 <vertical align="left">
-                <linear orientation="horizontal" align="left" margin="0" >
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
-                    <text text="问题反馈" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
-                    <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
-                </linear>
+                    <linear orientation="horizontal" align="left" margin="0" >
+                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
+                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
+                        <text text="问题反馈" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
+                        <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
+                    </linear>
                     <ScrollView>
-                        <webview id="webview"/> 
+                        <webview id="webview"/>
                     </ScrollView>
                     
                 </vertical>
@@ -229,6 +267,7 @@ function mainUi() {
         animator.start();
     });
     ui.ScriptTwo_tip.text("开始运行");
+    ui.ScriptThree_tip.text("开始运行");
 
     ui.ScriptOne.on('click', () => { 
         animator = ObjectAnimator.ofFloat(ui.ScriptOne_tip, "translationY", 0, -200, -200, -200);  
