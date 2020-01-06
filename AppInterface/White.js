@@ -266,7 +266,7 @@ function mainUi() {
         animator.setDuration(3000); //动画时间      
         animator.start();
     });
-    ui.ScriptTwo_tip.text("（BUG修复中……）");
+    ui.ScriptTwo_tip.text("（已尝试修复，开始运行）");
     ui.ScriptThree_tip.text("开始运行");
 
     ui.ScriptOne.on('click', () => { 
