@@ -339,7 +339,7 @@ function mainUi() {
         animator.start();
     });
     ui.ScriptTwo_tip.text("开始运行");
-    ui.ScriptThree_tip.text("BUG定位修复中……");
+    ui.ScriptThree_tip.text("已尝试修复问题，点击运行");
 
     ui.ScriptOne.on('click', () => { 
         animator = ObjectAnimator.ofFloat(ui.ScriptOne_tip, "translationY", 0, -200, -200, -200);  
