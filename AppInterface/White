@@ -36,7 +36,7 @@ function mainUi() {
     //Not pink色是#DFC8C6
     ui.layout(
         <ScrollView>
-            <frame w="*" h="*" id="main" background="{{context_framebg}}">//全局背景颜色
+            <frame w="*" h="auto" id="main" background="{{context_framebg}}">//全局背景颜色
                 <vertical align="center" paddingTop="5" margin="0">
                     <img src="{{context_Logo}}" w="auto" h="40"/>//黑色logo
                     <text id="text" marginLeft="25" textStyle="bold" color="{{context_textColor}}" bg="{{context_textBg}}" gravity="left" size="20" marginTop="10" h="auto">
@@ -121,11 +121,11 @@ function mainUi() {
         </card>
         
         //水平线性布局
-        <linear orientation="horizontal" align="center" margin="5">
-            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30" margin="10 60 0 0" tint="{{context_textColor}}" bg="{{context_textBg}}"/>
-            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD" margin="60 70 0 0" bg="{{context_textBg}}" gravity="center_vertical" textSize="12sp"/>
-            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD" margin="10 70 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
-            <text id="AboutApp" text="关于软件" color="#BDBDBD" margin="10 70 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
+        <linear orientation="horizontal" align="center" margin="5 20 5 100" >
+            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="25" layout_gravity="center"/>
+            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="25" layout_gravity="center" />
+            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="25" layout_gravity="center" />
+            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="25" layout_gravity="center"/>
         </linear>
         </vertical>
         </frame>
@@ -235,31 +235,32 @@ function mainUi() {
     function AboutApp() {
         events.removeAllListeners();
         ui.layout(
-            <frame w="*" h="*" background="{{context_framebg}}">
-                <vertical align="center">
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" marginTop="50" w="auto"h="50" gravity="center"/>//应用logo
-                    <img src="{{context_Logo}}" w="auto"h="50" gravity="center"/>//黑色logo
+            <ScrollView>
+                <frame w="*" h="*" background="{{context_framebg}}">
+                    <vertical align="center">
+                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" marginTop="50" w="auto"h="50" gravity="center"/>//应用logo
+                        <img src="{{context_Logo}}" w="auto"h="50" gravity="center"/>//黑色logo
+                        <card  h="5" marginTop="10" cardCornerRadius="0dp"
+                        cardElevation="0dp" gravity="center_vertical">
+                        <vertical padding="0 0" h="auto">
+                        </vertical>
+                        <View bg="#FFEA3324" h="*" w="*"/>//卡片颜色1
+                    </card>
+                    <text text="软件及脚本开发者" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
+                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/authorName.png" layout_gravity="center" w="150" h="30" />//作者名
                     <card  h="5" marginTop="10" cardCornerRadius="0dp"
                     cardElevation="0dp" gravity="center_vertical">
                     <vertical padding="0 0" h="auto">
                     </vertical>
-                    <View bg="#FFEA3324" h="*" w="*"/>//卡片颜色1
+                    <View bg="#FFFF711F" h="*" w="*"/>//卡片颜色1
                 </card>
-                <text text="软件及脚本开发者" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
-                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/authorName.png" layout_gravity="center" w="150" h="30" />//作者名
+                <text text="软件版本" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
+                <text id="AppVision" color="{{context_textColor}}" textSize="20" textStyle="normal" gravity="center"/>
                 <card  h="5" marginTop="10" cardCornerRadius="0dp"
                 cardElevation="0dp" gravity="center_vertical">
                 <vertical padding="0 0" h="auto">
                 </vertical>
-                <View bg="#FFFF711F" h="*" w="*"/>//卡片颜色1
-            </card>
-            <text text="软件版本" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
-            <text id="AppVision" color="{{context_textColor}}" textSize="20" textStyle="normal" gravity="center"/>
-            <card  h="5" marginTop="10" cardCornerRadius="0dp"
-            cardElevation="0dp" gravity="center_vertical">
-            <vertical padding="0 0" h="auto">
-            </vertical>
-            <View bg="#FFFABB06" h="*" w="*"/>//卡片颜色1
+                <View bg="#FFFABB06" h="*" w="*"/>//卡片颜色1
             </card>
             <text text="设备信息" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
             <text id="DeviceInformation" color="{{context_textColor}}" textSize="15" textStyle="normal" gravity="center"/>
@@ -279,16 +280,18 @@ function mainUi() {
             <View bg="#FF4285F4" h="*" w="*"/>//卡片颜色1
             </card>
             <text id="Ttip"  color="{{context_textColor}}" textSize="15" textStyle="normal" marginTop="5" gravity="center"/>
-            <card  h="5" marginTop="10" cardCornerRadius="0dp"
+            <card  h="5" margin="0 10 0 100" cardCornerRadius="0dp"
             cardElevation="0dp" gravity="center_vertical">
             <vertical padding="0 0" h="auto">
             </vertical>
             <View bg="#FF9D41F9" h="*" w="*"/>//卡片颜色1
             </card>
+            
             </vertical>
             <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
             margin="16" layout_gravity="bottom|right" tint="#ffffff" />
             </frame>
+            </ScrollView>
         );
         ui.AppVision.text(app.versionName + "(" + app.versionCode + ")");
         ui.OpenSource.text("Github：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
@@ -337,7 +340,7 @@ function mainUi() {
         animator.start();
     });
     ui.ScriptTwo_tip.text("开始运行");
-    ui.ScriptThree_tip.text("BUG定位修复中……");
+    ui.ScriptThree_tip.text("开始运行");
 
     ui.ScriptOne.on('click', () => { 
         animator = ObjectAnimator.ofFloat(ui.ScriptOne_tip, "translationY", 0, -200, -200, -200);  
