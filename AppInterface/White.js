@@ -235,6 +235,7 @@ function mainUi() {
     function AboutApp() {
         events.removeAllListeners();
         ui.layout(
+        <ScrollView>
             <frame w="*" h="*" background="{{context_framebg}}">
                 <vertical align="center">
                     <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" marginTop="50" w="auto"h="50" gravity="center"/>//应用logo
@@ -289,6 +290,7 @@ function mainUi() {
             <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
             margin="16" layout_gravity="bottom|right" tint="#ffffff" />
             </frame>
+            </ScrollView>
         );
         ui.AppVision.text(app.versionName + "(" + app.versionCode + ")");
         ui.OpenSource.text("Github：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
