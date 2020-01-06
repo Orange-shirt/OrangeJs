@@ -1,5 +1,6 @@
 "ui";
 context_DayOrNight = 1;
+context_widthofTen = device.width / 10;
 
 function setDayMode() {
     context_framebg = "#FAFAFA" //全局背景
@@ -35,7 +36,7 @@ function mainUi() {
     //Not pink色是#DFC8C6
     ui.layout(
         <ScrollView>
-            <frame id="main" background="{{context_framebg}}">//全局背景颜色
+            <frame w="*" h="*" id="main" background="{{context_framebg}}">//全局背景颜色
                 <vertical align="center" paddingTop="5" margin="0">
                     <img src="{{context_Logo}}" w="auto" h="40"/>//黑色logo
                     <text id="text" marginLeft="25" textStyle="bold" color="{{context_textColor}}" bg="{{context_textBg}}" gravity="left" size="20" marginTop="10" h="auto">
@@ -124,9 +125,8 @@ function mainUi() {
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30" margin="10 60 0 0" tint="{{context_textColor}}" bg="{{context_textBg}}"/>
             <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD" margin="60 70 0 0" bg="{{context_textBg}}" gravity="center_vertical" textSize="12sp"/>
             <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD" margin="10 70 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
-            <text id="TalktoDeveloper" text="关于软件" color="#BDBDBD" margin="10 70 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
+            <text id="AboutApp" text="关于软件" color="#BDBDBD" margin="10 70 0 0" bg="{{context_textBg}}" gravity="center" textSize="12sp"/>
         </linear>
-        <text bg="{{context_textBg}}" marginTop="200"/>
         </vertical>
         </frame>
         </ScrollView>
@@ -134,6 +134,9 @@ function mainUi() {
 
     ui.ScriptOne_tip.click(() => {
         engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
+    });
+    ui.AboutApp.click(() => {
+        engines.execScript(AboutApp());
     });
 
     function runScriptOne() {
@@ -206,7 +209,7 @@ function mainUi() {
     function TalkToDeveloper() {
         events.removeAllListeners();
         ui.layout(
-            <frame>
+            <frame w="*" h="*">
                 <vertical align="left">
                     <linear orientation="horizontal" align="left" margin="0" >
                         <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
@@ -224,6 +227,73 @@ function mainUi() {
             </frame>
         );
         ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
+        ui.Back.click(() => {
+            engines.execScript(mainUi());
+        });
+    }
+
+    function AboutApp() {
+        events.removeAllListeners();
+        ui.layout(
+            <frame w="*" h="*" background="{{context_framebg}}">
+                <vertical align="center">
+                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" marginTop="50" w="auto"h="50" gravity="center"/>//应用logo
+                    <img src="{{context_Logo}}" w="auto"h="50" gravity="center"/>//黑色logo
+                    <card  h="5" marginTop="10" cardCornerRadius="0dp"
+                    cardElevation="0dp" gravity="center_vertical">
+                    <vertical padding="0 0" h="auto">
+                    </vertical>
+                    <View bg="#FFEA3324" h="*" w="*"/>//卡片颜色1
+                </card>
+                <text text="软件及脚本开发者" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
+                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/authorName.png" layout_gravity="center" w="150" h="30" />//作者名
+                <card  h="5" marginTop="10" cardCornerRadius="0dp"
+                cardElevation="0dp" gravity="center_vertical">
+                <vertical padding="0 0" h="auto">
+                </vertical>
+                <View bg="#FFFF711F" h="*" w="*"/>//卡片颜色1
+            </card>
+            <text text="软件版本" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
+            <text id="AppVision" color="{{context_textColor}}" textSize="20" textStyle="normal" gravity="center"/>
+            <card  h="5" marginTop="10" cardCornerRadius="0dp"
+            cardElevation="0dp" gravity="center_vertical">
+            <vertical padding="0 0" h="auto">
+            </vertical>
+            <View bg="#FFFABB06" h="*" w="*"/>//卡片颜色1
+            </card>
+            <text text="设备信息" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
+            <text id="DeviceInformation" color="{{context_textColor}}" textSize="15" textStyle="normal" gravity="center"/>
+            
+            <card  h="5" marginTop="10" cardCornerRadius="0dp"
+            cardElevation="0dp" gravity="center_vertical">
+            <vertical padding="0 0" h="auto">
+            </vertical>
+            <View bg="#FF34A853" h="*" w="*"/>//卡片颜色1
+            </card>
+            <text text="项目开源地址" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
+            <text id="OpenSource" autoLink="web" color="{{context_textColor}}" textSize="15" textStyle="normal" gravity="center"/>
+            <card  h="5" marginTop="10" cardCornerRadius="0dp"
+            cardElevation="0dp" gravity="center_vertical">
+            <vertical padding="0 0" h="auto">
+            </vertical>
+            <View bg="#FF4285F4" h="*" w="*"/>//卡片颜色1
+            </card>
+            <text id="Ttip"  color="{{context_textColor}}" textSize="15" textStyle="normal" marginTop="5" gravity="center"/>
+            <card  h="5" marginTop="10" cardCornerRadius="0dp"
+            cardElevation="0dp" gravity="center_vertical">
+            <vertical padding="0 0" h="auto">
+            </vertical>
+            <View bg="#FF9D41F9" h="*" w="*"/>//卡片颜色1
+            </card>
+            </vertical>
+            <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
+            margin="16" layout_gravity="bottom|right" tint="#ffffff" />
+            </frame>
+        );
+        ui.AppVision.text(app.versionName + "(" + app.versionCode + ")");
+        ui.OpenSource.text("Github：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
+        ui.DeviceInformation.text("设备品牌/型号：" + device.brand + "(" + device.model + ")\n" + "安卓版本：" + device.release + device.baseOS + "\n修订版本号：" + device.buildId + "\n设备分辨率：" + device.height + "*" + device.width);
+        ui.Ttip.text("此软件/脚本均为兴趣制作，仅供学习参考交流使用\n请勿将本软件/脚本用于任何商业用途");
         ui.Back.click(() => {
             engines.execScript(mainUi());
         });
@@ -267,7 +337,7 @@ function mainUi() {
         animator.start();
     });
     ui.ScriptTwo_tip.text("开始运行");
-    ui.ScriptThree_tip.text("开始运行");
+    ui.ScriptThree_tip.text("BUG定位修复中……");
 
     ui.ScriptOne.on('click', () => { 
         animator = ObjectAnimator.ofFloat(ui.ScriptOne_tip, "translationY", 0, -200, -200, -200);  
