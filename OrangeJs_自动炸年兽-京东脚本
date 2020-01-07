@@ -1,4 +1,4 @@
-log("*   ╉ The Animal Protecting ╊");
+= log("*   ╉ The Animal Protecting ╊");
 log("*　　┏┓　　　┏┓+ +");
 log("*　┏┛┻━━━┛┻┓ + +");
 log("*　┃　　　　　　　┃");
@@ -612,7 +612,7 @@ function clickAndDoing() {
         click(Rk.centerX(), Rk.centerY());
         toastLog("已点击了“做任务拿爆竹”\n若没有成功出现“领爆竹”请重试或反馈");
         sleep(3000);
-        var hd0 = "参加好玩互动 (4/4次)"
+        var hd0 = "参加好玩互动 (5/5次)"
         context_xH = 1;
         while (context_xH == 1) {
             var A = textContains("参加好玩互动").findOne();
@@ -672,7 +672,7 @@ function clickAndDoing() {
             }
         }
 
-        var hd3 = "逛逛好店 (15/15次)"
+        var hd3 = "逛逛好店 (18/18次)"
 
         context_xH = 1;
         while (context_xH == 1) {
