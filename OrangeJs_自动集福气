@@ -632,6 +632,15 @@ function click_powerˉqiandao() {
         click(KXSX.centerX(), KXSX.centerY());
         sleep(2000);
     }
+    if (text("立即查看").exists()) {
+        var KXSX = text("开心收下").findOne().bounds();
+        click(KXSX.centerX(), KXSX.centerY());
+        toastLog("已点击“立即查看”按钮")
+        sleep(2000);
+        toastLog("尝试返回活动界面");
+        Justback();
+        sleep(2000);
+    }
     if (text("收下祝福").exists()) {
         var KXSX = text("收下祝福").findOne().bounds();
         click(KXSX.centerX(), KXSX.centerY());
