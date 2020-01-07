@@ -531,23 +531,38 @@ function Justback() {
 }
 
 function openJdAndSearch() {
-    app.startActivity({
-        action: "android.intent.action.VIEW", //此处可为其他值
-        packageName: "com.jingdong.app.mall",
-        className: "com.jingdong.app.mall.main.MainActivity"
-        //此处可以加入其他内容，如data、extras
-    });
+    context_while = 1;
+    while (context_while == 1) {
+        var time = 1;
+        app.startActivity({
+            action: "android.intent.action.VIEW", //此处可为其他值
+            packageName: "com.jingdong.app.mall",
+            className: "com.jingdong.app.mall.main.MainActivity"
+            //此处可以加入其他内容，如data、extras
+        });
+        toastLog("正在尝试打开京东APP" + "*" + time);
+        sleep(1000);
+        if (currentPackage() == "com.jingdong.app.mall") {
+            context_while = 0;
+        }
+    }
+    context_while = 1;
+    while (context_while == 1) {
+        var time = 1;
+        app.startActivity({
+            action: "android.intent.action.VIEW", //此处可为其他值
+            packageName: "com.jingdong.app.mall",
+            className: "com.jd.lib.search.view.Activity.ProductListActivity"
+            //此处可以加入其他内容，如data、extras
+        });
+        toastLog("正在尝试打开京东搜索栏*" + time);
+        sleep(1000);
+        if (className("android.widget.HorizontalScrollView").exists()) {
+            context_while = 0;
+        }
+    }
 
-    sleep(1000);
-
-    app.startActivity({
-        action: "android.intent.action.VIEW", //此处可为其他值
-        packageName: "com.jingdong.app.mall",
-        className: "com.jd.lib.search.view.Activity.ProductListActivity"
-        //此处可以加入其他内容，如data、extras
-    });
     toastLog("正在打开“京东”APP...");
-    className("android.widget.HorizontalScrollView").waitFor();
     if (className("android.widget.HorizontalScrollView").exists()) {
         var x = className("android.widget.HorizontalScrollView").findOne().bounds();
         click(x.centerX(), x.centerY());
