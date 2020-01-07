@@ -602,6 +602,11 @@ function openJdAndSearch() {
 
 function clickAndDoing() {
 
+    if (text("开心收下").exists()) {
+        text("开心收下").findOne().click();
+        sleep(2000);
+    }
+
     if (text("做任务拿爆竹").exists) {
         var Rk = text("做任务拿爆竹").findOne().bounds();
         click(Rk.centerX(), Rk.centerY());
