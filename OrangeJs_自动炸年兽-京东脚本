@@ -30,29 +30,6 @@ var width = device.width;
 
 var GJCwords = "炸年兽" //京东搜索关键词
 function dialogs_js() {
-    /*提示
-    var Tipss = random(0, 5);
-    if (Tipss == 0) {
-        var Tips = ("日志界面可以在设置中关闭");
-    }
-    if (Tipss == 1) {
-        var Tips = ("日志界面右上角可以打开设置");
-    }
-    if (Tipss == 2) {
-        var Tips = ("关闭日志界面可无需清理软件");
-    }
-    if (Tipss == 3) {
-        var Tips = ("清理软件数据可恢复日志功能");
-    }
-    if (Tipss == 4) {
-        var Tips = ("作者肝了一晚的新功能！\n“多帐号完成任务”快试试！");
-    }
-    if (Tipss == 5) {
-        var Tips = ("支持“去点击”“去兑换”任务啦～");
-    }
-    */
-
-    //var xiazai = ("软件下载链接戳 ");
     var ScriptVersion = ("Beta1.0"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
@@ -534,10 +511,17 @@ function openJdAndSearch() {
     context_while = 1;
     while (context_while == 1) {
         var time = 1;
+        /*
         app.startActivity({
             action: "android.intent.action.VIEW", //此处可为其他值
             packageName: "com.jingdong.app.mall",
             className: "com.jingdong.app.mall.main.MainActivity"
+            //此处可以加入其他内容，如data、extras
+        });*/
+        app.startActivity({
+            action: "android.intent.action.VIEW", //此处可为其他值
+            packageName: "com.jingdong.app.mall",
+            className: "com.jingdong.app.mall.open.InterfaceActivity"
             //此处可以加入其他内容，如data、extras
         });
         toastLog("正在尝试打开京东APP" + "*" + time);
@@ -549,6 +533,13 @@ function openJdAndSearch() {
     context_while = 1;
     while (context_while == 1) {
         var time = 1;
+        app.startActivity({
+            action: "android.intent.action.VIEW", //此处可为其他值
+            packageName: "com.jingdong.app.mall",
+            className: "com.jd.lib.rank.view.activity.RankingListActivity"
+            //此处可以加入其他内容，如data、extras
+        });
+        sleep(1000);
         app.startActivity({
             action: "android.intent.action.VIEW", //此处可为其他值
             packageName: "com.jingdong.app.mall",
@@ -613,7 +604,9 @@ function clickAndDoing() {
         toastLog("已点击了“做任务拿爆竹”\n若没有成功出现“领爆竹”请重试或反馈");
         sleep(3000);
         var hd0 = "参加好玩互动 (5/5次)"
-        context_xH = 1;
+        if (textContains("参加好玩互动").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var A = textContains("参加好玩互动").findOne();
             var AO = A.parent();
@@ -633,8 +626,9 @@ function clickAndDoing() {
 
 
         var hd1 = "看京品推荐官直播/视频 (4/4次)"
-
-        context_xH = 1;
+        if (textContains("看京品推荐官直播/视频").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var B = textContains("看京品推荐官直播/视频").findOne();
             var AO = B.parent();
@@ -653,8 +647,9 @@ function clickAndDoing() {
         }
 
         var hd2 = "加购精选好物 (15/15次)"
-
-        context_xH = 1;
+        if (textContains("加购精选好物").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var C = textContains("加购精选好物").findOne();
             var AO = C.parent();
@@ -673,8 +668,9 @@ function clickAndDoing() {
         }
 
         var hd3 = "逛逛好店 (18/18次)"
-
-        context_xH = 1;
+        if (textContains("逛逛好店").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var D = textContains("逛逛好店").findOne();
             var AO = D.parent();
@@ -693,8 +689,9 @@ function clickAndDoing() {
         }
 
         var hd4 = "逛逛热卖会场 (5/5次)"
-
-        context_xH = 1;
+        if (textContains("逛逛热卖会场").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var E = textContains("逛逛热卖会场").findOne();
             var AO = E.parent();
@@ -713,8 +710,9 @@ function clickAndDoing() {
         }
 
         var hd5 = "开启LBS定位 (1/1次)"
-
-        context_xH = 1;
+        if (textContains("开启LBS定位").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var F = textContains("开启LBS定位").findOne();
             var AO = F.parent();
