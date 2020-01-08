@@ -525,7 +525,7 @@ function openJdAndSearch() {
             //此处可以加入其他内容，如data、extras
         });
         toastLog("正在尝试打开京东APP" + "*" + time);
-        sleep(1000);
+        sleep(3000);
         if (currentPackage() == "com.jingdong.app.mall") {
             context_while = 0;
         }
@@ -539,7 +539,7 @@ function openJdAndSearch() {
             className: "com.jd.lib.rank.view.activity.RankingListActivity"
             //此处可以加入其他内容，如data、extras
         });
-        sleep(1000);
+        sleep(3000);
         app.startActivity({
             action: "android.intent.action.VIEW", //此处可为其他值
             packageName: "com.jingdong.app.mall",
@@ -547,7 +547,7 @@ function openJdAndSearch() {
             //此处可以加入其他内容，如data、extras
         });
         toastLog("正在尝试打开京东搜索栏*" + time);
-        sleep(1000);
+        sleep(2000);
         if (className("android.widget.HorizontalScrollView").exists()) {
             context_while = 0;
         }
