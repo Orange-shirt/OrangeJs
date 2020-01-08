@@ -200,7 +200,7 @@ function mainUi() {
                 margin="16" layout_gravity="bottom|right" tint="#ffffff" />
             </frame>
         );
-        ui.webview.loadUrl("https://code.aliyun.com/orange_shirt/OrangeJs/raw/41d8237746ce4f5bb09db07feb67cdeff12153be/OtherRes/JDQRcode_OrangeJs.png");
+        ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
         ui.Back.click(() => {
             engines.execScript(mainUi());
         });
