@@ -37,7 +37,7 @@ function mainUi() {
     ui.layout(
         <ScrollView>
             <frame w="*" h="auto" id="main" background="{{context_framebg}}">//全局背景颜色
-                <vertical align="center" paddingTop="5" margin="0">
+                <vertical align="center" paddingTop="5" margin="0" >
                     <img src="{{context_Logo}}" w="auto" h="40"/>//黑色logo
                     <text id="text" marginLeft="25" textStyle="bold" color="{{context_textColor}}" bg="{{context_textBg}}" gravity="left" size="20" marginTop="10" h="auto">
                     </text>
@@ -51,7 +51,7 @@ function mainUi() {
                         <View bg="#FF4395FB" h="*" w="0"/>//卡片颜色2
                         
                         <card layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
-                        cardElevation="0dp" align="center">
+                        cardElevation="0dp" align="center" >
                         <vertical padding="10 0" h="auto">
                         </vertical>
                         <View bg="{{context_QxtextBg}}" h="*" w="*"/>//无障碍权限中的卡片颜色1
@@ -87,39 +87,18 @@ function mainUi() {
         </card>
         <text id="NowScript" text="可运行脚本" textStyle="bold" color="{{context_textColor}}" gravity="left" size="14" marginLeft="28">
         </text>
-        <card h="100" margin="5 8" cardCornerRadius="2dp"
-        cardElevation="0dp" gravity="center_vertical">
-        <vertical padding="0 0" h="auto">
-        </vertical>
-        <View bg="#FFEF5350" h="*" w="*"/>//打底卡片颜色1
-        <text id="ScriptTwo" text="自动集福气（淘宝）" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
-        </text>
-        <text id="ScriptTwo_tip"  textStyle="bold" color="#FFFFFF" bg="#1E88E5" gravity="center" size="10" marginTop="100" h="35">
-        </text>
-        </card>
-        //第二个可运行脚本
-        <card h="100" margin="5 8" cardCornerRadius="2dp"
-        cardElevation="0dp" gravity="center_vertical">
-        <vertical padding="0 0" h="auto">
-        </vertical>
-        <View bg="#FF00BCD4" h="*" w="*"/>//打底卡片颜色1
-        <text id="ScriptThree" text="自动炸年兽（京东）" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
-        </text>
-        <text id="ScriptThree_tip"  textStyle="bold" color="#FFFFFF" bg="#81C784" gravity="center" size="10" marginTop="100" h="35">
-        </text>
-        </card>
-        //第三个可运行脚本
-        <card h="100" margin="5 8" cardCornerRadius="2dp"
-        cardElevation="0dp" gravity="center_vertical">
-        <vertical padding="0 0" h="auto">
-        </vertical>
-        <View bg="#FF2BB75E" h="*" w="*"/>//打底卡片颜色1
-        <text id="ScriptOne" text="自动看团课（微信）" textStyle="bold" color="#FFFFFF" gravity="center" size="20" marginTop="0" h="auto">
-        </text>
-        <text id="ScriptOne_tip"  textStyle="bold" color="#FFFFFF" bg="#81C784" gravity="center" size="10" marginTop="100" h="35">
-        </text>
-        </card>
+        //第一个可运行脚本
+        <button id="ScriptTwo" text="自动集福气（淘宝）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FFEF5350" margin="5 8">
+            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="25" layout_gravity="center"/>
+        </button>
         
+        //第二个可运行脚本
+        <button id="ScriptThree" text="自动炸年兽（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF00BCD4" margin="5 8"/>
+        //第三个可运行脚本
+        <button id="ScriptFour" text="自动集生肖（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF009688" margin="5 8"/>
+        //第四个可运行脚本
+        <button id="ScriptOne" text="自动看团课（微信）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF2BB75E" margin="5 8"/>
+
         //水平线性布局
         <linear orientation="horizontal" align="center" margin="5 20 5 100" >
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="25" layout_gravity="center"/>
@@ -132,7 +111,7 @@ function mainUi() {
         </ScrollView>
     );
 
-    ui.ScriptOne_tip.click(() => {
+    ui.ScriptOne.click(() => {
         engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
     });
     ui.AboutApp.click(() => {
@@ -156,12 +135,7 @@ function mainUi() {
             toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
-    ui.ScriptThree.on('click', () => { 
-        animator = ObjectAnimator.ofFloat(ui.ScriptThree_tip, "translationY", 0, -200, -200, -200);  
-        animator.setDuration(3000); //动画时间      
-        animator.start();
-    });
-    ui.ScriptTwo_tip.click(() => {
+    ui.ScriptTwo.click(() => {
         engines.execScript("自动集福气", "runScriptTwo();\n" + runScriptTwo.toString());
     });
 
@@ -181,7 +155,7 @@ function mainUi() {
             toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
-    ui.ScriptThree_tip.click(() => {
+    ui.ScriptThree.click(() => {
         engines.execScript("自动炸年兽", "runScriptThree();\n" + runScriptThree.toString());
     });
 
@@ -226,7 +200,7 @@ function mainUi() {
                 margin="16" layout_gravity="bottom|right" tint="#ffffff" />
             </frame>
         );
-        ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
+        ui.webview.loadUrl("https://code.aliyun.com/orange_shirt/OrangeJs/raw/41d8237746ce4f5bb09db07feb67cdeff12153be/OtherRes/JDQRcode_OrangeJs.png");
         ui.Back.click(() => {
             engines.execScript(mainUi());
         });
@@ -302,8 +276,26 @@ function mainUi() {
         });
     }
 
-    ui.ScriptOne_tip.text("脚本分辨率支持：1920*1080");
+    ui.ScriptFour.click(() => {
+        engines.execScript("自动集生肖", "runScriptFour();\n" + runScriptFour.toString());
+    });
 
+    function runScriptFour() {
+        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%94%9F%E8%82%96_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第四个脚本网址
+        var res_script = http.get(ScriptTwo_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动炸年兽", OrangeJs);
+        } else {
+            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
 
     ui.text.text("权限设置");
 
@@ -314,13 +306,6 @@ function mainUi() {
     });
 
     ui.xfc_text.click(() => {
-        /*
-        if (ui.xfc_text.text() == "急停悬浮按钮：关") {
-            ui.xfc_text.text("急停悬浮按钮：开");
-
-        } else {
-            ui.xfc_text.text("急停悬浮按钮：关");
-        }*/
         engines.stopAllAndToast();
     });
 
@@ -332,20 +317,6 @@ function mainUi() {
             context_DayOrNight = 1;
         }
         engines.execScript(events.removeAllListeners(), mainUi());
-    });
-
-    ui.ScriptTwo.on('click', () => { 
-        animator = ObjectAnimator.ofFloat(ui.ScriptTwo_tip, "translationY", 0, -200, -200, -200);  
-        animator.setDuration(3000); //动画时间      
-        animator.start();
-    });
-    ui.ScriptTwo_tip.text("开始运行");
-    ui.ScriptThree_tip.text("开始运行");
-
-    ui.ScriptOne.on('click', () => { 
-        animator = ObjectAnimator.ofFloat(ui.ScriptOne_tip, "translationY", 0, -200, -200, -200);  
-        animator.setDuration(3000); //动画时间      
-        animator.start();
     });
 
     ui.autoService.on("check", function(checked) {
