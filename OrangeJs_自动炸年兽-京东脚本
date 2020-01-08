@@ -30,7 +30,7 @@ var width = device.width;
 
 var GJCwords = "炸年兽" //京东搜索关键词
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动炸年兽”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -461,17 +461,8 @@ function Justback() {
         sleep(2000);
     }
     if (context_i_back == 2) {
-        openTBandsearch();
-        sleep(3000);
-        if (currentActivity() != "com.taobao.browser.BrowserActivity") {
-            openTBandsearch();
-            sleep(3000);
-            if (currentActivity() != "com.taobao.browser.BrowserActivity") {
-                openTBandsearch_mine();
-            }
-        }
-        jinhuodong();
-        click_powerˉqiandao();
+        openJdAndSearch();
+        clickAndDoing();
     }
     if (context_i_back == 3) {
         sleep(1000);
@@ -508,52 +499,93 @@ function Justback() {
 }
 
 function openJdAndSearch() {
-    context_while = 1;
-    while (context_while == 1) {
-        var time = 1;
-        /*
-        app.startActivity({
-            action: "android.intent.action.VIEW", //此处可为其他值
-            packageName: "com.jingdong.app.mall",
-            className: "com.jingdong.app.mall.main.MainActivity"
-            //此处可以加入其他内容，如data、extras
-        });*/
-        app.startActivity({
-            action: "android.intent.action.VIEW", //此处可为其他值
-            packageName: "com.jingdong.app.mall",
-            className: "com.jingdong.app.mall.open.InterfaceActivity"
-            //此处可以加入其他内容，如data、extras
-        });
-        toastLog("正在尝试打开京东APP" + "*" + time);
-        sleep(3000);
-        if (currentPackage() == "com.jingdong.app.mall") {
-            context_while = 0;
+    openJd();
+
+    function openJd() {
+        launch("com.jingdong.app.mall");
+        for (var deng = 10; deng > 0; deng--) {
+            toastLog("正在启动京东APP，剩余" + deng)
+            sleep(2000);
+            if (currentPackage() == "com.jingdong.app.mall") {
+                var deng = 0;
+            }
         }
-    }
-    context_while = 1;
-    while (context_while == 1) {
-        var time = 1;
+        if (text("立即修复").exists) {
+            toastLog("存在“立即修复”按钮");
+            var Aa = textContains("退出").findOnce();
+            if (Aa != null) {
+                click(Aa.centerX(), Aa.centerY());
+                sleep(3000);
+                launch("com.jingdong.app.mall");
+                for (var deng = 10; deng > 0; deng--) {
+                    toastLog("正在启动京东APP，剩余" + deng)
+                    sleep(2000);
+                    if (currentPackage() == "com.jingdong.app.mall") {
+                        var deng = 0;
+                    }
+                }
+            }
+        }
         app.startActivity({
             action: "android.intent.action.VIEW", //此处可为其他值
             packageName: "com.jingdong.app.mall",
             className: "com.jd.lib.rank.view.activity.RankingListActivity"
             //此处可以加入其他内容，如data、extras
         });
+        toastLog("正在尝试打开搜索后界面");
         sleep(3000);
         app.startActivity({
             action: "android.intent.action.VIEW", //此处可为其他值
             packageName: "com.jingdong.app.mall",
-            className: "com.jd.lib.search.view.Activity.ProductListActivity"
+            className: "com.jingdong.app.mall.main.MainActivity"
             //此处可以加入其他内容，如data、extras
         });
-        toastLog("正在尝试打开京东搜索栏*" + time);
+        toastLog("正在尝试打开主页");
         sleep(2000);
-        if (className("android.widget.HorizontalScrollView").exists()) {
-            context_while = 0;
+        if (currentActivity() != "com.jingdong.app.mall.MainFrameActivity") {
+            toastLog("[循环]当前非京东主界面，返回中……");
+            context_while = 1;
+            while (context_while == 1) {
+                Justback();
+                sleep(1000);
+                if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
+                    if (desc("扫啊扫").exists()) {
+                        toastLog("已处于京东主界面[循环结束]");
+                        context_while = 0;
+                    }
+                }
+                if (text("搜索").exists()) {
+                    toastLog("存在搜索");
+                    Justback();
+                    sleep(1000);
+                    if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
+                        toastLog(currentActivity());
+                        if (text("搜索").exists()) {
+                            toastLog("搜索依然存在#587");
+                        } else if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
+                            toastLog("已无搜索，判断为主界面[退出循环]");
+                            context_while = 0;
+                        }
+                    }
+                } else {
+                    if (currentPackage() != "com.jingdong.app.mall") {
+                        toastLog("当前未处于京东中，尝试重新进入");
+                        openJd();
+                        context_while = 0;
+                    }
+                }
+            }
         }
     }
-
-    toastLog("正在打开“京东”APP...");
+    sleep(1000);
+    app.startActivity({
+        action: "android.intent.action.VIEW", //此处可为其他值
+        packageName: "com.jingdong.app.mall",
+        className: "com.jd.lib.search.view.Activity.ProductListActivity"
+        //此处可以加入其他内容，如data、extras
+    });
+    toastLog("正在尝试打开京东搜索栏");
+    sleep(1000);
     if (className("android.widget.HorizontalScrollView").exists()) {
         var x = className("android.widget.HorizontalScrollView").findOne().bounds();
         click(x.centerX(), x.centerY());
@@ -726,6 +758,30 @@ function clickAndDoing() {
                 sleep(3000);
                 toastLog(H);
                 context_xH = 0;
+            }
+        }
+        var hd6 = "逛年货节主会场 (1/1次)"
+        if (textContains("逛年货节主会场").exists()) {
+            context_xH = 1;
+        }
+        while (context_xH == 1) {
+            var F = textContains("逛年货节主会场").findOne();
+            var AO = F.parent();
+            var B = AO.children();
+            var H = B[1].text();
+            if (H == hd6) {
+                toastLog(H);
+                context_xH = 0;
+            } else {
+                toastLog(H);
+                B[3].click();
+                var deng = 30;
+                for (deng == 30; deng > 0; deng--) {
+                    sleep(1500);
+                    toastLog("正在完成“逛年货节主会场”任务\n剩余" + deng + "秒……");
+                }
+                //返回
+                Justback();
             }
         }
     } else {
