@@ -30,9 +30,9 @@ var width = device.width;
 
 var GJCwords = "炸年兽" //京东搜索关键词
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.1"); //版本
+    var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-    var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
+    var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动炸年兽”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
     if (i < 0) {
         toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
@@ -53,6 +53,8 @@ function dialogs_js() {
         alert("=(^･ω･^)=  脚本作者\n酷安@橘衫下邂逅的时光", "“自动炸年兽” " + ScriptVersion + "\n当前软件版本" + app.versionName + "(" + app.versionCode + ")\n\n全自动的京东活动脚本！\n支持多种分辨率，安卓7+无需ROOT！\n支持启动后自动更新脚本，无需费心即可保持最新，且开放全部的脚本代码！\n脚本的全部运行不加任何广告，不干任何不相关的事情！不触碰任何个人隐私！\n此脚本为兴趣制作，仅供参考，严禁售卖\n\n如有任何问题，欢迎向作者反馈哦～");
         dialogs_js();
     } else if (i == 1) {
+        toastLog("请稍候，正在检测权限...")
+        context_Manualstate = 0;
         toastLog(options_[i]);
         device.keepScreenDim();
         toastLog("检测权限设置……");
@@ -60,7 +62,7 @@ function dialogs_js() {
         toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
         auto.waitFor();
         toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
-        sleep(3000);
+        sleep(2000);
         toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
         sleep(2000);
         var test_rawWindow = floaty.rawWindow(
@@ -77,6 +79,9 @@ function dialogs_js() {
     } else if (i == 5) {
         toastLog(options_[i]);
         Q_A_();
+    } else if (i == 6) {
+        toastLog(options_[i]);
+        context_Manualstate = 1; //设置手动模式
     }
 }
 
@@ -785,12 +790,43 @@ function clickAndDoing() {
             }
         }
     } else {
-        toastLog("很抱歉，脚本找不到活动入口按钮");
+        toastLog("很抱歉，脚本在当前界面找不到活动入口“做任务拿爆竹”按钮");
     }
 }
 
-
-openJdAndSearch();
+if (context_Manualstate == 1) {
+    toastLog("已手动模式运行脚本");
+    var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
+    var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开京东APP至活动页”\n\n请选择脚本等待您打开京东的时间", options);
+    if (i >= 0) {
+        toast("您选择的是" + options[i]);
+    } else if (i < 0) {
+        toastLog("您取消了选择");
+        dialogs_js();
+    }
+    if (i == 0) {
+        //等待20秒
+        var deng = 20;
+    } else if (i == 1) {
+        //等待30秒
+        var deng = 30;
+    } else if (i == 2) {
+        //等待50秒
+        var deng = 50;
+    } else if (i == 3) {
+        //等待60秒
+        var deng = 60;
+    } else if (i == 4) {
+        //等待10秒
+        var deng = 10;
+    }
+    for (deng = deng; deng > 0; deng--) {
+        toastLog("请打开京东至炸年兽的“做任务拿爆竹”界面\n剩余" + deng + "秒后运行脚本...");
+        sleep(1111);
+    }
+} else {
+    openJdAndSearch();
+}
 clickAndDoing();
 dialogs.alert("脚本已运行完成");
 log("脚本已运行完成");
