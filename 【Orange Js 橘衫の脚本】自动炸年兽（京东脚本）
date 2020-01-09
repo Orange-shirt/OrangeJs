@@ -30,32 +30,9 @@ var width = device.width;
 
 var GJCwords = "炸年兽" //京东搜索关键词
 function dialogs_js() {
-    /*提示
-    var Tipss = random(0, 5);
-    if (Tipss == 0) {
-        var Tips = ("日志界面可以在设置中关闭");
-    }
-    if (Tipss == 1) {
-        var Tips = ("日志界面右上角可以打开设置");
-    }
-    if (Tipss == 2) {
-        var Tips = ("关闭日志界面可无需清理软件");
-    }
-    if (Tipss == 3) {
-        var Tips = ("清理软件数据可恢复日志功能");
-    }
-    if (Tipss == 4) {
-        var Tips = ("作者肝了一晚的新功能！\n“多帐号完成任务”快试试！");
-    }
-    if (Tipss == 5) {
-        var Tips = ("支持“去点击”“去兑换”任务啦～");
-    }
-    */
-
-    //var xiazai = ("软件下载链接戳 ");
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-    var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
+    var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动炸年兽”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
     if (i < 0) {
         toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
@@ -76,6 +53,8 @@ function dialogs_js() {
         alert("=(^･ω･^)=  脚本作者\n酷安@橘衫下邂逅的时光", "“自动炸年兽” " + ScriptVersion + "\n当前软件版本" + app.versionName + "(" + app.versionCode + ")\n\n全自动的京东活动脚本！\n支持多种分辨率，安卓7+无需ROOT！\n支持启动后自动更新脚本，无需费心即可保持最新，且开放全部的脚本代码！\n脚本的全部运行不加任何广告，不干任何不相关的事情！不触碰任何个人隐私！\n此脚本为兴趣制作，仅供参考，严禁售卖\n\n如有任何问题，欢迎向作者反馈哦～");
         dialogs_js();
     } else if (i == 1) {
+        toastLog("请稍候，正在检测权限...")
+        context_Manualstate = 0;
         toastLog(options_[i]);
         device.keepScreenDim();
         toastLog("检测权限设置……");
@@ -83,7 +62,7 @@ function dialogs_js() {
         toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
         auto.waitFor();
         toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
-        sleep(3000);
+        sleep(2000);
         toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
         sleep(2000);
         var test_rawWindow = floaty.rawWindow(
@@ -100,6 +79,9 @@ function dialogs_js() {
     } else if (i == 5) {
         toastLog(options_[i]);
         Q_A_();
+    } else if (i == 6) {
+        toastLog(options_[i]);
+        context_Manualstate = 1; //设置手动模式
     }
 }
 
@@ -484,17 +466,8 @@ function Justback() {
         sleep(2000);
     }
     if (context_i_back == 2) {
-        openTBandsearch();
-        sleep(3000);
-        if (currentActivity() != "com.taobao.browser.BrowserActivity") {
-            openTBandsearch();
-            sleep(3000);
-            if (currentActivity() != "com.taobao.browser.BrowserActivity") {
-                openTBandsearch_mine();
-            }
-        }
-        jinhuodong();
-        click_powerˉqiandao();
+        openJdAndSearch();
+        clickAndDoing();
     }
     if (context_i_back == 3) {
         sleep(1000);
@@ -531,38 +504,93 @@ function Justback() {
 }
 
 function openJdAndSearch() {
-    context_while = 1;
-    while (context_while == 1) {
-        var time = 1;
+    openJd();
+
+    function openJd() {
+        launch("com.jingdong.app.mall");
+        for (var deng = 10; deng > 0; deng--) {
+            toastLog("正在启动京东APP，剩余" + deng)
+            sleep(2000);
+            if (currentPackage() == "com.jingdong.app.mall") {
+                var deng = 0;
+            }
+        }
+        if (text("立即修复").exists) {
+            toastLog("存在“立即修复”按钮");
+            var Aa = textContains("退出").findOnce();
+            if (Aa != null) {
+                click(Aa.centerX(), Aa.centerY());
+                sleep(3000);
+                launch("com.jingdong.app.mall");
+                for (var deng = 10; deng > 0; deng--) {
+                    toastLog("正在启动京东APP，剩余" + deng)
+                    sleep(2000);
+                    if (currentPackage() == "com.jingdong.app.mall") {
+                        var deng = 0;
+                    }
+                }
+            }
+        }
+        app.startActivity({
+            action: "android.intent.action.VIEW", //此处可为其他值
+            packageName: "com.jingdong.app.mall",
+            className: "com.jd.lib.rank.view.activity.RankingListActivity"
+            //此处可以加入其他内容，如data、extras
+        });
+        toastLog("正在尝试打开搜索后界面");
+        sleep(3000);
         app.startActivity({
             action: "android.intent.action.VIEW", //此处可为其他值
             packageName: "com.jingdong.app.mall",
             className: "com.jingdong.app.mall.main.MainActivity"
             //此处可以加入其他内容，如data、extras
         });
-        toastLog("正在尝试打开京东APP" + "*" + time);
-        sleep(1000);
-        if (currentPackage() == "com.jingdong.app.mall") {
-            context_while = 0;
+        toastLog("正在尝试打开主页");
+        sleep(2000);
+        if (currentActivity() != "com.jingdong.app.mall.MainFrameActivity") {
+            toastLog("[循环]当前非京东主界面，返回中……");
+            context_while = 1;
+            while (context_while == 1) {
+                Justback();
+                sleep(1000);
+                if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
+                    if (desc("扫啊扫").exists()) {
+                        toastLog("已处于京东主界面[循环结束]");
+                        context_while = 0;
+                    }
+                }
+                if (text("搜索").exists()) {
+                    toastLog("存在搜索");
+                    Justback();
+                    sleep(1000);
+                    if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
+                        toastLog(currentActivity());
+                        if (text("搜索").exists()) {
+                            toastLog("搜索依然存在#587");
+                        } else if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
+                            toastLog("已无搜索，判断为主界面[退出循环]");
+                            context_while = 0;
+                        }
+                    }
+                } else {
+                    if (currentPackage() != "com.jingdong.app.mall") {
+                        toastLog("当前未处于京东中，尝试重新进入");
+                        openJd();
+                        context_while = 0;
+                    }
+                }
+            }
         }
     }
-    context_while = 1;
-    while (context_while == 1) {
-        var time = 1;
-        app.startActivity({
-            action: "android.intent.action.VIEW", //此处可为其他值
-            packageName: "com.jingdong.app.mall",
-            className: "com.jd.lib.search.view.Activity.ProductListActivity"
-            //此处可以加入其他内容，如data、extras
-        });
-        toastLog("正在尝试打开京东搜索栏*" + time);
-        sleep(1000);
-        if (className("android.widget.HorizontalScrollView").exists()) {
-            context_while = 0;
-        }
-    }
-
-    toastLog("正在打开“京东”APP...");
+    sleep(1000);
+    app.startActivity({
+        action: "android.intent.action.VIEW", //此处可为其他值
+        packageName: "com.jingdong.app.mall",
+        className: "com.jd.lib.search.view.Activity.ProductListActivity"
+        //此处可以加入其他内容，如data、extras
+    });
+    toastLog("正在尝试打开京东搜索栏");
+    sleep(1000);
     if (className("android.widget.HorizontalScrollView").exists()) {
         var x = className("android.widget.HorizontalScrollView").findOne().bounds();
         click(x.centerX(), x.centerY());
@@ -613,7 +641,9 @@ function clickAndDoing() {
         toastLog("已点击了“做任务拿爆竹”\n若没有成功出现“领爆竹”请重试或反馈");
         sleep(3000);
         var hd0 = "参加好玩互动 (5/5次)"
-        context_xH = 1;
+        if (textContains("参加好玩互动").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var A = textContains("参加好玩互动").findOne();
             var AO = A.parent();
@@ -633,8 +663,9 @@ function clickAndDoing() {
 
 
         var hd1 = "看京品推荐官直播/视频 (4/4次)"
-
-        context_xH = 1;
+        if (textContains("看京品推荐官直播/视频").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var B = textContains("看京品推荐官直播/视频").findOne();
             var AO = B.parent();
@@ -653,8 +684,9 @@ function clickAndDoing() {
         }
 
         var hd2 = "加购精选好物 (15/15次)"
-
-        context_xH = 1;
+        if (textContains("加购精选好物").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var C = textContains("加购精选好物").findOne();
             var AO = C.parent();
@@ -673,8 +705,9 @@ function clickAndDoing() {
         }
 
         var hd3 = "逛逛好店 (18/18次)"
-
-        context_xH = 1;
+        if (textContains("逛逛好店").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var D = textContains("逛逛好店").findOne();
             var AO = D.parent();
@@ -693,8 +726,9 @@ function clickAndDoing() {
         }
 
         var hd4 = "逛逛热卖会场 (5/5次)"
-
-        context_xH = 1;
+        if (textContains("逛逛热卖会场").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var E = textContains("逛逛热卖会场").findOne();
             var AO = E.parent();
@@ -713,8 +747,9 @@ function clickAndDoing() {
         }
 
         var hd5 = "开启LBS定位 (1/1次)"
-
-        context_xH = 1;
+        if (textContains("开启LBS定位").exists()) {
+            context_xH = 1;
+        }
         while (context_xH == 1) {
             var F = textContains("开启LBS定位").findOne();
             var AO = F.parent();
@@ -730,13 +765,68 @@ function clickAndDoing() {
                 context_xH = 0;
             }
         }
+        var hd6 = "逛年货节主会场 (1/1次)"
+        if (textContains("逛年货节主会场").exists()) {
+            context_xH = 1;
+        }
+        while (context_xH == 1) {
+            var F = textContains("逛年货节主会场").findOne();
+            var AO = F.parent();
+            var B = AO.children();
+            var H = B[1].text();
+            if (H == hd6) {
+                toastLog(H);
+                context_xH = 0;
+            } else {
+                toastLog(H);
+                B[3].click();
+                var deng = 30;
+                for (deng == 30; deng > 0; deng--) {
+                    sleep(1500);
+                    toastLog("正在完成“逛年货节主会场”任务\n剩余" + deng + "秒……");
+                }
+                //返回
+                Justback();
+            }
+        }
     } else {
-        toastLog("很抱歉，脚本找不到活动入口按钮");
+        toastLog("很抱歉，脚本在当前界面找不到活动入口“做任务拿爆竹”按钮");
     }
 }
 
-
-openJdAndSearch();
+if (context_Manualstate == 1) {
+    toastLog("已手动模式运行脚本");
+    var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
+    var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开京东APP至活动页”\n\n请选择脚本等待您打开京东的时间", options);
+    if (i >= 0) {
+        toast("您选择的是" + options[i]);
+    } else if (i < 0) {
+        toastLog("您取消了选择");
+        dialogs_js();
+    }
+    if (i == 0) {
+        //等待20秒
+        var deng = 20;
+    } else if (i == 1) {
+        //等待30秒
+        var deng = 30;
+    } else if (i == 2) {
+        //等待50秒
+        var deng = 50;
+    } else if (i == 3) {
+        //等待60秒
+        var deng = 60;
+    } else if (i == 4) {
+        //等待10秒
+        var deng = 10;
+    }
+    for (deng = deng; deng > 0; deng--) {
+        toastLog("请打开京东至炸年兽的“做任务拿爆竹”界面\n剩余" + deng + "秒后运行脚本...");
+        sleep(1111);
+    }
+} else {
+    openJdAndSearch();
+}
 clickAndDoing();
 dialogs.alert("脚本已运行完成");
 log("脚本已运行完成");
