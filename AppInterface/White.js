@@ -291,7 +291,7 @@ function mainUi() {
         if (res_script.statusCode == 200) {
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
-            engines.execScript("自动炸年兽", OrangeJs);
+            engines.execScript("自动集生肖", OrangeJs);
         } else {
             toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
