@@ -98,13 +98,12 @@ function mainUi() {
         <button id="ScriptFour" text="自动集生肖（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF009688" margin="5 8"/>
         //第四个可运行脚本
         <button id="ScriptOne" text="自动看团课（微信）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF2BB75E" margin="5 8"/>
-
-        //水平线性布局
-        <linear orientation="horizontal" align="center" margin="5 20 5 100" >
-            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="25" layout_gravity="center"/>
-            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="25" layout_gravity="center" />
-            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="25" layout_gravity="center" />
-            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="25" layout_gravity="center"/>
+        <linear orientation="horizontal" align="center" margin="5 15 5 100" >
+            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center"/>
+            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center" />
+            <text id="JoinQQGroup" text="加入QQ群" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center" />
+            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center" />
+            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center"/>
         </linear>
         </vertical>
         </frame>
@@ -117,6 +116,7 @@ function mainUi() {
     ui.AboutApp.click(() => {
         engines.execScript(AboutApp());
     });
+
 
     function runScriptOne() {
         var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0"; //第一个脚本网址
@@ -297,55 +297,90 @@ function mainUi() {
         }
     }
 
-    ui.text.text("权限设置");
-
-    ui.xfc_text.text("停止全部脚本");
-
-    ui.Privacy_Security.click(() => {
-
+    ui.JoinQQGroup.click(() => {
+        engines.execScript("加入QQ群", "JoinQQGroup();\n" + JoinQQGroup.toString());
     });
 
-    ui.xfc_text.click(() => {
-        engines.stopAllAndToast();
-    });
-
-
-    ui.changeColor.click(() => { //更换主题(仅可更换10次)
-        if (context_DayOrNight == 1) {
-            context_DayOrNight = 0;
+    function JoinQQGroup() {
+        var options = ["使用QQ加群", "使用TIM加群"]
+        var i = dialogs.select("请选择", options);
+        if (i >= 0) {
+            toast("您选择的是" + options[i]);
         } else {
-            context_DayOrNight = 1;
+            toastLog("您取消了选择");
+            exit();
         }
-        engines.execScript(events.removeAllListeners(), mainUi());
-    });
-
-    ui.autoService.on("check", function(checked) {
-        /* // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
-         if (auto.service == null) {
-             app.startActivity({
-                 action: "android.settings.ACCESSIBILITY_SETTINGS"
-             });
-         }*/
-
-        if (!checked && auto.service != null) {
-            auto.service.disableSelf();
-        } else if (auto.service == null) {
-            if (checked) {
-                engines.execScript("Auto", "auto.waitFor();\ntoastLog('无障碍权限已开启！')");
-            }
+        if (i == 1) {
+            app.startActivity({
+                action: "android.intent.action.VIEW",
+                packageName: "com.tencent.tim",
+                className: "com.tencent.mobileqq.activity.JumpActivity",
+                data: app.parseUri("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3Dv5ohaWahdOfqDmyX7L_a196dl3K-SX5_"),
+                flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
+            });
+        } else if (i == 0) {
+            app.startActivity({
+                action: "android.intent.action.VIEW",
+                packageName: "com.tencent.mobileqq",
+                className: "com.tencent.mobileqq.activity.JumpActivity",
+                data: app.parseUri("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3Dv5ohaWahdOfqDmyX7L_a196dl3K-SX5_"),
+                flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
+            });
         }
-    });
+    }
 
-    ui.Privacy_Security.click(() => {
-        engines.execScript(SP());
-    });
-
-    // 当用户回到本界面时，resume事件会被触发
-    ui.emitter.on("resume", function() {
-        // 此时根据无障碍服务的开启情况，同步开关的状态
-        ui.autoService.checked = auto.service != null;
-    });
 }
+
+ui.text.text("权限设置");
+
+ui.xfc_text.text("停止全部脚本");
+
+ui.Privacy_Security.click(() => {
+
+});
+
+ui.xfc_text.click(() => {
+    engines.stopAllAndToast();
+});
+
+
+ui.changeColor.click(() => { //更换主题(仅可更换10次)
+    if (context_DayOrNight == 1) {
+        context_DayOrNight = 0;
+    } else {
+        context_DayOrNight = 1;
+    }
+    engines.execScript(events.removeAllListeners(), mainUi());
+});
+
+ui.autoService.on("check", function(checked) {
+    /* // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+     if (auto.service == null) {
+         app.startActivity({
+             action: "android.settings.ACCESSIBILITY_SETTINGS"
+         });
+     }*/
+
+    if (!checked && auto.service != null) {
+        auto.service.disableSelf();
+    } else if (auto.service == null) {
+        if (checked) {
+            engines.execScript("Auto", "auto.waitFor();\ntoastLog('无障碍权限已开启！')");
+        }
+    }
+});
+
+ui.Privacy_Security.click(() => {
+    engines.execScript(SP());
+});
+
+// 当用户回到本界面时，resume事件会被触发
+ui.emitter.on("resume", function() {
+    // 此时根据无障碍服务的开启情况，同步开关的状态
+    ui.autoService.checked = auto.service != null;
+});
+
+
 
 function SP() {
 
