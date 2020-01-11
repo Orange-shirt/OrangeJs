@@ -5,15 +5,30 @@ if (EwmT == false) {
     files.removeDir("/storage/emulated/0/OrangeJsRes/"); //防止有其它文件捣乱，各位也不要在此文件夹存其它东西
     files.ensureDir("/storage/emulated/0/OrangeJsRes/"); //确保文件夹存在，不存在自动创建
     toastLog("正在下载活动入口二维码……\n请确保已授予存储权限！");
+    var DownTP = dialogs.build({
+        title: "京东活动入口二维码下载中...",
+        progress: {
+            max: -1
+        },
+        cancelable: false
+    }).show();
+    setTimeout(() => {
+        DownTP.dismiss();
+        dialogs.alert("二维码下载超时", "请重试");
+        exit();
+    }, 10000);
     var url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OtherRes/JDQRcode_OrangeJs.png";
     var res = http.get(url);
     if (res.statusCode != 200) {
-        dialogs.alert("活动入口二维码下载失败", "这可能是您的网络不好导致的，请检查网络是否正常后再重新运行脚本吧 :c" + "\nHTTP状态码" + res.statusCode);
+        DownTP.dismiss();
+        dialogs.alert("活动入口二维码下载失败", "这可能是您的网络不好导致的，请检查网络是否正常后再重新运行脚本吧 :c" + "\nHttpStatusCode状态码:" + res.statusCode);
+        exit();
+    } else {
+        files.writeBytes("/storage/emulated/0/OrangeJsRes/JD_QRcode_OrangeJs.jpg", res.body.bytes());
+        DownTP.dismiss();
+        toast("下载成功");
     }
-    files.writeBytes("/storage/emulated/0/OrangeJsRes/JD_QRcode_OrangeJs.jpg", res.body.bytes());
-    toast("下载成功");
     //var Re=files.rename("/storage/emulated/0/OrangeJsRes/QRcode_", "QRcode_ForJd_byOrangeJs.png");
-
     //if(Re==true){
     //toastLog("重命名活动二维码已成功");
     //}
@@ -462,6 +477,18 @@ window.action.setOnTouchListener(function(view, event) {
 });
 
 function onClick() {
+    if (How == 1) {
+        if (HDtext == null) {
+            toastLog("已删除错误的设置");
+            files.remove("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        } else if (HDtext == "undefined") {
+            toastLog("已删除错误的设置");
+            files.remove("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        } else if (HDtext == undefined) {
+            toastLog("已删除错误的设置");
+            files.remove("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        }
+    }
     dialogs.alert("已停止运行脚本！");
     log("用户点击了停止按钮");
     engines.stopAllAndToast();
@@ -597,7 +624,30 @@ function openJd() {
     }
 }
 
+function openHdbytext() {
+    //设置剪切板
+    log(context_HDtext);
+    setClip(context_HDtext);
+    sleep(2000);
+    var loopA = 1;
+    for (loopA == 1; loopA < 3; loop++) {
+        if (text("十二生肖来送福啦！赶紧上车去瓜分千万京豆，你就是狂欢城年货大街上最靓的崽～").exists()) {
+            var loopA = 3;
+            var D = textContains("十二生肖来送福啦！赶紧上车去瓜分千万京豆，你就是狂欢城年货大街上最靓的崽～").findOne();
+            var AO = D.parent();
+            var B = AO.children();
+            var H = B[3].bounds();
+            click(H.centerX(), H.centerY());
+        } else {
+            toastLog(loopA);
+            setClip(context_HDtext);
+            sleep(2000);
+        }
+    }
+}
+
 function openHd() {
+    //采用二维码形式打开
     sleep(1000);
     if (desc("扫啊扫").exists()) {
         var A = desc("扫啊扫").findOne().bounds();
@@ -620,6 +670,10 @@ function openHd() {
     sleep(2000);
     if (text("最近添加").exists()) {
         text("最近添加").findOne().click();
+    } else {
+        toastLog("没有找到“最近添加”重新打开中...");
+        openJd();
+        openHd();
     }
     var Swipe = className("android.support.v7.widget.RecyclerView").findOne().bounds();
     context_while = 1;
@@ -771,7 +825,7 @@ function Duihuan() {
         if (text("小福袋兑换成功").exists()) {
             var D = textContains("小福袋兑换成功").findOne();
             var AO = D.parent();
-            var B = AO.children();            
+            var B = AO.children();
             B[4].click();
             toastLog("已成功收下福币");
         } else {
@@ -782,8 +836,73 @@ function Duihuan() {
     }
 }
 
-openJd();
-openHd();
+function SetOpenHd() {
+    var options = ["使用二维码打开", "使用口令打开"]
+    var i = dialogs.select("您未设置打开京东的方法\n请选择如何打开京东活动", options);
+    if (i >= 0) {
+        files.ensureDir("/storage/emulated/0/OrangeJs/自动集生肖");
+        var Did = files.exists("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        if (Did == false) {
+            files.create("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        }
+        open("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        toastLog("您选择的是" + options[i]);
+    }
+    if (i < 0) {
+        toastLog("您没有选择哦");
+        SetOpenHd();
+    }
+    if (i == 0) { //二维码打开
+        var openHDby = 0;
+        files.write("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt", openHDby + "\n");
+        openHd();
+    } else if (i == 1) {
+        var openHDby = 1;
+        files.write("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt", openHDby + "\n");
+        var HDtext = rawInput("请输入您的活动口令");
+        if (HDtext == null) {
+            toastLog("您没有输入哦");
+            SetOpenHd();
+        }
+        var queren = dialogs.confirm("您输入的活动口令为:\n" + HDtext);
+        if (queren == null) {
+            SetOpenHd();
+        } else if (queren == false) {
+            SetOpenHd();
+        }
+        files.append("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt", HDtext);
+        openHdbytext();
+    }
+}
+
+function Start() {
+    var setting = files.exists("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+    if (setting == false) {
+        SetOpenHd();
+        var SZz = SZ.readlines();
+        var How = SZz[0];
+    } else {
+        var SZ = open("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        var SZz = SZ.readlines();
+        var How = SZz[0];
+    }
+    if (How == 0) {
+        SZ.close();
+        openJd();
+        openHd();
+    } else if (How == 1) {
+        context_HDtext = files.read("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+        log(context_HDtext);
+        if (context_HDtext == "1\n") {
+            toastLog("未设置口令");
+            files.remove("/storage/emulated/0/OrangeJs/自动集生肖/自动集生肖脚本设置.txt");
+            Start();
+        }
+        SZ.close();
+        openHdbytext();
+    }
+}
+Start();
 Doit(); //等待10秒进入后完成了浏览80次店铺，停在活动按钮处。
 //尝试自动连连看兑换
 Duihuan(); //自动兑换
