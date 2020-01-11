@@ -54,7 +54,7 @@ function mainUi() {
                         cardElevation="0dp" align="center" >
                         <vertical padding="10 0" h="auto">
                         </vertical>
-                        <View bg="{{context_QxtextBg}}" h="*" w="*"/>//无障碍权限中的卡片颜色1
+                        <View bg="{{context_QxtextBg}}" h="*" w="*"/>
                         <Switch id="autoService" text="无障碍服务" textColor="{{context_textColor}}" gravity="center" textStyle="bold" bg="{{context_QxtextBg}}" checked="{{auto.service != null}}" padding="5 5 5 5" textSize="15sp"/>
                     </card>
                 </card>
@@ -71,8 +71,8 @@ function mainUi() {
                 <vertical padding="10 0" h="auto">
                 </vertical>
                 <View bg="{{context_FctextBg}}" h="*" w="*"/>//悬浮窗权限中的卡片颜色
-                <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto">
-                </text>
+                <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto"/>
+ 
             </card>
         </card>
         </linear>
@@ -329,7 +329,6 @@ function mainUi() {
         }
     }
 
-}
 
 ui.text.text("权限设置");
 
@@ -380,7 +379,7 @@ ui.emitter.on("resume", function() {
     ui.autoService.checked = auto.service != null;
 });
 
-
+}
 
 function SP() {
 
