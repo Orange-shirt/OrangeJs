@@ -33,4 +33,9 @@
 
 **京东“十二生肖”活动自动完成任务脚本“自动集生肖” 全自动一条龙服务，采用二维码打开活动的方式不进行任何助力！支持多种判断防手滑！脚本同时支持定时运行，支持自动兑换福币等**
 
+## 【脚本】[自动集卡收红心（快手脚本）](## 【脚本】[自动集生肖（京东脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E9%9B%86%E5%8D%A1%E6%94%B6%E7%BA%A2%E5%BF%83%EF%BC%88%E5%BF%AB%E6%89%8B%E8%84%9A%E6%9C%AC%EF%BC%89)
+![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
+
+**快手“集卡分1亿”活动全自动完成任务脚本“自动集卡收红心” 全自动一条龙服务，支持安卓7.0及以上设备无需ROOT，支持定时运行，同时支持错误界面纠正，支持全程静音运行等**
+
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
