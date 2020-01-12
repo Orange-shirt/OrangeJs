@@ -81,7 +81,8 @@ function dialogs_js() {
         Q_A_();
     } else if (i == 6) {
         toastLog(options_[i]);
-        context_Manualstate = 1; //设置手动模式
+        context_Manualstate = 1; 
+        Set_Back_way()//设置手动模式
     }
 }
 
