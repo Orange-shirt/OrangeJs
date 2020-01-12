@@ -72,7 +72,7 @@ function mainUi() {
                 </vertical>
                 <View bg="{{context_FctextBg}}" h="*" w="*"/>//悬浮窗权限中的卡片颜色
                 <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto"/>
- 
+                
             </card>
         </card>
         </linear>
@@ -88,16 +88,15 @@ function mainUi() {
         <text id="NowScript" text="可运行脚本" textStyle="bold" color="{{context_textColor}}" gravity="left" size="14" marginLeft="28">
         </text>
         //第一个可运行脚本
-        <button id="ScriptTwo" text="自动集福气（淘宝）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FFEF5350" margin="5 8">
-            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="25" layout_gravity="center"/>
-        </button>
-        
+        <button id="ScriptTwo" text="自动集福气（淘宝）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FFEF5350" margin="5 8"/>
         //第二个可运行脚本
-        <button id="ScriptThree" text="自动炸年兽（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF00BCD4" margin="5 8"/>
+        <button id="ScriptFive" text="自动集卡收红心（快手）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FFFFC107" margin="5 8"/>
         //第三个可运行脚本
-        <button id="ScriptFour" text="自动集生肖（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF009688" margin="5 8"/>
+        <button id="ScriptThree" text="自动炸年兽（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FF00BCD4" margin="5 8"/>
         //第四个可运行脚本
-        <button id="ScriptOne" text="自动看团课（微信）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="70" bg="#FF2BB75E" margin="5 8"/>
+        <button id="ScriptFour" text="自动集生肖（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FF009688" margin="5 8"/>
+        //第五个可运行脚本
+        <button id="ScriptOne" text="自动看团课（微信）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FF2BB75E" margin="5 8"/>
         <linear orientation="horizontal" align="center" margin="5 15 5 100" >
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center"/>
             <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center" />
@@ -135,6 +134,28 @@ function mainUi() {
             toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
+
+    ui.ScriptFive.click(() => {
+        engines.execScript("自动集卡收红心", "runScriptFive();\n" + runScriptFive.toString());
+    });
+
+    function runScriptFive() {
+        var ScriptFive_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E8%87%AA%E5%8A%A8%E9%9B%86%E5%8D%A1%E6%94%B6%E7%BA%A2%E5%BF%83_OrangeJs.js"; //第五个脚本网址
+        var res_script = http.get(ScriptFive_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动集卡收红心", OrangeJs);
+        } else {
+            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
     ui.ScriptTwo.click(() => {
         engines.execScript("自动集福气", "runScriptTwo();\n" + runScriptTwo.toString());
     });
@@ -330,54 +351,54 @@ function mainUi() {
     }
 
 
-ui.text.text("权限设置");
+    ui.text.text("权限设置");
 
-ui.xfc_text.text("停止全部脚本");
+    ui.xfc_text.text("停止全部脚本");
 
-ui.Privacy_Security.click(() => {
+    ui.Privacy_Security.click(() => {
 
-});
+    });
 
-ui.xfc_text.click(() => {
-    engines.stopAllAndToast();
-});
+    ui.xfc_text.click(() => {
+        engines.stopAllAndToast();
+    });
 
 
-ui.changeColor.click(() => { //更换主题(仅可更换10次)
-    if (context_DayOrNight == 1) {
-        context_DayOrNight = 0;
-    } else {
-        context_DayOrNight = 1;
-    }
-    engines.execScript(events.removeAllListeners(), mainUi());
-});
-
-ui.autoService.on("check", function(checked) {
-    /* // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
-     if (auto.service == null) {
-         app.startActivity({
-             action: "android.settings.ACCESSIBILITY_SETTINGS"
-         });
-     }*/
-
-    if (!checked && auto.service != null) {
-        auto.service.disableSelf();
-    } else if (auto.service == null) {
-        if (checked) {
-            engines.execScript("Auto", "auto.waitFor();\ntoastLog('无障碍权限已开启！')");
+    ui.changeColor.click(() => { //更换主题(仅可更换10次)
+        if (context_DayOrNight == 1) {
+            context_DayOrNight = 0;
+        } else {
+            context_DayOrNight = 1;
         }
-    }
-});
+        engines.execScript(events.removeAllListeners(), mainUi());
+    });
 
-ui.Privacy_Security.click(() => {
-    engines.execScript(SP());
-});
+    ui.autoService.on("check", function(checked) {
+        /* // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+         if (auto.service == null) {
+             app.startActivity({
+                 action: "android.settings.ACCESSIBILITY_SETTINGS"
+             });
+         }*/
 
-// 当用户回到本界面时，resume事件会被触发
-ui.emitter.on("resume", function() {
-    // 此时根据无障碍服务的开启情况，同步开关的状态
-    ui.autoService.checked = auto.service != null;
-});
+        if (!checked && auto.service != null) {
+            auto.service.disableSelf();
+        } else if (auto.service == null) {
+            if (checked) {
+                engines.execScript("Auto", "auto.waitFor();\ntoastLog('无障碍权限已开启！')");
+            }
+        }
+    });
+
+    ui.Privacy_Security.click(() => {
+        engines.execScript(SP());
+    });
+
+    // 当用户回到本界面时，resume事件会被触发
+    ui.emitter.on("resume", function() {
+        // 此时根据无障碍服务的开启情况，同步开关的状态
+        ui.autoService.checked = auto.service != null;
+    });
 
 }
 
