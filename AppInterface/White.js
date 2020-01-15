@@ -36,7 +36,7 @@ function mainUi() {
     //Not pink色是#DFC8C6
     ui.layout(
         <ScrollView>
-            <frame w="*" h="auto" id="main" background="{{context_framebg}}">//全局背景颜色
+            <frame w="auto" h="*" id="main" background="{{context_framebg}}">//全局背景颜色
                 <vertical align="center" paddingTop="5" margin="0" >
                     <img src="{{context_Logo}}" w="auto" h="40"/>//黑色logo
                     <text id="text" marginLeft="25" textStyle="bold" color="{{context_textColor}}" bg="{{context_textBg}}" gravity="left" size="20" marginTop="10" h="auto">
@@ -49,7 +49,6 @@ function mainUi() {
                         </vertical>
                         <View bg="#FFEA3324" h="*" w="*"/>//卡片颜色1
                         <View bg="#FF4395FB" h="*" w="0"/>//卡片颜色2
-                        
                         <card layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
                         cardElevation="0dp" align="center" >
                         <vertical padding="10 0" h="auto">
@@ -87,28 +86,95 @@ function mainUi() {
         </card>
         <text id="NowScript" text="可运行脚本" textStyle="bold" color="{{context_textColor}}" gravity="left" size="14" marginLeft="28">
         </text>
-        //第一个可运行脚本
-        <button id="ScriptTwo" text="自动集福气（淘宝）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FFEF5350" margin="5 8"/>
-        //第二个可运行脚本
-        <button id="ScriptFive" text="自动集卡收红心（快手）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FFFFC107" margin="5 8"/>
-        //第三个可运行脚本
-        <button id="ScriptThree" text="自动炸年兽（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FF00BCD4" margin="5 8"/>
-        //第四个可运行脚本
-        <button id="ScriptFour" text="自动集生肖（京东）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FF009688" margin="5 8"/>
-        //第五个可运行脚本
-        <button id="ScriptOne" text="自动看团课（微信）" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" style="Widget.AppCompat.Button.Colored" w="*" h="60" bg="#FF2BB75E" margin="5 8"/>
-        <linear orientation="horizontal" align="center" margin="5 15 5 100" >
+        //淘宝脚本
+        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+            <View bg="#FF5722" h="*" w="*"/>
+            <vertical padding="0 0" h="auto">
+                <linear orientation="horizontal" align="left" margin="0">
+                    <img src="https://pp.myapp.com/ma_icon/0/icon_5080_1577343737/256" w="40" h="40" margin="20 20 0 0"/>
+                    <text text="手机淘宝" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
+                </linear>
+                <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                    <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                        <View w="*" h="*" bg="#FFAB91"/>
+                        <text id="ScriptTwo" text="自动集福气" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                    </card>
+                </linear>
+            </vertical>
+        </card>
+        
+        //京东脚本
+        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+            <View bg="#F44336" h="*" w="*"/>
+            <vertical padding="0 0" h="auto">
+                <linear orientation="horizontal" align="left" margin="0">
+                    <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
+                    <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
+                </linear>
+                <Horizo​​ntalScrollView>
+                    <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                            <View w="*" h="*" bg="#EF9A9A"/>
+                            <text id="ScriptThree" text="自动炸年兽" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                        </card>
+                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="0 20">
+                            <View w="*" h="*" bg="#EF9A9A"/>
+                            <text id="ScriptFour" text="自动集生肖" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                        </card>
+                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20">
+                            <View w="*" h="*" bg="#EF9A9A"/>
+                            <text id="ScriptSix" text="自动宠汪汪" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                        </card>
+                    </linear>
+                </Horizo​​ntalScrollView>
+            </vertical>
+        </card>
+        
+        //快手脚本
+        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+            <View bg="#FF9800" h="*" w="*"/>
+            <vertical padding="0 0" h="auto">
+                <linear orientation="horizontal" align="left" margin="0">
+                    <img src="http://pp.myapp.com/ma_icon/0/icon_2608_1578902227/256" w="40" h="40" margin="20 20 0 0"/>
+                    <text text="快手" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
+                </linear>
+                <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                    <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                        <View w="*" h="*" bg="#FFCC80"/>
+                        <text id="ScriptFive" text="自动集卡收红心" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                    </card>
+                </linear>
+            </vertical>
+        </card>
+        
+        //微信脚本
+        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+            <View bg="#4CAF50" h="*" w="*"/>
+            <vertical padding="0 0" h="auto">
+                <linear orientation="horizontal" align="left" margin="0">
+                    <img src="http://pp.myapp.com/ma_icon/0/icon_10910_1577346809/256" w="40" h="40" margin="20 20 0 0"/>
+                    <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
+                </linear>
+                <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                    <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                        <View w="*" h="*" bg="#A5D6A7"/>
+                        <text id="ScriptOne" text="自动看团课" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                    </card>
+                </linear>
+            </vertical>
+        </card>
+        
+        <linear orientation="horizontal" align="center" margin="5 15 5 15" >
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center"/>
-            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center" />
-            <text id="JoinQQGroup" text="加入QQ群" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center" />
-            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center" />
-            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="12sp" layout_weight="20" layout_gravity="center"/>
+            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" />
+            <text id="JoinQQGroup" text="加入QQ群" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" />
+            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" />
+            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center"/>
         </linear>
         </vertical>
         </frame>
         </ScrollView>
     );
-
     ui.ScriptOne.click(() => {
         engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
     });
@@ -118,6 +184,13 @@ function mainUi() {
 
 
     function runScriptOne() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
         var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0"; //第一个脚本网址
         var res_script = http.get(ScriptOne_Url, {
             headers: {
@@ -127,19 +200,56 @@ function mainUi() {
         });
 
         if (res_script.statusCode == 200) {
+            DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("自动看团课", OrangeJs);
         } else {
-            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
+    ui.ScriptSix.click(() => {
+        engines.execScript("自动宠汪汪", "runScriptSix();\n" + runScriptSix.toString());
+    });
 
+    function runScriptSix() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptSix_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%AE%A0%E6%B1%AA%E6%B1%AA_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第六个脚本网址
+        var res_script = http.get(ScriptSix_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动宠汪汪", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
     ui.ScriptFive.click(() => {
         engines.execScript("自动集卡收红心", "runScriptFive();\n" + runScriptFive.toString());
     });
 
     function runScriptFive() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
         var ScriptFive_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E8%87%AA%E5%8A%A8%E9%9B%86%E5%8D%A1%E6%94%B6%E7%BA%A2%E5%BF%83_OrangeJs.js"; //第五个脚本网址
         var res_script = http.get(ScriptFive_Url, {
             headers: {
@@ -148,11 +258,13 @@ function mainUi() {
             }
         });
         if (res_script.statusCode == 200) {
+            DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("自动集卡收红心", OrangeJs);
         } else {
-            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
 
@@ -161,6 +273,13 @@ function mainUi() {
     });
 
     function runScriptTwo() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
         var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94"; //第二个脚本网址
         var res_script = http.get(ScriptTwo_Url, {
             headers: {
@@ -169,11 +288,13 @@ function mainUi() {
             }
         });
         if (res_script.statusCode == 200) {
+            DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("自动集福气", OrangeJs);
         } else {
-            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
     ui.ScriptThree.click(() => {
@@ -181,6 +302,13 @@ function mainUi() {
     });
 
     function runScriptThree() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
         var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E7%82%B8%E5%B9%B4%E5%85%BD-%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC"; //第三个脚本网址
         var res_script = http.get(ScriptTwo_Url, {
             headers: {
@@ -189,11 +317,13 @@ function mainUi() {
             }
         });
         if (res_script.statusCode == 200) {
+            DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("自动炸年兽", OrangeJs);
         } else {
-            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
 
@@ -302,6 +432,13 @@ function mainUi() {
     });
 
     function runScriptFour() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
         var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%94%9F%E8%82%96_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第四个脚本网址
         var res_script = http.get(ScriptTwo_Url, {
             headers: {
@@ -310,11 +447,13 @@ function mainUi() {
             }
         });
         if (res_script.statusCode == 200) {
+            DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("自动集生肖", OrangeJs);
         } else {
-            toastLog("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
 
