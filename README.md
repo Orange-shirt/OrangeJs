@@ -38,4 +38,14 @@
 
 **快手“集卡分1亿”活动全自动完成任务脚本“自动集卡收红心” 全自动一条龙服务，支持安卓7.0及以上设备无需ROOT，支持定时运行，同时支持错误界面纠正，支持全程静音运行等**
 
+## 【脚本】[自动宠汪汪（京东脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E5%AE%A0%E6%B1%AA%E6%B1%AA%EF%BC%88%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC%EF%BC%89)
+![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
+
+**一条龙服务以完成所有任务**
+**采用新的打开JD的方法，同时增加各种判断**
+**支持安卓7.0以上无障碍服务，实现无需ROOT运行**
+**支持定时运行，支持手动模式等……**
+
+为了提供流畅体验，不会完成“去签到（因为若完成此任务会跳转奇怪的小程序）”“邀请好友”任务
+
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
