@@ -45,7 +45,9 @@ function dialogs_js() {
             device.setMusicVolume(0);
             context_Mute = 1;
             toastLog("🔇已静音媒体音量");
-        }
+        }else{
+            context_Mute = 0;
+            }
     } else if (i == 2) {
         toastLog(options_[i]);
         exit();
@@ -84,7 +86,9 @@ function dialogs_js() {
             device.setMusicVolume(0);
             context_Mute = 1;
             toastLog("🔇已静音媒体音量");
-        }
+        }else{
+            context_Mute = 0;
+            }
         sleep(2000);
         wait_Time_over();
     } else if (i == 5) {
