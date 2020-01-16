@@ -460,7 +460,7 @@ window.action.setOnTouchListener(function(view, event) {
 function onClick() {
     dialogs.alert("已停止运行脚本！");
     log("用户点击了停止按钮");
-    engines.stopAllAndToast();
+    exit();
 }
 
 function Justback() {
