@@ -52,7 +52,7 @@ function dialogs_js() {
     */
 
     var xiazai = ("软件下载链接戳 ");
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "👥 多帐号完成任务", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动集福气”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -473,7 +473,7 @@ window.action.setOnTouchListener(function(view, event) {
 function onClick() {
     dialogs.alert("已停止运行脚本！");
     log("用户点击了停止按钮");
-    engines.stopAllAndToast();
+    exit();
 }
 
 currentActivity();
@@ -1030,6 +1030,34 @@ function main_js_clickAll15s() {
             }
         }
     }
+    while (textContains("去逛逛").exists()) {
+        textContains("去逛逛").findOne().click();
+        var dengdai10s = 10;
+        for (dengdai10s == 10; dengdai10s > 0; dengdai10s--) {
+            toastLog("正在完成“去逛逛”任务\n剩余" + dengdai10s + "秒……")
+            sleep(2000);
+            swipe(width / 2, height - 600, width / 2, 0, 500);
+        }
+        Justback();
+        sleep(2000);
+        if (text("已签到").exists()) {
+            toastLog("已返回活动界面");
+        } else {
+            toastLog("未能返回任务界面，再次返回");
+            Justback();
+            if (text("已签到").exists()) {
+                toastLog("已处于活动界面");
+            } else {
+                openTBandsearch();
+                sleep(3000);
+                if (currentActivity() != "com.taobao.browser.BrowserActivity") {
+                    openTBandsearch_mine();
+                }
+                jinhuodong();
+                click_powerˉqiandao();
+            }
+        }
+    }
 
     while (textContains("前往双12互动群签到(0/1) 签到得10000能量 去签到").exists()) {
         textContains("前往双12互动群签到(0/1) 签到得10000能量 去签到").findOne().click();
@@ -1156,8 +1184,13 @@ function main_js_clickAll15s() {
             click_powerˉqiandao();
         }
     }
-    while (textContains("去兑换").exists()) {
+
+    if (textContains("去兑换").exists()) {
         textContains("去兑换").findOne().click();
+        sleep(2000);
+    }
+    if (text("去领取").exists()) {
+        text("去领取").findOne().click();
         sleep(2000);
     }
     while (textContains("去淘小学兑换公益爱星(0/1) 兑换爱星得10000能量 去兑换").exists()) {
@@ -1193,7 +1226,31 @@ openTBandsearch();
 jinhuodong();
 click_powerˉqiandao();
 main_js_clickAll15s();
-
+toastLog("二次循环已完成\n即将进行自动浇灌…");
+openTBandsearch();
+jinhuodong();
+sleep(2000);
+var A = className("android.view.View").findOnce(16);
+if (A != null) {
+    var While = 1;
+} else {
+    toastLog("不存在View16（浇灌福气按钮）");
+}
+while (While == 1) {
+    A.click();
+    toastLog("已尝试点击“浇灌福气”按钮");
+    sleep(2000);
+    var aaq = className("android.view.View").text("立即领取").findOnce();
+    var aax = className("android.view.View").text("快去做任务集福气吧").findOnce()
+    if (aaq != null) {
+        var aab = aaq.bounds();
+        click(aab.centerX(), aab.centerY());
+        toastLog("存在“立即领取”按钮\n已尝试点击…");
+    } else if (aax != null) {
+        toastLog("福气不足，停止浇灌");
+        var While = 0;
+    }
+}
 if (context_Manualstate == 1) {
     app.startActivity({
         packageName: "com.taobao.taobao",
