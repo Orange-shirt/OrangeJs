@@ -1246,6 +1246,7 @@ while (While == 1) {
         var aab = aaq.bounds();
         click(aab.centerX(), aab.centerY());
         toastLog("存在“立即领取”按钮\n已尝试点击…");
+sleep(2000);
     } else if (aax != null) {
         toastLog("福气不足，停止浇灌");
         var While = 0;
