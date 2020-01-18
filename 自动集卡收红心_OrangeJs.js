@@ -993,6 +993,8 @@ function DoTask() {
                     InToHD();
                     DoTask();
                 }
+            } else {
+                var While = 0;
             }
         } //集卡任务完成
     }
