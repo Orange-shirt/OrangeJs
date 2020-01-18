@@ -736,6 +736,7 @@ function DoTask() {
         //这是已处于“集卡”界面的代码
     }
     sleep(2000);
+    swipe(width/2,height-100,width/2,100,1000);
     if (text("，做任务得红心").findOnce != null) {
         toastLog("正在跳转到“做任务”界面...");
         if (text("，做任务得红心 ").exists()) {
