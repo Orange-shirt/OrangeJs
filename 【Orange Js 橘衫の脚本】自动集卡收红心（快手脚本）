@@ -31,7 +31,7 @@ var width = device.width;
 function dialogs_js() {
     var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-    var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
+    var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动集卡收红心”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
     if (i < 0) {
         toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
@@ -94,6 +94,18 @@ function dialogs_js() {
     } else if (i == 5) {
         toastLog(options_[i]);
         Q_A_();
+    } else if (i == 6) {
+        toastLog(options_[i]);
+        context_Manualstate = 1;
+        Set_Back_way() //设置手动模式
+        var Mute = confirm("🔇要静音媒体音量吗?", "建议在公共场合选择静音，已免快手视频的噪音影响其它人\n\n若没有授予本软件“修改系统设置”权限请手动静音。\n没有授予该权限点击确定后会跳转设置");
+        if (Mute) {
+            device.setMusicVolume(0);
+            context_Mute = 1;
+            toastLog("🔇已静音媒体音量");
+        } else {
+            context_Mute = 0;
+        }
     }
 }
 
@@ -517,11 +529,7 @@ function Justback() {
         sleep(2000);
     }
 }
-Maininterface();
-ClickMenu();
-ClickHDdoor();
-InToHD();
-DoTask();
+
 
 function Maininterface() {
     var WhileT = 1;
@@ -732,11 +740,8 @@ function DoTask() {
                 }
             }
         } else {
-            toastLog("找不到“收取红心”按钮\n重新进入活动页面中...");
-            Maininterface();
-            ClickMenu();
-            ClickHDdoor();
-            InToHD();
+            toastLog("找不到“收取红心”按钮\n跳过此任务");
+            sleep(2000);
         }
     }
     OpenJK();
@@ -1046,7 +1051,49 @@ function DoTask() {
         } //集卡任务完成
     }
 }
+firstD();
 
+function firstD() {
+    if (context_Manualstate == 1) {
+        toastLog("已手动模式运行脚本");
+        var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
+        var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开京东APP至活动页”\n\n请选择脚本等待您打开京东的时间", options);
+        if (i >= 0) {
+            toast("您选择的是" + options[i]);
+        } else if (i < 0) {
+            toastLog("您取消了选择");
+            dialogs_js();
+            firstD();
+        }
+        if (i == 0) {
+            //等待20秒
+            var deng = 20;
+        } else if (i == 1) {
+            //等待30秒
+            var deng = 30;
+        } else if (i == 2) {
+            //等待50秒
+            var deng = 50;
+        } else if (i == 3) {
+            //等待60秒
+            var deng = 60;
+        } else if (i == 4) {
+            //等待10秒
+            var deng = 10;
+        }
+        for (deng = deng; deng > 0; deng--) {
+            toastLog("请打开京东至宠汪汪的主界面\n剩余" + deng + "秒后运行脚本...");
+            sleep(1111);
+        }
+        DoTask();
+    } else {
+        Maininterface();
+        ClickMenu();
+        ClickHDdoor();
+        InToHD();
+        DoTask();
+    }
+}
 log("任务已完成！检测不到任务了！");
 dialogs.alert("(☞ﾟ∀ﾟ)☞\n(☞^o^) ☞     脚本已运行完毕\n(☞ ͡° ͜ʖ ͡°)☞", "检测不到任务喽～\n如有遗漏请自行操作或再次运行\n如有任何问题欢迎向作者反馈哦～\n\n脚本作者@橘衫下邂逅的时光");
 exit();
