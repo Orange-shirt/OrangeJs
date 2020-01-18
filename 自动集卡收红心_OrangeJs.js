@@ -608,7 +608,20 @@ function ClickHDdoor() {
             Maininterface();
             ClickMenu();
         }
-    } else {
+    } if (text("集卡分一亿").findOnce != null) {
+        var A = text("集卡分一亿").findOnce();
+        toastLog("正在尝试点击“集卡分一亿”");
+        if (A != null) {
+            var B = A.bounds();
+            click(B.centerX(), B.centerY());
+            toastLog("已找到并尝试点击活动入口");
+            sleep(3000);
+        } else {
+            toastLog("找不到活动入口");
+            Maininterface();
+            ClickMenu();
+        }
+    }else {
         toastLog("找不到活动入口");
         Maininterface();
         ClickMenu();
