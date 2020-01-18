@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.1"); //版本
+    var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动集卡收红心”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -595,7 +595,13 @@ function ClickHDdoor() {
             sleep(2000);
         }
     }
-    if (textContains("集卡分1亿").findOnce != null) {
+    var X = id("com.smile.gifmaker:id/title").find();
+    if (X.nonEmpty() == true) {
+        var x = X[0].bounds();
+        click(x.centerX(), x.centerY());
+        toastLog("通过find尝试点击“集卡分一亿”");
+        sleep(2000);
+    } else if (textContains("集卡分1亿").findOnce != null) {
         var A = textContains("集卡分1亿").findOnce();
         toastLog("正在尝试点击“集卡分一亿”");
         if (A != null) {
@@ -632,9 +638,18 @@ function ClickHDdoor() {
 function InToHD() {
     var While = 1;
     while (While == 1) {
+        if (text("我知道了").findOnce() != null) {
+            var Am = text("我知道了").findOnce().bounds();
+            click(Am.centerX(), Am.centerY());
+            toastLog("点击了“我知道了”");
+            sleep(2000);
+        }
         if (textContains("收取红心").findOnce() != null) {
-            toastLog("已处于活动中");
+            toastLog("已处于“收取红心”活动中");
             var While = 0;
+        } else if (text("，做任务得红心 ").exists()) {
+            var While = 0;
+            toastLog("已处于“集卡”界面");
         } else if (text("加载中...").findOnce() != null) {
             toastLog("正在等待活动界面加载...");
             sleep(1000);
@@ -660,7 +675,35 @@ function DoTask() {
         device.setMusicVolume(0);
         toastLog("🔇静音媒体音量");
     }
-
+    if (text("，做任务得红心 ").exists()) {
+        toastLog("已处于“集卡”界面");
+        sleep(2000);
+        toastLog("正在滑动至“当前红心…，做任务得红心”处");
+        swipe(width / 2, height - 100, width / 2, 100, 1000);
+        swipe(width / 2, height - 100, width / 2, 100, 1000);
+        swipe(width / 2, height - 100, width / 2, 100, 1000);
+        if (text("，做任务得红心").findOnce != null) {
+            toastLog("正在跳转到“做任务”界面...");
+            if (text("，做任务得红心 ").exists()) {
+                var Z = text("，做任务得红心 ").findOne().bounds();
+                click(Z.centerX(), Z.centerY());
+                toastLog("已点击“，做任务得红心”");
+                sleep(2500);
+                if (text("做任务得红心").exists()) {
+                    Justback();
+                    toastLog("已返回，准备点红心");
+                    sleep(2000);
+                }
+            } else {
+                toastLog("找不到“跳转”按钮\n尝试重新进入活动中...");
+                Maininterface();
+                ClickMenu();
+                ClickHDdoor();
+                InToHD();
+                DoTask();
+            }
+        }
+    }
     var While = 10;
     while (While > 0) {
         While--;
@@ -737,9 +780,9 @@ function DoTask() {
     }
     sleep(2000);
     toastLog("正在滑动至“当前红心…，做任务得红心”处");
-    swipe(width/2,height-100,width/2,100,1000);
-    swipe(width/2,height-100,width/2,100,1000);
-    swipe(width/2,height-100,width/2,100,1000);
+    swipe(width / 2, height - 100, width / 2, 100, 1000);
+    swipe(width / 2, height - 100, width / 2, 100, 1000);
+    swipe(width / 2, height - 100, width / 2, 100, 1000);
     if (text("，做任务得红心").findOnce != null) {
         toastLog("正在跳转到“做任务”界面...");
         if (text("，做任务得红心 ").exists()) {
