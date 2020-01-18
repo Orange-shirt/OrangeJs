@@ -45,9 +45,9 @@ function dialogs_js() {
             device.setMusicVolume(0);
             context_Mute = 1;
             toastLog("🔇已静音媒体音量");
-        }else{
+        } else {
             context_Mute = 0;
-            }
+        }
     } else if (i == 2) {
         toastLog(options_[i]);
         exit();
@@ -86,9 +86,9 @@ function dialogs_js() {
             device.setMusicVolume(0);
             context_Mute = 1;
             toastLog("🔇已静音媒体音量");
-        }else{
+        } else {
             context_Mute = 0;
-            }
+        }
         sleep(2000);
         wait_Time_over();
     } else if (i == 5) {
@@ -460,7 +460,7 @@ window.action.setOnTouchListener(function(view, event) {
 function onClick() {
     dialogs.alert("已停止运行脚本！");
     log("用户点击了停止按钮");
-    exit();
+    engines.stopAllAndToast();
 }
 
 function Justback() {
@@ -559,8 +559,8 @@ function Maininterface() {
 function ClickMenu() {
     //点击菜单按钮
     toastLog("正在尝试点击菜单按钮");
-    if (id("left_btn").findOnce != null) {
-        var Btn = id("left_btn").findOnce();
+    if (id("com.smile.gifmaker:id/left_btn").findOnce != null) {
+        var Btn = id("com.smile.gifmaker:id/left_btn").findOnce();
         if (Btn != null) {
             Btn.click();
             toastLog("已找到并尝试点击菜单按钮");
@@ -568,8 +568,8 @@ function ClickMenu() {
         } else {
             toastLog("找不到菜单按钮");
             Maininterface();
-            if (id("left_btn").findOnce() != null) {
-                id("left_btn").findOne().click();
+            if (id("com.smile.gifmaker:id/left_btn").findOnce() != null) {
+                id("com.smile.gifmaker:id/left_btn").findOne().click();
                 toastLog("已找到并尝试点击菜单按钮");
                 sleep(2000);
             }
@@ -577,8 +577,8 @@ function ClickMenu() {
     } else {
         toastLog("找不到彩蛋按钮");
         Maininterface();
-        if (id("left_btn").findOnce() != null) {
-            id("left_btn").findOne().click();
+        if (id("com.smile.gifmaker:id/left_btn").findOnce() != null) {
+            id("com.smile.gifmaker:id/left_btn").findOne().click();
             toastLog("已找到并尝试点击菜单按钮");
             sleep(2000);
         }
@@ -621,7 +621,7 @@ function ClickHDdoor() {
             Maininterface();
             ClickMenu();
         }
-    }else {
+    } else {
         toastLog("找不到活动入口");
         Maininterface();
         ClickMenu();
@@ -703,8 +703,8 @@ function DoTask() {
             device.setMusicVolume(0);
             toastLog("🔇静音媒体音量");
         }
-        if (text("集卡").findOnce() != null) {
-            var A = text("集卡").findOne();
+        if (textContains("集卡").findOnce() != null) {
+            var A = textContains("集卡").findOne();
             var B = A.bounds();
             click(B.centerX(), B.centerY());
             sleep(2000);
