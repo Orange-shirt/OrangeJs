@@ -595,8 +595,8 @@ function ClickHDdoor() {
             sleep(2000);
         }
     }
-    if (text("集卡分1亿").findOnce != null) {
-        var A = text("集卡分1亿").findOnce();
+    if (textContains("集卡分1亿").findOnce != null) {
+        var A = textContains("集卡分1亿").findOnce();
         toastLog("正在尝试点击“集卡分一亿”");
         if (A != null) {
             var B = A.bounds();
@@ -608,8 +608,8 @@ function ClickHDdoor() {
             Maininterface();
             ClickMenu();
         }
-    } else if (text("集卡分一亿").findOnce != null) {
-        var A = text("集卡分一亿").findOnce();
+    } else if (textContains("集卡分一亿").findOnce != null) {
+        var A = textContains("集卡分一亿").findOnce();
         toastLog("正在尝试点击“集卡分一亿”");
         if (A != null) {
             var B = A.bounds();
