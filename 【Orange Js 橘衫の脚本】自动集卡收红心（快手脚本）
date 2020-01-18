@@ -1057,7 +1057,7 @@ function firstD() {
     if (context_Manualstate == 1) {
         toastLog("已手动模式运行脚本");
         var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
-        var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开京东APP至活动页”\n\n请选择脚本等待您打开京东的时间", options);
+        var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开快手APP至点赞中国年界面”\n\n请选择脚本等待您打开快手的时间", options);
         if (i >= 0) {
             toast("您选择的是" + options[i]);
         } else if (i < 0) {
@@ -1082,7 +1082,7 @@ function firstD() {
             var deng = 10;
         }
         for (deng = deng; deng > 0; deng--) {
-            toastLog("请打开京东至宠汪汪的主界面\n剩余" + deng + "秒后运行脚本...");
+            toastLog("请打开快手至“点赞中国年”的界面\n剩余" + deng + "秒后运行脚本...");
             sleep(1111);
         }
         DoTask();
