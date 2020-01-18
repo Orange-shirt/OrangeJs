@@ -51,7 +51,7 @@ var width = device.width;
 
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动集生肖”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -625,9 +625,6 @@ function openHd() {
     context_while = 1;
     while (context_while == 1) {
         var A = className("android.widget.RelativeLayout").findOnce(1).bounds();
-        var B = className("android.widget.RelativeLayout").findOnce(4).bounds();
-        var C = B.centerY() - A.centerY();
-        var D = Swipe.centerY() - C;
         if (textContains(EwmPicture).exists()) {
             context_while = 0;
             var Tp = textContains(EwmPicture).findOne().bounds();
@@ -660,7 +657,7 @@ function openHd() {
                 toastLog("已无其它文件夹\n已检测到此情况次数为:" + stop)
                 if (stop < 3) {
                     //滑动
-                    swipe(Swipe.centerX(), Swipe.centerY(), Swipe.centerX(), D, 500);
+                    swipe(Swipe.centerX(), Swipe.height(), Swipe.centerX(), 0, 500);
                     stop++;
                 } else if (stop == 3) {
                     //报错！没有文件夹
@@ -673,7 +670,7 @@ function openHd() {
                 var SS = Sa;
                 toastLog("还未找到文件夹，继续寻找……");
                 //滑动
-                swipe(Swipe.centerX(), Swipe.centerY(), Swipe.centerX(), D, 500);
+                swipe(Swipe.centerX(), Swipe.height(), Swipe.centerX(), 0, 500);
             }
 
         }
