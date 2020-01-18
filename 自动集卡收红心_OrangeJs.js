@@ -528,7 +528,7 @@ function Maininterface() {
     var While = 1;
     while (While == 1) {
         WhileT++;
-        if (id("left_btn").findOnce() != null) {
+        if (id("com.smile.gifmaker:id/left_btn").findOnce() != null) {
             var While = 0;
         } else {
             ensureApp();
@@ -632,7 +632,10 @@ function ClickHDdoor() {
 function InToHD() {
     var While = 1;
     while (While == 1) {
-        if (text("加载中...").findOnce() != null) {
+        if (textContains("收取红心").findOnce() != null) {
+            toastLog("已处于活动中");
+            var While = 0;
+        } else if (text("加载中...").findOnce() != null) {
             toastLog("正在等待活动界面加载...");
             sleep(1000);
         } else if (text("刷新").findOnce() != null) {
@@ -640,9 +643,6 @@ function InToHD() {
             var A = text("刷新").findOne().bounds();
             click(A.centerX(), A.centerY());
             sleep(1000);
-        } else if (text("收取红心").findOnce() != null) {
-            toastLog("已处于活动中");
-            var While = 0;
         } else if (currentActivity() == "com.yxcorp.gifshow.webview.KwaiWebViewActivity") {
             toastLog("正在等待活动界面加载...");
             sleep(1000);
