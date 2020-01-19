@@ -3,7 +3,7 @@
 
 这是一个由我使用Auto.js软件制作的脚本合辑，将在此开放脚本代码以及保持更新，欢迎使用以及提供您宝贵的意见:D
 
-**[点击下载软件（1.0）](https://www.lanzous.com/i8gs5li)**
+**[点击下载OrangeJs（橘衫の脚本）APK（1.0）](https://www.lanzous.com/i8gs5li)**
 
 ## 【脚本】[自动看团课(预览版preview1.0)](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
