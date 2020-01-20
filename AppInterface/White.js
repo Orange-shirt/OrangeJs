@@ -126,7 +126,7 @@ function mainUi() {
                                     <View w="*" h="*" bg="#EF9A9A"/>
                                     <text id="ScriptThree" text="自动炸年兽" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
                                 </card>
-                                <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20">
+                                <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="0 20">
                                     <View w="*" h="*" bg="#EF9A9A"/>
                                     <text id="ScriptSix" text="自动宠汪汪" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
                                 </card>
