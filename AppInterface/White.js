@@ -86,66 +86,100 @@ function mainUi() {
         </card>
         <text id="NowScript" text="可运行脚本" textStyle="bold" color="{{context_textColor}}" gravity="left" size="14" marginLeft="28">
         </text>
-        //淘宝脚本
-        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-            <View bg="#FF5722" h="*" w="*"/>
-            <vertical padding="0 0" h="auto">
-                <linear orientation="horizontal" align="left" margin="0">
-                    <img src="https://pp.myapp.com/ma_icon/0/icon_5080_1577343737/256" w="40" h="40" margin="20 20 0 0"/>
-                    <text text="手机淘宝" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
-                </linear>
-                <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                    <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                        <View w="*" h="*" bg="#FFAB91"/>
-                        <text id="ScriptTwo" text="自动集福气" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
-                    </card>
-                </linear>
-            </vertical>
-        </card>
+        <Horizo​​ntalScrollView>
+            <linear orientation="horizontal" align="left" margin="0">
+                //淘宝脚本
+                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+                    <View bg="#FF5722" h="*" w="*"/>
+                    <vertical padding="0 0" h="auto">
+                        <linear orientation="horizontal" align="left" margin="0">
+                            <img src="https://pp.myapp.com/ma_icon/0/icon_5080_1577343737/256" w="40" h="40" margin="20 20 0 0"/>
+                            <vertical padding="0 0" h="auto">
+                                <text text="手机淘宝" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐9.4.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            </vertical>
+                        </linear>
+                        //
+                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#FFAB91"/>
+                                <text id="ScriptTwo" text="自动集福气" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                            </card>
+                        </linear>
+                    </vertical>
+                </card>
+                
+                //京东脚本
+                <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+                    <View bg="#F44336" h="*" w="*"/>
+                    <vertical padding="0 0" h="auto">
+                        <linear orientation="horizontal" align="left" margin="0">
+                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
+                            <vertical padding="0 0" h="auto">
+                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐8.4.4版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            </vertical>
+                        </linear>
+                        <Horizo​​ntalScrollView>
+                            <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                                <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                    <View w="*" h="*" bg="#EF9A9A"/>
+                                    <text id="ScriptThree" text="自动炸年兽" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                                </card>
+                                <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20">
+                                    <View w="*" h="*" bg="#EF9A9A"/>
+                                    <text id="ScriptSix" text="自动宠汪汪" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                                </card>
+                            </linear>
+                        </Horizo​​ntalScrollView>
+                    </vertical>
+                </card>
+            </linear>
+        </Horizo​​ntalScrollView>
         
-        //京东脚本
-        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-            <View bg="#F44336" h="*" w="*"/>
-            <vertical padding="0 0" h="auto">
-                <linear orientation="horizontal" align="left" margin="0">
-                    <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
-                    <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
-                </linear>
-                <Horizo​​ntalScrollView>
-                    <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                            <View w="*" h="*" bg="#EF9A9A"/>
-                            <text id="ScriptThree" text="自动炸年兽" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
-                        </card>
-                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="0 20">
-                            <View w="*" h="*" bg="#EF9A9A"/>
-                            <text id="ScriptFour" text="自动集生肖" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
-                        </card>
-                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20">
-                            <View w="*" h="*" bg="#EF9A9A"/>
-                            <text id="ScriptSix" text="自动宠汪汪" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
-                        </card>
-                    </linear>
-                </Horizo​​ntalScrollView>
-            </vertical>
-        </card>
-        
-        //快手脚本
-        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-            <View bg="#FF9800" h="*" w="*"/>
-            <vertical padding="0 0" h="auto">
-                <linear orientation="horizontal" align="left" margin="0">
-                    <img src="http://pp.myapp.com/ma_icon/0/icon_2608_1578902227/256" w="40" h="40" margin="20 20 0 0"/>
-                    <text text="快手" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
-                </linear>
-                <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                    <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                        <View w="*" h="*" bg="#FFCC80"/>
-                        <text id="ScriptFive" text="自动集卡收红心" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
-                    </card>
-                </linear>
-            </vertical>
-        </card>
+        <Horizo​​ntalScrollView>
+            <linear orientation="horizontal" align="left" margin="0">
+                //快手脚本
+                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+                    <View bg="#FF9800" h="*" w="*"/>
+                    <vertical padding="0 0" h="auto">
+                        <linear orientation="horizontal" align="left" margin="0">
+                            <img src="http://pp.myapp.com/ma_icon/0/icon_2608_1578902227/256" w="40" h="40" margin="20 20 0 0"/>
+                            <vertical padding="0 0" h="auto">
+                                <text text="快手" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐6.11.5.12256版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            </vertical>
+                        </linear>
+                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#FFCC80"/>
+                                <text id="ScriptFive" text="自动集卡收红心" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                            </card>
+                        </linear>
+                    </vertical>
+                </card>
+                
+                //抖音脚本
+                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+                    <View bg="#9C27B0" h="*" w="*"/>
+                    <vertical padding="0 0" h="auto">
+                        <linear orientation="horizontal" align="left" margin="0">
+                            <img src="https://pp.myapp.com/ma_icon/0/icon_42350811_1560849910/256" w="40" h="40" margin="20 20 0 0"/>
+                            <vertical padding="0 0" h="auto">
+                                <text text="抖音" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐9.6.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            </vertical>
+                        </linear>
+                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#CE93D8"/>
+                                <text id="ScriptSeven" text="自动赢红包" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                            </card>
+                        </linear>
+                    </vertical>
+                </card>
+            </linear>
+        </Horizo​​ntalScrollView>
         
         //微信脚本
         <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
@@ -153,7 +187,10 @@ function mainUi() {
             <vertical padding="0 0" h="auto">
                 <linear orientation="horizontal" align="left" margin="0">
                     <img src="http://pp.myapp.com/ma_icon/0/icon_10910_1577346809/256" w="40" h="40" margin="20 20 0 0"/>
-                    <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="25" margin="10 20 0 0"/>
+                    <vertical padding="0 0" h="auto">
+                        <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                        <text text="推荐7.0.4版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                    </vertical>
                 </linear>
                 <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                     <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
@@ -207,6 +244,35 @@ function mainUi() {
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+    ui.ScriptSeven.click(() => {
+        engines.execScript("自动赢红包", "runScriptSeven();\n" + runScriptSeven.toString());
+    });
+
+    function runScriptSeven() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptSix_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E8%B5%A2%E7%BA%A2%E5%8C%85_%E6%8A%96%E9%9F%B3%E8%84%9A%E6%9C%AC.js"; //第七个脚本网址
+        var res_script = http.get(ScriptSix_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动赢红包", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
     ui.ScriptSix.click(() => {
@@ -427,35 +493,6 @@ function mainUi() {
         });
     }
 
-    ui.ScriptFour.click(() => {
-        engines.execScript("自动集生肖", "runScriptFour();\n" + runScriptFour.toString());
-    });
-
-    function runScriptFour() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%94%9F%E8%82%96_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第四个脚本网址
-        var res_script = http.get(ScriptTwo_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动集生肖", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
 
     ui.JoinQQGroup.click(() => {
         engines.execScript("加入QQ群", "JoinQQGroup();\n" + JoinQQGroup.toString());
