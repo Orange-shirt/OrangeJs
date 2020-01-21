@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动赢红包”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -40,6 +40,14 @@ function dialogs_js() {
         toastLog(options_[i]);
         context_Manualstate = 0;
         Set_Back_way();
+        var Mute = confirm("🔇要静音媒体音量吗?", "建议在公共场合选择静音，已免抖音视频的噪音影响其它人\n\n若没有授予本软件“修改系统设置”权限请手动静音。\n没有授予该权限点击确定后会跳转设置");
+        if (Mute) {
+            device.setMusicVolume(0);
+            context_Mute = 1;
+            toastLog("🔇已静音媒体音量");
+        } else {
+            context_Mute = 0;
+        }
     } else if (i == 2) {
         toastLog(options_[i]);
         exit();
@@ -74,6 +82,14 @@ function dialogs_js() {
         }, 1000);
         toastLog("悬浮窗权限已开启！");
         sleep(2000);
+        var Mute = confirm("🔇要静音媒体音量吗?", "建议在公共场合选择静音，已免抖音视频的噪音影响其它人\n\n若没有授予本软件“修改系统设置”权限请手动静音。\n没有授予该权限点击确定后会跳转设置");
+        if (Mute) {
+            device.setMusicVolume(0);
+            context_Mute = 1;
+            toastLog("🔇已静音媒体音量");
+        } else {
+            context_Mute = 0;
+        }
         wait_Time_over();
     } else if (i == 5) {
         toastLog(options_[i]);
@@ -561,8 +577,16 @@ function clickHomeSs() {
         toastLog("已找到“首页搜索”按钮\n尝试点击……");
         sleep(2000);
     } else {
-        console.trace("找不到“首页搜索”按钮\n正在重试中……");
-        openApp();
+        var D = id("com.ss.android.ugc.aweme:id/avx").findOnce();
+        if (D != null) {
+            var d = D.bounds();
+            click(d.centerX(), d.centerY());
+            toastLog("已找到“首页搜索”按钮\n尝试点击……");
+            sleep(2000);
+        } else {
+            console.trace("找不到“首页搜索”按钮\n正在重试中……");
+            openApp();
+        }
     }
     SearchIn();
 }
