@@ -1254,35 +1254,7 @@ function mainC() {
                 }
                 var dian = text("可帮喂").findOnce();
                 var dianM = text("抢").findOnce();
-
-                if (dian != null) {
-                    var fw = dian.bounds();
-                    click(fw.centerX(), fw.centerY());
-                    toastLog("已点击“可帮喂”按钮\n准备帮喂中……");
-                    sleep(3000);
-                    S_Wy_Qiang();
-                } else if (dianM != null) {
-                    var fg = dianM.bounds();
-                    click(fg.centerX(), fg.centerY());
-                    toastLog("已点击“抢”按钮\n准备抢狗粮中……");
-                    sleep(3000);
-                    if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
-                        var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
-                        click(ns.centerX(), ns.centerY());
-                        toastLog("已尝试点击了“狗粮骨头”");
-                        sleep(2000);
-                    }
-                    Justback();
-                    sleep(2000);
-                } else {
-                    toastLog("已找不到“可帮喂”按钮");
-                    var While = 0;
-                }
-            }
-        } else {
-            toastLog("未找到“帮忙喂养”按钮\n跳过此任务！");
-        }
-
+        
         function S_Wy_Qiang() {
             if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
                 var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
@@ -1354,6 +1326,33 @@ function mainC() {
                     var While = 0;
                 }
             }
+        }
+                if (dian != null) {
+                    var fw = dian.bounds();
+                    click(fw.centerX(), fw.centerY());
+                    toastLog("已点击“可帮喂”按钮\n准备帮喂中……");
+                    sleep(3000);
+                    S_Wy_Qiang();
+                } else if (dianM != null) {
+                    var fg = dianM.bounds();
+                    click(fg.centerX(), fg.centerY());
+                    toastLog("已点击“抢”按钮\n准备抢狗粮中……");
+                    sleep(3000);
+                    if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
+                        var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
+                        click(ns.centerX(), ns.centerY());
+                        toastLog("已尝试点击了“狗粮骨头”");
+                        sleep(2000);
+                    }
+                    Justback();
+                    sleep(2000);
+                } else {
+                    toastLog("已找不到“可帮喂”按钮");
+                    var While = 0;
+                }
+            }
+        } else {
+            toastLog("未找到“帮忙喂养”按钮\n跳过此任务！");
         }
     }
 }
