@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动赢红包”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -577,8 +577,16 @@ function clickHomeSs() {
         toastLog("已找到“首页搜索”按钮\n尝试点击……");
         sleep(2000);
     } else {
-        console.trace("找不到“首页搜索”按钮\n正在重试中……");
-        openApp();
+        var D = id("com.ss.android.ugc.aweme:id/avx").findOnce();
+        if (D != null) {
+            var d = D.bounds();
+            click(d.centerX(), d.centerY());
+            toastLog("已找到“首页搜索”按钮\n尝试点击……");
+            sleep(2000);
+        } else {
+            console.trace("找不到“首页搜索”按钮\n正在重试中……");
+            openApp();
+        }
     }
     SearchIn();
 }
