@@ -52,7 +52,7 @@ function dialogs_js() {
     */
 
     var xiazai = ("软件下载链接戳 ");
-    var ScriptVersion = ("Beta1.1"); //版本
+    var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "👥 多帐号完成任务", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动集福气”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1230,14 +1230,15 @@ toastLog("二次循环已完成\n即将进行自动浇灌…");
 openTBandsearch();
 jinhuodong();
 sleep(2000);
-var A = className("android.view.View").findOnce(16);
+var A = className("android.widget.Image").findOnce(8);
 if (A != null) {
     var While = 1;
+    var a = A.bounds();
 } else {
-    toastLog("不存在View16（浇灌福气按钮）");
+    toastLog("没有找到“浇灌福气”按钮");
 }
 while (While == 1) {
-    A.click();
+    click(width/2, a.centerY());
     toastLog("已尝试点击“浇灌福气”按钮");
     sleep(2000);
     var aaq = className("android.view.View").text("立即领取").findOnce();
