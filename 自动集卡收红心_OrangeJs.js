@@ -23,16 +23,24 @@ log("*　　　　┗┻┛　┗┻┛+ + ");
 log("*    Code is far away from bug!");
 log("*        神兽保佑,代码无bug");
 
+//Beta1.3脚本更新提醒
+var Qz = files.exists("/storage/emulated/0/OrangeJs/自动选号赚红心/Beta1.3脚本更新日志.txt")
+if (Qz == false) {
+    var SD = dialogs.confirm("‼️ Beta1.3重要更新提醒", "•脚本现不支持快手“大屏模式”，请不要开启快手“大屏模式”\n\n•完成“去分享”任务时更换为“复制链接”分享，所复制的链接为您自己的分享链接，但不会进行分享操作\n\n•脚本已更名为“自动选号赚红心”\n\n•所有功能均在快手6.11.5.12256版本上开发且经过测试");
+    if (SD == true) {
+        files.createWithDirs("/storage/emulated/0/OrangeJs/自动选号赚红心/Beta1.3脚本更新日志.txt");
+    }
+}
 
 dialogs_js();
 var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.2"); //版本
+    var ScriptVersion = ("Beta1.3"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
-    var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动集卡收红心”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
+    var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动选号赚红心”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
     if (i < 0) {
         toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
         dialogs_js();
@@ -57,7 +65,7 @@ function dialogs_js() {
         dialogs_js();
     } else if (i == 4) {
         toastLog(options_[i]);
-        alert("=(^･ω･^)=  脚本作者\n酷安@橘衫下邂逅的时光", "“自动集卡收红心” " + ScriptVersion + "\n当前软件版本" + app.versionName + "(" + app.versionCode + ")\n\n全自动的快手活动脚本！\n支持多种分辨率，安卓7+无需ROOT！\n支持启动后自动更新脚本，无需费心即可保持最新，且开放全部的脚本代码！\n脚本的全部运行不加任何广告，不干任何不相关的事情！不触碰任何个人隐私！\n此脚本为兴趣制作，仅供参考，严禁售卖\n\n如有任何问题，欢迎向作者反馈哦～");
+        alert("=(^･ω･^)=  脚本作者\n酷安@橘衫下邂逅的时光", "“自动选号赚红心” " + ScriptVersion + "\n当前软件版本" + app.versionName + "(" + app.versionCode + ")\n\n全自动的快手活动脚本！\n支持多种分辨率，安卓7+无需ROOT！\n支持启动后自动更新脚本，无需费心即可保持最新，且开放全部的脚本代码！\n脚本的全部运行不加任何广告，不干任何不相关的事情！不触碰任何个人隐私！\n此脚本为兴趣制作，仅供参考，严禁售卖\n\n如有任何问题，欢迎向作者反馈哦～");
         dialogs_js();
     } else if (i == 1) {
         toastLog("请稍候，正在检测权限...")
@@ -536,7 +544,7 @@ function Maininterface() {
     var While = 1;
     while (While == 1) {
         WhileT++;
-        if (id("com.smile.gifmaker:id/left_btn").findOnce() != null) {
+        if (desc("菜单").findOnce() != null) {
             var While = 0;
         } else {
             ensureApp();
@@ -583,7 +591,7 @@ function ClickMenu() {
             }
         }
     } else {
-        toastLog("找不到彩蛋按钮");
+        toastLog("找不到菜单按钮");
         Maininterface();
         if (id("com.smile.gifmaker:id/left_btn").findOnce() != null) {
             id("com.smile.gifmaker:id/left_btn").findOne().click();
@@ -603,15 +611,9 @@ function ClickHDdoor() {
             sleep(2000);
         }
     }
-    var X = id("com.smile.gifmaker:id/title").find();
-    if (X.nonEmpty() == true) {
-        var x = X[0].bounds();
-        click(x.centerX(), x.centerY());
-        toastLog("通过find尝试点击“集卡分一亿”");
-        sleep(2000);
-    } else if (textContains("集卡分1亿").findOnce != null) {
-        var A = textContains("集卡分1亿").findOnce();
-        toastLog("正在尝试点击“集卡分一亿”");
+    if (text("我的春节红包").findOnce() != null) {
+        var A = text("我的春节红包").findOnce();
+        toastLog("正在尝试点击“我的春节红包”");
         if (A != null) {
             var B = A.bounds();
             click(B.centerX(), B.centerY());
@@ -622,9 +624,9 @@ function ClickHDdoor() {
             Maininterface();
             ClickMenu();
         }
-    } else if (textContains("集卡分一亿").findOnce != null) {
-        var A = textContains("集卡分一亿").findOnce();
-        toastLog("正在尝试点击“集卡分一亿”");
+    } else if (textContains("我的春节红包").findOnce() != null) {
+        var A = textContains("我的春节红包").findOnce();
+        toastLog("正在尝试点击“我的春节红包”");
         if (A != null) {
             var B = A.bounds();
             click(B.centerX(), B.centerY());
@@ -636,28 +638,25 @@ function ClickHDdoor() {
             ClickMenu();
         }
     } else {
-        toastLog("找不到活动入口");
-        Maininterface();
-        ClickMenu();
-        ClickHDdoor();
+        dialogs.alert("未发现“我的春节红包”入口", "脚本并没有在您的快手主界面菜单栏找到“我的春节红包”活动入口，请检查您是否存在这个入口。\n\n如未存在则代表您的账号无法参与此活动。\n\n若存在此入口请截图后向开发者反馈");
+        toastLog("找不到活动入口，已停止运行脚本");
+        exit();
     }
 }
 
 function InToHD() {
     var While = 1;
     while (While == 1) {
+        sleep(1000);
         if (text("我知道了").findOnce() != null) {
             var Am = text("我知道了").findOnce().bounds();
             click(Am.centerX(), Am.centerY());
             toastLog("点击了“我知道了”");
             sleep(2000);
         }
-        if (textContains("收取红心").findOnce() != null) {
-            toastLog("已处于“收取红心”活动中");
+        if (text("去选号").findOnce() != null) {
+            toastLog("已处于“去选号”界面中");
             var While = 0;
-        } else if (text("，做任务得红心 ").exists()) {
-            var While = 0;
-            toastLog("已处于“集卡”界面");
         } else if (text("加载中...").findOnce() != null) {
             toastLog("正在等待活动界面加载...");
             sleep(1000);
@@ -666,7 +665,7 @@ function InToHD() {
             var A = text("刷新").findOne().bounds();
             click(A.centerX(), A.centerY());
             sleep(1000);
-        } else if (currentActivity() == "com.yxcorp.gifshow.webview.KwaiWebViewActivity") {
+        } else if (currentActivity() == "com.kuaishou.spring.redpacket.redpacketlist.activity.RedPacketListActivity") {
             toastLog("正在等待活动界面加载...");
             sleep(1000);
         } else {
@@ -683,27 +682,18 @@ function DoTask() {
         device.setMusicVolume(0);
         toastLog("🔇静音媒体音量");
     }
-    if (text("，做任务得红心 ").exists()) {
-        toastLog("已处于“集卡”界面");
+    if (text("去选号").exists()) {
+        toastLog("已处于“去选号”界面");
         sleep(2000);
-        toastLog("正在滑动至“当前红心…，做任务得红心”处");
-        swipe(width / 2, height - 100, width / 2, 100, 1000);
-        swipe(width / 2, height - 100, width / 2, 100, 1000);
-        swipe(width / 2, height - 100, width / 2, 100, 1000);
-        if (text("，做任务得红心").findOnce != null) {
-            toastLog("正在跳转到“做任务”界面...");
-            if (text("，做任务得红心 ").exists()) {
-                var Z = text("，做任务得红心 ").findOne().bounds();
-                click(Z.centerX(), Z.centerY());
-                toastLog("已点击“，做任务得红心”");
+        if (text("去选号").findOnce != null) {
+            toastLog("正在跳转到“去选号”界面...");
+            if (text("去选号").exists()) {
+                var Z = text("去选号").findOne().click();
+                //click(Z.centerX(), Z.centerY());
+                toastLog("已点击“去选号”");
                 sleep(2500);
-                if (text("做任务得红心").exists()) {
-                    Justback();
-                    toastLog("已返回，准备点红心");
-                    sleep(2000);
-                }
             } else {
-                toastLog("找不到“跳转”按钮\n尝试重新进入活动中...");
+                toastLog("找不到“去选号”按钮\n尝试重新进入活动中...");
                 Maininterface();
                 ClickMenu();
                 ClickHDdoor();
@@ -712,90 +702,58 @@ function DoTask() {
             }
         }
     }
-    var While = 10;
-    while (While > 0) {
-        While--;
-        var A = text("收取红心").findOnce();
-        if (A != null) {
-            var B = A.bounds();
-            click(B.centerX(), B.centerY());
-            toastLog("点击“收取红心”\n剩余" + While + "次");
-            sleep(2000);
-            if (text("去集卡分1亿").findOnce() != null) {
-                toastLog("检测到弹窗\n尝试返回！");
-                Justback();
-                sleep(2000);
-            } else {
-                var S = text("红心赢好礼").findOnce();
-                if (S != null) {
-                    var N = S.bounds();
-                    click(N.centerX(), N.centerY());
-                }
-            }
-            if (text("我知道了").exists()) {
-                var T = text("我知道了").findOnce();
-                if (T != null) {
-                    var H = T.bounds();
-                    click(H.centerX(), H.centerY());
-                }
-            }
-        } else {
-            toastLog("找不到“收取红心”按钮\n跳过此任务");
-            sleep(2000);
-        }
-    }
     OpenJK();
 
     function OpenJK() {
-        if (context_Mute == 1) {
-            device.setMusicVolume(0);
-            toastLog("🔇静音媒体音量");
-        }
-        if (textContains("集卡").findOnce() != null) {
-            var A = textContains("集卡").findOne();
+        if (text("去选号").findOnce() != null) {
+            var A = textContains("去选号").findOne();
             var B = A.bounds();
             click(B.centerX(), B.centerY());
             sleep(2000);
-            var While = 1;
-            while (While == 1) {
-                if (text("加载中...").findOnce() != null) {
-                    toastLog("正在等待集卡界面加载...");
-                    sleep(1000);
-                } else if (text("刷新").findOnce() != null) {
-                    toastLog("正在进行刷新集卡界面...");
-                    var A = text("刷新").findOne().bounds();
-                    click(A.centerX(), A.centerY());
-                    sleep(1000);
-                } else if (text("人集齐").findOnce() != null) {
-                    toastLog("已处于活动中");
-                    var While = 0;
-                } else if (currentActivity() == "com.yxcorp.gifshow.webview.KwaiWebViewActivity") {
-                    toastLog("正在等待集卡界面加载...");
-                    sleep(1000);
-                } else {
-                    Maininterface();
-                    ClickMenu();
-                    ClickHDdoor();
-                    InToHD();
-                    DoTask();
-                }
+        }
+        var While = 1;
+        while (While == 1) {
+            if (text("加载中...").findOnce() != null) {
+                toastLog("正在等待“选号夺金”界面加载...");
+                sleep(1000);
+            } else if (text("刷新").findOnce() != null) {
+                toastLog("正在进行刷新集卡界面...");
+                var A = text("刷新").findOne().bounds();
+                click(A.centerX(), A.centerY());
+                sleep(1000);
+            } else if (text("选号夺金").findOnce() != null) {
+                toastLog("已处于活动中");
+                var While = 0;
+            } else if (currentActivity() == "com.yxcorp.gifshow.webview.KwaiWebViewActivity") {
+                toastLog("正在等待“选号夺金”界面加载...");
+                sleep(1000);
+            } else {
+                Maininterface();
+                ClickMenu();
+                ClickHDdoor();
+                InToHD();
+                DoTask();
             }
         }
-        //这是已处于“集卡”界面的代码
+        //这是已处于“选号夺金”界面的代码
+    }
+    if (text("知道了").findOnce() != null) {
+        var Df = text("知道了").findOnce().bounds();
+        click(Df.centerX(), Df.centerY());
+        toastLog("已尝试点击“知道了”");
+        sleep(1000);
     }
     sleep(2000);
-    toastLog("正在滑动至“当前红心…，做任务得红心”处");
-    swipe(width / 2, height - 100, width / 2, 100, 1000);
-    swipe(width / 2, height - 100, width / 2, 100, 1000);
-    swipe(width / 2, height - 100, width / 2, 100, 1000);
-    if (text("，做任务得红心").findOnce != null) {
-        toastLog("正在跳转到“做任务”界面...");
-        if (text("，做任务得红心 ").exists()) {
-            var Z = text("，做任务得红心 ").findOne().bounds();
-            click(Z.centerX(), Z.centerY());
+    if (text("赚红心").findOnce() != null) {
+        toastLog("正在跳转到“赚红心”界面...");
+        if (text("赚红心").exists()) {
+            var Z = text("赚红心").findOne().click();
+            //click(Z.centerX(), Z.centerY());
+            toastLog("已尝试点击“赚红心”按钮");
             sleep(2500);
+            JustDo();
         } else {
-            toastLog("找不到“跳转”按钮\n尝试重新进入活动中...");
+            toastLog("找不到“赚红心”按钮\n尝试重新进入活动中...");
             Maininterface();
             ClickMenu();
             ClickHDdoor();
@@ -803,41 +761,17 @@ function DoTask() {
             DoTask();
         }
     } else {
-        toastLog("可能未完成集卡任务或处于错误界面，正在尝试重新进入活动中...");
+        toastLog("可能处于错误界面，正在尝试重新进入活动中...");
         Maininterface();
         ClickMenu();
         ClickHDdoor();
         InToHD();
         DoTask();
     }
-    /* if (text("赚红心").exists()) {
-         var A = text("赚红心").findOnce();
-       
-             var B = text("赚红心").bounds();
-             click(B.centerX(), B.centerY());
-             sleep(2000);
-         
-     } else {
-         toastLog("找不到“赚红心”按钮\n重新进入活动中...");
-         Maininterface();
-         ClickMenu();
-         ClickHDdoor();
-         InToHD();
-         DoTask();
-     }*/
-    /*if (text("，做任务得红心 ").findOnce() != null) {
-        var S = text("，做任务得红心 ").findOne.bounds();
-        click(S.centerX(), S.centerY());
-        sleep(2000);
-    } else {
-        toastLog("未找到“，做任务得红心 ”\n正在重新进入活动中...");
-        Maininterface();
-        ClickMenu();
-        ClickHDdoor();
-        InToHD();
-        DoTask();
-    }*/
-    if (text("做任务得红心").exists()) {
+}
+
+function JustDo() {
+    if (text("做任务得红心").findOnce() != null) {
         while (text("去签到").exists()) {
             var A = text("去签到").findOnce();
             if (A != null) {
@@ -854,8 +788,9 @@ function DoTask() {
             }
             var A = text("去浏览").findOnce();
             if (A != null) {
-                var B = A.bounds();
-                click(B.centerX(), B.centerY());
+                var B = A.click();
+                toastLog("已尝试点击“去浏览”按钮");
+                //click(B.centerX(), B.centerY());
                 sleep(2000);
                 var WhileX = 1;
                 while (WhileX == 1) {
@@ -965,20 +900,21 @@ function DoTask() {
                 DoTask();
             }
         }
-        swipe(width / 2, height - 100, width / 2, 100, 500);
+        //swipe(width / 2, height - 100, width / 2, 100, 500);
         while (text("去分享").exists()) {
             var A = text("去分享").findOnce();
             if (A != null) {
-                var B = A.bounds();
-                click(B.centerX(), B.centerY());
+                var B = A.click();
+                toastLog("已尝试点击“去分享”按钮");
+                //click(B.centerX(), B.centerY());
                 sleep(2000);
                 if (text("分享至").exists()) {
-                    var X = text("QQ好友").findOnce();
+                    var X = text("复制链接").findOnce();
                     if (X != null) {
                         var V = X.bounds();
                         click(V.centerX(), V.centerY());
-                        toastLog("点击了QQ好友分享\n（不分享，跳转后直接尝试返回）");
-                        sleep(3000);
+                        toastLog("点击了“复制链接”分享\n（不分享!直接尝试返回）");
+                        sleep(2000);
                         //直接返回不分享！
                         Justback();
                         toastLog("已尝试返回快手活动界面");
@@ -996,12 +932,10 @@ function DoTask() {
         DoTask();
     }
 
-    //已处于做任务界面，进行集卡任务
-    if (text("做任务得红心").exists()) {
+    //已处于做任务界面
+    if (text("做任务得红心").findOnce() != null) {
         Justback();
-        toastLog("已尝试返回“收取红心”界面");
-        sleep(2000);
-        OpenJK();
+        toastLog("已尝试返回“选号夺金”界面");
         sleep(2000);
         var While = 1;
         while (While == 1) {
@@ -1014,41 +948,56 @@ function DoTask() {
                     sleep(2000);
                 }
             }
-            if (textContains("今日机会已用完").exists()) {
-                toastLog("今日机会已用完")
+            if (text("已达本期选号上限").exists()) {
+                toastLog("已达本期选号上限")
                 var While = 0;
             } else if (textContains("红心不足，去做任务").exists()) {
                 toastLog("红心不足，去做任务");
                 var While = 0;
-            } else if (textContains("抽卡 今天还可抽").exists()) {
-                var DT = textContains("抽卡 今天还可抽").findOnce();
+            } else if (text("立即选号").exists()) {
+                var DT = text("立即选号").findOnce();
                 if (DT != null) {
-                    DT.click();
-                    toastLog("已尝试点击“抽卡”按钮");
+                    var Xs = DT.bounds();
+                    click(Xs.centerX(), Xs.centerY());
+                    toastLog("已尝试点击“立即选号”按钮");
                     sleep(3000);
-                    while (text("继续抽卡").exists()) {
-                        var Q = text("继续抽卡").findOnce();
-                        if (Q != null) {
-                            Q.click();
-                            toastLog("已尝试点击“继续抽卡”按钮");
-                            sleep(3000);
-                        } else {
-                            toastLog("已不存在“继续抽卡”按钮”");
-                            Justback();
-                        }
+                    var Va = text("确认选号").findOnce();
+                    if (Va != null) {
+                        var Vb = Va.bounds();
+                        click(Vb.centerX(), Vb.centerY());
+                        toastLog("已尝试点击“确认选号”按钮");
                     }
                 } else {
-                    toastLog("检测未处于抽卡界面\n正在重新进入活动中...");
-                    Maininterface();
-                    ClickMenu();
-                    ClickHDdoor();
-                    InToHD();
-                    DoTask();
+                    var While = 0;
+                }
+            } else if (text("再次选号").exists()) {
+                var DT = text("再次选号").findOnce();
+                if (DT != null) {
+                    var Xs = DT.bounds();
+                    click(Xs.centerX(), Xs.centerY());
+                    toastLog("已尝试点击“再次选号”按钮");
+                    sleep(3000);
+                    var Va = text("确认选号").findOnce();
+                    if (Va != null) {
+                        var Vb = Va.bounds();
+                        click(Vb.centerX(), Vb.centerY());
+                        toastLog("已尝试点击“确认选号”按钮");
+                    }
+                } else {
+                    var While = 0;
+                }
+            } else if (text("确认选号").findOnce() != null) {
+                var bx = text("确认选号").findOnce();
+                if (bx != null) {
+                    var bn = bx.bounds();
+                    click(bn.centerX(), bn.centerY());
+                    toastLog("已尝试点击残留的“确认选号”按钮");
+                    sleep(2000);
                 }
             } else {
                 var While = 0;
             }
-        } //集卡任务完成
+        } //选号任务完成
     }
 }
 firstD();
@@ -1057,7 +1006,7 @@ function firstD() {
     if (context_Manualstate == 1) {
         toastLog("已手动模式运行脚本");
         var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
-        var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开快手APP至点赞中国年界面”\n\n请选择脚本等待您打开快手的时间", options);
+        var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开快手APP至“选号夺金”界面”\n\n请选择脚本等待您打开快手的时间", options);
         if (i >= 0) {
             toast("您选择的是" + options[i]);
         } else if (i < 0) {
@@ -1082,10 +1031,10 @@ function firstD() {
             var deng = 10;
         }
         for (deng = deng; deng > 0; deng--) {
-            toastLog("请打开快手至“点赞中国年”的界面\n剩余" + deng + "秒后运行脚本...");
+            toastLog("请打开快手至“选号夺金”的界面\n剩余" + deng + "秒后运行脚本...");
             sleep(1111);
         }
-        DoTask();
+        JustDo();
     } else {
         Maininterface();
         ClickMenu();
