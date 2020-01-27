@@ -30,7 +30,7 @@ var width = device.width;
 
 var GJCwords = "宠汪汪" //京东搜索关键词
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.1"); //版本
+    var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -81,8 +81,8 @@ function dialogs_js() {
         Q_A_();
     } else if (i == 6) {
         toastLog(options_[i]);
-        context_Manualstate = 1; 
-        Set_Back_way()//设置手动模式
+        context_Manualstate = 1;
+        Set_Back_way() //设置手动模式
     }
 }
 
@@ -547,6 +547,7 @@ function A() {
         }
     }
     // var Ac=id("a3l").findOnce();
+    //京东8.4.4
     var Ac = className("android.widget.TextView").id("com.jd.lib.category:id/a3l").findOnce();
     if (Ac != null) {
         var a = Ac.bounds();
@@ -567,8 +568,30 @@ function A() {
             BS();
         }
     } else {
-        toastLog("未找到“分类”中的搜索栏\n重试中……");
-        openJDinSearch();
+        //京东8.4.6
+        var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a2u").findOnce();
+        if (Ac != null) {
+            var a = Ac.bounds();
+            sleep(1000);
+            click(a.centerX(), a.centerY());
+            toastLog("已尝试点击“分类搜索框”");
+            sleep(1000);
+            if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                sleep(2000);
+                if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                    sleep(2000);
+                    if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                        openJDinSearch();
+                    }
+                }
+            } else {
+                toastLog("已找到“京东搜索框”尝试搜索进入活动…");
+                BS();
+            }
+        } else {
+            toastLog("未找到“分类”中的搜索栏\n重试中……");
+            openJDinSearch();
+        }
     }
 }
 
@@ -628,8 +651,22 @@ function D() {
         }
         mainC();
     } else {
+    var jr = id("com.jd.lib.search:id/aks").findOnce();
+    if (jr != null) {
+        var j = jr.bounds();
+        click(j.centerX(), j.centerY());
+        toastLog("已尝试点击“宠汪汪”活动入口…");
+        sleep(2000);
+        var deng = 8;
+        for (deng == 8; deng > 0; deng--) {
+            toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
+            sleep(1000);
+        }
+        mainC();
+    }else{
         toastLog("找不到“宠汪汪”活动入口\n重试中……");
         C();
+        }
     }
 }
 
@@ -1088,7 +1125,7 @@ function mainC() {
             sleep(1000);
         }
         //开始完成关注频道任务
-        var hd3 = "关注频道（5/5）";
+        var hd3 = "关注频道（4/4）";
         if (textContains("关注频道").exists()) {
             context_xH = 1;
 
@@ -1112,7 +1149,14 @@ function mainC() {
                         var While = 1;
                         while (While == 1) {
                             sleep(2000);
-                            if (id("fd").findOnce().text() == "关注频道任务") {
+                            var AZ=id("com.jingdong.app.mall:id/fd").findOnce();
+                            if(AZ!=null){
+                                var AX=AZ.text();
+                                if(AX=="关注频道任务"){
+                                    var AA="关注频道任务";
+                                    }
+                                }
+                            if (AA!=null) {
                                 var CC = text("已关注").find().length;
                                 var A = text("进入并关注").find();
                                 if (CC > 3) {
@@ -1139,8 +1183,8 @@ function mainC() {
                                     var While = 0;
                                 }
                             } else {
-                                if (id("fd").findOnce() != null) {
-                                    if (id("fd").findOnce().text() == "宠汪汪") {
+                                if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
+                                    if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "宠汪汪") {
                                         if (text("做任务领狗粮").exists()) {
                                             var While = 0;
                                             toastLog("处于“做任务领狗粮”界面未进入关注频道任务中，尝试进入……");
@@ -1158,13 +1202,13 @@ function mainC() {
                             }
                         }
                         sleep(2000);
-                        if (id("fd").findOnce() != null) {
-                            if (id("fd").findOnce().text() == "关注频道任务") {
+                        if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
+                            if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "关注频道任务") {
                                 //循环结束即任务完成返回
                                 Justback();
                                 toastLog("处于“关注频道任务”界面\n尝试返回……");
                                 sleep(2000);
-                            } else if (id("fd").findOnce().text() == "宠汪汪") {
+                            } else if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "宠汪汪") {
                                 if (text("做任务领狗粮").exists()) {
                                     toastLog("已处于“做任务领狗粮”界面");
                                 } else {
@@ -1234,13 +1278,13 @@ function mainC() {
                 var While = 1;
             } else {
                 toastLog("未找到“可喂养”的汪汪\n跳过此任务！");
-                var S=className("android.widget.Image").text("pop_close_btn").findOnce();
-                if(S!=null){
-                    var ss=S.bounds();
-                    click(ss.centerX(),ss.centerY());
+                var S = className("android.widget.Image").text("pop_close_btn").findOnce();
+                if (S != null) {
+                    var ss = S.bounds();
+                    click(ss.centerX(), ss.centerY());
                     toastLog("已尝试点击关闭蒙版按钮");
                     sleep(2000);
-                    }
+                }
             }
             while (While == 1) {
                 var m = text("可帮喂").find();
@@ -1254,79 +1298,79 @@ function mainC() {
                 }
                 var dian = text("可帮喂").findOnce();
                 var dianM = text("抢").findOnce();
-        
-        function S_Wy_Qiang() {
-            if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
-                var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
-                if (a == ww_title) {
-                    toastLog("正在喂养" + ww_title);
-                    sleep(2000);
-                    if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
-                        var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
-                        click(ns.centerX(), ns.centerY());
-                        toastLog("已尝试点击了“狗粮骨头”");
-                        sleep(2000);
-                    }
-                    if (text("dog-food-icon").findOnce() != null) {
-                        var hv = text("dog-food-icon").findOnce().bounds();
-                        click(hv.centerX(), hv.centerY());
-                        toastLog("已尝试点击“帮TA喂养”按钮");
-                        sleep(2000);
-                        if (className("android.view.View").text("确定").findOnce() != null) {
-                            var ed = className("android.view.View").text("确定").findOnce().bounds();
-                            click(ed.centerX(), ed.centerY());
-                            toastLog("已尝试点击“确定帮TA喂养按钮”");
-                            sleep(2000);
 
-                        }
-                        Justback();
-                        sleep(2000);
-                    } else {
-                        toastLog("处于“喂养" + ww_title + "”界面\n但未发现喂养按钮\n返回上一级界面...");
-                        Justback();
-                        sleep(2000);
-                    }
-                }
-            } else {
-                sleep(2000);
-                if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
-                    var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
-                    if (a == ww_title) {
-                        toastLog("正在喂养" + ww_title);
-                        sleep(2000);
-                        if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
-                            var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
-                            click(ns.centerX(), ns.centerY());
-                            toastLog("已尝试点击了“狗粮骨头”");
+                function S_Wy_Qiang() {
+                    if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
+                        var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
+                        if (a == ww_title) {
+                            toastLog("正在喂养" + ww_title);
                             sleep(2000);
-                        }
-                        if (text("dog-food-icon").findOnce() != null) {
-                            var hv = text("dog-food-icon").findOnce().bounds();
-                            click(hv.centerX(), hv.centerY());
-                            toastLog("已尝试点击“帮TA喂养”按钮");
-                            sleep(2000);
-                            if (className("android.view.View").text("确定").findOnce() != null) {
-                                var ed = className("android.view.View").text("确定").findOnce().bounds();
-                                click(ed.centerX(), ed.centerY());
-                                toastLog("已尝试点击“确定帮TA喂养按钮”");
+                            if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
+                                var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
+                                click(ns.centerX(), ns.centerY());
+                                toastLog("已尝试点击了“狗粮骨头”");
                                 sleep(2000);
                             }
-                            Justback();
-                            sleep(2000);
-                        } else {
-                            toastLog("处于“喂养" + ww_title + "”界面\n但未发现喂养按钮\n返回上一级界面...");
-                            Justback();
-                            sleep(2000);
+                            if (text("dog-food-icon").findOnce() != null) {
+                                var hv = text("dog-food-icon").findOnce().bounds();
+                                click(hv.centerX(), hv.centerY());
+                                toastLog("已尝试点击“帮TA喂养”按钮");
+                                sleep(2000);
+                                if (className("android.view.View").text("确定").findOnce() != null) {
+                                    var ed = className("android.view.View").text("确定").findOnce().bounds();
+                                    click(ed.centerX(), ed.centerY());
+                                    toastLog("已尝试点击“确定帮TA喂养按钮”");
+                                    sleep(2000);
+
+                                }
+                                Justback();
+                                sleep(2000);
+                            } else {
+                                toastLog("处于“喂养" + ww_title + "”界面\n但未发现喂养按钮\n返回上一级界面...");
+                                Justback();
+                                sleep(2000);
+                            }
                         }
-                    } else if (a == "宠汪汪") {
-                        toastLog("还处于“宠汪汪”界面\n继续任务…");
+                    } else {
+                        sleep(2000);
+                        if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
+                            var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
+                            if (a == ww_title) {
+                                toastLog("正在喂养" + ww_title);
+                                sleep(2000);
+                                if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
+                                    var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
+                                    click(ns.centerX(), ns.centerY());
+                                    toastLog("已尝试点击了“狗粮骨头”");
+                                    sleep(2000);
+                                }
+                                if (text("dog-food-icon").findOnce() != null) {
+                                    var hv = text("dog-food-icon").findOnce().bounds();
+                                    click(hv.centerX(), hv.centerY());
+                                    toastLog("已尝试点击“帮TA喂养”按钮");
+                                    sleep(2000);
+                                    if (className("android.view.View").text("确定").findOnce() != null) {
+                                        var ed = className("android.view.View").text("确定").findOnce().bounds();
+                                        click(ed.centerX(), ed.centerY());
+                                        toastLog("已尝试点击“确定帮TA喂养按钮”");
+                                        sleep(2000);
+                                    }
+                                    Justback();
+                                    sleep(2000);
+                                } else {
+                                    toastLog("处于“喂养" + ww_title + "”界面\n但未发现喂养按钮\n返回上一级界面...");
+                                    Justback();
+                                    sleep(2000);
+                                }
+                            } else if (a == "宠汪汪") {
+                                toastLog("还处于“宠汪汪”界面\n继续任务…");
+                            }
+                        } else {
+                            toastLog("没有找到顶栏标题\n跳过此任务");
+                            var While = 0;
+                        }
                     }
-                } else {
-                    toastLog("没有找到顶栏标题\n跳过此任务");
-                    var While = 0;
                 }
-            }
-        }
                 if (dian != null) {
                     var fw = dian.bounds();
                     click(fw.centerX(), fw.centerY());
@@ -1358,6 +1402,7 @@ function mainC() {
 }
 
 firstD();
+
 function firstD() {
     if (context_Manualstate == 1) {
         toastLog("已手动模式运行脚本");
