@@ -36,4 +36,5 @@
 **支持定时运行，支持手动模式等……**
 
 为了提供流畅体验，不会完成“去签到（因为若完成此任务会跳转奇怪的小程序）”“邀请好友”任务
+
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
