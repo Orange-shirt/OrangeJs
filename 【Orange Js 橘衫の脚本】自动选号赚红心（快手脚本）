@@ -735,9 +735,14 @@ function DoTask() {
                 DoTask();
             }
         }
-        //这是已处于“集卡”界面的代码
+        //这是已处于“选号夺金”界面的代码
     }
-
+    if (text("知道了").findOnce() != null) {
+        var Df = text("知道了").findOnce().bounds();
+        click(Df.centerX(), Df.centerY());
+        toastLog("已尝试点击“知道了”");
+        sleep(1000);
+    }
     sleep(2000);
     if (text("赚红心").findOnce() != null) {
         toastLog("正在跳转到“赚红心”界面...");
