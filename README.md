@@ -5,6 +5,9 @@
 
 **[点击下载OrangeJs（橘衫の脚本）APK（1.0）](https://www.lanzous.com/i8gs5li)**
 
+# 脚本总数：7
+## 当前可用：4
+
 ## 【脚本】[自动看团课(预览版preview1.0)](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
 **目前本脚本支持陕西，湖南的高校**（团课公众号为“三秦青年”/“青年湖南”）**的用户**
