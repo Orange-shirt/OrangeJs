@@ -728,8 +728,8 @@ function L_Water() {
         click(A.centerX(), A.centerY());
         toastLog("已尝试点击“领取”按钮");
         sleep(2000);
-        swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
-        toastLog("已尝试滑动一个控件");
+        /*swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
+        toastLog("已尝试滑动一个控件");*/
     }
     if (text("去邀请").findOnce() != null) {
         var B = text("去邀请").findOnce().parent().bounds();
@@ -804,11 +804,46 @@ function firstD() {
 }
 
 if (text("领水滴").findOnce() != null) {
-    var A = text("领水滴").findOnce().bounds();
-    click(width - 30, A.centerY());
+    /*var A = text("领水滴").findOnce().bounds();
+    click(width - 30, A.centerY());*/
     toastLog("尝试返回再次浇水");
-    sleep(2000);
-    GiveWater();
+    Justback();
+    sleep(3000);
+    if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
+        if (text("东东农场").findOnce() != null) {
+            var A = text("东东农场").findOnce().bounds();
+            click(A.centerX(), A.centerY());
+            toastLog("已尝试点击“东东农场”入口按钮");
+            sleep(3000);
+        } else {
+            toastLog("未发现“东东农场”按钮\n正在重新进入京东…");
+            Justback();
+            Justback();
+            Justback();
+            openJDinSearch();
+        }
+        var While = 1;
+        while (While == 1) {
+            if (currentActivity() == "com.jingdong.app.mall.WebActivity") {
+                if (text("86b551d1155595c3").exists() == false) {
+                    toastLog("正在等待“京东农场”加载…");
+                    sleep(2000);
+                } else {
+                    toastLog("已成功进入“京东农场”");
+                    sleep(2000);
+                    var While = 0;
+                }
+            } else {
+                toastLog("检测到当前界面错误\n重新打开京东…");
+                var While = 0;
+                openJDinSearch();
+            }
+        }
+        sleep(2000);
+        GiveWater();
+    } else {
+        toastLog("跳过二次任务循环：未找到活动入口");
+    }
 }
 dialogs.alert("脚本已运行完成");
 log("脚本已运行完成");
