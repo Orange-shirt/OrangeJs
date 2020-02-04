@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“多多果园自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1037,7 +1037,7 @@ function DoTask() {
     } else {
         toastLog("跳过！未找到“水滴娱乐”入口按钮");
     }
-    /*//去抽签任务
+    //去抽签任务
     if (text("amusement_v4").findOnce() != null) {
         var Ad = text("amusement_v4").findOnce().bounds();
         click(Ad.centerX(), Ad.centerY());
@@ -1057,11 +1057,11 @@ function DoTask() {
                 click(Aq.centerX(), Aq.centerY());
                 toastLog("已尝试点击“去抽签”按钮");
                 sleep(3500);
-                if (text("抽奖 本次免费").findOnce() != null) {
-                    var Cj = text("抽奖 本次免费").findOnce().bounds();
+                if (text("本次免费").findOnce() != null) {
+                    var Cj = text("本次免费").findOnce().bounds();
                     click(Cj.centerX(), Cj.centerY());
-                    toastLog("已尝试点击“免费抽奖”按钮");
-                    sleep(5000);
+                    toastLog("已尝试点击“免费抽签”按钮");
+                    sleep(8000);
                     if (text("继续抽奖").findOnce() != null) {
                         var JC = text("继续抽奖").findOnce().bounds();
                         click(JC.centerX(), JC.centerY());
@@ -1076,7 +1076,7 @@ function DoTask() {
         }
     } else {
         toastLog("跳过！未找到“水滴娱乐”入口按钮");
-    }*/
+    }
     dialogs.alert("脚本已运行完成");
     log("脚本已运行完成");
     exit();
