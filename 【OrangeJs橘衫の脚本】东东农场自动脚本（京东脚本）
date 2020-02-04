@@ -642,6 +642,13 @@ function GiveWater() {
     }
     var While = 1;
     while (While == 1) {
+        if (className("android.view.View").scrollable(true).findOnce() != null) {
+            var A = className("android.view.View").scrollable(true).findOne().parent().children();
+            var B = A[2].bounds();
+            click(B.centerX(), B.centerY());
+            toastLog("已尝试关闭“任务蒙版”");
+            sleep(2000);
+        }
         if (text("86b551d1155595c3").findOnce() != null) {
             var B = text("86b551d1155595c3").findOnce().bounds();
             click(B.centerX(), B.centerY());
@@ -804,9 +811,15 @@ function firstD() {
 }
 
 if (text("领水滴").findOnce() != null) {
-    /*var A = text("领水滴").findOnce().bounds();
-    click(width - 30, A.centerY());*/
-    toastLog("尝试返回再次浇水");
+    if (className("android.view.View").scrollable(true).findOnce() != null) {
+        var A = className("android.view.View").scrollable(true).findOne().parent().children();
+        var B = A[2].bounds();
+        click(B.centerX(), B.centerY());
+        toastLog("已尝试关闭“任务蒙版”");
+        sleep(2000);
+    }
+    GiveWater();
+    /*toastLog("尝试返回再次浇水");
     Justback();
     sleep(3000);
     if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
@@ -843,7 +856,7 @@ if (text("领水滴").findOnce() != null) {
         GiveWater();
     } else {
         toastLog("跳过二次任务循环：未找到活动入口");
-    }
+    }*/
 }
 dialogs.alert("脚本已运行完成");
 log("脚本已运行完成");
