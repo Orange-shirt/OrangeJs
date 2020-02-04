@@ -107,49 +107,46 @@ function mainUi() {
                         </linear>
                     </vertical>
                 </card>
-                
-                //京东脚本
-                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#F44336" h="*" w="*"/>
+                //拼多多脚本
+                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
+                    <View bg="#FF1744" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="http://image.coolapk.com/apk_logo/2019/1218/11/512E5B9B4E8B4A7-32664-o_1dsbg23j210ns1ee110u7evuevcr-uid-1871800@512x512.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐8.4.4版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="拼多多" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐4.90.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
-                        <Horizo​​ntalScrollView>
-                            <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                                
-                                <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20">
-                                    <View w="*" h="*" bg="#EF9A9A"/>
-                                    <text id="ScriptSix" text="自动宠汪汪" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
-                                </card>
-                            </linear>
-                        </Horizo​​ntalScrollView>
+                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#90FF1744"/>
+                                <text id="ScriptTen" text="多多果园自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                            </card>
+                        </linear>
                     </vertical>
                 </card>
+                
             </linear>
         </Horizo​​ntalScrollView>
         
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0">
-                //快手脚本
+                //微博脚本
                 <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#FF9800" h="*" w="*"/>
+                    <View bg="#FF8F00" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://pp.myapp.com/ma_icon/0/icon_2608_1578902227/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="http://pp.myapp.com/ma_icon/0/icon_9926_1579487446/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="快手" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐6.11.5.12256版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="微博" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐9.9.3版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#FFCC80"/>
-                                <text id="ScriptFive" text="自动选号赚红心" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                                <View w="*" h="*" bg="#90FF8F00"/>
+                                <text id="ScriptNine" text="微博任务自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
                             </card>
                         </linear>
                     </vertical>
@@ -175,6 +172,31 @@ function mainUi() {
                 </card>
             </linear>
         </Horizo​​ntalScrollView>
+        //京东脚本
+        <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+            <View bg="#F44336" h="*" w="*"/>
+            <vertical padding="0 0" h="auto">
+                <linear orientation="horizontal" align="left" margin="0">
+                    <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
+                    <vertical padding="0 0" h="auto">
+                        <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                        <text text="推荐8.4.6版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                    </vertical>
+                </linear>
+                <Horizo​​ntalScrollView>
+                    <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20">
+                            <View w="*" h="*" bg="#EF9A9A"/>
+                            <text id="ScriptSix" text="自动宠汪汪" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                        </card>
+                        <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="0 20 20 0">
+                            <View w="*" h="*" bg="#EF9A9A"/>
+                            <text id="ScriptEight" text="东东农场自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                        </card>
+                    </linear>
+                </Horizo​​ntalScrollView>
+            </vertical>
+        </card>
         <text text="关注疫情" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28"/>
         <card h="1" margin="5 5" cardCornerRadius="1dp"
         cardElevation="0dp" gravity="center_vertical">
@@ -267,9 +289,70 @@ function mainUi() {
         }
     }
 
+    ui.ScriptEight.click(() => {
+        engines.execScript("东东农场自动脚本", "runScriptEight();\n" + runScriptEight.toString());
+    });
+
+    function runScriptEight() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptEight_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E4%B8%9C%E4%B8%9C%E5%86%9C%E5%9C%BA%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第八个脚本网址
+        var res_script = http.get(ScriptEight_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("东东农场自动脚本", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
+    ui.ScriptTen.click(() => {
+        engines.execScript("多多果园自动脚本", "runScriptTen();\n" + runScriptTen.toString());
+    });
+
+    function runScriptTen() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptTen_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E5%A4%9A%E5%A4%9A%E6%9E%9C%E5%9B%AD%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E6%8B%BC%E5%A4%9A%E5%A4%9A%E8%84%9A%E6%9C%AC.js"; //第十个脚本网址
+        var res_script = http.get(ScriptTen_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("多多果园自动脚本", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
     ui.ScriptSix.click(() => {
         engines.execScript("自动宠汪汪", "runScriptSix();\n" + runScriptSix.toString());
     });
+
 
     function runScriptSix() {
         var DownJs = dialogs.build({
@@ -296,11 +379,11 @@ function mainUi() {
             dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
-    ui.ScriptFive.click(() => {
-        engines.execScript("自动集卡收红心", "runScriptFive();\n" + runScriptFive.toString());
+    ui.ScriptNine.click(() => {
+        engines.execScript("微博任务自动脚本", "runScriptNine();\n" + runScriptNine.toString());
     });
 
-    function runScriptFive() {
+    function runScriptNine() {
         var DownJs = dialogs.build({
             title: "正在请求脚本中……",
             progress: {
@@ -308,8 +391,8 @@ function mainUi() {
             },
             cancelable: false
         }).show();
-        var ScriptFive_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E8%87%AA%E5%8A%A8%E9%9B%86%E5%8D%A1%E6%94%B6%E7%BA%A2%E5%BF%83_OrangeJs.js"; //第五个脚本网址
-        var res_script = http.get(ScriptFive_Url, {
+        var ScriptNine_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E5%BE%AE%E5%8D%9A%E4%BB%BB%E5%8A%A1%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E5%BE%AE%E5%8D%9A%E8%84%9A%E6%9C%AC.js"; //第九个脚本网址
+        var res_script = http.get(ScriptNine_Url, {
             headers: {
                 'Accept-Language': 'en-us,en;q=0.5',
                 'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
@@ -319,7 +402,7 @@ function mainUi() {
             DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
-            engines.execScript("自动集卡收红心", OrangeJs);
+            engines.execScript("微博任务自动脚本", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
@@ -458,7 +541,7 @@ function mainUi() {
         if (JKs == true) {
             setClip("疫情防控捐款");
             toastLog("请在浏览器中打开");
-            app.openUrl("https://qr.alipay.com/ap7zk606x2ul8gb1d4");
+            app.openUrl("https://ds.alipay.com/?from=mobilecodec&scheme=alipays%3A%2F%2Fplatformapi%2Fstartapp%3FsaId%3D10000007%26clientVersion%3D3.7.0.0718%26qrcode%3Dhttps%253A%252F%252Fqr.alipay.com%252Fap7zk606x2ul8gb1d4%253F_s%253Dweb-other");
         }
     }
 
