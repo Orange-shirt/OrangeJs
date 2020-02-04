@@ -651,8 +651,8 @@ function DGk() {
 }
 
 function GiveWater() {
-    var While = 1;
-    while (While == 1) {
+    var While = 10;
+    for (While == 10; While > 0; While--) {
         if (currentActivity() != "com.xunmeng.pinduoduo.activity.NewPageActivity") {
             toastLog("当前未处于活动界面");
             sleep(2000);
@@ -781,6 +781,8 @@ function DoTask() {
                     }
                 }
             }
+        } else {
+            var While = 0;
         }
     }
     if (text("commonPopupCloseButton").findOnce() != null) {
