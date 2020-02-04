@@ -966,6 +966,7 @@ function mainC() {
                         toastLog(H);
                         var AB = B[3].bounds();
                         click(AB.centerX(), AB.centerY());
+                        toastLog("已尝试点击去完成“逛逛会场”任务");
                         sleep(2000);
                         if (id("fd").findOnce() != null) {
                             if (id("fd").findOnce().text() != "宠汪汪") {
@@ -975,7 +976,14 @@ function mainC() {
                                     sleep(2000);
                                 }
                                 Justback();
-                                sleep(1000);
+                                sleep(2000);
+                                if (id("a96").findOnce() != null) {
+                                    Justback();
+                                    sleep(2000);
+                                    if (id("a96").findOnce() != null) {
+                                        openJDinSearch();
+                                    }
+                                }
                                 if (id("fd").findOnce() != null) {
                                     if (id("fd").findOnce().text() == "宠汪汪") {
                                         if (text("做任务领狗粮").exists()) {
@@ -991,6 +999,30 @@ function mainC() {
                                                 toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
                                                 sleep(2000);
                                             }
+                                        }
+                                    } else {
+                                        Justback();
+                                        sleep(3000);
+                                        if (id("fd").findOnce().text() == "宠汪汪") {
+                                            if (text("做任务领狗粮").exists()) {
+                                                toastLog("已处于“做任务领狗粮”界面");
+                                            } else {
+                                                toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
+                                                var ZX = text("linggouliang").findOnce();
+                                                if (ZX != null) {
+                                                    var Zx = ZX.bounds();
+                                                    click(Zx.centerX(), Zx.centerY());
+                                                    sleep(2000);
+                                                } else {
+                                                    toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
+                                                    sleep(2000);
+                                                }
+                                            }
+                                        } else {
+                                            toastLog("仍然找不到顶栏标题\n尝试重新进入……");
+                                            sleep(2000);
+                                            context_xH = 0;
+                                            openJDinSearch();
                                         }
                                     }
                                 } else {
@@ -1013,11 +1045,20 @@ function mainC() {
                                     }
                                 }
                             }
+                        } else if (id("a96").findOnce() != null) {
+                            var deng = 5;
+                            for (deng == 5; deng > 0; deng--) {
+                                toastLog("正在完成逛逛会场任务\n" + H + "\n剩余" + deng + "秒……");
+                                sleep(2000);
+                            }
+                            Justback();
+                            sleep(2000);
+                        } else {
+                            Justback();
+                            sleep(2000);
                         }
                     }
                 } else {
-                    toastLog("未找到“逛逛会场”重试中……")
-                    mainC();
                     toastLog("跳过! 未找到“逛逛会场”");
                     context_xH = 0;
                 }
@@ -1237,7 +1278,7 @@ function mainC() {
                     context_xH = 0;
                 }
             }
-        } //完成“关注店铺”任务
+        } //完成“关注频道”任务
         else {
             toastLog("未找到“关注频道”重试中……")
             mainC();
@@ -1285,6 +1326,9 @@ function mainC() {
                     toastLog("已尝试点击关闭蒙版按钮");
                     sleep(2000);
                 }
+                dialogs.alert("脚本已运行完成");
+                log("脚本已运行完成");
+                exit();
             }
             while (While == 1) {
                 var m = text("可帮喂").find();
@@ -1393,8 +1437,14 @@ function mainC() {
                 } else {
                     toastLog("已找不到“可帮喂”按钮");
                     var While = 0;
+                    dialogs.alert("脚本已运行完成");
+                    log("脚本已运行完成");
+                    exit();
                 }
             }
+            dialogs.alert("脚本已运行完成");
+            log("脚本已运行完成");
+            exit();
         } else {
             toastLog("未找到“帮忙喂养”按钮\n跳过此任务！");
             dialogs.alert("脚本已运行完成");
