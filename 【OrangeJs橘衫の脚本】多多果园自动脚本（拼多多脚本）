@@ -508,37 +508,54 @@ function OpenApp() {
     for (deng == 5; deng > 0; deng--) {
         toastLog("正在等待“拼多多”启动缓冲\n剩余" + deng + "秒……");
         sleep(2000);
-        if (id("com.xunmeng.pinduoduo:id/bza").findOnce() != null) {
+        if (id("com.xunmeng.pinduoduo:id/bza").findOnce() != null) { //4.90.0
+            toastLog("已处于拼多多首页");
+            var deng = 0;
+        } else if (id("com.xunmeng.pinduoduo:id/c09").findOnce() != null) { //4.91.0
             toastLog("已处于拼多多首页");
             var deng = 0;
         }
     }
-    while (id("com.xunmeng.pinduoduo:id/bza").findOnce() == null) {
-        Justback();
-        toastLog("拼多多已启动但未处于首页\n正在尝试返回拼多多首页中……");
-        sleep(3000);
-        if (currentPackage() != "com.xunmeng.pinduoduo") {
-            app.startActivity({
-                action: "android.intent.action.VIEW", //此处可为其他值
-                packageName: "com.xunmeng.pinduoduo",
-                className: "com.xunmeng.pinduoduo.ui.activity.MainFrameActivity"
-                //此处可以加入其他内容，如data、extras
-            });
-            var deng = 5;
-            for (deng == 5; deng > 0; deng--) {
-                toastLog("正在等待“拼多多”启动缓冲\n剩余" + deng + "秒……");
-                sleep(2000);
-                if (id("com.xunmeng.pinduoduo:id/bza").findOnce() != null) {
-                    toastLog("已处于拼多多首页");
-                    var deng = 0;
+    var While = 1;
+    while (While == 1) {
+        if (id("com.xunmeng.pinduoduo:id/bza").findOnce() != null) {
+            id("com.xunmeng.pinduoduo:id/bza").findOnce().click();
+            toastLog("已尝试点击“主页搜索框”");
+            var While = 0;
+            sleep(2000);
+        } else if (id("com.xunmeng.pinduoduo:id/c09").findOnce() != null) {
+            id("com.xunmeng.pinduoduo:id/c09").findOnce().click();
+            toastLog("已尝试点击“主页搜索框”");
+            var While = 0;
+            sleep(2000);
+        } else {
+            Justback();
+            toastLog("拼多多已启动但未处于首页\n正在尝试返回拼多多首页中……");
+            sleep(3000);
+            if (currentPackage() != "com.xunmeng.pinduoduo") {
+                app.startActivity({
+                    action: "android.intent.action.VIEW", //此处可为其他值
+                    packageName: "com.xunmeng.pinduoduo",
+                    className: "com.xunmeng.pinduoduo.ui.activity.MainFrameActivity"
+                    //此处可以加入其他内容，如data、extras
+                });
+                var deng = 5;
+                for (deng == 5; deng > 0; deng--) {
+                    toastLog("正在等待“拼多多”启动缓冲\n剩余" + deng + "秒……");
+                    sleep(2000);
+                    if (id("com.xunmeng.pinduoduo:id/bza").findOnce() != null) {
+                        toastLog("已处于拼多多首页");
+                        var deng = 0;
+                    } else if (id("com.xunmeng.pinduoduo:id/c09").findOnce() != null) {
+                        toastLog("已处于拼多多首页");
+                        var deng = 0;
+                    }
                 }
             }
         }
     }
-    id("com.xunmeng.pinduoduo:id/bza").findOnce().click();
-    toastLog("已尝试点击“主页搜索框”");
-    sleep(2000);
-    if (id("com.xunmeng.pinduoduo:id/bzg").findOnce() != null) {
+
+    if (id("com.xunmeng.pinduoduo:id/bzg").findOnce() != null) { //4.90.0
         toastLog("已处于搜索界面");
         setText("多多果园");
         sleep(2000);
@@ -578,6 +595,70 @@ function OpenApp() {
             }
             if (id("com.xunmeng.pinduoduo:id/bz0").findOnce() != null) {
                 var A = id("com.xunmeng.pinduoduo:id/bz0").findOnce().children();
+                A[0].click();
+                toastLog("已尝试点击“多多果园”入口");
+                sleep(2000);
+                var deng = 10;
+                for (deng == 10; deng > 0; deng--) {
+                    if (text("wateringBottle-v4").findOnce() != null) {
+                        toastLog("已处于“多多果园”活动界面");
+                        var deng = 0;
+                    } else {
+                        toastLog("正在等待“多多果园”活动界面加载\n当前剩余" + deng + "秒……");
+                        sleep(1500);
+                    }
+                }
+                if (text("wateringBottle-v4").findOnce() == null) {
+                    toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
+                    OpenApp();
+                }
+            } else {
+                toastLog("未找到“多多果园”入口\n重新打开软件中……");
+                sleep(1500);
+                OpenApp();
+            }
+        }
+    } //↓4.91.0
+    else if (id("com.xunmeng.pinduoduo:id/c0e").findOnce() != null) {
+        toastLog("已处于搜索界面");
+        setText("多多果园");
+        sleep(2000);
+        if (id("com.xunmeng.pinduoduo:id/b1").text("多多果园").findOnce() != null) {
+            var ks = id("com.xunmeng.pinduoduo:id/b1").text("多多果园").findOnce().bounds();
+            click(ks.centerX(), ks.centerY());
+            toastLog("已尝试点击快速入口“多多果园”");
+            sleep(2000);
+            var deng = 10;
+            for (deng == 10; deng > 0; deng--) {
+                if (text("wateringBottle-v4").findOnce() != null) {
+                    toastLog("已处于“多多果园”活动界面");
+                    var deng = 0;
+                } else {
+                    toastLog("正在等待“多多果园”活动界面加载\n当前剩余" + deng + "秒……");
+                    sleep(1500);
+                }
+            }
+            if (text("wateringBottle-v4").findOnce() == null) {
+                toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
+                sleep(2000);
+                OpenApp();
+            }
+        } else if (id("com.xunmeng.pinduoduo:id/c04").findOnce() != null) {
+            id("com.xunmeng.pinduoduo:id/c04").findOnce().click();
+            toastLog("已尝试点击“搜索”按钮");
+            sleep(2000);
+            var deng = 10;
+            for (deng == 10; deng > 0; deng--) {
+                if (id("com.xunmeng.pinduoduo:id/bzy").findOnce() != null) {
+                    var deng = 0;
+                    toastLog("已找到“多多果园”入口");
+                } else {
+                    toastLog("正在等待“多多果园”入口加载\n当前剩余" + deng + "秒……");
+                    sleep(1500);
+                }
+            }
+            if (id("com.xunmeng.pinduoduo:id/bzy").findOnce() != null) {
+                var A = id("com.xunmeng.pinduoduo:id/bzy").findOnce().children();
                 A[0].click();
                 toastLog("已尝试点击“多多果园”入口");
                 sleep(2000);
@@ -695,6 +776,12 @@ function GiveWater() {
                 var D = text("点击领取+").findOne().bounds();
                 click(D.centerX(), D.centerY());
                 toastLog("已尝试点击“领取”");
+                sleep(2000);
+            }
+            if (text("继续参与下一期").findOnce() != null) {
+                var d = text("继续参与下一期").findOne().bounds();
+                click(d.centerX(), d.centerY());
+                toastLog("已尝试点击“继续参与下一期”");
                 sleep(2000);
             }
             if (text("去使用").findOnce() != null) {
@@ -1043,6 +1130,12 @@ function EnSure() {
         var d = text("我知道了").findOne().bounds();
         click(d.centerX(), d.centerY());
         toastLog("已尝试点击“我知道了”");
+        sleep(2000);
+    }
+    if (text("领取奖励").findOnce() != null) {
+        var d = text("领取奖励").findOne().bounds();
+        click(d.centerX(), d.centerY());
+        toastLog("已尝试点击“领取奖励”");
         sleep(2000);
     }
     if (text("commonPopupCloseButton").findOnce() != null) {
