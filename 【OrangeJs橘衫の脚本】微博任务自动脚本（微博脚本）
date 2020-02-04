@@ -455,22 +455,42 @@ function Justback() {
 OpeninHd();
 
 function OpeninHd() {
-    /*app.startActivity({
-        action: "android.intent.action.VIEW", //此处可为其他值
-        packageName: "com.sina.weibo",
-        className: "com.sina.weibo.MainTabActivity"
-        //此处可以加入其他内容，如data、extras
-    });
-    */
+    //此功能无链式调用
     app.startActivity({
         action: "android.intent.action.VIEW", //此处可为其他值
         packageName: "com.sina.weibo",
         className: "com.sina.weibo.feed.HomeActivity"
         //此处可以加入其他内容，如data、extras
     });
-    while (id("titleSave").findOnce() == null) {
-        toastLog("正在等待微博APP启动至主页");
-        sleep(2000);
+    var deng = 5;
+    for (deng == 5; deng > 0; deng--) {
+        if (id("titleSave").findOnce() == null) {
+            toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
+            sleep(2000);
+        } else {
+            toastLog("已到达主页");
+            var deng = 0;
+        }
+    }
+    if (id("titleSave").findOnce() == null) {
+        toastLog("HomeIntent打开失败\n自动切换Intent\n尝试再次打开…");
+        sleep(1000);
+        app.startActivity({
+            action: "android.intent.action.VIEW", //此处可为其他值
+            packageName: "com.sina.weibo",
+            className: "com.sina.weibo.MainTabActivity"
+            //此处可以加入其他内容，如data、extras
+        });
+        var deng = 5;
+        for (deng == 5; deng > 0; deng--) {
+            if (id("titleSave").findOnce() == null) {
+                toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
+                sleep(2000);
+            } else {
+                toastLog("已到达主页");
+                var deng = 0;
+            }
+        }
     }
     sleep(2000);
     app.startActivity({
@@ -486,6 +506,9 @@ function OpeninHd() {
         if (text("日常任务").exists()) {
             toastLog("已处于微博任务界面")
             var While = 0;
+        } else if (text("微博-出错了").findOnce() != null) {
+            var While = 0;
+            OpeninHd();
         } else {
             toastLog("正在等待微博任务界面加载……");
             sleep(2000);
@@ -496,21 +519,41 @@ function OpeninHd() {
 
 function NOpeninHd() {
     //此功能无链式调用
-    /*app.startActivity({
-        action: "android.intent.action.VIEW", //此处可为其他值
-        packageName: "com.sina.weibo",
-        className: "com.sina.weibo.MainTabActivity"
-        //此处可以加入其他内容，如data、extras
-    });*/
     app.startActivity({
         action: "android.intent.action.VIEW", //此处可为其他值
         packageName: "com.sina.weibo",
         className: "com.sina.weibo.feed.HomeActivity"
         //此处可以加入其他内容，如data、extras
     });
-    while (id("titleSave").findOnce() == null) {
-        toastLog("正在等待微博APP启动至主页");
-        sleep(2000);
+    var deng = 5;
+    for (deng == 5; deng > 0; deng--) {
+        if (id("titleSave").findOnce() == null) {
+            toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
+            sleep(2000);
+        } else {
+            toastLog("已到达主页");
+            var deng = 0;
+        }
+    }
+    if (id("titleSave").findOnce() == null) {
+        toastLog("HomeIntent打开失败\n自动切换Intent\n尝试再次打开…");
+        sleep(1000);
+        app.startActivity({
+            action: "android.intent.action.VIEW", //此处可为其他值
+            packageName: "com.sina.weibo",
+            className: "com.sina.weibo.MainTabActivity"
+            //此处可以加入其他内容，如data、extras
+        });
+        var deng = 5;
+        for (deng == 5; deng > 0; deng--) {
+            if (id("titleSave").findOnce() == null) {
+                toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
+                sleep(2000);
+            } else {
+                toastLog("已到达主页");
+                var deng = 0;
+            }
+        }
     }
     sleep(2000);
     app.startActivity({
@@ -526,6 +569,9 @@ function NOpeninHd() {
         if (text("日常任务").exists()) {
             toastLog("已处于微博任务界面")
             var While = 0;
+        } else if (text("微博-出错了").findOnce() != null) {
+            var While = 0;
+            NOpeninHd();
         } else {
             toastLog("正在等待微博任务界面加载……");
             sleep(2000);
