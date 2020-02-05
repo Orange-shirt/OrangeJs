@@ -642,21 +642,47 @@ function GiveWater() {
     }
     var While = 1;
     while (While == 1) {
-        if (className("android.view.View").scrollable(true).findOnce() != null) {
-            var A = className("android.view.View").scrollable(true).findOne().parent().children();
-            var B = A[2].bounds();
-            click(B.centerX(), B.centerY());
-            toastLog("已尝试关闭“任务蒙版”");
-            sleep(2000);
+        if (text("领水滴").exists()) {
+            if (className("android.view.View").scrollable(true).findOnce() != null) {
+                var A = className("android.view.View").scrollable(true).findOne().parent().children();
+                var B = A[2].bounds();
+                click(B.centerX(), B.centerY());
+                toastLog("已尝试关闭“任务蒙版”");
+                sleep(2000);
+            }
         }
         if (text("86b551d1155595c3").findOnce() != null) {
             var B = text("86b551d1155595c3").findOnce().bounds();
             click(B.centerX(), B.centerY());
             toastLog("已尝试点击“浇水”按钮");
             sleep(1000);
+            if (text("三餐福利时间到了").findOnce() != null) {
+                var A = text("去领取").findOnce().bounds();
+                click(A.centerX(), A.centerY());
+                toastLog("存在“三餐福利时间到了去领取”按钮\n已尝试点击...");
+                sleep(2000);
+            }
+            if (text("继续领水滴").findOnce() != null) {
+                var A = text("继续领水滴").findOnce().bounds();
+                click(A.centerX(), A.centerY());
+                toastLog("存在“继续领水滴”按钮\n已尝试点击...");
+                sleep(2000);
+            }
             if (text("剩余水滴不足，完成任务得水滴").findOnce() != null) {
                 toastLog("剩余水滴不足，完成任务得水滴");
                 var While = 0;
+                if (text("三餐福利时间到了").findOnce() != null) {
+                    var A = text("去领取").findOnce().bounds();
+                    click(A.centerX(), A.centerY());
+                    toastLog("存在“三餐福利时间到了去领取”按钮\n已尝试点击...");
+                    sleep(2000);
+                }
+                if (text("继续领水滴").findOnce() != null) {
+                    var A = text("继续领水滴").findOnce().bounds();
+                    click(A.centerX(), A.centerY());
+                    toastLog("存在“继续领水滴”按钮\n已尝试点击...");
+                    sleep(2000);
+                }
                 if (text("签到领水滴").findOnce() != null) {
                     text("签到领水滴").findOnce().click();
                     toastLog("存在“签到领水滴”按钮\n已尝试点击...");
