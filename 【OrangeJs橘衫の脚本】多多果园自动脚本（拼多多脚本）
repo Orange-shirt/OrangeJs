@@ -894,6 +894,9 @@ function DoTask() {
         toastLog("已尝试点击“关闭蒙版”按钮");
         sleep(2000);
     }
+
+
+
     if (className("android.view.View").text("浏览商品1分钟").findOnce() != null) {
         var A = className("android.view.View").text("浏览商品1分钟").findOnce().parent();
         var B = A.children();
@@ -903,6 +906,11 @@ function DoTask() {
             D[0].click();
             toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text());
             sleep(2000);
+            if (id("29").findOnce() != null) {
+                id("29").findOnce().click();
+                toastLog("已尝试再次点击“浏览商品1分享去完成”按钮");
+                sleep(2000);
+            }
             var deng = 60;
             for (deng == 60; deng > 0; deng--) {
                 toastLog("正在完成“" + B[0].text() + "”任务\n当前剩余" + deng + "秒……");
@@ -940,6 +948,11 @@ function DoTask() {
             D[0].click();
             toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text());
             sleep(2000);
+            if (id("30030").text("去完成").findOnce() != null) {
+                id("30030").findOnce().click();
+                toastLog("已尝试再次点击“浏览果园1分钟去完成”按钮");
+                sleep(2000);
+            }
             var deng = 60;
             for (deng == 60; deng > 0; deng--) {
                 toastLog("正在完成“" + B[0].text() + "”任务\n当前剩余" + deng + "秒……");
@@ -986,10 +999,18 @@ function DoTask() {
         toastLog("已尝试点击“关闭蒙版”按钮");
         sleep(2000);
     }
+    /*
     if (text("大年初七后奖励升级").findOnce() != null) {
         var GB = text("大年初七后奖励升级").findOnce().bounds();
         click(GB.centerX(), GB.centerY());
         toastLog("已尝试点击“大年初七后奖励升级”按钮来关闭“领水滴”蒙版");
+        sleep(2000);
+    }*/
+
+    if (className("android.widget.Image").text("closeIconV4").depth(16).findOnce() != null) {
+        var A = className("android.widget.Image").text("closeIconV4").depth(16).findOnce().parent().bounds();
+        click(A.centerX(), A.centerY());
+        toastLog("已尝试点击关闭任务蒙版");
         sleep(2000);
     }
     GiveWater();
