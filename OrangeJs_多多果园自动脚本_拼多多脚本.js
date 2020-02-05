@@ -511,6 +511,9 @@ function OpenApp() {
         if (id("com.xunmeng.pinduoduo:id/bza").findOnce() != null) { //4.90.0
             toastLog("已处于拼多多首页");
             var deng = 0;
+        } else if (id("d1j").className("android.widget.TextView").text("首页").findOnce() != null) {
+            toastLog("已处于拼多多首页");
+            var deng = 0;
         } else if (id("com.xunmeng.pinduoduo:id/c09").findOnce() != null) { //4.91.0
             toastLog("已处于拼多多首页");
             var deng = 0;
@@ -527,6 +530,11 @@ function OpenApp() {
             id("com.xunmeng.pinduoduo:id/c09").findOnce().click();
             toastLog("已尝试点击“主页搜索框”");
             var While = 0;
+            sleep(2000);
+        } else if (id("d1j").className("android.widget.TextView").text("首页").findOnce() != null) {
+            var S = id("d1j").className("android.widget.TextView").text("首页").findOnce().bounds();
+            click(S.centerX(), S.centerY());
+            toastLog("已找到首页按钮尝试点击…");
             sleep(2000);
         } else {
             Justback();
