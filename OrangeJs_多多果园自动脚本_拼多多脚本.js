@@ -895,8 +895,6 @@ function DoTask() {
         sleep(2000);
     }
 
-
-
     if (className("android.view.View").text("浏览商品1分钟").findOnce() != null) {
         var A = className("android.view.View").text("浏览商品1分钟").findOnce().parent();
         var B = A.children();
@@ -907,7 +905,8 @@ function DoTask() {
             toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text());
             sleep(2000);
             if (id("29").findOnce() != null) {
-                id("29").findOnce().click();
+                var X=id("29").findOnce().bounds();
+                click(X.centerX(),X.centerY());
                 toastLog("已尝试再次点击“浏览商品1分享去完成”按钮");
                 sleep(2000);
             }
@@ -948,8 +947,9 @@ function DoTask() {
             D[0].click();
             toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text());
             sleep(2000);
-            if (id("30030").text("去完成").findOnce() != null) {
-                id("30030").findOnce().click();
+            if (id("30030").findOnce() != null) {
+                var X=id("30030").findOnce().bounds();
+                click(X.centerX(),X.centerY());
                 toastLog("已尝试再次点击“浏览果园1分钟去完成”按钮");
                 sleep(2000);
             }
