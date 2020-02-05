@@ -752,6 +752,14 @@ function GiveWater() {
             toastLog("已尝试点击水滴不足“关闭蒙版”按钮");
             sleep(2000);
             var While = 0;
+        } else if (text("当前的水滴数不够").findOnce() != null) {
+            toastLog("当前的水滴数不够");
+            sleep(2000);
+            var While = 0;
+        } else if (text("0g").findOnce() != null) {
+            toastLog("当前的水滴数0g");
+            sleep(2000);
+            var While = 0;
         } else if (text("ny-20-close").findOnce() != null) {
             var D = text("ny-20-close").findOnce().bounds();
             click(D.centerX(), D.centerY());
