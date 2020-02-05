@@ -825,7 +825,7 @@ function mainC() {
             sleep(2000);
         }
 
-        var hd3 = "关注店铺（8/8）";
+        var hd3 = "关注店铺（9/9）";
         if (textContains("关注店铺").exists()) {
             context_xH = 1;
             while (context_xH == 1) {
@@ -866,8 +866,8 @@ function mainC() {
                                             sleep(1500);
                                         }
                                         Justback();
-                                    } else if (text("已关注").find().length == 8) {
-                                        toastLog("已关注全部8个店铺");
+                                    } else if (text("已关注").find().length == 9) {
+                                        toastLog("已关注全部9个店铺");
                                         var While = 0;
                                     }
                                 }
@@ -977,13 +977,13 @@ function mainC() {
                                 }
                                 Justback();
                                 sleep(2000);
-                                if (id("a96").findOnce() != null) {
+                                /*if (id("a96").findOnce() != null) {
                                     Justback();
                                     sleep(2000);
                                     if (id("a96").findOnce() != null) {
                                         openJDinSearch();
                                     }
-                                }
+                                }*/
                                 if (id("fd").findOnce() != null) {
                                     if (id("fd").findOnce().text() == "宠汪汪") {
                                         if (text("做任务领狗粮").exists()) {
@@ -1123,7 +1123,11 @@ function mainC() {
                                 toastLog("关注商品任务\n没有找到顶栏标题");
                                 sleep(2000);
                             }
-                        } else if (id("fd").findOnce().text() != "宠汪汪") {
+                        } else if (id("fd").findOnce() != null) {
+                            if (id("fd").findOnce().text() == "宠汪汪") {
+                                toastLog("还处于“做任务领狗粮”界面\n继续任务……");
+                            }
+                        } else if (id("fd").findOnce() == null) {
                             var deng = 5;
                             for (deng == 5; deng > 0; deng--) {
                                 toastLog("正在完成关注商品任务\n" + H + "\n剩余" + deng + "秒……");
@@ -1131,24 +1135,20 @@ function mainC() {
                             }
                             Justback();
                             sleep(1000);
-                        } else if (id("fd").findOnce().text() == "宠汪汪") {
-                            toastLog("还处于“做任务领狗粮”界面\n继续任务……");
                         }
                     }
                 } else {
-                    toastLog("未找到“关注商品”重试中……")
-                    mainC();
                     toastLog("跳过! 未找到“关注商品”");
                     context_xH = 0;
                 }
-            }
-        } //“关注商品”任务完成
-        else {
+            } //“关注商品”任务完成
+        } else {
             toastLog("未找到“关注商品”重试中……")
             mainC();
             toastLog("跳过! 未找到“关注商品”");
             context_xH = 0;
         }
+
         sleep(2000);
         //在屏幕上滑动两个控件的距离
         var G = textContains("关注店铺").findOnce();
