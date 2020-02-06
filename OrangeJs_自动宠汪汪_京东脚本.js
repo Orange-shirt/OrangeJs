@@ -30,7 +30,7 @@ var width = device.width;
 
 var GJCwords = "宠汪汪" //京东搜索关键词
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.3"); //版本
+    var ScriptVersion = ("Beta1.4"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -825,7 +825,8 @@ function mainC() {
             sleep(2000);
         }
 
-        var hd3 = "关注店铺（9/9）";
+        var Number = 20;
+        var hd3 = "关注店铺（" + Number + "/" + Number + "）";
         if (textContains("关注店铺").exists()) {
             context_xH = 1;
             while (context_xH == 1) {
@@ -838,7 +839,16 @@ function mainC() {
                     if (H == hd3) {
                         toastLog(H);
                         context_xH = 0;
+                    } else if (Number != 0) {
+                        Number--;
+                        var hd3 = "关注店铺（" + Number + "/" + Number + "）";
+                        if (H == hd3) {
+                            toastLog(H);
+                            var Number = 0;
+                            context_xH = 0;
+                        }
                     } else {
+                        var Number = 20;
                         toastLog(H);
                         var AB = B[3].bounds();
                         click(AB.centerX(), AB.centerY());
@@ -866,8 +876,8 @@ function mainC() {
                                             sleep(1500);
                                         }
                                         Justback();
-                                    } else if (text("已关注").find().length == 9) {
-                                        toastLog("已关注全部9个店铺");
+                                    } else {
+                                        toastLog("已关注全部店铺");
                                         var While = 0;
                                     }
                                 }
@@ -948,8 +958,10 @@ function mainC() {
             toastLog("已尝试滑动两个控件的距离");
             sleep(2500);
         }
+
         //开始完成逛逛会场任务
-        var rw = "逛逛会场（4/4）";
+        var Number = 20;
+        var rw = "逛逛会场（" + Number + "/" + Number + "）";
         if (textContains("逛逛会场").exists()) {
             context_xH = 1;
             while (context_xH == 1) {
@@ -962,7 +974,16 @@ function mainC() {
                     if (H == rw) {
                         toastLog(H);
                         context_xH = 0;
+                    } else if (Number != 0) {
+                        Number--;
+                        var rw = "逛逛会场（" + Number + "/" + Number + "）";
+                        if (H == rw) {
+                            toastLog(H);
+                            var Number = 0;
+                            context_xH = 0;
+                        }
                     } else {
+                        var Number = 20;
                         toastLog(H);
                         var AB = B[3].bounds();
                         click(AB.centerX(), AB.centerY());
@@ -1085,8 +1106,10 @@ function mainC() {
             toastLog("已尝试滑动两个控件的距离");
             sleep(2500);
         }
+
         //开始完成关注商品任务
-        var rw = "关注商品（10/10）";
+        var Number = 20;
+        var rw = "关注商品（" + Number + "/" + Number + "）";
         if (textContains("关注商品").exists()) {
             context_xH = 1;
 
@@ -1100,7 +1123,16 @@ function mainC() {
                     if (H == rw) {
                         toastLog(H);
                         context_xH = 0;
+                    } else if (Number != 0) {
+                        Number--;
+                        var rw = "关注商品（" + Number + "/" + Number + "）";
+                        if (H == rw) {
+                            toastLog(H);
+                            var Number = 0;
+                            context_xH = 0;
+                        }
                     } else {
+                        var Number = 20;
                         toastLog(H);
                         var AB = B[3].bounds();
                         click(AB.centerX(), AB.centerY());
@@ -1166,7 +1198,8 @@ function mainC() {
             sleep(2500);
         }
         //开始完成关注频道任务
-        var hd3 = "关注频道（4/4）";
+        var Number = 20;
+        var hd3 = "关注频道（" + Number + "/" + Number + "）";
         if (textContains("关注频道").exists()) {
             context_xH = 1;
 
@@ -1180,7 +1213,16 @@ function mainC() {
                     if (H == hd3) {
                         toastLog(H);
                         context_xH = 0;
+                    } else if (Number != 0) {
+                        Number--;
+                        var hd3 = "关注频道（" + Number + "/" + Number + "）";
+                        if (H == hd3) {
+                            toastLog(H);
+                            var Number = 0;
+                            context_xH = 0;
+                        }
                     } else {
+                        var Number = 20;
                         toastLog(H);
                         var AB = B[3].bounds();
                         click(AB.centerX(), AB.centerY());
@@ -1219,8 +1261,8 @@ function mainC() {
                                         toastLog("进入并关注的Find是空的");
                                         sleep(2000);
                                     }
-                                } else if (text("已关注").find().length == 4) {
-                                    toastLog("已关注全部4个频道");
+                                } else {
+                                    toastLog("已关注全部频道");
                                     var While = 0;
                                 }
                             } else {
