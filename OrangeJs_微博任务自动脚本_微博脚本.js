@@ -851,6 +851,9 @@ function DoTask() {
     while (While == 1) {
         var A = className("android.widget.Button").text("领取3积分").findOnce();
         var B = className("android.widget.Button").text("领取5积分").findOnce();
+        var C = className("android.widget.Button").text("领取30积分").findOnce();
+        var D = className("android.widget.Button").text("领取10积分").findOnce();
+        var E = className("android.widget.Button").text("领取50积分").findOnce();
         if (A != null) {
             A.click();
             toastLog("已找到“领取3积分”按钮\n已尝试点击……");
@@ -858,6 +861,18 @@ function DoTask() {
         } else if (B != null) {
             B.click();
             toastLog("已找到“领取5积分”按钮\n已尝试点击……");
+            sleep(2000);
+        } else if (C != null) {
+            C.click();
+            toastLog("已找到“领取30积分”按钮\n已尝试点击……");
+            sleep(2000);
+        } else if (D != null) {
+            D.click();
+            toastLog("已找到“领取10积分”按钮\n已尝试点击……");
+            sleep(2000);
+        } else if (E != null) {
+            E.click();
+            toastLog("已找到“领取50积分”按钮\n已尝试点击……");
             sleep(2000);
         } else {
             var While = 0;
