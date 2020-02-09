@@ -961,6 +961,7 @@ function mainC() {
 
         //开始完成逛逛会场任务
         var Number = 20;
+        var OK = 0;
         var rw = "逛逛会场（" + Number + "/" + Number + "）";
         if (textContains("逛逛会场").exists()) {
             context_xH = 1;
@@ -970,7 +971,22 @@ function mainC() {
                     toastLog("已找到“逛逛会场”");
                     var AO = D.parent();
                     var B = AO.children();
-                    var H = B[1].text();
+                    try {
+                        if (OK > 8) { //最多只做8次
+                            if (H != null) {
+                                if (H == B[1].text()) {
+                                    context_xH = 0;
+                                    toastLog("检测到上次任务未完成\n跳过此任务");
+                                }
+                            }
+                        } else {
+                            var H = B[1].text();
+                        }
+                    } catch (e) {
+                        log(e);
+                    } finally {
+                        var H = B[1].text();
+                    }
                     if (H == rw) {
                         toastLog(H);
                         context_xH = 0;
@@ -984,6 +1000,7 @@ function mainC() {
                         }
                     } else {
                         var Number = 20;
+                        OK++;
                         toastLog(H);
                         var AB = B[3].bounds();
                         click(AB.centerX(), AB.centerY());
