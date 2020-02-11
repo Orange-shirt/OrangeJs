@@ -644,11 +644,13 @@ function GiveWater() {
     while (While == 1) {
         if (text("领水滴").exists()) {
             if (className("android.view.View").scrollable(true).findOnce() != null) {
-                var A = className("android.view.View").scrollable(true).findOne().parent().children();
-                var B = A[2].bounds();
-                click(B.centerX(), B.centerY());
-                toastLog("已尝试关闭“任务蒙版”");
-                sleep(2000);
+                if (className("android.view.View").text("领水滴").findOnce() != null) {
+                    var A = className("android.view.View").scrollable(true).findOne().parent().children();
+                    var B = A[2].bounds();
+                    click(B.centerX(), B.centerY());
+                    toastLog("已尝试关闭“任务蒙版”");
+                    sleep(2000);
+                }
             }
         }
         if (text("86b551d1155595c3").findOnce() != null) {
@@ -763,6 +765,14 @@ function L_Water() {
         sleep(2000);
         /*swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
         toastLog("已尝试滑动一个控件");*/
+    } else if (text("去领取").findOnce() != null) {
+        var A = text("去领取").findOnce().bounds();
+        var B = text("去领取").findOnce().parent().bounds();
+        click(A.centerX(), A.centerY());
+        toastLog("已尝试点击“去领取”按钮");
+        sleep(2000);
+        /*swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
+        toastLog("已尝试滑动一个控件");*/
     }
     if (text("去邀请").findOnce() != null) {
         var B = text("去邀请").findOnce().parent().bounds();
@@ -770,18 +780,30 @@ function L_Water() {
         swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
         toastLog("已尝试滑动一个控件");
     }
-
+    if (text("去领取").findOnce() != null) {
+        var A = text("去领取").findOnce().bounds();
+        var B = text("去领取").findOnce().parent().bounds();
+        click(A.centerX(), A.centerY());
+        toastLog("已尝试点击“去领取”按钮");
+        sleep(2000);
+        swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
+        toastLog("已尝试滑动一个控件");*/
+    }
     if (text("去逛逛").findOnce() != null) {
         var A = text("去逛逛").findOnce().bounds();
         var B = text("去逛逛").findOnce().parent().bounds();
         click(A.centerX(), A.centerY());
         toastLog("已尝试点击“去逛逛”按钮");
         sleep(2000);
+        if(className("android.view.View").text("领水滴").findOnce()==null){
         Justback();
         toastLog("已尝试返回活动任务界面");
         sleep(3000);
         swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
         toastLog("已尝试滑动一个控件");
+        }else{
+            toastLog("未成功点击“去逛逛”按钮");
+            }
     }
 
     if (text("去领取").findOnce() != null) {
