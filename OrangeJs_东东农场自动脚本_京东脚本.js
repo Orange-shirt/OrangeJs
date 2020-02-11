@@ -815,11 +815,13 @@ function L_Water() {
             } else {
                 var While = 0;
                 toastLog("控件已处于可点击位置");
-            }
-        }
-        click(C.centerX(), C.centerY());
+                if(B!=null){
+                click(C.centerX(), C.centerY());
         toastLog("已尝试点击“去领取”按钮");
         sleep(2000);
+            }
+        }
+        
     }
     if (text("去领取").findOnce() != null) {
         var A = className("android.view.View").scrollable(true).findOne().bounds();
