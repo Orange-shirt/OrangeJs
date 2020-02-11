@@ -642,18 +642,15 @@ function GiveWater() {
     }
     var While = 1;
     while (While == 1) {
-        if (text("领水滴").exists()) {
-            if (className("android.view.View").scrollable(true).findOnce() != null) {
-                if (className("android.view.View").text("领水滴").findOnce() != null) {
-                    var A = className("android.view.View").scrollable(true).findOnce();
-                    if (A != null) {
-                        var A = A.parent().children();
-                        var B = A[2].bounds();
-                        click(B.centerX(), B.centerY());
-                        toastLog("已尝试关闭“任务蒙版”");
-                        sleep(2000);
-                    }
-                }
+        var D = 0;
+        while (className("android.view.View").text("领水滴").findOnce() != null) {
+            var GB = className("android.view.View").text("领水滴").findOnce().bounds();
+            click(GB.right - D, GB.centerY());
+            sleep(1000);
+            log("已尝试关闭任务蒙版" + D);
+            if (className("android.view.View").text("领水滴").findOnce() != null) {
+                var D = D + 10;
+                log(D);
             }
         }
         if (text("86b551d1155595c3").findOnce() != null) {
@@ -798,7 +795,7 @@ function L_Water() {
         } else if (B.centerY() < A.top) {
             var While = 1;
         }*/
-        var While=1;
+        var While = 1;
         while (While == 1) {
             var A = className("android.view.View").scrollable(true).findOnce().bounds();
             var B = className("android.view.View").text("去领取").findOnce();
@@ -817,15 +814,15 @@ function L_Water() {
                 var While = 0;
                 toastLog("控件已处于可点击位置");
                 click(C.centerX(), C.centerY());
-        toastLog("已尝试点击“去领取”按钮");
-        sleep(2000);
-        
+                toastLog("已尝试点击“去领取”按钮");
+                sleep(2000);
+
             }
         }
-        
+
     }
     if (text("去领取").findOnce() != null) {
-        var While=1;
+        var While = 1;
         /*var A = className("android.view.View").scrollable(true).findOne().bounds();
         var B = className("android.view.View").text("去领取").findOne().bounds();
         if (B.centerY() > A.bottom) {
@@ -851,14 +848,14 @@ function L_Water() {
                 var While = 0;
                 toastLog("控件已处于可点击位置");
                 click(C.centerX(), C.centerY());
-        toastLog("已尝试点击“去领取”按钮");
-        sleep(2000);
+                toastLog("已尝试点击“去领取”按钮");
+                sleep(2000);
             }
         }
-        
+
     }
     if (text("去逛逛").findOnce() != null) {
-        var While=1;
+        var While = 1;
         /*var A = className("android.view.View").scrollable(true).findOne().bounds();
         var B = className("android.view.View").text("去逛逛").findOne().bounds();
         if (B.centerY() > A.bottom) {
@@ -901,7 +898,7 @@ function L_Water() {
         } else if (B.centerY() < A.top) {
             var While = 1;
         }*/
-        var While=1;
+        var While = 1;
         while (While == 1) {
             var A = className("android.view.View").scrollable(true).findOnce().bounds();
             var B = className("android.view.View").text("去领取").findOnce();
@@ -967,15 +964,27 @@ function firstD() {
         openJDinSearch();
     }
 }
-
 if (text("领水滴").findOnce() != null) {
-    if (className("android.view.View").scrollable(true).findOnce() != null) {
+
+    var D = 0;
+    while (className("android.view.View").text("领水滴").findOnce() != null) {
+        var GB = className("android.view.View").text("领水滴").findOnce().bounds();
+        click(GB.right - D, GB.centerY());
+        sleep(1000);
+        log("已尝试关闭任务蒙版" + D);
+        if (className("android.view.View").text("领水滴").findOnce() != null) {
+            var D = D + 10;
+            log(D);
+        }
+    }
+    /*if (className("android.view.View").scrollable(true).findOnce() != null) {
         var A = className("android.view.View").scrollable(true).findOne().parent().children();
         var B = A[2].bounds();
         click(B.centerX(), B.centerY());
         toastLog("已尝试关闭“任务蒙版”");
         sleep(2000);
-    }
+    }*/
+    sleep(1000);
     GiveWater();
     /*toastLog("尝试返回再次浇水");
     Justback();
