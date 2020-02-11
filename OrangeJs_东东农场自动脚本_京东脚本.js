@@ -819,6 +819,7 @@ function L_Water() {
                 click(C.centerX(), C.centerY());
         toastLog("已尝试点击“去领取”按钮");
         sleep(2000);
+        }
             }
         }
         
