@@ -787,7 +787,7 @@ function L_Water() {
         toastLog("已尝试点击“去领取”按钮");
         sleep(2000);
         swipe(width / 2, height - 300, width / 2, height - 300 - B.height() - 60, 500);
-        toastLog("已尝试滑动一个控件");*/
+        toastLog("已尝试滑动一个控件");
     }
     if (text("去逛逛").findOnce() != null) {
         var A = text("去逛逛").findOnce().bounds();
