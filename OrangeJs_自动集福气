@@ -661,8 +661,14 @@ function click_powerˉqiandao() {
     if (a != null) {
         var b = a.bounds();
         click(b.centerX(), b.centerY());
+        toastLog("已尝试点击“集福气”按钮\n请稍等……");
+        sleep(3000);
+    } else {
+        toastLog("找不到“集福气”按钮");
+        sleep(2000);
     }
     sleep(2000);
+
     if (text("去签到").exists()) {
         var a = text("去签到").findOne().bounds();
         click(a.centerX(), a.centerY());
@@ -856,6 +862,19 @@ function main_js_clickAll15s() {
         text("去签到").findOne().click();
         sleep(2000);
     }
+
+    if (text("去签到").exists()) {
+        var QD = text("去签到").findOne().bounds();
+        click(QD.centerX(), QD.centerY());
+        toastLog("已尝试点击“去签到”按钮\n" + QD.centerX(), QD.centerY());
+        sleep(2000);
+    }
+    if (className("android.view.View").text("去签到").depth(19).findOnce() != null) {
+        var MN = className("android.view.View").text("已签到").depth(19).findOnce().bounds();
+        click(MN.centerX(), MN.centerY());
+        toastLog("已尝试点击“去签到”按钮");
+        sleep(2000);
+    }
     if (text("已签到").exists()) {
         toastLog("已处于活动界面");
     } else {
@@ -866,6 +885,12 @@ function main_js_clickAll15s() {
         };
         jinhuodong();
         click_powerˉqiandao();
+    }
+    if (className("android.view.View").text("去领取").findOnce() != null) {
+        var Fw = className("android.view.View").text("去领取").findOnce().bounds();
+        click(Fw.centerX(), Fw.centerY());
+        toastLog("已尝试点击“去领取”按钮");
+        sleep(2000);
     }
     while (textContains("去浏览").exists()) {
         textContains("去浏览").findOne().click();
@@ -1231,6 +1256,7 @@ openTBandsearch();
 jinhuodong();
 sleep(2000);
 var A = className("android.widget.Image").findOnce(8);
+//var A=className("android.widget.Image").text("TB1W.jerVT7gK0jSZFpXXaTkpXa-137-139.png_100x150Q90s50.jpg_").findOnce();
 if (A != null) {
     var While = 1;
     var a = A.bounds();
@@ -1238,7 +1264,7 @@ if (A != null) {
     toastLog("没有找到“浇灌福气”按钮");
 }
 while (While == 1) {
-    click(width/2, a.centerY());
+    click(width / 2, a.centerY());
     toastLog("已尝试点击“浇灌福气”按钮");
     sleep(2000);
     var aaq = className("android.view.View").text("立即领取").findOnce();
