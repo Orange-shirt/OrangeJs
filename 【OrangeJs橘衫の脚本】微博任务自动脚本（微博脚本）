@@ -1058,6 +1058,8 @@ function DoTask() {
         var F = className("android.widget.Button").text("领0.01元").findOnce();
         var G = className("android.widget.Button").text("领0.05元").findOnce();
         var H = className("android.widget.Button").text("领0.3元").findOnce();
+        var I = className("android.widget.Button").text("领取90积分").findOnce();
+        var J = className("android.widget.Button").text("领取80积分").findOnce();
         if (A != null) {
             A.click();
             toastLog("已找到“领取3积分”按钮\n已尝试点击……");
@@ -1089,6 +1091,14 @@ function DoTask() {
         } else if (H != null) {
             H.click();
             toastLog("已找到“领0.3元”按钮\n已尝试点击……");
+            sleep(2000);
+        } else if (I != null) {
+            I.click();
+            toastLog("已找到“领取90积分”按钮\n已尝试点击……");
+            sleep(2000);
+        } else if (J != null) {
+            J.click();
+            toastLog("已找到“领取80积分”按钮\n已尝试点击……");
             sleep(2000);
         } else {
             var While = 0;
@@ -1130,6 +1140,7 @@ function DoTask() {
                 if (id("com.sina.weibo:id/lySearchInput").findOnce() != null) {
                     toastLog("已进入“我的微博”界面");
                     sleep(2000);
+                    var WhileX = 0;
                 } else if (id("com.sina.weibo:id/lable").text("暂无微博").findOnce() != null) {
                     toastLog("已找到“暂无微博”提示");
                     var WhileX = 0;
