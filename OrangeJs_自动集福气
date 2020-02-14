@@ -52,7 +52,7 @@ function dialogs_js() {
     */
 
     var xiazai = ("软件下载链接戳 ");
-    var ScriptVersion = ("Beta1.2"); //版本
+    var ScriptVersion = ("Beta1.3"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "👥 多帐号完成任务", "ℹ️ Q&A常见问题解答"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动集福气”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -607,6 +607,11 @@ function jinhuodong() {
             sleep(1000);
         }
         sleep(1000);
+        if (className("android.view.View").text("合种").findOnce() != null) {
+            toastLog("已成功进入活动界面");
+            var dengdai10s = 0;
+            sleep(2000);
+        }
     }
 }
 click_powerˉqiandao();
@@ -657,10 +662,10 @@ function click_powerˉqiandao() {
         sleep(2000);
     }
     //点击活动入口
-    var a = className("android.widget.Image").findOnce(11);
-    if (a != null) {
-        var b = a.bounds();
-        click(b.centerX(), b.centerY());
+    var S = className("android.view.View").depth(20).findOnce();
+    if (S != null) {
+        var b = S.parent().bounds();
+        click(b.right - 50, b.bottom - 50);
         toastLog("已尝试点击“集福气”按钮\n请稍等……");
         sleep(3000);
     } else {
@@ -1255,17 +1260,19 @@ toastLog("二次循环已完成\n即将进行自动浇灌…");
 openTBandsearch();
 jinhuodong();
 sleep(2000);
-var A = className("android.widget.Image").findOnce(8);
+//var A = className("android.widget.Image").findOnce(8);
+var A = className("android.view.View").depth(20).findOnce();
 //var A=className("android.widget.Image").text("TB1W.jerVT7gK0jSZFpXXaTkpXa-137-139.png_100x150Q90s50.jpg_").findOnce();
 if (A != null) {
     var While = 1;
-    var a = A.bounds();
+    var a = A.parent().bounds();
 } else {
     toastLog("没有找到“浇灌福气”按钮");
 }
 while (While == 1) {
-    click(width / 2, a.centerY());
+    //click(width / 2, a.centerY());
     toastLog("已尝试点击“浇灌福气”按钮");
+    click(a.centerX(), a.bottom - 20);
     sleep(2000);
     var aaq = className("android.view.View").text("立即领取").findOnce();
     var aax = className("android.view.View").text("快去做任务集福气吧").findOnce()
