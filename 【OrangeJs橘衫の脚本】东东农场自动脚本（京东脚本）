@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.1"); //版本
+    var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“东东农场自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -757,172 +757,226 @@ function L_Water() {
         toastLog("未找到“领水滴”按钮");
     }
 
-    if (text("领取").findOnce() != null) {
-        var A = className("android.view.View").scrollable(true).findOne().bounds();
-        var B = className("android.view.View").text("领取").findOne().bounds();
-        if (B.centerY() > A.bottom) {
-            var While = 1;
-        } else if (B.centerY() < A.top) {
-            var While = 1;
-        }
-        while (While == 1) {
-            var A = className("android.view.View").scrollable(true).findOnce().bounds();
-            var B = className("android.view.View").text("领取").findOnce();
-            var C = B.bounds();
-            if (C.centerY() > A.bottom) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() - 300, 500);
-                toastLog("正在向上滑动至可点击位置");
-                sleep(2000);
-            } else if (C.centerY() < A.top) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() + 300, 500);
-                toastLog("正在向下滑动至可点击位置");
-                sleep(2000);
-            } else {
-                var While = 0;
-                toastLog("控件已处于可点击位置");
-            }
-        }
-        click(C.centerX(), C.centerY());
-        toastLog("已尝试点击“领取”按钮");
-        sleep(2000);
-    } else if (text("去领取").findOnce() != null) {
-        /*var A = className("android.view.View").scrollable(true).findOne().bounds();
-        var B = className("android.view.View").text("去领取").findOne().bounds();
-        if (B.centerY() > A.bottom) {
-            var While = 1;
-        } else if (B.centerY() < A.top) {
-            var While = 1;
-        }*/
+
+    //每日首次浇水
+    if (className("android.widget.Image").text("e4a2816cb98b08c4").findOnce() != null) {
         var While = 1;
         while (While == 1) {
-            var A = className("android.view.View").scrollable(true).findOnce().bounds();
-            var B = className("android.view.View").text("去领取").findOnce();
-            var C = B.bounds();
-            if (C.centerY() > A.bottom) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() - 300, 500);
-                toastLog("正在向上滑动至可点击位置");
-                sleep(2000);
-            } else if (C.centerY() < A.top) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() + 300, 500);
-                toastLog("正在向下滑动至可点击位置");
-                sleep(2000);
+            var A = className("android.widget.Image").text("e4a2816cb98b08c4").findOnce().parent().parent().children();
+            var B = A[5].children();
+            if (B.size() > 1) {
+                var C = B[1]; //按钮
+                var D = C.bounds();
+                if (C.text() != "再逛逛") {
+                    //滑动至可点击位置
+                    var a = className("android.view.View").scrollable(true).findOnce().bounds();
+                    var c = D
+                    if (c.centerY() > a.bottom) {
+                        swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() - 300, 500);
+                        toastLog("正在向上滑动至可点击位置(" + C.text() + ")");
+                        sleep(2000);
+                    } else if (c.centerY() < a.top) {
+                        swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() + 300, 500);
+                        toastLog("正在向下滑动至可点击位置(" + C.text() + ")");
+                        sleep(2000);
+                    } else {
+                        var While = 0;
+                        toastLog("控件已处于可点击位置(" + C.text() + ")");
+                        click(D.centerX(), D.centerY());
+                        sleep(2000);
+                        if (text("领水滴").findOnce() == null) {
+                            Justback();
+                            toastLog("已尝试返回活动界面(" + C.text() + ")");
+                            sleep(2000);
+                        }
+                    }
+                } else {
+                    log(A[1].text() + "：" + C.text());
+                    var While = 0;
+                }
             } else {
+                log("任务1控件已变化");
                 var While = 0;
-                toastLog("控件已处于可点击位置");
-                click(C.centerX(), C.centerY());
-                toastLog("已尝试点击“去领取”按钮");
-                sleep(2000);
-
             }
         }
-
-    }
-    if (text("去领取").findOnce() != null) {
-        var While = 1;
-        /*var A = className("android.view.View").scrollable(true).findOne().bounds();
-        var B = className("android.view.View").text("去领取").findOne().bounds();
-        if (B.centerY() > A.bottom) {
-            var While = 1;
-        } else if (B.centerY() < A.top) {
-            var While = 1;
-        }*/
-        while (While == 1) {
-            var A = className("android.view.View").scrollable(true).findOnce().bounds();
-            var B = className("android.view.View").text("去领取").findOnce();
-            var C = B.bounds();
-            if (C.centerY() > A.bottom) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() - 300, 500);
-                toastLog("正在向上滑动至可点击位置");
-                sleep(2000);
-            } else if (C.centerY() < A.top) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() + 300, 500);
-                toastLog("正在向下滑动至可点击位置");
-                sleep(2000);
-            } else {
-                var While = 0;
-                toastLog("控件已处于可点击位置");
-                click(C.centerX(), C.centerY());
-                toastLog("已尝试点击“去领取”按钮");
-                sleep(2000);
-            }
-        }
-
-    }
-    if (text("去逛逛").findOnce() != null) {
-        var While = 1;
-        /*var A = className("android.view.View").scrollable(true).findOne().bounds();
-        var B = className("android.view.View").text("去逛逛").findOne().bounds();
-        if (B.centerY() > A.bottom) {
-            var While = 1;
-        } else if (B.centerY() < A.top) {
-            var While = 1;
-        }*/
-        while (While == 1) {
-            var A = className("android.view.View").scrollable(true).findOnce().bounds();
-            var B = className("android.view.View").text("去逛逛").findOnce();
-            var C = B.bounds();
-            if (C.centerY() > A.bottom) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() - 300, 500);
-                toastLog("正在向上滑动至可点击位置");
-                sleep(2000);
-            } else if (C.centerY() < A.top) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() + 300, 500);
-                toastLog("正在向下滑动至可点击位置");
-                sleep(2000);
-            } else {
-                var While = 0;
-                toastLog("控件已处于可点击位置");
-            }
-        }
-        click(C.centerX(), C.centerY());
-        toastLog("已尝试点击“去逛逛”按钮");
-        sleep(2000);
-        Justback();
-        toastLog("已尝试返回活动任务界面");
-        sleep(3000);
+    } else {
+        log("已不存在任务1");
     }
 
-    if (text("去领取").findOnce() != null) {
-        /*var A = className("android.view.View").scrollable(true).findOne().bounds();
-        var B = className("android.view.View").text("去领取").findOne().bounds();
-        if (B.centerY() > A.bottom) {
-            var While = 1;
-        } else if (B.centerY() < A.top) {
-            var While = 1;
-        }*/
+    //浏览推荐商品
+    if (className("android.widget.Image").text("5c36f09db7c3ebbd").findOnce() != null) {
         var While = 1;
         while (While == 1) {
-            var A = className("android.view.View").scrollable(true).findOnce().bounds();
-            var B = className("android.view.View").text("去领取").findOnce();
-            var C = B.bounds();
-            if (C.centerY() > A.bottom) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() - 300, 500);
-                toastLog("正在向上滑动至可点击位置");
-                sleep(2000);
-            } else if (C.centerY() < A.top) {
-                var While = 1;
-                swipe(A.centerX(), A.centerY(), A.centerX(), A.centerY() + 300, 500);
-                toastLog("正在向下滑动至可点击位置");
-                sleep(2000);
+            var A = className("android.widget.Image").text("5c36f09db7c3ebbd").findOnce().parent().parent().children();
+            var B = A[3].children();
+            if (B.size() > 1) {
+                var C = B[1];
+                var D = C.bounds();
+                if (C.text() != "再逛逛") {
+                    //滑动至可点击位置
+                    var a = className("android.view.View").scrollable(true).findOnce().bounds();
+                    var c = D;
+                    if (c.centerY() > a.bottom) {
+                        swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() - 300, 500);
+                        toastLog("正在向上滑动至可点击位置(" + C.text() + ")");
+                        sleep(2000);
+                    } else if (c.centerY() < a.top) {
+                        swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() + 300, 500);
+                        toastLog("正在向下滑动至可点击位置(" + C.text() + ")");
+                        sleep(2000);
+                    } else {
+                        var While = 0;
+                        toastLog("控件已处于可点击位置(" + C.text() + ")");
+                        click(D.centerX(), D.centerY());
+                        sleep(2000);
+                        if (text("领水滴").findOnce() == null) {
+                            Justback();
+                            toastLog("已尝试返回活动界面");
+                            sleep(2000);
+                        }
+                    }
+                } else {
+                    log(A[1].text() + "：" + C.text());
+                    var While = 0;
+                }
             } else {
+                log("任务2控件已变化");
                 var While = 0;
-                toastLog("控件已处于可点击位置");
             }
         }
-        click(C.centerX(), C.centerY());
-        toastLog("已尝试点击“去领取”按钮");
-        sleep(2000);
+    } else {
+        log("已不存在任务2");
     }
+
+    //每日累计浇水10次
+    if (className("android.widget.Image").text("6111436ca7538ae7").findOnce() != null) {
+        var While = 1;
+        while (While == 1) {
+            var A = className("android.widget.Image").text("6111436ca7538ae7").findOnce().parent().parent().children();
+            var B = A[4].children();
+            var C = B[0];
+            var D = C.bounds();
+            if (C.text() != "去完成") {
+                //滑动至可点击位置
+                var a = className("android.view.View").scrollable(true).findOnce().bounds();
+                var c = D;
+                if (c.centerY() > a.bottom) {
+                    swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() - 300, 500);
+                    toastLog("正在向上滑动至可点击位置(" + C.text() + ")");
+                    sleep(2000);
+                } else if (c.centerY() < a.top) {
+                    swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() + 300, 500);
+                    toastLog("正在向下滑动至可点击位置(" + C.text() + ")");
+                    sleep(2000);
+                } else {
+                    var While = 0;
+                    toastLog("控件已处于可点击位置(" + C.text() + ")");
+                    click(D.centerX(), D.centerY());
+                    sleep(2000);
+                    if (text("领水滴").findOnce() == null) {
+                        Justback();
+                        toastLog("已尝试返回活动界面");
+                        sleep(2000);
+                    }
+                }
+            } else {
+                log(A[1].text() + "：" + C.text());
+                var While = 0;
+            }
+        }
+    } else {
+        log("已不存在任务3");
+    }
+
+    //红包图标
+    if (className("android.widget.Image").text("84fb193d3b42c1e6").findOnce() != null) {
+        var While = 1;
+        while (While == 1) {
+            //红包图标
+            var A = className("android.widget.Image").text("84fb193d3b42c1e6").findOnce().parent().parent().children();
+            var B = A[3].children();
+            if (B.size() > 1) {
+                var C = B[1];
+                var D = C.bounds();
+                if (C.text() != "再逛逛") {
+                    //滑动至可点击位置
+                    var a = className("android.view.View").scrollable(true).findOnce().bounds();
+                    var c = D;
+                    if (c.centerY() > a.bottom) {
+                        swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() - 300, 500);
+                        toastLog("正在向上滑动至可点击位置(" + C.text() + ")");
+                        sleep(2000);
+                    } else if (c.centerY() < a.top) {
+                        swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() + 300, 500);
+                        toastLog("正在向下滑动至可点击位置(" + C.text() + ")");
+                        sleep(2000);
+                    } else {
+                        var While = 0;
+                        toastLog("控件已处于可点击位置(" + C.text() + ")");
+                        click(D.centerX(), D.centerY());
+                        sleep(2000);
+                        if (text("领水滴").findOnce() == null) {
+                            Justback();
+                            toastLog("已尝试返回活动界面(" + C.text() + ")");
+                            sleep(2000);
+                        }
+                    }
+                } else {
+                    log(A[1].text() + "：" + C.text());
+                    var While = 0;
+                }
+            } else {
+                log("任务4控件已变化");
+                var While = 0;
+            }
+        }
+    } else {
+        log("已不存在任务4");
+    }
+
+    //定时领水任务
+    if (className("android.widget.Image").text("5cf5f9bb9e7b2b39").findOnce() != null) {
+        var While = 1;
+        while (While == 1) {
+            //定时领水任务
+            var A = className("android.widget.Image").text("5cf5f9bb9e7b2b39").findOnce().parent().parent().children();
+            var B = A[10].children();
+            var C = B[0];
+            var D = C.bounds();
+            if (C.text() != "再逛逛") {
+                //滑动至可点击位置
+                var a = className("android.view.View").scrollable(true).findOnce().bounds();
+                var c = D;
+                if (c.centerY() > a.bottom) {
+                    swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() - 300, 500);
+                    toastLog("正在向上滑动至可点击位置(" + C.text() + ")");
+                    sleep(2000);
+                } else if (c.centerY() < a.top) {
+                    swipe(a.centerX(), a.centerY(), a.centerX(), a.centerY() + 300, 500);
+                    toastLog("正在向下滑动至可点击位置(" + C.text() + ")");
+                    sleep(2000);
+                } else {
+                    var While = 0;
+                    toastLog("控件已处于可点击位置(" + C.text() + ")");
+                    click(D.centerX(), D.centerY());
+                    sleep(2000);
+                    if (text("领水滴").findOnce() == null) {
+                        Justback();
+                        toastLog("已尝试返回活动界面(" + C.text() + ")");
+                        sleep(2000);
+                    }
+                }
+            } else {
+                log(A[1].text() + "：" + C.text());
+                var While = 0;
+            }
+        }
+    } else {
+        log("已不存在任务5");
+    }
+
 }
+
 
 
 firstD();
