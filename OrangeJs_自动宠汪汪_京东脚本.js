@@ -30,7 +30,7 @@ var width = device.width;
 
 var GJCwords = "宠汪汪" //京东搜索关键词
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.41"); //版本
+    var ScriptVersion = ("Beta1.5"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -588,9 +588,30 @@ function A() {
                 toastLog("已找到“京东搜索框”尝试搜索进入活动…");
                 BS();
             }
-        } else {
-            toastLog("未找到“分类”中的搜索栏\n重试中……");
-            openJDinSearch();
+        } else { //京东8.5.0
+            var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a2v").findOnce();
+            if (Ac != null) {
+                var a = Ac.bounds();
+                sleep(1000);
+                click(a.centerX(), a.centerY());
+                toastLog("已尝试点击“分类搜索框”");
+                sleep(1000);
+                if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                    sleep(2000);
+                    if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                        sleep(2000);
+                        if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                            openJDinSearch();
+                        }
+                    }
+                } else {
+                    toastLog("已找到“京东搜索框”尝试搜索进入活动…");
+                    BS();
+                }
+            } else {
+                toastLog("未找到“分类”中的搜索栏\n重试中……");
+                openJDinSearch();
+            }
         }
     }
 }
@@ -616,6 +637,20 @@ function C() {
     for (deng == 10; deng > 0; deng--) {
         if (id("com.jd.lib.search:id/ak1").findOnce() != null) {
             if (id("com.jd.lib.search:id/bw").findOnce() != null) {
+                var d = id("com.jd.lib.search:id/bw").findOnce();
+                if (d != null) {
+                    var dd = d.bounds();
+                    click(dd.centerX(), dd.centerY());
+                    toastLog("存在“重新加载”按钮\n已尝试点击……");
+                    sleep(2000);
+                    var deng = 10;
+                }
+            } else {
+                toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
+                sleep(1500);
+            }
+        } else if (id("com.jd.lib.search:id/ak7").findOnce() != null) {
+            if (id("com.jd.lib.search:id/bw").findOnce() != null) { //京东8.5.0
                 var d = id("com.jd.lib.search:id/bw").findOnce();
                 if (d != null) {
                     var dd = d.bounds();
@@ -664,8 +699,22 @@ function D() {
             }
             mainC();
         } else {
-            toastLog("找不到“宠汪汪”活动入口\n重试中……");
-            C();
+            var jr = id("com.jd.lib.search:id/aku").findOnce();
+            if (jr != null) {
+                var j = jr.bounds();
+                click(j.centerX(), j.centerY());
+                toastLog("已尝试点击“宠汪汪”活动入口…");
+                sleep(2000);
+                var deng = 8;
+                for (deng == 8; deng > 0; deng--) {
+                    toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
+                    sleep(1000);
+                }
+                mainC();
+            } else {
+                toastLog("找不到“宠汪汪”活动入口\n重试中……");
+                C();
+            }
         }
     }
 }
@@ -824,7 +873,7 @@ function mainC() {
             toastLog("存在“领取”按钮\n已尝试点击…");
             sleep(2000);
         }
-
+        sleep(2000);
         var Number = 20;
         var hd3 = "关注店铺（" + Number + "/" + Number + "）";
         if (textContains("关注店铺").exists()) {
