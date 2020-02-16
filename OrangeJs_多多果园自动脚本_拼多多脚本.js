@@ -1287,7 +1287,13 @@ function EnSure() {
         toastLog("已尝试点击首次“去完成”按钮");
         sleep(3000);
         Justback();
+        sleep(2000);
         //确定是否是活动界面
+        if (text("直接离开").findOnce() != null) {
+            text("直接离开").findOnce().click();
+            toastLog("已尝试点击“直接离开”");
+            sleep(2000);
+        }
     }
     if (text("我知道了").findOnce() != null) {
         var d = text("我知道了").findOne().bounds();
