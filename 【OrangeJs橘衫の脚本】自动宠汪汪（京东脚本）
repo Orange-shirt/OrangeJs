@@ -50,7 +50,7 @@ while (While == 1) {
                 titleColor: "#F44336",
                 contentLineSpacing: 1.2,
                 //对话框内容
-                content: "本脚本目前已测试的软件版本有：\n京东" + SupportVersion + "\n如您使用没有问题可直接忽略\n若有问题可使用相应版本或反馈",
+                content: "本脚本目前已测试的软件版本有：\n京东" + SupportVersion + "\n您当前安装的版本为："+InstalledVersion+"\n如您使用没有问题可直接忽略\n若有问题可使用相应版本或反馈",
                 //对话框文字颜色
                 contentColor: "#777777",
                 //确定键内容
