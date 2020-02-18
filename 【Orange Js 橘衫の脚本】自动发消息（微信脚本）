@@ -22,8 +22,92 @@ log("*　　　　┃┫┫　┃┫┫");
 log("*　　　　┗┻┛　┗┻┛+ + ");
 log("*    Code is far away from bug!");
 log("*        神兽保佑,代码无bug");
+function getPackageVersion(packageName) {
+    try {
+        importPackage(android.content);
+        var pckMan = context.getPackageManager();
+        var packageInfo = pckMan.getPackageInfo(packageName, 0);
+        return packageInfo.versionName;
+    } catch (e) {
+        dialogs.alert("您没有安装微信APP");
+        exit();
+    }
+}
+var InstalledVersion = getPackageVersion("com.tencent.mm");
+var SupportVersion = ["7.0.10", "7.0.4"]
 
-
+var Each = SupportVersion.length;
+var While = 1;
+while (While == 1) {
+    if (Each < 0) {
+        context_check = null;
+        //判断是否选择了不再显示
+        if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/不再显示.txt") != true) {
+            dialogs.build({
+                //对话框标题
+                title: "当前微信APP版本未经测试",
+                titleColor: "#F44336",
+                contentLineSpacing: 1.2,
+                //对话框内容
+                content: "本脚本目前已测试的软件版本有：\n微信" + SupportVersion + "\n您当前安装的版本为：" + InstalledVersion + "\n如您使用没有问题可直接忽略\n若有问题可使用相应版本或反馈",
+                //对话框文字颜色
+                contentColor: "#777777",
+                //确定键内容
+                positive: "继续运行",
+                positiveColor: "#388E3C",
+                //取消键内容
+                negative: "取消运行",
+                negativeColor: "#D32F2F",
+                //中性键内容
+                neutral: "给作者反馈",
+                neutralColor: "#616161",
+                cancelable: false,
+                canceledOnTouchOutside: false,
+                //勾选框内容
+                checkBoxPrompt: "能正常使用，不再提示"
+            }).on("positive", () => {
+                //监听确定键
+                toast("继续运行脚本");
+                if (context_check == 1) {
+                    //创建文件
+                    var NeverShow = files.createWithDirs("/storage/emulated/0/OrangeJs/自动微信发消息/不再显示.txt");
+                    if (NeverShow == false) {
+                        dialogs.alert("设置不再显示失败！\n请授予本软件存储权限！");
+                    }
+                }
+                engines.execScript("自动微信发消息", "RunJs()\n" + RunJs.toString());
+            }).on("neutral", () => {
+                //监听中性键
+                app.openUrl("https://wj.qq.com/s2/5238744/d982");
+            }).on("negative", () => {
+                //监听消极键
+                exit();
+            }).on("check", (checked) => {
+                //监听勾选框
+                log("勾选框状态：" + checked);
+                if (checked == true) {
+                    context_check = 1;
+                    toastLog("请确保您当前软件的版本可以正常使用\n否则请不要勾选此按钮");
+                } else {
+                    context_check = null;
+                }
+            }).show();
+        } else {
+            engines.execScript("自动微信发消息", "RunJs()\n" + RunJs.toString());
+            exit();
+        }
+        var While = 0;
+        exit();
+    } else if (SupportVersion[Each] != InstalledVersion) {
+        Each--;
+    } else {
+        var While = 0;
+        log("已安装支持的软件版本：" + SupportVersion[Each]);
+        engines.execScript("自动微信发消息", "RunJs()\n" + RunJs.toString());
+        exit();
+    }
+}
+function RunJs(){
 dialogs_js();
 var height = device.height;
 var width = device.width;
@@ -44,10 +128,10 @@ function dialogs_js() {
         toastLog(options_[i]);
         exit();
     } else if (i == 3) {
-        if (files.exists("/storage/emulated/0/OrangeJs/微信自动发消息/消息设置.txt") != true) {
+        if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
             InformationSettings();
         } else {
-            var PZ = open("/storage/emulated/0/OrangeJs/微信自动发消息/消息设置.txt");
+            var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
             var Pz = PZ.readlines();
             PZ.close();
             var DX = Pz[0];
@@ -59,7 +143,7 @@ function dialogs_js() {
             dialogs_js();
         }
     } else if (i == 1) {
-        if (files.exists("/storage/emulated/0/OrangeJs/微信自动发消息/消息设置.txt") == null) {
+        if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") == null) {
             dialogs.alert("您还没有配置脚本，不能定时运行哦");
             dialogs_js();
         } else {
@@ -106,8 +190,8 @@ function InformationSettings() {
             if (XX != null) {
                 var QR = dialogs.confirm("请确认以下信息", "联系人备注/群聊名称/公众号名称：\n" + DX + "\n" + "将发送的消息内容：" + XX + "\n\n之后运行将默认使用此配置，确定之后如需更改请在脚本配置中进行")
                 if (QR == true) {
-                    files.createWithDirs("/storage/emulated/0/OrangeJs/微信自动发消息/消息设置.txt");
-                    files.write("/storage/emulated/0/OrangeJs/微信自动发消息/消息设置.txt", DX + "\n" + XX);
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
+                    files.write("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt", DX + "\n" + XX);
                     break;
                 } else {
                     InformationSettings();
@@ -492,10 +576,10 @@ function Justback() {
     }
 }
 
-if (files.exists("/storage/emulated/0/OrangeJs/微信自动发消息/消息设置.txt") != true) {
+if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
     InformationSettings();
 } else {
-    var PZ = open("/storage/emulated/0/OrangeJs/微信自动发消息/消息设置.txt");
+    var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
     var Pz = PZ.readlines();
     PZ.close();
     var DX = Pz[0];
@@ -507,12 +591,16 @@ function OpenWXcontent() {
         if (id("android:id/text1").text("通讯录").findOnce() != null) {
             toastLog("已处于“微信通讯录”界面");
             break;
-        } else if (id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce() != null) {
+        } else if (id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.4
             var A = id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce().bounds();
             click(A.centerX(), A.centerY());
             toastLog("已尝试点击“通讯录”按钮");
             sleep(2000);
             //break;
+        } else if (id("dkb").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.10
+            id("dkb").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+            toastLog("已尝试点击“通讯录”按钮");
+            sleep(2000);
         } else if (currentPackage() == "com.tencent.mm") {
             Justback();
             toastLog("已处于微信中但非主界面\n正在尝试返回主界面");
@@ -535,9 +623,11 @@ function Doit() {
     while (true) {
         if (className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce() != null) {
             className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce().child(1).child(0).click();
+            toastLog("已尝试点击“搜索”按钮");
             sleep(2000);
             if (className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce() != null) {
                 className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce().setText(DX);
+                toastLog("已设置搜索文字")
                 sleep(2000);
                 if (id("com.tencent.mm:id/qm").text(DX).findOnce() != null) {
                     id("com.tencent.mm:id/qm").text(DX).findOnce().parent().parent().parent().parent().click();
@@ -584,6 +674,53 @@ function Doit() {
                 toastLog("当前界面未找到搜索框\n正在重新进入搜寻……");
                 OpenWXcontent();
             }
+        } else if (className("android.view.ViewGroup").id("com.tencent.mm:id/l2").findOnce() != null) { //7.0.10
+            className("android.view.ViewGroup").id("com.tencent.mm:id/l2").findOnce().child(1).child(0).click();
+            toastLog("已尝试点击“搜索”按钮");
+            sleep(2000);
+            if (className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce() != null) {
+                className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce().setText(DX);
+                toastLog("已设置搜索文字")
+                sleep(2000);
+                if (id("com.tencent.mm:id/s7").text(DX).findOnce() != null) {
+                    id("com.tencent.mm:id/s7").text(DX).findOnce().parent().parent().parent().parent().click();
+                    toastLog("已尝试点击设定的“联系对象”")
+                    sleep(2000);
+                    if (id("com.tencent.mm:id/aqe").findOnce() != null) {
+                        id("com.tencent.mm:id/aqe").findOnce().setText(XX);
+                        sleep(1000);
+                        if (id("com.tencent.mm:id/aql").findOnce() != null) {
+                            id("com.tencent.mm:id/aql").findOnce().click();
+                            toastLog("已点击“发送”按钮");
+                            device.cancelKeepingAwake();
+                            dialogs.alert("脚本已运行完成");
+                            log("脚本已运行完成");
+                            exit();
+                            break;
+                        } else {
+                            toastLog("当前界面找不到消息发送按钮\n正在重新进入搜寻……");
+                            sleep(2000);
+                            OpenWXcontent();
+                        }
+                    } else {
+                        toastLog("当前非正确的联系界面\n正在重新进入搜寻……");
+                        sleep(2000);
+                        OpenWXcontent();
+                    }
+                } else {
+                    var WrongDX = 0;
+                    WrongDX++;
+                    toastLog("当前界面未找到设定的联系名称\n正在重新进入搜寻……");
+                    if (WrongDX >= 3) {
+                        dialogs.alert("无法找到配置的联系名称\n请确认您输入的联系名称是否正确", "在输入联系名称时请确保完全正确，您可重新运行脚本并在脚本配置中修改联系名称配置");
+                        exit();
+                    }
+                    OpenWXcontent();
+                }
+            } else {
+                toastLog("当前界面未找到搜索框\n正在重新进入搜寻……");
+                OpenWXcontent();
+            }
         } else {
             toastLog("当前未处于“微信通讯录”界面\n正在尝试回到此界面");
             sleep(2000);
@@ -593,3 +730,4 @@ function Doit() {
 }
 
 Doit();
+}
