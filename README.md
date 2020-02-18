@@ -8,18 +8,6 @@
 # 脚本总数：10
 ## 当前可用：6
 
-## 【脚本】[自动看团课(预览版preview1.0)](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0)
-![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
-**目前本脚本支持陕西，湖南的高校**（团课公众号为“三秦青年”/“青年湖南”）**的用户**
-
-**目前仅支持“ ‘青年大学习’ 第七季第八期”**
-
-**设备分辨率要求:支持所有屏幕宽度为1080的设备！**
-
-一条龙服务，首次进入的用户可自动填入个人信息，可自动打开微信到“青年大学习”界面观看团课，并在团课开始时以及观看完成后自动截图并保存！同时包含自动答题，包括视频弹出来的所有测验题和课后习题!
-
-很快本脚本就会支持更多分辨率以及其它省份的公众号啦～
-
 ## 【脚本】[自动集福气（淘宝脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
 
@@ -59,5 +47,13 @@
 **脚本不会完成所有需要拼单或者购买的任务，以及邀请好友、添加好友任务等…**
 
 脚本在推荐的软件版本上已测试通过，其它软件版本请自行测试如有问题请升级软件版本
+
+## 【脚本】[自动微信发消息（微信脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E5%8F%91%E6%B6%88%E6%81%AF%EF%BC%88%E5%BE%AE%E4%BF%A1%E8%84%9A%E6%9C%AC%EF%BC%89)
+![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
+
+**本脚本支持定时运行，支持安卓7及以上系统无需ROOT运行，支持防误触等，在最新版微信7.0.10和7.0.4版本上已测试通过**
+
+**脚本目前仅可发送文字消息，但发送对象可以是“联系人”,“群聊”,“公众号”**
+
 
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
