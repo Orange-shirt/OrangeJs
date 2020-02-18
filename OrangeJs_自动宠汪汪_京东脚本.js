@@ -50,7 +50,7 @@ while (While == 1) {
                 titleColor: "#F44336",
                 contentLineSpacing: 1.2,
                 //对话框内容
-                content: "本脚本目前已测试的软件版本有：\n京东" + SupportVersion + "\n您当前安装的版本为："+InstalledVersion+"\n如您使用没有问题可直接忽略\n若有问题可使用相应版本或反馈",
+                content: "本脚本目前已测试的软件版本有：\n京东" + SupportVersion + "\n您当前安装的版本为：" + InstalledVersion + "\n如您使用没有问题可直接忽略\n若有问题可使用相应版本或反馈",
                 //对话框文字颜色
                 contentColor: "#777777",
                 //确定键内容
@@ -116,7 +116,7 @@ function RunJs() {
 
     var GJCwords = "宠汪汪" //京东搜索关键词
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.5"); //版本
+        var ScriptVersion = ("Beta1.51"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -675,23 +675,22 @@ function RunJs() {
                     BS();
                 }
             } else { //京东8.5.0
-        if (className("android.view.View").desc("分类").findOnce() != null) {
-    className("android.view.View").desc("分类").findOnce().click();
-    toastLog("已尝试点击“分类”按钮");
-    sleep(2000);
-}
                 var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a2v").findOnce();
+                if (Ac == null) {
+                    className("android.view.View").desc("分类").findOnce().click();
+                    toastLog("已尝试点击“分类”按钮");
+                    sleep(2000);
+                }
                 if (Ac != null) {
-                    var a = Ac.bounds();
+                    Ac.click();
                     sleep(1000);
-                    click(a.centerX(), a.centerY());
-                    toastLog("已尝试点击“分类搜索框”");
+                    toastLog("已尝试点击“分类搜索框8.5.0”");
                     sleep(1000);
-                    if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                    if (id("com.jd.lib.search:id/a2v").findOnce() == null) {
                         sleep(2000);
-                        if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                        if (id("com.jd.lib.search:id/a2v").findOnce() == null) {
                             sleep(2000);
-                            if (id("com.jd.lib.search:id/a3r").findOnce() == null) {
+                            if (id("com.jd.lib.search:id/a2v").findOnce() == null) {
                                 openJDinSearch();
                             }
                         }
@@ -703,6 +702,7 @@ function RunJs() {
                     toastLog("未找到“分类”中的搜索栏\n重试中……");
                     openJDinSearch();
                 }
+
             }
         }
     }
@@ -712,10 +712,14 @@ function RunJs() {
         sleep(1000);
         var Z = id("com.jingdong.app.mall:id/a9b").findOnce();
         if (Z != null) {
-            var z = Z.bounds();
-            click(z.centerX(), z.centerY());
-            toastLog("已找到搜索按钮\n并已尝试点击…");
+            Z.click();
             sleep(2000);
+            if (id("com.jingdong.app.mall:id/a9b").findOnce() != null) {
+                var z = Z.bounds();
+                click(z.centerX(), z.centerY());
+                toastLog("已找到搜索按钮\n并已尝试点击…");
+                sleep(2000);
+            }
             C();
         } else {
             toastLog("找不到搜索按钮\n无法进行搜索操作\n重试中……");
@@ -751,7 +755,7 @@ function RunJs() {
                         var deng = 10;
                     }
                 } else {
-                    toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
+                    toastLog("正在等待“宠汪汪”活动入口加载\n剩余" + deng + "秒……");
                     sleep(1500);
                 }
             } else {
@@ -792,8 +796,9 @@ function RunJs() {
             } else {
                 var jr = id("com.jd.lib.search:id/aku").findOnce();
                 if (jr != null) {
-                    var j = jr.bounds();
-                    click(j.centerX(), j.centerY());
+                    jr.child(0).click();
+                    //var j = jr.bounds();
+                    //click(j.centerX(), j.centerY());
                     toastLog("已尝试点击“宠汪汪”活动入口…");
                     sleep(2000);
                     var deng = 8;
