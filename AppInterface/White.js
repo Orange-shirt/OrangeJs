@@ -159,13 +159,13 @@ function mainUi() {
                             <img src="http://pp.myapp.com/ma_icon/0/icon_10910_1577346809/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
                                 <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐7.0.4版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="推荐7.0.10版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
                                 <View w="*" h="*" bg="#A5D6A7"/>
-                                <text id="ScriptOne" text="自动看团课" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                                <text id="ScriptOne" text="自动微信发消息" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
                             </card>
                         </linear>
                     </vertical>
@@ -270,7 +270,7 @@ function mainUi() {
             },
             cancelable: false
         }).show();
-        var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0"; //第一个脚本网址
+        var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%BE%AE%E4%BF%A1%E5%8F%91%E6%B6%88%E6%81%AF_%E5%BE%AE%E4%BF%A1%E8%84%9A%E6%9C%AC.js"; //第一个脚本网址
         var res_script = http.get(ScriptOne_Url, {
             headers: {
                 'Accept-Language': 'en-us,en;q=0.5',
@@ -282,7 +282,7 @@ function mainUi() {
             DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
-            engines.execScript("自动看团课", OrangeJs);
+            engines.execScript("自动微信发消息", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
