@@ -675,6 +675,11 @@ function RunJs() {
                     BS();
                 }
             } else { //京东8.5.0
+        if (className("android.view.View").desc("分类").findOnce() != null) {
+    className("android.view.View").desc("分类").findOnce().click();
+    toastLog("已尝试点击“分类”按钮");
+    sleep(2000);
+}
                 var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a2v").findOnce();
                 if (Ac != null) {
                     var a = Ac.bounds();
