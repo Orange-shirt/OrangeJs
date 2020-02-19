@@ -200,7 +200,10 @@ function RunJs() {
                     test_rawWindow.close();
                 }, 1000);
                 toastLog("悬浮窗权限已开启！");
+                context_Manualstate = 0;
+                Set_Back_way();
                 DS();
+                device.keepScreenOn();
             }
         }
     }
