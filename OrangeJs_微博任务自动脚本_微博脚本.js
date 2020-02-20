@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.1"); //版本
+    var ScriptVersion = ("Beta1.11"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“微博任务自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -664,6 +664,33 @@ function DoTask() {
                                             toastLog("已尝试点击“确定取消关注”按钮");
                                             sleep(2000);
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    } else if (className("android.view.ViewGroup").clickable(true).findOne(8000) != null) {
+                        className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).click()
+                        sleep(2000);
+                        toastLog("已尝试点击“关注”按钮");
+                        if (className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).child(0).text() == "已关注") {
+                            var A = className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).child(0).bounds();
+                            click(A.centerX(), A.centerY());
+                            toastLog("已尝试点击“已关注”按钮");
+                            sleep(3000);
+                            if (className("android.widget.TextView").text("已关注").findOnce() != null) {
+                                var Aqg = className("android.widget.TextView").text("已关注").findOnce().bounds();
+                                click(Aqg.centerX(), Aqg.centerY());
+                                toastLog("已尝试点击“已关注菜单”按钮");
+                                sleep(2000);
+                                if (className("android.widget.TextView").text("取消关注").findOnce() != null) {
+                                    var QG = className("android.widget.TextView").text("取消关注").findOnce().bounds();
+                                    click(QG.centerX(), QG.centerY());
+                                    toastLog("已尝试点击“取消关注”按钮");
+                                    sleep(2000);
+                                    if (className("android.widget.TextView").text("确定").findOnce() != null) {
+                                        className("android.widget.TextView").text("确定").findOnce().click();
+                                        toastLog("已尝试点击“确定取消关注”按钮");
+                                        sleep(2000);
                                     }
                                 }
                             }
