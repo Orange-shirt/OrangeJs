@@ -172,7 +172,7 @@ function RunJs() {
                 toastLog("悬浮窗权限已开启！");
                 sleep(2000);
                 wait_Time_over();
-                device.keepScreenOn();
+                device.keepScreenDim();
             }
         } else if (i == 2) {
             if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") == null) {
@@ -203,7 +203,7 @@ function RunJs() {
                 context_Manualstate = 0;
                 Set_Back_way();
                 DS();
-                device.keepScreenOn();
+                device.keepScreenDim();
             }
         }
     }
@@ -343,6 +343,7 @@ function RunJs() {
                                                     var myDate = new Date();
                                                     if (myDate.getHours() == 时 && myDate.getMinutes() == 分 && myDate.getSeconds() == 秒) {
                                                         console.warn("时间到！开始运行脚本！" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒");
+                                                        device.wakeUpIfNeeded();
                                                         break;
                                                     }
                                                     sleep(1000);
