@@ -95,17 +95,14 @@ while (While == 1) {
             }).show();
         } else {
             engines.execScript("多多果园自动脚本", "RunJs()\n" + RunJs.toString());
-            exit();
         }
         var While = 0;
-        exit();
     } else if (SupportVersion[Each] != InstalledVersion) {
         Each--;
     } else {
         var While = 0;
         log("已安装支持的软件版本：" + SupportVersion[Each]);
         engines.execScript("多多果园自动脚本", "RunJs()\n" + RunJs.toString());
-        exit();
     }
 }
 
