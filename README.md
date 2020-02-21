@@ -5,8 +5,8 @@
 
 **[点击下载OrangeJs（橘衫の脚本）APK（1.0）](https://www.lanzous.com/i8gs5li)**
 
-# 脚本总数：10
-## 当前可用：6
+# 脚本总数：12
+## 当前可用：7
 
 ## 【脚本】[自动集福气（淘宝脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
