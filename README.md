@@ -55,5 +55,15 @@
 
 **脚本目前仅可发送文字消息，但发送对象可以是“联系人”,“群聊”,“公众号”**
 
+## 【脚本】[自动健康打卡（完美校园脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1%EF%BC%88%E5%AE%8C%E7%BE%8E%E6%A0%A1%E5%9B%AD%E8%84%9A%E6%9C%AC%EF%BC%89)
+![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
+
+**由于涉及个人隐私信息，本脚本首次使用AES128位加密算法并使用每个安卓设备独一无二的Android ID和16位随机数组成的32位密码来加密循环3次以确保个人隐私信息安全，且整个加密或解密过程完全在本地进行，倘若密文不甚泄露，在没有密码的情况下，使用目前世界上最快的超级计算机暴力破解AES算法也大概需要上亿年**
+
+**脚本的首次运行需要进行配置信息保存，但配置过程非常简单，您只需要和平常健康打卡时一样正常填写表单即可，且若您最近一切正常，脚本还可快速帮您进行选择，您也可根据您自身情况进行填写，脚本完全支持个性化填写的配置。**
+
+**配置完成之后的运行可直接填写保存的配置信息，且在手机流畅的情况下，从打开软件到信息填写完成提交整个过程不会超过1分钟。**
+
+**此外脚本依然继承本项目其它脚本的无需ROOT，全自动一条龙服务，定时运行等特点**
 
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
