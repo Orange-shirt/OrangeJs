@@ -1423,6 +1423,59 @@ function RunJs() {
                 sleep(2000);
             }
         }
+
+
+        while (true) {
+            if (className("android.view.View").text("浏览爆款会场").findOnce() != null) {
+                var A = className("android.view.View").text("浏览爆款会场").findOnce().parent();
+                var B = A.children();
+                var C = B[3];
+                var D = C.children();
+                if (D[0].text() == "去完成") {
+                    D[0].click();
+                    toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text());
+                    sleep(2000);
+                    if (className("android.view.View").text("浏览爆款会场").findOnce() != null) {
+                        var A = className("android.view.View").text("浏览爆款会场").findOnce().parent();
+                        var B = A.children();
+                        var C = B[3];
+                        var D = C.children();
+                        if (D[0].text() == "去完成") {
+                            D[0].click();
+                            toastLog("已尝试再次点击“浏览爆款会场”去完成");
+                            sleep(2000);
+                        }
+                    }
+                    var deng = 60;
+                    for (deng == 60; deng > 0; deng--) {
+                        toastLog("正在完成“" + B[0].text() + "”任务\n当前剩余" + deng + "秒……");
+                        sleep(1100);
+                        if (text("惊喜礼包大放送").findOnce() != null) {
+                            var D = text("commonPopupCloseButtonV2").findOnce().bounds();
+                            click(D.centerX(), D.centerY());
+                            toastLog("已尝试点击“关闭礼包蒙版”按钮");
+                            sleep(2000);
+                        }
+                    }
+                    toastLog("任务完成尝试返回活动界面");
+                    Justback();
+                    if (className("android.view.View").text("领水滴").findOnce() != null) {
+                        toastLog("已返回“领水滴”界面\n继续完成任务…");
+                        sleep(2000);
+                    } else {
+                        toastLog("未处于活动界面\n尝试再次返回…");
+                        Justback();
+                        sleep(2000);
+                    }
+                } else if (D[1].text() == "领取") {
+                    D[1].click();
+                    toastLog("已尝试点击“" + D[1].text() + "”按钮\n" + B[0].text() + B[2].text());
+                    sleep(2000);
+                } else {
+                    break;
+                }
+            }
+        }
         /*var While = 1;
         while (While == 1) {
             if (className("android.widget.Button").text("领取").findOnce() != null) {
