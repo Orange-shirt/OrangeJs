@@ -235,7 +235,7 @@ function mainUi() {
                 
                 //驰援疫情
                 <card h="150" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
-                    <img id="JK" src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/PicsArt_01-27-12.26.54.jpg" scaleType="fitXY"/>
+                    <img id="JK" src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/PicsArt_02-22-05.46.41.jpg" scaleType="fitXY"/>
                 </card>
             </linear>
         </Horizo​​ntalScrollView>
