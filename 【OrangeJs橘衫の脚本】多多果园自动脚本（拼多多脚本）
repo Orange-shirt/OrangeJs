@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.xunmeng.pinduoduo");
-var SupportVersion = ["5.0.0", "4.92.0", "4.91.0", "4.90.0"]
+var SupportVersion = ["5.1.1", "5.0.0", "4.92.0", "4.91.0", "4.90.0"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -112,7 +112,7 @@ function RunJs() {
     var width = device.width;
 
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.3"); //版本
+        var ScriptVersion = ("Beta1.31"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“多多果园自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -493,6 +493,17 @@ function RunJs() {
         }
     }
 
+    function getPackageVersion(packageName) {
+        try {
+            importPackage(android.content);
+            var pckMan = context.getPackageManager();
+            var packageInfo = pckMan.getPackageInfo(packageName, 0);
+            return packageInfo.versionName;
+        } catch (e) {
+            dialogs.alert("您没有安装拼多多APP");
+            exit();
+        }
+    }
     //下面是悬浮窗
     var window = floaty.window(
         <frame>
@@ -621,22 +632,27 @@ function RunJs() {
         while (While == 1) {
             if (id("com.xunmeng.pinduoduo:id/bza").findOnce() != null) { //4.90.0
                 id("com.xunmeng.pinduoduo:id/bza").findOnce().click();
-                toastLog("已尝试点击“主页搜索框”");
+                toastLog("已尝试点击“主页搜索框4.90.0”");
                 var While = 0;
                 sleep(2000);
             } else if (id("com.xunmeng.pinduoduo:id/c09").findOnce() != null) { //4.91.0
                 id("com.xunmeng.pinduoduo:id/c09").findOnce().click();
-                toastLog("已尝试点击“主页搜索框”");
+                toastLog("已尝试点击“主页搜索框4.91.0”");
                 var While = 0;
                 sleep(2000);
             } else if (id("com.xunmeng.pinduoduo:id/c0s").findOnce() != null) { //4.92.0
                 id("com.xunmeng.pinduoduo:id/c0s").findOnce().click();
-                toastLog("已尝试点击“主页搜索框”");
+                toastLog("已尝试点击“主页搜索框4.92.0”");
                 var While = 0;
                 sleep(2000);
-            } else if (id("com.xunmeng.pinduoduo:id/c1s").findOnce() != null) { //5.0.0
+            } else if (getPackageVersion("com.xunmeng.pinduoduo") == "5.0.0" && id("com.xunmeng.pinduoduo:id/c1s").findOnce() != null) { //5.0.0
                 id("com.xunmeng.pinduoduo:id/c1s").findOnce().click();
-                toastLog("已尝试点击“主页搜索框”");
+                toastLog("已尝试点击“主页搜索框5.0.0”");
+                var While = 0;
+                sleep(2000);
+            } else if (getPackageVersion("com.xunmeng.pinduoduo") == "5.1.1" && id("com.xunmeng.pinduoduo:id/c3i").findOnce() != null) { //5.1.1
+                id("com.xunmeng.pinduoduo:id/c3i").findOnce().click();
+                toastLog("已尝试点击“主页搜索框5.1.1”");
                 var While = 0;
                 sleep(2000);
             } else if (id("d1j").className("android.widget.TextView").text("首页").findOnce() != null) { //4.91.0
@@ -654,9 +670,18 @@ function RunJs() {
                 click(S.centerX(), S.centerY());
                 toastLog("已找到首页按钮尝试点击…");
                 sleep(2000);
+            } else if (id("d51").className("android.widget.TextView").text("首页").findOnce() != null) { //5.1.1
+                //var S = id("d51").className("android.widget.TextView").text("首页").findOnce().bounds();
+                //click(S.centerX(), S.centerY());
+                id("d51").className("android.widget.TextView").text("首页").findOne(1000).parent().click();
+                toastLog("已找到首页按钮尝试点击…");
+                sleep(2000);
             } else {
                 Justback();
                 toastLog("拼多多已启动但未处于首页\n正在尝试返回拼多多首页中……");
+                if (text("直接离开").clickable(true).findOnce() != null) {
+                    text("直接离开").clickable(true).findOnce().click();
+                }
                 sleep(3000);
                 if (currentPackage() != "com.xunmeng.pinduoduo") {
                     app.startActivity({
@@ -679,6 +704,9 @@ function RunJs() {
                             toastLog("已处于拼多多首页");
                             var deng = 0;
                         } else if (id("com.xunmeng.pinduoduo:id/c1s").findOnce() != null) { //5.0.0
+                            toastLog("已处于拼多多首页");
+                            var deng = 0;
+                        } else if (id("com.xunmeng.pinduoduo:id/c3i").findOnce() != null) { //5.1.1
                             toastLog("已处于拼多多首页");
                             var deng = 0;
                         }
@@ -949,6 +977,69 @@ function RunJs() {
                     OpenApp();
                 }
             }
+        } //↓5.1.1
+        else if (id("com.xunmeng.pinduoduo:id/c3o").findOnce() != null) {
+            toastLog("已处于搜索界面");
+            setText("多多果园");
+            sleep(2000);
+            if (id("com.xunmeng.pinduoduo:id/b2").text("多多果园").findOnce() != null) {
+                var ks = id("com.xunmeng.pinduoduo:id/b2").text("多多果园").findOnce().bounds();
+                click(ks.centerX(), ks.centerY());
+                toastLog("已尝试点击快速入口“多多果园”");
+                sleep(2000);
+                var deng = 10;
+                for (deng == 10; deng > 0; deng--) {
+                    /*if (text("wateringBottle-v4").findOnce() != null) {
+                        toastLog("已处于“多多果园”活动界面");
+                        var deng = 0;
+                    } else {}*/
+                    toastLog("正在等待“多多果园”活动界面加载\n当前剩余" + deng + "秒……");
+                    sleep(1500);
+
+                }
+                if (text("wateringBottle-v4").findOnce() == null) {
+                    toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
+                    sleep(2000);
+                    OpenApp();
+                }
+            } else if (id("com.xunmeng.pinduoduo:id/c3d").findOnce() != null) {
+                id("com.xunmeng.pinduoduo:id/c3d").findOnce().click();
+                toastLog("已尝试点击“搜索”按钮");
+                sleep(2000);
+                var deng = 10;
+                for (deng == 10; deng > 0; deng--) {
+                    if (id("com.xunmeng.pinduoduo:id/c1h").findOnce() != null) {
+                        var deng = 0;
+                        toastLog("已找到“多多果园”入口");
+                    } else {
+                        toastLog("正在等待“多多果园”入口加载\n当前剩余" + deng + "秒……");
+                        sleep(1500);
+                    }
+                }
+                if (id("com.xunmeng.pinduoduo:id/c38").findOnce() != null) {
+                    id("com.xunmeng.pinduoduo:id/c38").findOnce().child(0).click();
+                    toastLog("已尝试点击“多多果园”入口");
+                    sleep(2000);
+                    var deng = 10;
+                    for (deng == 10; deng > 0; deng--) {
+                        /*if (text("wateringBottle-v4").findOnce() != null) {
+                            toastLog("已处于“多多果园”活动界面");
+                            var deng = 0;
+                        } else {}*/
+                        toastLog("正在等待“多多果园”活动界面加载\n当前剩余" + deng + "秒……");
+                        sleep(1500);
+
+                    }
+                    if (text("wateringBottle-v4").findOnce() == null) {
+                        toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
+                        OpenApp();
+                    }
+                } else {
+                    toastLog("未找到“多多果园”入口\n重新打开软件中……");
+                    sleep(1500);
+                    OpenApp();
+                }
+            }
         }
     }
 
@@ -1059,6 +1150,12 @@ function RunJs() {
                     toastLog("已尝试点击“2选1选择”按钮");
                     sleep(2000);
                 }
+                if (className("android.view.View").text("领取水滴去浇水").findOnce() != null) {
+                    var D = className("android.view.View").text("领取水滴去浇水").findOnce().bounds();
+                    click(D.centerX(), D.centerY());
+                    toastLog("已尝试点击“领取水滴去浇水”按钮");
+                    sleep(2000);
+                }
                 if (text("浇水挑战升级,以下浇水宝箱2选1").findOnce() != null) {
                     var D = text("选我").findOnce().bounds();
                     click(D.centerX(), D.centerY());
@@ -1134,32 +1231,101 @@ function RunJs() {
                 var B = A.children();
                 var C = B[3];
                 var D = C.children();
-                if (D[0].text() == "去完成") {
-                    D[0].click();
-                    toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text() + "未完成");
-                    sleep(2000);
-                    if (text("每天5次定时领水").findOnce() != null) {
-                        var D = text("确定领取").findOnce().bounds();
-                        click(D.centerX(), D.centerY());
-                        toastLog("已尝试点击“确定领取”按钮");
+                if (A.child(3).childCount() != 0) {
+                    if (D[0].text() == "去完成") {
+                        D[0].click();
+                        toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text() + "未完成");
                         sleep(2000);
-                    }
-                } //此任务会有20秒缓冲时间;
-                else if (D[0].text() == "明日再来") {
-                    var While = 0;
-                    toastLog(B[0].text() + "：明日再来");
-                } else {
-                    var deng = 20;
-                    for (deng == 20; deng > 0; deng--) {
-                        toastLog("请等待" + deng + "秒……\n之后继续完成：\n" + B[0].text() + "任务");
-                        sleep(1500);
-                        if (text("commonPopupCloseButton").findOnce() != null) {
-                            var DT = text("commonPopupCloseButton").findOnce().bounds();
-                            click(DT.centerX(), DT.centerY());
-                            toastLog("已尝试点击“关闭蒙版”按钮");
+                        var A = className("android.view.View").text("每日免费领水").findOnce().parent();
+                        var B = A.children();
+                        var C = B[3];
+                        var D = C.children();
+                        if (D[0].text() == "去完成") {
+                            var While = 0;
+                        }
+                        if (text("每天5次定时领水").findOnce() != null) {
+                            var D = text("确定领取").findOnce().bounds();
+                            click(D.centerX(), D.centerY());
+                            toastLog("已尝试点击“确定领取”按钮");
                             sleep(2000);
                         }
+                    } //此任务会有20秒缓冲时间;
+                    else if (D[0].text() == "明日再来") {
+                        var While = 0;
+                        toastLog(B[0].text() + "：明日再来");
+                    } else {
+                        var deng = 20;
+                        for (deng == 20; deng > 0; deng--) {
+                            toastLog("请等待" + deng + "秒……\n之后继续完成：\n" + B[0].text() + "任务");
+                            sleep(1500);
+
+                            if (text("水壶已经满了").findOnce() != null) {
+                                var Qd = text("确定").findOnce().bounds();
+                                click(Qd.centerX(), Qd.centerY());
+                                toastLog("已尝试点击“确定”按钮");
+                                sleep(2000);
+                                var While = 0;
+                                var deng = 0;
+                            }
+                            if (text("commonPopupCloseButton").findOnce() != null) {
+                                var DT = text("commonPopupCloseButton").findOnce().bounds();
+                                click(DT.centerX(), DT.centerY());
+                                toastLog("已尝试点击“关闭蒙版”按钮");
+                                sleep(2000);
+                            }
+                        }
                     }
+                }
+                if (A.child(4).childCount() != 0) {
+                    var A = className("android.view.View").text("每日免费领水").findOnce().parent();
+                    var B = A.children();
+                    var C = B[4];
+                    var D = C.children();
+                    if (D[0].text() == "去完成") {
+                        D[0].click();
+                        toastLog("已尝试点击“" + D[0].text() + "”按钮\n" + B[0].text() + B[2].text() + "未完成");
+                        sleep(2000);
+                        var A = className("android.view.View").text("每日免费领水").findOnce().parent();
+                        var B = A.children();
+                        var C = B[4];
+                        var D = C.children();
+                        if (D[0].text() == "去完成") {
+                            var While = 0;
+                        }
+                        if (text("每天5次定时领水").findOnce() != null) {
+                            var D = text("确定领取").findOnce().bounds();
+                            click(D.centerX(), D.centerY());
+                            toastLog("已尝试点击“确定领取”按钮");
+                            sleep(2000);
+                        }
+                    } //此任务会有20秒缓冲时间;
+                    else if (D[0].text() == "明日再来") {
+                        var While = 0;
+                        toastLog(B[0].text() + "：明日再来");
+                    } else {
+                        var deng = 20;
+                        for (deng == 20; deng > 0; deng--) {
+                            toastLog("请等待" + deng + "秒……\n之后继续完成：\n" + B[0].text() + "任务");
+                            sleep(1500);
+
+                            if (text("水壶已经满了").findOnce() != null) {
+                                var Qd = text("确定").findOnce().bounds();
+                                click(Qd.centerX(), Qd.centerY());
+                                toastLog("已尝试点击“确定”按钮");
+                                sleep(2000);
+                                var While = 0;
+                                var deng = 0;
+                            }
+                            if (text("commonPopupCloseButton").findOnce() != null) {
+                                var DT = text("commonPopupCloseButton").findOnce().bounds();
+                                click(DT.centerX(), DT.centerY());
+                                toastLog("已尝试点击“关闭蒙版”按钮");
+                                sleep(2000);
+                            }
+                        }
+                    }
+                } else {
+                    var While = 0;
                 }
             } else {
                 var While = 0;
@@ -1257,7 +1423,7 @@ function RunJs() {
                 sleep(2000);
             }
         }
-        var While = 1;
+        /*var While = 1;
         while (While == 1) {
             if (className("android.widget.Button").text("领取").findOnce() != null) {
                 className("android.widget.Button").text("领取").findOnce().click();
@@ -1268,15 +1434,29 @@ function RunJs() {
                 toastLog("已不存在“领取”按钮");
                 sleep(2000);
             }
-        }
+        }*/
         sleep(1000);
+        if (text("好友种下果树后即可获得80g").findOnce() != null) {
+            var DT = text("好友种下果树后即可获得80g").findOnce().bounds();
+            click(DT.centerX(), DT.centerY() - 200);
+            toastLog("已尝试点击“关闭邀请好友界面”按钮");
+            sleep(2000);
+        }
+        /*
         if (text("commonPopupCloseButton").findOnce() != null) {
             var DT = text("commonPopupCloseButton").findOnce().bounds();
             click(DT.centerX(), DT.centerY());
             toastLog("已尝试点击“关闭蒙版”按钮");
             sleep(2000);
         }
-        /*
+        
+        if (className("android.widget.Image").text("closeIconV4").depth(16).findOne(1000) != null) {
+            var DT = className("android.widget.Image").text("closeIconV4").depth(16).findOne(1000).parent().bounds();
+            click(DT.centerX(), DT.centerY());
+            toastLog("已尝试点击“关闭蒙版”按钮");
+            sleep(2000);
+        }
+        
         if (text("大年初七后奖励升级").findOnce() != null) {
             var GB = text("大年初七后奖励升级").findOnce().bounds();
             click(GB.centerX(), GB.centerY());
@@ -1307,9 +1487,8 @@ function RunJs() {
             sleep(2000);
             DGk();
         }
-
-        if (text("amusement_v4").findOnce() != null) {
-            var Ad = text("amusement_v4").findOnce().bounds();
+        if (className("android.widget.Image").text("guide_light_2_v2").findOne(1000) != null) {
+            var Ad = className("android.widget.Image").text("guide_light_2_v2").findOne(1000).parent().parent().bounds();
             click(Ad.centerX(), Ad.centerY());
             toastLog("已尝试点击“水滴娱乐”按钮");
             sleep(2000);
