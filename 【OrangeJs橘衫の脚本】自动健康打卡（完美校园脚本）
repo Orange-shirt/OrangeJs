@@ -1120,9 +1120,10 @@ function NotFirstRun() {
             var B = A[1].children();
             var C = B[0];
             var D = B[0].children();
-            C.click();
+            
+            if (D[0].text() == "选择院系和专业"||D[0].text()!=Choice[0]) {
+                C.click();
             sleep(1000);
-            if (D[0].text() == "选择院系和专业") {
                 var str = Choice[0];
                 //第一次正则
                 var n = str.search("-");
@@ -1207,9 +1208,9 @@ function NotFirstRun() {
             var B = A[1].children();
             var C = B[0];
             var D = B[0].children();
-            C.click();
-            sleep(1000);
-            if (C.text() == "省份/市") {
+            if (C.text() == "省份/市"||C.text()!=Choice[6]) {
+                C.click();
+                sleep(1000);
                 var str = Choice[6];
                 //第一次正则
                 var n = str.search("/");
