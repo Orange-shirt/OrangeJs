@@ -112,7 +112,7 @@ function RunJs() {
     var width = device.width;
 
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.31"); //版本
+        var ScriptVersion = ("Beta1.32"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“多多果园自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1242,40 +1242,71 @@ function RunJs() {
                         var D = C.children();
                         if (D[0].text() == "去完成") {
                             var While = 0;
-                        }
-                        if (text("每天5次定时领水").findOnce() != null) {
-                            var D = text("确定领取").findOnce().bounds();
-                            click(D.centerX(), D.centerY());
-                            toastLog("已尝试点击“确定领取”按钮");
-                            sleep(2000);
+                            toastLog("重复！跳过此任务!")
+                        } else {
+                            var deng = 20;
+                            for (deng == 20; deng > 0; deng--) {
+                                toastLog("请等待" + deng + "秒……\n之后继续完成：\n" + B[0].text() + "任务");
+                                sleep(1500);
+                                if (text("水壶已经满了").findOnce() != null) {
+                                    var Qd = text("确定").findOnce().bounds();
+                                    click(Qd.centerX(), Qd.centerY());
+                                    toastLog("已尝试点击“确定”按钮");
+                                    sleep(2000);
+                                    var While = 0;
+                                    var deng = 0;
+                                }
+                                if (text("commonPopupCloseButton").findOnce() != null) {
+                                    var DT = text("commonPopupCloseButton").findOnce().bounds();
+                                    click(DT.centerX(), DT.centerY());
+                                    toastLog("已尝试点击“关闭蒙版”按钮");
+                                    sleep(2000);
+                                }
+                                if (text("每天5次定时领水").findOnce() != null) {
+                                    var D = text("确定领取").findOnce().bounds();
+                                    click(D.centerX(), D.centerY());
+                                    toastLog("已尝试点击“确定领取”按钮");
+                                    sleep(2000);
+                                }
+                                if (text("去邀请好友").clickable(true).findOnce() != null) {
+                                    text("去邀请好友").clickable(true).findOnce().click();
+                                    toastLog("已尝试点击“去邀请好友按钮”");
+                                    sleep(1500);
+                                    click(device.width / 2, device.height / 2);
+                                    toastLog("已尝试点击关闭“去邀请好友”");
+                                    sleep(1500);
+                                    if (text("getWater_v4").findOnce() != null) {
+                                        var A = text("getWater_v4").findOnce().bounds();
+                                        click(A.centerX(), A.centerY());
+                                        toastLog("已尝试点击“领水滴”按钮");
+                                        sleep(2000);
+                                        if (className("android.view.View").text("领水滴").findOnce() != null) {
+                                            toastLog("已处于“领水滴”界面\n继续任务……");
+                                        } else {
+                                            toastLog("竟然打不到“领水滴”按钮！\n重新打开软件……");
+                                            OpenApp();
+                                        }
+
+                                    } else {
+                                        toastLog("关闭“邀请好友”失败！\n重新打开软件……");
+                                        OpenApp();
+                                    }
+                                }
+                            }
                         }
                     } //此任务会有20秒缓冲时间;
                     else if (D[0].text() == "明日再来") {
                         var While = 0;
                         toastLog(B[0].text() + "：明日再来");
+                    } else if (D[0].text() == "去邀请") {
+                        var While = 0;
+                        toastLog(B[0].text() + "：去邀请");
                     } else {
-                        var deng = 20;
-                        for (deng == 20; deng > 0; deng--) {
-                            toastLog("请等待" + deng + "秒……\n之后继续完成：\n" + B[0].text() + "任务");
-                            sleep(1500);
-
-                            if (text("水壶已经满了").findOnce() != null) {
-                                var Qd = text("确定").findOnce().bounds();
-                                click(Qd.centerX(), Qd.centerY());
-                                toastLog("已尝试点击“确定”按钮");
-                                sleep(2000);
-                                var While = 0;
-                                var deng = 0;
-                            }
-                            if (text("commonPopupCloseButton").findOnce() != null) {
-                                var DT = text("commonPopupCloseButton").findOnce().bounds();
-                                click(DT.centerX(), DT.centerY());
-                                toastLog("已尝试点击“关闭蒙版”按钮");
-                                sleep(2000);
-                            }
-                        }
+                        var While = 0;
+                        toastLog("未知情况，跳过此任务！");
                     }
                 }
+
                 if (A.child(4).childCount() != 0) {
                     var A = className("android.view.View").text("每日免费领水").findOnce().parent();
                     var B = A.children();
@@ -1291,38 +1322,70 @@ function RunJs() {
                         var D = C.children();
                         if (D[0].text() == "去完成") {
                             var While = 0;
-                        }
-                        if (text("每天5次定时领水").findOnce() != null) {
-                            var D = text("确定领取").findOnce().bounds();
-                            click(D.centerX(), D.centerY());
-                            toastLog("已尝试点击“确定领取”按钮");
-                            sleep(2000);
+                            toastLog("重复！跳过此任务！")
+                        } else {
+                            var deng = 20;
+                            for (deng == 20; deng > 0; deng--) {
+                                toastLog("请等待" + deng + "秒……\n之后继续完成：\n" + B[0].text() + "任务");
+                                sleep(1500);
+
+                                if (text("水壶已经满了").findOnce() != null) {
+                                    var Qd = text("确定").findOnce().bounds();
+                                    click(Qd.centerX(), Qd.centerY());
+                                    toastLog("已尝试点击“确定”按钮");
+                                    sleep(2000);
+                                    var While = 0;
+                                    var deng = 0;
+                                }
+                                if (text("commonPopupCloseButton").findOnce() != null) {
+                                    var DT = text("commonPopupCloseButton").findOnce().bounds();
+                                    click(DT.centerX(), DT.centerY());
+                                    toastLog("已尝试点击“关闭蒙版”按钮");
+                                    sleep(2000);
+                                }
+                                if (text("每天5次定时领水").findOnce() != null) {
+                                    var D = text("确定领取").findOnce().bounds();
+                                    click(D.centerX(), D.centerY());
+                                    toastLog("已尝试点击“确定领取”按钮");
+                                    sleep(2000);
+                                }
+                                if (text("去邀请好友").clickable(true).findOnce() != null) {
+                                    text("去邀请好友").clickable(true).findOnce().click();
+                                    toastLog("已尝试点击“去邀请好友按钮”");
+                                    sleep(1500);
+                                    click(device.width / 2, device.height / 2);
+                                    toastLog("已尝试点击关闭“去邀请好友”");
+                                    sleep(1500);
+                                    if (text("getWater_v4").findOnce() != null) {
+                                        var A = text("getWater_v4").findOnce().bounds();
+                                        click(A.centerX(), A.centerY());
+                                        toastLog("已尝试点击“领水滴”按钮");
+                                        sleep(2000);
+                                        if (className("android.view.View").text("领水滴").findOnce() != null) {
+                                            toastLog("已处于“领水滴”界面\n继续任务……");
+                                        } else {
+                                            toastLog("竟然打不到“领水滴”按钮！\n重新打开软件……");
+                                            OpenApp();
+                                        }
+
+                                    } else {
+                                        toastLog("关闭“邀请好友”失败！\n重新打开软件……");
+                                        OpenApp();
+                                    }
+                                }
+                            }
+
                         }
                     } //此任务会有20秒缓冲时间;
                     else if (D[0].text() == "明日再来") {
                         var While = 0;
                         toastLog(B[0].text() + "：明日再来");
+                    } else if (D[0].text() == "去邀请") {
+                        var While = 0;
+                        toastLog(B[0].text() + "：去邀请");
                     } else {
-                        var deng = 20;
-                        for (deng == 20; deng > 0; deng--) {
-                            toastLog("请等待" + deng + "秒……\n之后继续完成：\n" + B[0].text() + "任务");
-                            sleep(1500);
-
-                            if (text("水壶已经满了").findOnce() != null) {
-                                var Qd = text("确定").findOnce().bounds();
-                                click(Qd.centerX(), Qd.centerY());
-                                toastLog("已尝试点击“确定”按钮");
-                                sleep(2000);
-                                var While = 0;
-                                var deng = 0;
-                            }
-                            if (text("commonPopupCloseButton").findOnce() != null) {
-                                var DT = text("commonPopupCloseButton").findOnce().bounds();
-                                click(DT.centerX(), DT.centerY());
-                                toastLog("已尝试点击“关闭蒙版”按钮");
-                                sleep(2000);
-                            }
-                        }
+                        var While = 0;
+                        toastLog("未知情况，跳过此任务！");
                     }
                 } else {
                     var While = 0;
@@ -1502,14 +1565,14 @@ function RunJs() {
             toastLog("已尝试点击“关闭蒙版”按钮");
             sleep(2000);
         }
-        
+            
         if (className("android.widget.Image").text("closeIconV4").depth(16).findOne(1000) != null) {
             var DT = className("android.widget.Image").text("closeIconV4").depth(16).findOne(1000).parent().bounds();
             click(DT.centerX(), DT.centerY());
             toastLog("已尝试点击“关闭蒙版”按钮");
             sleep(2000);
         }
-        
+            
         if (text("大年初七后奖励升级").findOnce() != null) {
             var GB = text("大年初七后奖励升级").findOnce().bounds();
             click(GB.centerX(), GB.centerY());
