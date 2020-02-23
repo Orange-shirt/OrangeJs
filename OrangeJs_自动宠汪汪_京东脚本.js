@@ -95,17 +95,14 @@ while (While == 1) {
             }).show();
         } else {
             engines.execScript("自动宠汪汪", "RunJs()\n" + RunJs.toString());
-            exit();
         }
         var While = 0;
-        exit();
     } else if (SupportVersion[Each] != InstalledVersion) {
         Each--;
     } else {
         var While = 0;
         log("已安装支持的软件版本：" + SupportVersion[Each]);
         engines.execScript("自动宠汪汪", "RunJs()\n" + RunJs.toString());
-        exit();
     }
 }
 
