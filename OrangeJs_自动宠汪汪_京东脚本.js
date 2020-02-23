@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.jingdong.app.mall");
-var SupportVersion = ["8.5.0", "8.4.6", "8.4.4"]
+var SupportVersion = ["8.5.1","8.5.0", "8.4.6", "8.4.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
