@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.jingdong.app.mall");
-var SupportVersion = ["8.5.0", "8.4.6", "8.4.4"]
+var SupportVersion = ["8.5.1","8.5.0", "8.4.6", "8.4.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -95,17 +95,14 @@ while (While == 1) {
             }).show();
         } else {
             engines.execScript("自动宠汪汪", "RunJs()\n" + RunJs.toString());
-            exit();
         }
         var While = 0;
-        exit();
     } else if (SupportVersion[Each] != InstalledVersion) {
         Each--;
     } else {
         var While = 0;
         log("已安装支持的软件版本：" + SupportVersion[Each]);
         engines.execScript("自动宠汪汪", "RunJs()\n" + RunJs.toString());
-        exit();
     }
 }
 
