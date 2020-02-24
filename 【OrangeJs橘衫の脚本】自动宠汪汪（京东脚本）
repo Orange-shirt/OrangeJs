@@ -882,9 +882,9 @@ function RunJs() {
         WY();
 
         function WY() {
-            var While = 1;
+            var While = 10;
             //这个while可以完成喂养狗狗任务，直到狗粮不足或进食中
-            while (While == 1) {
+            for (While == 10;While>0;While--) {
                 var A = text("dog-food-icon").findOnce();
                 if (A != null) {
                     var B = A.bounds();
