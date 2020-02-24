@@ -113,7 +113,7 @@ function RunJs() {
 
     var GJCwords = "宠汪汪" //京东搜索关键词
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.51"); //版本
+        var ScriptVersion = ("Beta1.52"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -884,7 +884,7 @@ function RunJs() {
         function WY() {
             var While = 10;
             //这个while可以完成喂养狗狗任务，直到狗粮不足或进食中
-            for (While == 10;While>0;While--) {
+            for (While == 10; While > 0; While--) {
                 var A = text("dog-food-icon").findOnce();
                 if (A != null) {
                     var B = A.bounds();
@@ -945,12 +945,33 @@ function RunJs() {
             }
         }
         sleep(1000);
-        var lgl = text("linggouliang").findOnce();
-        if (lgl != null) {
-            var lgla = lgl.bounds();
+        if (className("android.widget.Image").text("close-btn-1").findOnce() != null) {
+            var Ab = className("android.widget.Image").text("close-btn-1").findOnce().bounds();
+            click(Ab.centerX(), Ab.centerY());
+            toastLog("已尝试关闭喂养弹窗");
+            sleep(1000);
+        }
+        if (text("linggouliang").findOnce() != null) {
+            var lgla = text("linggouliang").findOnce().bounds();
             click(lgla.centerX(), lgla.centerY());
             toastLog("已找到“领狗粮”按钮\n尝试点击…");
             sleep(2000);
+            if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").findOnce() != null) {
+                toastLog("已成功打开“任务页”");
+            } else {
+                if (className("android.widget.Image").text("close-btn-1").findOnce() != null) {
+                    var Ab = className("android.widget.Image").text("close-btn-1").findOnce().bounds();
+                    click(Ab.centerX(), Ab.centerY());
+                    toastLog("已尝试关闭喂养弹窗");
+                    sleep(1000);
+                }
+                if (className("android.widget.Image").text("linggouliang_text2").findOnce() != null) {
+                    var dk = className("android.widget.Image").text("linggouliang_text2").findOne().parent().bounds();
+                    click(dk.centerX(), dk.centerY());
+                    toastLog("已尝试再次点击打开“任务页”");
+                    sleep(2000);
+                }
+            }
         } else {
             toastLog("未找到“领狗粮按钮”等待两秒重试");
             sleep(2000);
