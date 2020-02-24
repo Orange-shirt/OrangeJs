@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.jingdong.app.mall");
-var SupportVersion = ["8.5.1","8.5.0", "8.4.6", "8.4.4"]
+var SupportVersion = ["8.5.1", "8.5.0", "8.4.6", "8.4.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -918,6 +918,14 @@ function RunJs() {
                             }
                             sleep(1000);
                             if (text("您的宠物正在进食中,请稍后再喂食").exists()) {
+                                var Aa = text("close-btn-1").findOnce();
+                                if (Aa != null) {
+                                    var Ab = Aa.bounds();
+                                    click(Ab.centerX(), Ab.centerY());
+                                    toastLog("检测到您的宠物正在进食中，已尝试关闭喂养弹窗");
+                                    var While = 0;
+                                }
+                            } else if (className("android.widget.Image").text("3CHy8l0d+v+eC8bshGb9DkuG7Jhm+k+AHlnoZYT+lAkEAAAAASUVORK5CYII=").findOnce() != null) {
                                 var Aa = text("close-btn-1").findOnce();
                                 if (Aa != null) {
                                     var Ab = Aa.bounds();
