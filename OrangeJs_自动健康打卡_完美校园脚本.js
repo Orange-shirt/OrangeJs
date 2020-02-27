@@ -53,7 +53,9 @@ if (TestCreate == false) {
     }
 }
 
-
+if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
+    requestScreenCapture();
+}
 dialogs_js();
 
 function dialogs_js() {
@@ -65,9 +67,6 @@ function dialogs_js() {
         toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
         dialogs_js();
     } else if (i == 0) {
-        if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
-            requestScreenCapture();
-        }
         toastLog(options_[i]);
         if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/.OrangeJs.EncryptedValue") == true) {
             var XIANG = ["\n🔐自动填写已加密保存的信息", "📝替换并创建新的信息再保存\n"]
@@ -219,18 +218,21 @@ function dialogs_js() {
                         if (s == 0) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.mobileqq");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else if (s == 1) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.tim");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else {
                             toastLog("没有选择");
                         }
                     }
-                    exit();
+                    //返回主菜单
+                    dialogs_js();
                 }
             } else {
                 //返回主菜单
@@ -257,12 +259,14 @@ function dialogs_js() {
                         if (s == 0) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.mobileqq");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else if (s == 1) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.tim");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else {
                             toastLog("没有选择");
@@ -278,9 +282,6 @@ function dialogs_js() {
         }
 
     } else if (i == 1) {
-        if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
-            requestScreenCapture();
-        }
         if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/.OrangeJs.EncryptedValue") == false) {
             dialogs.alert("首次运行脚本不能定时运行哦(^_^)");
             dialogs_js();
