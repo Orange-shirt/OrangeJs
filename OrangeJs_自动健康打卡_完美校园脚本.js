@@ -230,8 +230,7 @@ function dialogs_js() {
                             toastLog("没有选择");
                         }
                     }
-                    //返回主菜单
-                    dialogs_js();
+                    exit();
                 }
             } else {
                 //返回主菜单
