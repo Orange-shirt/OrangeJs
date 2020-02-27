@@ -53,9 +53,7 @@ if (TestCreate == false) {
     }
 }
 
-if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
-    requestScreenCapture();
-}
+
 dialogs_js();
 
 function dialogs_js() {
@@ -67,6 +65,9 @@ function dialogs_js() {
         toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
         dialogs_js();
     } else if (i == 0) {
+        if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
+            requestScreenCapture();
+        }
         toastLog(options_[i]);
         if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/.OrangeJs.EncryptedValue") == true) {
             var XIANG = ["\n🔐自动填写已加密保存的信息", "📝替换并创建新的信息再保存\n"]
@@ -278,6 +279,9 @@ function dialogs_js() {
         }
 
     } else if (i == 1) {
+        if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
+            requestScreenCapture();
+        }
         if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/.OrangeJs.EncryptedValue") == false) {
             dialogs.alert("首次运行脚本不能定时运行哦(^_^)");
             dialogs_js();
