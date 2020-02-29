@@ -1482,7 +1482,7 @@ function NotFirstRun() {
                     sleep(1000);
                     captureScreen("/storage/emulated/0/OrangeJs/自动健康打卡/健康打卡截图.png");
                     toastLog("已尝试截图");
-                    window.setPosition(10,10);
+                    window.setPosition(10, 10);
                     break;
                 } else if (stop > 3) {
                     dialogs.alert("等待加载超时，已取消发送截图");
@@ -1711,6 +1711,10 @@ function NotFirstRun() {
                             id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(7).child(4).click();
                         } else if (id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().childCount() == 10) {
                             id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(9).child(4).click();
+                        } else if (id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().childCount() == 11) {
+                            id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(10).child(3).click();
+                        } else if (id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().childCount() == 9) {
+                            id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(8).child(3).click();
                         }
                         toastLog("已尝试点击“文件”按钮");
                         sleep(2000);
