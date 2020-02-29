@@ -1482,6 +1482,7 @@ function NotFirstRun() {
                     sleep(1000);
                     captureScreen("/storage/emulated/0/OrangeJs/自动健康打卡/健康打卡截图.png");
                     toastLog("已尝试截图");
+                    window.setPosition(10,10);
                     break;
                 } else if (stop > 3) {
                     dialogs.alert("等待加载超时，已取消发送截图");
