@@ -59,7 +59,7 @@ if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.t
 dialogs_js();
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.1"); //版本
+    var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "📄 查看已保存信息", "🔖 附加功能设置"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动健康打卡”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -205,7 +205,7 @@ function dialogs_js() {
         }
     } else if (i == 4) {
         if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") != true) {
-            let A = dialogs.confirm("🔖 附加功能设置\n打卡完成图发送", "这个功能可以帮您在打卡完成之后自动截取完成图，并将截图发送到指定QQ群/QQ好友，截图不会包含任何个人信息以及脚本悬浮窗\n\n请问需要开启吗？");
+            let A = dialogs.confirm("🔖 附加功能设置\n打卡完成图发送", "这个功能可以帮您在打卡完成之后自动截取完成图，并将截图发送到指定QQ群/QQ好友，截图不会包含任何个人信息以及脚本悬浮窗\n\n请问需要开启吗？（此功能需要最新版QQ/TIM）");
             if (A == true) {
                 //开启附加功能
                 let B = dialogs.rawInput("请输入发送对象信息\n\n支持QQ/昵称/备注/群聊号/群聊名");
@@ -218,12 +218,14 @@ function dialogs_js() {
                         if (s == 0) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.mobileqq");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else if (s == 1) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.tim");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else {
                             toastLog("没有选择");
@@ -257,12 +259,14 @@ function dialogs_js() {
                         if (s == 0) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.mobileqq");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用QQ发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else if (s == 1) {
                             files.createWithDirs("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
                             files.write("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt", B + "\ncom.tencent.tim");
-                            dialogs.alert("附加功能配置已保存！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            dialogs.alert("附加功能配置已保存\n请重新运行脚本！", "发送对象：" + B + "\n使用TIM发送\n如需更改请在主界面进行");
+                            exit();
                             break;
                         } else {
                             toastLog("没有选择");
@@ -1470,102 +1474,208 @@ function NotFirstRun() {
         }
         sleep(1000);
         className("android.view.View").text("提交信息").findOne(2000).click();
+        if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
+            var stop = 0;
+            while (true) {
+                if (text("打卡成功").findOnce() != null) {
+                    window.setPosition(-1000, -1000);
+                    sleep(1000);
+                    captureScreen("/storage/emulated/0/OrangeJs/自动健康打卡/健康打卡截图.png");
+                    toastLog("已尝试截图");
+                    window.setPosition(10, 10);
+                    break;
+                } else if (stop > 3) {
+                    dialogs.alert("等待加载超时，已取消发送截图");
+                    exit();
+                    break;
+                } else {
+                    sleep(3000);
+                    log("正在等待打卡完成");
+                    stop++;
+                }
+            }
 
-        function shareToTencent(file, share_APP) {
-            importPackage(android.content);
-            importClass(android.net.Uri);
-            importClass(java.io.File);
-            importClass(android.provider.MediaStore);
-            var f = new File(file);
-            var uri = Uri.fromFile(f);
-            // var fp = app.parseUri("content://com.estrongs.files"+file);
-            var fp = app.parseUri(uri.toString());
-            var intent = new Intent("android.intent.action.SEND");
-            intent.setType("file/*");
-            intent.putExtra(Intent.EXTRA_STREAM, uri);
-            intent.setClipData(ClipData.newRawUri(MediaStore.EXTRA_OUTPUT, fp));
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setComponent(new ComponentName(share_APP, "com.tencent.mobileqq.activity.JumpActivity"));
-            context.startActivity(intent);
-            if (share_APP == "com.tencent.mobileqq") {
-                for (var deng = 5; deng > 0; deng--) {
-                    toastLog("正在跳转到QQ分享页\n剩余" + deng + "秒……");
-                    sleep(2000);
-                    if (currentActivity() == "com.tencent.mobileqq.activity.ForwardRecentActivity") {
-                        var deng = 0;
-                        toastLog("已处于QQ分享页1");
-                    } else if (className("android.widget.TextView").text("发送给").findOnce() != null) {
-                        var deng = 0;
-                        toastLog("已处于QQ分享页2");
-                    } else if (currentPackage() == "com.tencent.mobileqq") {
-                        context.startActivity(intent);
-                        toastLog("分享页面未能成功启动\n重试中……")
-                        sleep(3000);
+            function QqShare(Search) {
+                while (true) {
+                    if (id("com.tencent.mobileqq:id/f55").desc("我的文件").findOnce() != null) {
+                        id("com.tencent.mobileqq:id/f55").desc("我的文件").findOnce().click();
+                        toastLog("已尝试点击“我的文件”按钮");
+                        sleep(2000);
+                        break;
+                    } else if (id("com.tencent.mobileqq:id/ba1").desc("帐户及设置").findOnce() != null && id("com.tencent.mobileqq:id/kbi").className("android.widget.TextView").text("联系人").findOnce() != null) {
+                        id("com.tencent.mobileqq:id/ba1").desc("帐户及设置").findOnce().click();
+                        toastLog("已尝试点击“帐户及设置”");
+                        sleep(2000);
+                    } else if (id("com.tencent.mobileqq:id/kbi").className("android.widget.TextView").text("联系人").findOnce() != null) {
+                        id("com.tencent.mobileqq:id/kbi").className("android.widget.TextView").text("联系人").findOnce().parent().click();
+                        toastLog("已尝试点击联系人按钮");
+                        sleep(2000);
+                    } else if (currentPackage() != "com.tencent.mobileqq") {
+                        app.startActivity({
+                            action: "android.intent.action.VIEW", //此处可为其他值
+                            packageName: "com.tencent.mobileqq",
+                            className: "com.tencent.mobileqq.activity.SplashActivity"
+                            //此处可以加入其他内容，如data、extras
+                        });
+                        toastLog("当前非QQ主界面\n正在启动QQ");
+                        sleep(2000);
+                    } else {
+                        back();
+                        toastLog("QQ已启动，但未处于主界面，返回中……");
+                        sleep(2000);
                     }
                 }
-                if (id("com.tencent.mobileqq:id/et_search_keyword").findOnce() != null) {
-                    id("com.tencent.mobileqq:id/et_search_keyword").findOnce().click();
-                    toastLog("已尝试点击“搜索框”");
+                if (id("com.tencent.mobileqq:id/dqc").text("手机文件").findOnce() != null) {
+                    id("com.tencent.mobileqq:id/dqc").text("手机文件").findOnce().click();
+                    toastLog("已尝试点击“手机文件”按钮");
                     sleep(2000);
-                    if (id("com.tencent.mobileqq:id/name").className("android.widget.LinearLayout").depth(5).findOnce() != null || id("com.tencent.mobileqq:id/ik9").findOnce() != null) {
-                        if (id("com.tencent.mobileqq:id/name").className("android.widget.LinearLayout").depth(5).findOnce() != null) {
-                            id("com.tencent.mobileqq:id/name").className("android.widget.LinearLayout").depth(5).findOnce().child(0).child(0).setText(Search);
-                            log("已找到悬浮搜索框8.1");
+                    if (id("com.tencent.mobileqq:id/iim").text("全部(手机内存/SD卡)").findOnce() != null) {
+                        id("com.tencent.mobileqq:id/iim").text("全部(手机内存/SD卡)").findOnce().click();
+                        toastLog("已尝试点击“全部文件”");
+                        sleep(2000);
+                        if (id("com.tencent.mobileqq:id/arm").className("android.widget.TextView").text("SD卡").findOnce() != null) {
+                            id("com.tencent.mobileqq:id/arm").className("android.widget.TextView").text("SD卡").findOnce().parent().click();
+                            toastLog("已尝试点击SD按钮");
                             sleep(2000);
-                        } else if (id("com.tencent.mobileqq:id/ik9").findOnce() != null) {
-                            id("com.tencent.mobileqq:id/ik9").findOnce().child(0).child(0).setText(Search);
-                            log("已找到悬浮搜索框8.2.7");
-                            sleep(2000);
-                        }
-                        if (id("com.tencent.mobileqq:id/title").className("android.widget.TextView").text(Search).findOnce() != null) {
-                            id("com.tencent.mobileqq:id/title").className("android.widget.TextView").text(Search).findOnce().parent().parent().click();
-                            toastLog("已尝试点击“发送对象（名称）”");
-                            sleep(2000);
-                            if (id("com.tencent.mobileqq:id/dialogRightBtn").findOnce() != null) {
-                                id("com.tencent.mobileqq:id/dialogRightBtn").findOnce().click();
-                                toastLog("已尝试点击“发送”按钮");
-                            } else {
-                                toastLog("未找到QQ“发送”按钮");
+                            if (id("com.tencent.mobileqq:id/bcl").text("/storage/emulated/0").findOnce() == null) {
+                                toastLog("SD卡非主内存\n返回重选");
+                                Justback();
+                                sleep(1000);
+                                if (id("com.tencent.mobileqq:id/arm").className("android.widget.TextView").text("手机内存").findOnce() != null) {
+                                    id("com.tencent.mobileqq:id/arm").className("android.widget.TextView").text("手机内存").findOnce().parent().click();
+                                    toastLog("已尝试点击“手机内存”按钮");
+                                    sleep(2000);
+                                } else {
+                                    toastLog("找不到手机内存按钮");
+                                }
                             }
-                        } else if (id("com.tencent.mobileqq:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null || id("com.tencent.mobileqq:id/j64").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null) {
-                            if (id("com.tencent.mobileqq:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null) {
-                                id("com.tencent.mobileqq:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce().parent().parent().click();
-                                log("已找到8.1发送对象的号码");
-                            } else if (id("com.tencent.mobileqq:id/j64").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null) {
-                                id("com.tencent.mobileqq:id/j64").className("android.widget.TextView").text("(" + Search + ")").findOnce().parent().parent().click();
-                                log("已找到8.2.7发送对象的号码");
-                            }
-                            toastLog("已尝试点击“发送对象（号码）”");
-                            sleep(2000);
-                            if (id("com.tencent.mobileqq:id/dialogRightBtn").findOnce() != null) {
-                                id("com.tencent.mobileqq:id/dialogRightBtn").findOnce().click();
-                                toastLog("已尝试点击“发送”按钮");
+                            if (id("com.tencent.mobileqq:id/bcl").text("/storage/emulated/0").findOnce() != null) {
+                                while (true) {
+                                    if (id("com.tencent.mobileqq:id/ec9").className("android.widget.AbsListView").findOnce() == null) {
+                                        toastLog("当前非文件浏览界面");
+                                        break;
+                                    } else if (id("com.tencent.mobileqq:id/c_x").className("android.widget.TextView").text("OrangeJs").findOnce() != null) {
+                                        id("com.tencent.mobileqq:id/c_x").className("android.widget.TextView").text("OrangeJs").findOnce().parent().click();
+                                        toastLog("已找到目标文件夹\n并已尝试点击…");
+                                        sleep(2000);
+                                        break;
+                                    } else {
+                                        var a = id("com.tencent.mobileqq:id/ec9").className("android.widget.AbsListView").findOnce().bounds();
+                                        swipe(a.centerX(), a.height(), a.centerX(), 0, 500);
+                                        toastLog("正在滑动寻找OrangeJs文件夹");
+                                    }
+                                }
+                                if (id("com.tencent.mobileqq:id/c_x").className("android.widget.TextView").text("自动健康打卡").findOnce() != null) {
+                                    id("com.tencent.mobileqq:id/c_x").className("android.widget.TextView").text("自动健康打卡").findOnce().parent().click();
+                                    toastLog("已尝试点击“自动健康打卡”文件夹");
+                                    sleep(2000);
+                                    if (id("com.tencent.mobileqq:id/c_g").className("android.widget.TextView").text("健康打卡截图.png").findOnce()) {
+                                        id("com.tencent.mobileqq:id/c_g").className("android.widget.TextView").text("健康打卡截图.png").findOnce().parent().parent().click();
+                                        toastLog("已尝试点击“健康打卡截图”");
+                                        sleep(2000);
+                                        if (id("com.tencent.mobileqq:id/ivTitleBtnRightImage").desc("菜单").findOnce() != null) {
+                                            id("com.tencent.mobileqq:id/ivTitleBtnRightImage").desc("菜单").findOnce().click();
+                                            toastLog("已尝试点击“菜单”按钮");
+                                            sleep(2000);
+                                            if (className("android.widget.GridView").id("com.tencent.mobileqq:id/cx3").findOnce() != null) {
+                                                className("android.widget.GridView").id("com.tencent.mobileqq:id/cx3").findOnce().child(0).click();
+                                                toastLog("已尝试点击“发给好友”按钮");
+                                                sleep(2000);
+                                                if (id("com.tencent.mobileqq:id/et_search_keyword").findOnce() != null) {
+                                                    id("com.tencent.mobileqq:id/et_search_keyword").findOnce().click();
+                                                    toastLog("已尝试点击“搜索框”");
+                                                    sleep(2000);
+                                                    if (id("com.tencent.mobileqq:id/name").className("android.widget.LinearLayout").depth(5).findOnce() != null || id("com.tencent.mobileqq:id/ik9").findOnce() != null) {
+                                                        if (id("com.tencent.mobileqq:id/name").className("android.widget.LinearLayout").depth(5).findOnce() != null) {
+                                                            id("com.tencent.mobileqq:id/name").className("android.widget.LinearLayout").depth(5).findOnce().child(0).child(0).setText(Search);
+                                                            log("已找到悬浮搜索框8.1");
+                                                            sleep(2000);
+                                                        } else if (id("com.tencent.mobileqq:id/ik9").findOnce() != null) {
+                                                            id("com.tencent.mobileqq:id/ik9").findOnce().child(0).child(0).setText(Search);
+                                                            log("已找到悬浮搜索框8.2.7");
+                                                            sleep(2000);
+                                                        }
+                                                        if (id("com.tencent.mobileqq:id/title").className("android.widget.TextView").text(Search).findOnce() != null) {
+                                                            id("com.tencent.mobileqq:id/title").className("android.widget.TextView").text(Search).findOnce().parent().parent().click();
+                                                            toastLog("已尝试点击“发送对象（名称）”");
+                                                            sleep(2000);
+                                                            if (id("com.tencent.mobileqq:id/dialogRightBtn").findOnce() != null) {
+                                                                id("com.tencent.mobileqq:id/dialogRightBtn").findOnce().click();
+                                                                toastLog("已尝试点击“发送”按钮");
+                                                            } else {
+                                                                toastLog("未找到QQ“发送”按钮");
+                                                            }
+                                                        } else if (id("com.tencent.mobileqq:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null || id("com.tencent.mobileqq:id/j64").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null) {
+                                                            if (id("com.tencent.mobileqq:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null) {
+                                                                id("com.tencent.mobileqq:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce().parent().parent().click();
+                                                                log("已找到8.1发送对象的号码");
+                                                            } else if (id("com.tencent.mobileqq:id/j64").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null) {
+                                                                id("com.tencent.mobileqq:id/j64").className("android.widget.TextView").text("(" + Search + ")").findOnce().parent().parent().click();
+                                                                log("已找到8.2.7发送对象的号码");
+                                                            }
+                                                            toastLog("已尝试点击“发送对象（号码）”");
+                                                            sleep(2000);
+                                                            if (id("com.tencent.mobileqq:id/dialogRightBtn").findOnce() != null) {
+                                                                id("com.tencent.mobileqq:id/dialogRightBtn").findOnce().click();
+                                                                toastLog("已尝试点击“发送”按钮");
+                                                            } else {
+                                                                toastLog("未找到QQ“发送”按钮");
+                                                            }
+                                                        } else {
+                                                            toastLog("未找到QQ发送对象");
+                                                        }
+                                                    } else {
+                                                        toastLog("未找到QQ悬浮搜索框");
+                                                    }
+                                                } else {
+                                                    toastLog("未找到QQ分享页搜索框");
+                                                }
+                                            } else {
+                                                toastLog("未找到“分享菜单”")
+                                            }
+                                        } else {
+                                            toastLog("找不到菜单按钮");
+                                        }
+                                    } else {
+                                        toastLog("找不到健康打卡截图");
+                                    }
+                                } else {
+                                    toastLog("找不到“自动健康打卡”文件夹")
+                                }
                             } else {
-                                toastLog("未找到QQ“发送”按钮");
+                                toastLog("找不到标准存储位置");
                             }
                         } else {
-                            toastLog("未找到QQ发送对象");
+                            toastLog("找不到存储位置");
                         }
-                    } else {
-                        toastLog("未找到QQ悬浮搜索框");
                     }
-                } else {
-                    toastLog("未找到QQ分享页搜索框");
                 }
-            } else if (share_APP == "com.tencent.tim") {
-                for (var deng = 5; deng > 0; deng--) {
-                    toastLog("正在跳转到TIM分享页\n剩余" + deng + "秒……");
-                    sleep(2000);
-                    if (currentActivity() == "com.tencent.mobileqq.activity.ForwardRecentActivity") {
-                        var deng = 0;
-                        toastLog("已处于TIM分享页1");
-                    } else if (className("android.widget.TextView").text("发送给").findOnce() != null) {
-                        var deng = 0;
-                        toastLog("已处于TIM分享页2");
-                    } else if (currentPackage() == "com.tencent.mobileqq") {
-                        context.startActivity(intent);
-                        toastLog("分享页面未能成功启动\n重试中……")
-                        sleep(3000);
+            }
+
+            function TimShare(Search) {
+                while (true) {
+                    if (className("android.widget.EditText").id("com.tencent.tim:id/et_search_keyword").findOnce() != null) {
+                        className("android.widget.EditText").id("com.tencent.tim:id/et_search_keyword").findOnce().click();
+                        toastLog("已尝试点击“首页搜索框”");
+                        sleep(2000);
+                        break;
+                    } else if (className("android.widget.TabWidget").id("android:id/tabs").findOnce() != null) {
+                        className("android.widget.TabWidget").id("android:id/tabs").findOnce().child(0).click();
+                        toastLog("已尝试点击首页按钮");
+                        sleep(2000);
+                    } else if (currentPackage() != "com.tencent.tim") {
+                        app.startActivity({
+                            action: "android.intent.action.VIEW", //此处可为其他值
+                            packageName: "com.tencent.tim",
+                            className: "com.tencent.mobileqq.activity.SplashActivity"
+                            //此处可以加入其他内容，如data、extras
+                        });
+                        toastLog("当前非TIM主界面\n正在启动TIM");
+                        sleep(2000);
+                    } else {
+                        back();
+                        toastLog("TIM已启动，但未处于主界面，返回中……");
+                        sleep(2000);
                     }
                 }
                 if (id("com.tencent.tim:id/et_search_keyword").findOnce() != null) {
@@ -1576,25 +1686,15 @@ function NotFirstRun() {
                         id("com.tencent.tim:id/name").className("android.widget.LinearLayout").depth(5).findOnce().child(0).child(0).setText(Search);
                         sleep(2000);
                         if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce() != null) {
-                            id("com.tencent.tim:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce().parent().click();
+                            id("com.tencent.tim:id/name").className("android.widget.TextView").text("(" + Search + ")").findOnce().parent().parent().click();
                             toastLog("已尝试点击“发送对象（号码）”");
                             sleep(2000);
-                            if (id("com.tencent.tim:id/dialogRightBtn").findOnce() != null) {
-                                id("com.tencent.tim:id/dialogRightBtn").findOnce().click();
-                                toastLog("已尝试点击“发送”按钮");
-                            } else {
-                                toastLog("未找到TIM“发送”按钮");
-                            }
+                            TimShareFs();
                         } else if (id("com.tencent.tim:id/title").className("android.widget.TextView").text(Search).findOnce() != null) {
-                            id("com.tencent.tim:id/title").className("android.widget.TextView").text(Search).findOnce().parent().click();
+                            id("com.tencent.tim:id/title").className("android.widget.TextView").text(Search).findOnce().parent().parent().click();
                             toastLog("已尝试点击“发送对象（名称）”");
                             sleep(2000);
-                            if (id("com.tencent.tim:id/dialogRightBtn").findOnce() != null) {
-                                id("com.tencent.tim:id/dialogRightBtn").findOnce().click();
-                                toastLog("已尝试点击“发送”按钮");
-                            } else {
-                                toastLog("未找到TIM“发送”按钮");
-                            }
+                            TimShareFs();
                         } else {
                             toastLog("未找到TIM发送对象");
                         }
@@ -1604,31 +1704,109 @@ function NotFirstRun() {
                 } else {
                     toastLog("未找到TIM分享页搜索框");
                 }
-            }
-        }
-        if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
-            var stop = 0;
-            while (true) {
-                if (text("打卡成功").findOnce() != null) {
-                    window.setPosition(-1000, -1000);
-                    sleep(1000);
-                    captureScreen("/storage/emulated/0/OrangeJs/自动健康打卡/健康打卡截图.png");
-                    toastLog("已尝试截图");
-                    break;
-                } else if (stop > 3) {
-                    dialogs.alert("等待加载超时，取消发送截图");
-                    exit();
-                    break;
-                } else {
-                    sleep(3000);
-                    toastLog("正在等待打卡完成");
-                    stop++;
+
+                function TimShareFs() {
+                    if (id("com.tencent.tim:id/rlCommenTitle").findOnce() != null) {
+                        if (id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().childCount() == 8) {
+                            id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(7).child(4).click();
+                        } else if (id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().childCount() == 10) {
+                            id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(9).child(4).click();
+                        } else if (id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().childCount() == 11) {
+                            id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(10).child(3).click();
+                        } else if (id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().childCount() == 9) {
+                            id("com.tencent.tim:id/rlCommenTitle").findOnce().parent().child(8).child(3).click();
+                        }
+                        toastLog("已尝试点击“文件”按钮");
+                        sleep(2000);
+                        if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("本机文件").findOnce() != null) {
+                            id("com.tencent.tim:id/name").className("android.widget.TextView").text("本机文件").findOnce().parent().parent().click();
+                            toastLog("已尝试点击“本机文件”");
+                            sleep(2000);
+                            if (id("com.tencent.tim:id/ivTitleBtnRightText").text("更多").findOnce() != null) {
+                                id("com.tencent.tim:id/ivTitleBtnRightText").text("更多").findOnce().click();
+                                toastLog("已点击“更多”按钮");
+                                sleep(2000);
+                                if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("SD卡").findOnce() != null) {
+                                    id("com.tencent.tim:id/name").className("android.widget.TextView").text("SD卡").findOnce().parent().click();
+                                    toastLog("已尝试点击SD按钮");
+                                    sleep(2000);
+                                    if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("/storage/emulated/0").findOnce() == null) {
+                                        toastLog("SD卡非主内存\n返回重选");
+                                        Justback();
+                                        sleep(1000);
+                                        if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("手机内存").findOnce() != null) {
+                                            id("com.tencent.tim:id/name").className("android.widget.TextView").text("手机内存").findOnce().parent().click();
+                                            toastLog("已尝试点击“手机内存”按钮");
+                                            sleep(2000);
+                                        } else {
+                                            toastLog("找不到手机内存按钮");
+                                        }
+                                    }
+                                    if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("/storage/emulated/0").findOnce() != null) {
+                                        while (true) {
+                                            if (id("com.tencent.tim:id/name").className("android.widget.AbsListView").findOnce() == null) {
+                                                toastLog("当前非文件浏览界面");
+                                                break;
+                                            } else if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("OrangeJs").findOnce() != null) {
+                                                id("com.tencent.tim:id/name").className("android.widget.TextView").text("OrangeJs").findOnce().parent().click();
+                                                toastLog("已找到目标文件夹\n并已尝试点击…");
+                                                sleep(2000);
+                                                break;
+                                            } else {
+                                                var a = id("com.tencent.tim:id/name").className("android.widget.AbsListView").findOnce().bounds();
+                                                swipe(a.centerX(), a.height(), a.centerX(), 0, 500);
+                                                toastLog("正在滑动寻找OrangeJs文件夹");
+                                            }
+                                        }
+                                        if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("自动健康打卡").findOnce() != null) {
+                                            id("com.tencent.tim:id/name").className("android.widget.TextView").text("自动健康打卡").findOnce().parent().click();
+                                            toastLog("已尝试点击“自动健康打卡”文件夹");
+                                            sleep(2000);
+                                            if (id("com.tencent.tim:id/name").className("android.widget.TextView").text("健康打卡截图.png").findOnce()) {
+                                                id("com.tencent.tim:id/name").className("android.widget.TextView").text("健康打卡截图.png").findOnce().parent().click();
+                                                toastLog("已尝试点击“健康打卡截图”");
+                                                sleep(2000);
+                                                if (id("com.tencent.tim:id/name").className("android.widget.Button").text("发送(1)").findOnce() != null) {
+                                                    id("com.tencent.tim:id/name").className("android.widget.Button").text("发送(1)").findOnce().click();
+                                                    toastLog("已尝试点击“发送”按钮");
+                                                    sleep(2000);
+                                                    if (text("健康打卡截图.png").exists()) {
+                                                        toastLog("发送截图任务已完成");
+                                                    }
+                                                } else {
+                                                    toastLog("找不到发送按钮");
+                                                }
+                                            } else {
+                                                toastLog("找不到健康打卡截图");
+                                            }
+                                        } else {
+                                            toastLog("找不到“自动健康打卡”文件夹")
+                                        }
+                                    } else {
+                                        toastLog("找不到标准存储位置");
+                                    }
+                                } else {
+                                    toastLog("找不到存储位置");
+                                }
+                            } else {
+                                toastLog("找不到“更多”按钮");
+                            }
+                        } else {
+                            toastLog("找不到“本机文件”");
+                        }
+                    } else {
+                        toastLog("找不到标准聊天界面");
+                    }
                 }
             }
             var Wj = open("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt");
             var Fz = Wj.readlines();
             var Search = Fz[0];
-            shareToTencent("/storage/emulated/0/OrangeJs/自动健康打卡/健康打卡截图.png", Fz[1]);
+            if (Fz[1] == "com.tencent.mobileqq") {
+                QqShare(Search);
+            } else if (Fz[1] == "com.tencent.tim") {
+                TimShare(Search);
+            }
             Wj.close();
         }
         toastLog("自动健康打卡：\n脚本已运行完成");
