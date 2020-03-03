@@ -824,58 +824,115 @@ function RunJs() {
     }
 
     function OpenWXcontent() {
-        while (true) {
-            if (id("android:id/text1").text("通讯录").findOnce() != null) {
-                toastLog("已处于“微信通讯录”界面");
-                break;
-            } else if (id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.4
-                var A = id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce().bounds();
-                click(A.centerX(), A.centerY());
-                toastLog("已尝试点击“通讯录”按钮");
-                sleep(2000);
-                //break;
-            } else if (id("dkb").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.10
-                id("dkb").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
-                toastLog("已尝试点击“通讯录”按钮");
-                sleep(2000);
-            } else if (currentPackage() == "com.tencent.mm") {
-                Justback();
-                toastLog("已处于微信中但非主界面\n正在尝试返回主界面");
-                sleep(2000);
-            } else {
-                app.startActivity({
-                    action: "android.intent.action.VIEW", //此处可为其他值
-                    packageName: "com.tencent.mm",
-                    className: "com.tencent.mm.ui.LauncherUI"
-                    //此处可以加入其他内容，如data、extras
-                });
-                toastLog("当前未处于微信中\n正在重新打开微信");
-                sleep(2000);
+        try {
+            while (true) {
+                if (id("android:id/text1").text("通讯录").findOnce() != null) {
+                    toastLog("已处于“微信通讯录”界面");
+                    break;
+                } else if (id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.4
+                    var A = id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce().bounds();
+                    click(A.centerX(), A.centerY());
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                    //break;
+                } else if (id("dkb").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.10
+                    id("dkb").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                } else if (currentPackage() == "com.tencent.mm") {
+                    Justback();
+                    toastLog("已处于微信中但非主界面\n正在尝试返回主界面");
+                    sleep(2000);
+                } else {
+                    app.startActivity({
+                        action: "android.intent.action.VIEW", //此处可为其他值
+                        packageName: "com.tencent.mm",
+                        className: "com.tencent.mm.ui.LauncherUI"
+                        //此处可以加入其他内容，如data、extras
+                    });
+                    toastLog("当前未处于微信中\n正在重新打开微信");
+                    sleep(2000);
+                }
             }
+        } catch (e) {
+            log(e);
         }
     }
 
 
     function Doit() {
-        while (true) {
-            if (className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce() != null) {
-                className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce().child(1).child(0).click();
-                toastLog("已尝试点击“搜索”按钮");
-                sleep(2000);
-                if (className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce() != null) {
-                    className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce().setText(DX);
-                    toastLog("已设置搜索文字")
+        try {
+            while (true) {
+                if (className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce() != null) {
+                    className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce().child(1).child(0).click();
+                    toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
-                    if (id("com.tencent.mm:id/qm").text(DX).findOnce() != null) {
-                        id("com.tencent.mm:id/qm").text(DX).findOnce().parent().parent().parent().parent().click();
-                        toastLog("已尝试点击设定的“联系对象”")
+                    if (className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce() != null) {
+                        className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce().setText(DX);
+                        toastLog("已设置搜索文字")
                         sleep(2000);
-                        if (className("android.widget.FrameLayout").descContains(DX).findOnce() != null) {
-                            if (id("com.tencent.mm:id/ami").findOnce() != null) {
-                                id("com.tencent.mm:id/ami").findOnce().setText(XX);
+                        if (id("com.tencent.mm:id/qm").text(DX).findOnce() != null) {
+                            id("com.tencent.mm:id/qm").text(DX).findOnce().parent().parent().parent().parent().click();
+                            toastLog("已尝试点击设定的“联系对象”")
+                            sleep(2000);
+                            if (className("android.widget.FrameLayout").descContains(DX).findOnce() != null) {
+                                if (id("com.tencent.mm:id/ami").findOnce() != null) {
+                                    id("com.tencent.mm:id/ami").findOnce().setText(XX);
+                                    sleep(1000);
+                                    if (id("com.tencent.mm:id/amp").findOnce() != null) {
+                                        id("com.tencent.mm:id/amp").findOnce().click();
+                                        toastLog("已点击“发送”按钮");
+                                        device.cancelKeepingAwake();
+                                        dialogs.alert("脚本已运行完成");
+                                        log("脚本已运行完成");
+                                        exit();
+                                        break;
+                                    } else {
+                                        toastLog("当前界面找不到消息发送按钮\n正在重新进入搜寻……");
+                                        sleep(2000);
+                                        OpenWXcontent();
+                                    }
+                                } else {
+                                    toastLog("当前界面找不到消息输入框\n正在重新进入搜寻……");
+                                    sleep(2000);
+                                    OpenWXcontent();
+                                }
+                            } else {
+                                toastLog("当前非正确的联系界面\n正在重新进入搜寻……");
+                                sleep(2000);
+                                OpenWXcontent();
+                            }
+                        } else {
+                            var WrongDX = 0;
+                            WrongDX++;
+                            toastLog("当前界面未找到设定的联系名称\n正在重新进入搜寻……");
+                            if (WrongDX >= 3) {
+                                dialogs.alert("无法找到配置的联系名称\n请确认您输入的联系名称是否正确", "在输入联系名称时请确保完全正确，您可重新运行脚本并在脚本配置中修改联系名称配置");
+                                exit();
+                            }
+                            OpenWXcontent();
+                        }
+                    } else {
+                        toastLog("当前界面未找到搜索框\n正在重新进入搜寻……");
+                        OpenWXcontent();
+                    }
+                } else if (className("android.view.ViewGroup").id("com.tencent.mm:id/l2").findOnce() != null) { //7.0.10
+                    className("android.view.ViewGroup").id("com.tencent.mm:id/l2").findOnce().child(1).child(0).click();
+                    toastLog("已尝试点击“搜索”按钮");
+                    sleep(2000);
+                    if (className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce() != null) {
+                        className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce().setText(DX);
+                        toastLog("已设置搜索文字")
+                        sleep(2000);
+                        if (id("com.tencent.mm:id/s7").text(DX).findOnce() != null) {
+                            id("com.tencent.mm:id/s7").text(DX).findOnce().parent().parent().parent().parent().click();
+                            toastLog("已尝试点击设定的“联系对象”")
+                            sleep(2000);
+                            if (id("com.tencent.mm:id/aqe").findOnce() != null) {
+                                id("com.tencent.mm:id/aqe").findOnce().setText(XX);
                                 sleep(1000);
-                                if (id("com.tencent.mm:id/amp").findOnce() != null) {
-                                    id("com.tencent.mm:id/amp").findOnce().click();
+                                if (id("com.tencent.mm:id/aql").findOnce() != null) {
+                                    id("com.tencent.mm:id/aql").findOnce().click();
                                     toastLog("已点击“发送”按钮");
                                     device.cancelKeepingAwake();
                                     dialogs.alert("脚本已运行完成");
@@ -888,83 +945,33 @@ function RunJs() {
                                     OpenWXcontent();
                                 }
                             } else {
-                                toastLog("当前界面找不到消息输入框\n正在重新进入搜寻……");
+                                toastLog("当前非正确的联系界面\n正在重新进入搜寻……");
                                 sleep(2000);
                                 OpenWXcontent();
                             }
                         } else {
-                            toastLog("当前非正确的联系界面\n正在重新进入搜寻……");
-                            sleep(2000);
-                            OpenWXcontent();
-                        }
-                    } else {
-                        var WrongDX = 0;
-                        WrongDX++;
-                        toastLog("当前界面未找到设定的联系名称\n正在重新进入搜寻……");
-                        if (WrongDX >= 3) {
-                            dialogs.alert("无法找到配置的联系名称\n请确认您输入的联系名称是否正确", "在输入联系名称时请确保完全正确，您可重新运行脚本并在脚本配置中修改联系名称配置");
-                            exit();
-                        }
-                        OpenWXcontent();
-                    }
-                } else {
-                    toastLog("当前界面未找到搜索框\n正在重新进入搜寻……");
-                    OpenWXcontent();
-                }
-            } else if (className("android.view.ViewGroup").id("com.tencent.mm:id/l2").findOnce() != null) { //7.0.10
-                className("android.view.ViewGroup").id("com.tencent.mm:id/l2").findOnce().child(1).child(0).click();
-                toastLog("已尝试点击“搜索”按钮");
-                sleep(2000);
-                if (className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce() != null) {
-                    className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce().setText(DX);
-                    toastLog("已设置搜索文字")
-                    sleep(2000);
-                    if (id("com.tencent.mm:id/s7").text(DX).findOnce() != null) {
-                        id("com.tencent.mm:id/s7").text(DX).findOnce().parent().parent().parent().parent().click();
-                        toastLog("已尝试点击设定的“联系对象”")
-                        sleep(2000);
-                        if (id("com.tencent.mm:id/aqe").findOnce() != null) {
-                            id("com.tencent.mm:id/aqe").findOnce().setText(XX);
-                            sleep(1000);
-                            if (id("com.tencent.mm:id/aql").findOnce() != null) {
-                                id("com.tencent.mm:id/aql").findOnce().click();
-                                toastLog("已点击“发送”按钮");
-                                device.cancelKeepingAwake();
-                                dialogs.alert("脚本已运行完成");
-                                log("脚本已运行完成");
+                            var WrongDX = 0;
+                            WrongDX++;
+                            toastLog("当前界面未找到设定的联系名称\n正在重新进入搜寻……");
+                            if (WrongDX >= 3) {
+                                dialogs.alert("无法找到配置的联系名称\n请确认您输入的联系名称是否正确", "在输入联系名称时请确保完全正确，您可重新运行脚本并在脚本配置中修改联系名称配置");
                                 exit();
-                                break;
-                            } else {
-                                toastLog("当前界面找不到消息发送按钮\n正在重新进入搜寻……");
-                                sleep(2000);
-                                OpenWXcontent();
                             }
-                        } else {
-                            toastLog("当前非正确的联系界面\n正在重新进入搜寻……");
-                            sleep(2000);
                             OpenWXcontent();
                         }
                     } else {
-                        var WrongDX = 0;
-                        WrongDX++;
-                        toastLog("当前界面未找到设定的联系名称\n正在重新进入搜寻……");
-                        if (WrongDX >= 3) {
-                            dialogs.alert("无法找到配置的联系名称\n请确认您输入的联系名称是否正确", "在输入联系名称时请确保完全正确，您可重新运行脚本并在脚本配置中修改联系名称配置");
-                            exit();
-                        }
+                        toastLog("当前界面未找到搜索框\n正在重新进入搜寻……");
                         OpenWXcontent();
                     }
                 } else {
-                    toastLog("当前界面未找到搜索框\n正在重新进入搜寻……");
+                    toastLog("当前未处于“微信通讯录”界面\n正在尝试回到此界面");
+                    sleep(2000);
                     OpenWXcontent();
                 }
-            } else {
-                toastLog("当前未处于“微信通讯录”界面\n正在尝试回到此界面");
-                sleep(2000);
-                OpenWXcontent();
             }
+        } catch (e) {
+            log(e);
         }
     }
-
     Doit();
 }
