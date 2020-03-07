@@ -112,7 +112,7 @@ function RunJs() {
     var width = device.width;
 
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.33"); //版本
+        var ScriptVersion = ("Beta1.34"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“多多果园自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -733,7 +733,7 @@ function RunJs() {
                 sleep(2000);
                 var deng = 10;
                 for (deng == 10; deng > 0; deng--) {
-                    if (text("wateringBottle-v4").findOnce() != null) {
+                    if (text("bottle_default_bt").findOnce() != null) {
                         toastLog("已处于“多多果园”活动界面");
                         var deng = 0;
                     } else {
@@ -741,7 +741,7 @@ function RunJs() {
                         sleep(1500);
                     }
                 }
-                if (text("wateringBottle-v4").findOnce() == null) {
+                if (text("bottle_default_bt").findOnce() == null) {
                     toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                     sleep(2000);
                     OpenApp();
@@ -767,7 +767,7 @@ function RunJs() {
                     sleep(2000);
                     var deng = 10;
                     for (deng == 10; deng > 0; deng--) {
-                        if (text("wateringBottle-v4").findOnce() != null) {
+                        if (text("bottle_default_bt").findOnce() != null) {
                             toastLog("已处于“多多果园”活动界面");
                             var deng = 0;
                         } else {
@@ -775,7 +775,7 @@ function RunJs() {
                             sleep(1500);
                         }
                     }
-                    if (text("wateringBottle-v4").findOnce() == null) {
+                    if (text("bottle_default_bt").findOnce() == null) {
                         toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                         OpenApp();
                     }
@@ -797,7 +797,7 @@ function RunJs() {
                 sleep(2000);
                 var deng = 10;
                 for (deng == 10; deng > 0; deng--) {
-                    /*if (text("wateringBottle-v4").findOnce() != null) {
+                    /*if (text("bottle_default_bt").findOnce() != null) {
                         toastLog("已处于“多多果园”活动界面");
                         var deng = 0;
                     } else {}*/
@@ -805,7 +805,7 @@ function RunJs() {
                     sleep(1500);
 
                 }
-                if (text("wateringBottle-v4").findOnce() == null) {
+                if (text("bottle_default_bt").findOnce() == null) {
                     toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                     sleep(2000);
                     OpenApp();
@@ -831,7 +831,7 @@ function RunJs() {
                     sleep(2000);
                     var deng = 10;
                     for (deng == 10; deng > 0; deng--) {
-                        /*if (text("wateringBottle-v4").findOnce() != null) {
+                        /*if (text("bottle_default_bt").findOnce() != null) {
                             toastLog("已处于“多多果园”活动界面");
                             var deng = 0;
                         } else {}*/
@@ -839,7 +839,7 @@ function RunJs() {
                         sleep(1500);
 
                     }
-                    if (text("wateringBottle-v4").findOnce() == null) {
+                    if (text("bottle_default_bt").findOnce() == null) {
                         toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                         OpenApp();
                     }
@@ -861,7 +861,7 @@ function RunJs() {
                 sleep(2000);
                 var deng = 10;
                 for (deng == 10; deng > 0; deng--) {
-                    /*if (text("wateringBottle-v4").findOnce() != null) {
+                    /*if (text("bottle_default_bt").findOnce() != null) {
                         toastLog("已处于“多多果园”活动界面");
                         var deng = 0;
                     } else {}*/
@@ -869,7 +869,7 @@ function RunJs() {
                     sleep(1500);
 
                 }
-                if (text("wateringBottle-v4").findOnce() == null) {
+                if (text("bottle_default_bt").findOnce() == null) {
                     toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                     sleep(2000);
                     OpenApp();
@@ -895,7 +895,7 @@ function RunJs() {
                     sleep(2000);
                     var deng = 10;
                     for (deng == 10; deng > 0; deng--) {
-                        /*if (text("wateringBottle-v4").findOnce() != null) {
+                        /*if (text("bottle_default_bt").findOnce() != null) {
                             toastLog("已处于“多多果园”活动界面");
                             var deng = 0;
                         } else {}*/
@@ -903,7 +903,7 @@ function RunJs() {
                         sleep(1500);
 
                     }
-                    if (text("wateringBottle-v4").findOnce() == null) {
+                    if (text("bottle_default_bt").findOnce() == null) {
                         toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                         OpenApp();
                     }
@@ -925,7 +925,7 @@ function RunJs() {
                 sleep(2000);
                 var deng = 10;
                 for (deng == 10; deng > 0; deng--) {
-                    /*if (text("wateringBottle-v4").findOnce() != null) {
+                    /*if (text("bottle_default_bt").findOnce() != null) {
                         toastLog("已处于“多多果园”活动界面");
                         var deng = 0;
                     } else {}*/
@@ -933,7 +933,7 @@ function RunJs() {
                     sleep(1500);
 
                 }
-                if (text("wateringBottle-v4").findOnce() == null) {
+                if (text("bottle_default_bt").findOnce() == null) {
                     toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                     sleep(2000);
                     OpenApp();
@@ -959,7 +959,7 @@ function RunJs() {
                     sleep(2000);
                     var deng = 10;
                     for (deng == 10; deng > 0; deng--) {
-                        /*if (text("wateringBottle-v4").findOnce() != null) {
+                        /*if (text("bottle_default_bt").findOnce() != null) {
                             toastLog("已处于“多多果园”活动界面");
                             var deng = 0;
                         } else {}*/
@@ -967,7 +967,7 @@ function RunJs() {
                         sleep(1500);
 
                     }
-                    if (text("wateringBottle-v4").findOnce() == null) {
+                    if (text("bottle_default_bt").findOnce() == null) {
                         toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                         OpenApp();
                     }
@@ -989,7 +989,7 @@ function RunJs() {
                 sleep(2000);
                 var deng = 10;
                 for (deng == 10; deng > 0; deng--) {
-                    /*if (text("wateringBottle-v4").findOnce() != null) {
+                    /*if (text("bottle_default_bt").findOnce() != null) {
                         toastLog("已处于“多多果园”活动界面");
                         var deng = 0;
                     } else {}*/
@@ -997,7 +997,7 @@ function RunJs() {
                     sleep(1500);
 
                 }
-                if (text("wateringBottle-v4").findOnce() == null) {
+                if (text("bottle_default_bt").findOnce() == null) {
                     toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                     sleep(2000);
                     OpenApp();
@@ -1022,7 +1022,7 @@ function RunJs() {
                     sleep(2000);
                     var deng = 10;
                     for (deng == 10; deng > 0; deng--) {
-                        /*if (text("wateringBottle-v4").findOnce() != null) {
+                        /*if (text("bottle_default_bt").findOnce() != null) {
                             toastLog("已处于“多多果园”活动界面");
                             var deng = 0;
                         } else {}*/
@@ -1030,7 +1030,7 @@ function RunJs() {
                         sleep(1500);
 
                     }
-                    if (text("wateringBottle-v4").findOnce() == null) {
+                    if (text("bottle_default_bt").findOnce() == null) {
                         toastLog("“多多果园”活动未成功加载\n正在重新打开软件……");
                         OpenApp();
                     }
@@ -1251,8 +1251,8 @@ function RunJs() {
                 click(D.centerX(), D.centerY());
                 toastLog("已尝试点击“关闭红包蒙版”按钮");
                 sleep(2000);
-            } else if (text("wateringBottle-v4").findOnce() != null) {
-                var Q = text("wateringBottle-v4").findOnce().bounds();
+            } else if (text("bottle_default_bt").findOnce() != null) {
+                var Q = text("bottle_default_bt").findOnce().bounds();
                 click(Q.centerX(), Q.centerY());
                 toastLog("已尝试点击“浇水”按钮");
                 sleep(2000);
