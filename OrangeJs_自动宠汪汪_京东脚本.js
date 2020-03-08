@@ -861,403 +861,387 @@ function RunJs() {
 
 
     function mainC() {
-        var M = text("下一页").findOnce();
-        if (M != null) {
-            var P = M.bounds();
-            click(P.centerX(), P.centerY());
-            toastLog("存在“下一页”按钮\n已尝试点击…");
-            sleep(2000);
-        }
-        InternetError();
-        var E = text("点击领养").findOnce();
-        if (E != null) {
-            var e = E.bounds();
-            click(e.centerX(), e.centerY());
-            toastLog("存在“点击领养”按钮\n已尝试点击…");
-            sleep(2000);
-        }
-        InternetError();
-
-        var G = text("进入小家").findOnce();
-        if (G != null) {
-            var g = G.bounds();
-            click(g.centerX(), g.centerY());
-            toastLog("存在“进入小家”按钮\n已尝试点击…");
-            sleep(2000);
-        }
-        InternetError();
-        var B = text("跳过引导").findOnce();
-        if (B != null) {
-            var b = B.bounds();
-            click(b.centerX(), b.centerY());
-            toastLog("存在“跳过引导”按钮\n已尝试点击…");
-            sleep(2000);
-        }
-        InternetError();
-        var lq = text("去领取").findOnce();
-        if (lq != null) {
-            var lqa = lq.bounds();
-            click(lqa.centerX(), lqa.centerY());
-            toastLog("存在“去领取”按钮\n已尝试点击");
-            sleep(2000);
-        }
-        var jx = text("继续领水滴").findOnce();
-        if (jx != null) {
-            var jxa = jx.bounds();
-            click(jxa.centerX(), jxa.centerY());
-            toastLog("存在“继续领水滴”按钮\n已尝试点击");
-            sleep(2000);
-        }
-
-        var jbp = text("聚宝盆来了").findOnce();
-        if (jbp != null) {
-            var gb = text("close-btn-1").findOnce();
-            if (gb != null) {
-                var jbpa = gb.bounds();
-                click(jbpa.centerX(), jbpa.centerY());
-                toastLog("存在“聚宝盆来了”弹窗\n尝试关闭…");
+        try {
+            var M = text("下一页").findOnce();
+            if (M != null) {
+                var P = M.bounds();
+                click(P.centerX(), P.centerY());
+                toastLog("存在“下一页”按钮\n已尝试点击…");
                 sleep(2000);
             }
-        }
-        WY();
+            InternetError();
+            var E = text("点击领养").findOnce();
+            if (E != null) {
+                var e = E.bounds();
+                click(e.centerX(), e.centerY());
+                toastLog("存在“点击领养”按钮\n已尝试点击…");
+                sleep(2000);
+            }
+            InternetError();
 
-        function WY() {
-            var While = 10;
-            //这个while可以完成喂养狗狗任务，直到狗粮不足或进食中
-            for (While == 10; While > 0; While--) {
-                var A = text("dog-food-icon").findOnce();
-                if (A != null) {
-                    var B = A.bounds();
-                    click(B.centerX(), B.centerY());
-                    toastLog("已找到“喂养”按钮\n尝试点击…");
+            var G = text("进入小家").findOnce();
+            if (G != null) {
+                var g = G.bounds();
+                click(g.centerX(), g.centerY());
+                toastLog("存在“进入小家”按钮\n已尝试点击…");
+                sleep(2000);
+            }
+            InternetError();
+            var B = text("跳过引导").findOnce();
+            if (B != null) {
+                var b = B.bounds();
+                click(b.centerX(), b.centerY());
+                toastLog("存在“跳过引导”按钮\n已尝试点击…");
+                sleep(2000);
+            }
+            InternetError();
+            var lq = text("去领取").findOnce();
+            if (lq != null) {
+                var lqa = lq.bounds();
+                click(lqa.centerX(), lqa.centerY());
+                toastLog("存在“去领取”按钮\n已尝试点击");
+                sleep(2000);
+            }
+            var jx = text("继续领水滴").findOnce();
+            if (jx != null) {
+                var jxa = jx.bounds();
+                click(jxa.centerX(), jxa.centerY());
+                toastLog("存在“继续领水滴”按钮\n已尝试点击");
+                sleep(2000);
+            }
+
+            var jbp = text("聚宝盆来了").findOnce();
+            if (jbp != null) {
+                var gb = text("close-btn-1").findOnce();
+                if (gb != null) {
+                    var jbpa = gb.bounds();
+                    click(jbpa.centerX(), jbpa.centerY());
+                    toastLog("存在“聚宝盆来了”弹窗\n尝试关闭…");
                     sleep(2000);
-                    if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
-                        var S = className("android.widget.Image").text("pop_close_btn").findOnce();
-                        if (S != null) {
-                            var s = S.parent().bounds();
-                            click(s.centerX(), s.centerY());
-                            toastLog("已尝试关闭“做任务领狗粮”蒙版");
-                            sleep(1000);
-                        }
-                    }
-                    if (text("请选择狗粮克数").findOnce() != null) {
-                        var C = text("喂养").findOnce();
-                        if (C != null) {
-                            var c = C.bounds();
-                            click(c.centerX(), c.centerY());
-                            toastLog("已找到并尝试点击“喂养”按钮");
-                            sleep(1000);
-                            if (text("您的宠物正在进食中,请稍后再喂食").exists()) {
-                                var Aa = text("close-btn-1").findOnce();
-                                if (Aa != null) {
-                                    var Ab = Aa.bounds();
-                                    click(Ab.centerX(), Ab.centerY());
-                                    toastLog("检测到您的宠物正在进食中，已尝试关闭喂养弹窗");
-                                    var While = 0;
-                                }
+                }
+            }
+
+
+            function WY() {
+                var While = 10;
+                //这个while可以完成喂养狗狗任务，直到狗粮不足或进食中
+                for (While == 10; While > 0; While--) {
+                    var A = text("dog-food-icon").findOnce();
+                    if (A != null) {
+                        var B = A.bounds();
+                        click(B.centerX(), B.centerY());
+                        toastLog("已找到“喂养”按钮\n尝试点击…");
+                        sleep(2000);
+                        if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                            var S = className("android.widget.Image").text("pop_close_btn").findOnce();
+                            if (S != null) {
+                                var s = S.parent().bounds();
+                                click(s.centerX(), s.centerY());
+                                toastLog("已尝试关闭“做任务领狗粮”蒙版");
+                                sleep(1000);
                             }
-                            sleep(1000);
-                            if (text("您的宠物正在进食中,请稍后再喂食").exists()) {
-                                var Aa = text("close-btn-1").findOnce();
-                                if (Aa != null) {
-                                    var Ab = Aa.bounds();
-                                    click(Ab.centerX(), Ab.centerY());
-                                    toastLog("检测到您的宠物正在进食中，已尝试关闭喂养弹窗");
-                                    var While = 0;
-                                }
-                            } else if (className("android.widget.Image").text("3CHy8l0d+v+eC8bshGb9DkuG7Jhm+k+AHlnoZYT+lAkEAAAAASUVORK5CYII=").findOnce() != null) {
-                                var Aa = text("close-btn-1").findOnce();
-                                if (Aa != null) {
-                                    var Ab = Aa.bounds();
-                                    click(Ab.centerX(), Ab.centerY());
-                                    toastLog("检测到您的宠物正在进食中，已尝试关闭喂养弹窗");
-                                    var While = 0;
-                                }
-                            }
-                            sleep(1000);
                         }
-                    } else if (textContains("请赚取足够狗粮后再来喂养").findOnce() != null) {
-                        //停止点击喂养按钮
-                        toastLog("检测到狗粮不足，停止喂养");
-                        var While = 0;
+                        if (text("请选择狗粮克数").findOnce() != null) {
+                            var C = text("喂养").findOnce();
+                            if (C != null) {
+                                var c = C.bounds();
+                                click(c.centerX(), c.centerY());
+                                toastLog("已找到并尝试点击“喂养”按钮");
+                                sleep(1000);
+                                if (text("您的宠物正在进食中,请稍后再喂食").exists()) {
+                                    var Aa = text("close-btn-1").findOnce();
+                                    if (Aa != null) {
+                                        var Ab = Aa.bounds();
+                                        click(Ab.centerX(), Ab.centerY());
+                                        toastLog("检测到您的宠物正在进食中，已尝试关闭喂养弹窗");
+                                        var While = 0;
+                                    }
+                                }
+                                sleep(1000);
+                                if (text("您的宠物正在进食中,请稍后再喂食").exists()) {
+                                    var Aa = text("close-btn-1").findOnce();
+                                    if (Aa != null) {
+                                        var Ab = Aa.bounds();
+                                        click(Ab.centerX(), Ab.centerY());
+                                        toastLog("检测到您的宠物正在进食中，已尝试关闭喂养弹窗");
+                                        var While = 0;
+                                    }
+                                } else if (className("android.widget.Image").text("3CHy8l0d+v+eC8bshGb9DkuG7Jhm+k+AHlnoZYT+lAkEAAAAASUVORK5CYII=").findOnce() != null) {
+                                    var Aa = text("close-btn-1").findOnce();
+                                    if (Aa != null) {
+                                        var Ab = Aa.bounds();
+                                        click(Ab.centerX(), Ab.centerY());
+                                        toastLog("检测到您的宠物正在进食中，已尝试关闭喂养弹窗");
+                                        var While = 0;
+                                    }
+                                }
+                                sleep(1000);
+                            }
+                        } else if (textContains("请赚取足够狗粮后再来喂养").findOnce() != null) {
+                            //停止点击喂养按钮
+                            toastLog("检测到狗粮不足，停止喂养");
+                            var While = 0;
+                        }
                     }
                 }
             }
-        }
-        sleep(1000);
-        if (className("android.widget.Image").text("close-btn-1").findOnce() != null) {
-            var Ab = className("android.widget.Image").text("close-btn-1").findOnce().bounds();
-            click(Ab.centerX(), Ab.centerY());
-            toastLog("已尝试关闭喂养弹窗");
+            WY();
             sleep(1000);
-        }
-        if (text("linggouliang").findOnce() != null) {
-            var lgla = text("linggouliang").findOnce().bounds();
-            click(lgla.centerX(), lgla.centerY());
-            toastLog("已找到“领狗粮”按钮\n尝试点击…");
-            sleep(2000);
-            if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").findOnce() != null) {
-                toastLog("已成功打开“任务页”");
-            } else {
-                if (className("android.widget.Image").text("close-btn-1").findOnce() != null) {
-                    var Ab = className("android.widget.Image").text("close-btn-1").findOnce().bounds();
-                    click(Ab.centerX(), Ab.centerY());
-                    toastLog("已尝试关闭喂养弹窗");
-                    sleep(1000);
-                }
-                if (className("android.widget.Image").text("linggouliang_text2").findOnce() != null) {
-                    var dk = className("android.widget.Image").text("linggouliang_text2").findOne().parent().bounds();
-                    click(dk.centerX(), dk.centerY());
-                    toastLog("已尝试再次点击打开“任务页”");
-                    sleep(2000);
-                }
+            if (className("android.widget.Image").text("close-btn-1").findOnce() != null) {
+                var Ab = className("android.widget.Image").text("close-btn-1").findOnce().bounds();
+                click(Ab.centerX(), Ab.centerY());
+                toastLog("已尝试关闭喂养弹窗");
+                sleep(1000);
             }
-        } else {
-            toastLog("未找到“领狗粮按钮”等待两秒重试");
-            sleep(2000);
-            var lgl = text("linggouliang").findOnce();
-            if (lgl != null) {
-                var lgla = lgl.bounds();
+            if (text("linggouliang").findOnce() != null) {
+                var lgla = text("linggouliang").findOnce().bounds();
                 click(lgla.centerX(), lgla.centerY());
                 toastLog("已找到“领狗粮”按钮\n尝试点击…");
                 sleep(2000);
+                if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").findOnce() != null) {
+                    toastLog("已成功打开“任务页”");
+                } else {
+                    if (className("android.widget.Image").text("close-btn-1").findOnce() != null) {
+                        var Ab = className("android.widget.Image").text("close-btn-1").findOnce().bounds();
+                        click(Ab.centerX(), Ab.centerY());
+                        toastLog("已尝试关闭喂养弹窗");
+                        sleep(1000);
+                    }
+                    if (className("android.widget.Image").text("linggouliang_text2").findOnce() != null) {
+                        var dk = className("android.widget.Image").text("linggouliang_text2").findOne().parent().bounds();
+                        click(dk.centerX(), dk.centerY());
+                        toastLog("已尝试再次点击打开“任务页”");
+                        sleep(2000);
+                    }
+                }
             } else {
-                toastLog("未发现“领狗粮”按钮");
-            }
-        }
-        var zrw = text("做任务得狗粮，喂养宠物可以获得更多积分哦～").findOnce();
-        if (zrw != null) {
-            toastLog("已处于“做任务领狗粮”界面")
-            var qd = text("领取").findOnce();
-            if (qd != null) {
-                var qda = qd.bounds();
-                click(qda.centerX(), qda.centerY());
-                toastLog("存在“领取”按钮\n已尝试点击…");
+                toastLog("未找到“领狗粮按钮”等待两秒重试");
                 sleep(2000);
+                var lgl = text("linggouliang").findOnce();
+                if (lgl != null) {
+                    var lgla = lgl.bounds();
+                    click(lgla.centerX(), lgla.centerY());
+                    toastLog("已找到“领狗粮”按钮\n尝试点击…");
+                    sleep(2000);
+                } else {
+                    toastLog("未发现“领狗粮”按钮");
+                }
             }
-            sleep(2000);
-            var Number = 20;
-            var hd3 = "关注店铺（" + Number + "/" + Number + "）";
-            if (textContains("关注店铺").exists()) {
-                context_xH = 1;
-                while (context_xH == 1) {
-                    var D = textContains("关注店铺").findOnce();
-                    if (D != null) {
-                        toastLog("已找到“关注店铺”");
-                        var AO = D.parent();
-                        var B = AO.children();
-                        var H = B[1].text();
-                        if (H == hd3) {
-                            toastLog(H);
-                            context_xH = 0;
-                        } else if (Number != 0) {
-                            Number--;
-                            var hd3 = "关注店铺（" + Number + "/" + Number + "）";
+            var zrw = text("做任务得狗粮，喂养宠物可以获得更多积分哦～").findOnce();
+            if (zrw != null) {
+                toastLog("已处于“做任务领狗粮”界面")
+                var qd = text("领取").findOnce();
+                if (qd != null) {
+                    var qda = qd.bounds();
+                    click(qda.centerX(), qda.centerY());
+                    toastLog("存在“领取”按钮\n已尝试点击…");
+                    sleep(2000);
+                }
+                sleep(2000);
+                var Number = 20;
+                var hd3 = "关注店铺（" + Number + "/" + Number + "）";
+                if (textContains("关注店铺").exists()) {
+                    context_xH = 1;
+                    while (context_xH == 1) {
+                        var D = textContains("关注店铺").findOnce();
+                        if (D != null) {
+                            toastLog("已找到“关注店铺”");
+                            var AO = D.parent();
+                            var B = AO.children();
+                            var H = B[1].text();
                             if (H == hd3) {
                                 toastLog(H);
-                                var Number = 0;
                                 context_xH = 0;
-                            }
-                        } else {
-                            var Number = 20;
-                            toastLog(H);
-                            var AB = B[3].bounds();
-                            click(AB.centerX(), AB.centerY());
-                            toastLog("正在完成关注店铺任务\n" + H)
-                            sleep(3000);
-                            //完成关注店铺任务
-                            var While = 1;
-                            while (While == 1) {
-                                sleep(2000);
-                                if (id("fd").findOnce() != null) {
-                                    if (id("fd").findOnce().text() == "关注店铺任务") {
-                                        var CC = text("已关注").find().length;
-                                        var A = text("进店并关注").find();
-                                        if (CC > 5) {
-                                            swipe(width / 2, height / 2, width / 2, 0, 1000);
-                                        }
-                                        if (A.length != 0) {
-                                            var A = text("进店并关注").find();
-                                            toastLog("需要关注的店铺数量剩余：" + A.length + "个\n当前已关注" + CC + "个店铺");
-                                            var B = A[0].bounds();
-                                            click(B.centerX(), B.centerY());
-                                            var deng = 5;
-                                            for (deng == 5; deng > 0; deng--) {
-                                                toastLog("已尝试点击进入店铺\n" + deng + "秒后本店铺浏览完成\n剩余" + A.length + "个店铺未浏览");
-                                                sleep(1500);
-                                            }
-                                            Justback();
-                                        } else {
-                                            toastLog("已关注全部店铺");
-                                            var While = 0;
-                                        }
-                                    }
-                                } else {
+                            } else if (Number != 0) {
+                                Number--;
+                                var hd3 = "关注店铺（" + Number + "/" + Number + "）";
+                                if (H == hd3) {
+                                    toastLog(H);
+                                    var Number = 0;
+                                    context_xH = 0;
+                                }
+                            } else {
+                                var Number = 20;
+                                toastLog(H);
+                                var AB = B[3].bounds();
+                                click(AB.centerX(), AB.centerY());
+                                toastLog("正在完成关注店铺任务\n" + H)
+                                sleep(3000);
+                                //完成关注店铺任务
+                                var While = 1;
+                                while (While == 1) {
+                                    sleep(2000);
                                     if (id("fd").findOnce() != null) {
-                                        if (id("fd").findOnce().text() == "宠汪汪") {
-                                            if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                        if (id("fd").findOnce().text() == "关注店铺任务") {
+                                            var CC = text("已关注").find().length;
+                                            var A = text("进店并关注").find();
+                                            if (CC > 5) {
+                                                swipe(width / 2, height / 2, width / 2, 0, 1000);
+                                            }
+                                            if (A.length != 0) {
+                                                var A = text("进店并关注").find();
+                                                toastLog("需要关注的店铺数量剩余：" + A.length + "个\n当前已关注" + CC + "个店铺");
+                                                var B = A[0].bounds();
+                                                click(B.centerX(), B.centerY());
+                                                var deng = 5;
+                                                for (deng == 5; deng > 0; deng--) {
+                                                    toastLog("已尝试点击进入店铺\n" + deng + "秒后本店铺浏览完成\n剩余" + A.length + "个店铺未浏览");
+                                                    sleep(1500);
+                                                }
+                                                Justback();
+                                            } else {
+                                                toastLog("已关注全部店铺");
                                                 var While = 0;
-                                                toastLog("处于“做任务领狗粮”界面未进入关注店铺中，尝试进入……");
+                                            }
+                                        }
+                                    } else {
+                                        if (id("fd").findOnce() != null) {
+                                            if (id("fd").findOnce().text() == "宠汪汪") {
+                                                if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                                    var While = 0;
+                                                    toastLog("处于“做任务领狗粮”界面未进入关注店铺中，尝试进入……");
+                                                }
+                                            } else if (currentActivity() == "com.jd.lib.jshop.jshop.JshopMainShopActivity") {
+                                                //上面的返回来处理店铺弹窗后这里再次返回
+                                                toastLog("当前未返回关注店铺界面\n尝试返回中……");
+                                                Justback();
                                             }
                                         } else if (currentActivity() == "com.jd.lib.jshop.jshop.JshopMainShopActivity") {
                                             //上面的返回来处理店铺弹窗后这里再次返回
                                             toastLog("当前未返回关注店铺界面\n尝试返回中……");
                                             Justback();
                                         }
-                                    } else if (currentActivity() == "com.jd.lib.jshop.jshop.JshopMainShopActivity") {
-                                        //上面的返回来处理店铺弹窗后这里再次返回
-                                        toastLog("当前未返回关注店铺界面\n尝试返回中……");
-                                        Justback();
                                     }
                                 }
-                            }
-                            sleep(2000);
-                            if (id("fd").findOnce() != null) {
-                                if (id("fd").findOnce().text() == "关注店铺任务") {
-                                    //循环结束即任务完成返回
-                                    Justback();
-                                    toastLog("处于“关注店铺任务”界面\n尝试返回……");
-                                    sleep(2000);
-                                } else if (id("fd").findOnce().text() == "宠汪汪") {
-                                    if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
-                                        toastLog("已处于“做任务领狗粮”界面");
-                                    } else {
-                                        toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
-                                        var ZX = text("linggouliang").findOnce();
-                                        if (ZX != null) {
-                                            var Zx = ZX.bounds();
-                                            click(Zx.centerX(), Zx.centerY());
-                                            sleep(2000);
+                                sleep(2000);
+                                if (id("fd").findOnce() != null) {
+                                    if (id("fd").findOnce().text() == "关注店铺任务") {
+                                        //循环结束即任务完成返回
+                                        Justback();
+                                        toastLog("处于“关注店铺任务”界面\n尝试返回……");
+                                        sleep(2000);
+                                    } else if (id("fd").findOnce().text() == "宠汪汪") {
+                                        if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                            toastLog("已处于“做任务领狗粮”界面");
                                         } else {
-                                            toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
-                                            sleep(2000);
+                                            toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
+                                            var ZX = text("linggouliang").findOnce();
+                                            if (ZX != null) {
+                                                var Zx = ZX.bounds();
+                                                click(Zx.centerX(), Zx.centerY());
+                                                sleep(2000);
+                                            } else {
+                                                toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
+                                                sleep(2000);
+                                            }
                                         }
                                     }
+                                } else {
+                                    toastLog("正在完成“关注店铺”任务\n但没有找到顶栏标题\n重试中……");
+                                    sleep(2000);
                                 }
-                            } else {
-                                toastLog("正在完成“关注店铺”任务\n但没有找到顶栏标题\n重试中……");
-                                sleep(2000);
-                            }
-                        }
-                    } else {
-                        toastLog("未找到“关注店铺”重试中……")
-                        mainC();
-                        toastLog("跳过! 未找到“关注店铺”");
-                        context_xH = 0;
-                    }
-                }
-            } //完成“关注店铺”任务
-            else {
-                toastLog("未找到“关注店铺”重试中……")
-                mainC();
-                toastLog("跳过! 未找到“关注店铺”");
-                context_xH = 0;
-            }
-            sleep(2000);
-            //在屏幕上滑动两个控件的距离
-            var Hd = className("android.widget.Image").text("task_sign").findOnce();
-            if (Hd != null) {
-                var Hdgd = className("android.widget.Image").text("task_sign").findOnce().parent().parent().bounds();
-                var rwlb = className("android.view.View").scrollable(true).findOnce();
-                if (rwlb != null) {
-                    var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
-                    log("已找到任务列表");
-                    swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
-                }
-            } else if (className("android.widget.Image").text("task_meals").findOnce() != null) {
-                var Hdgd = className("android.widget.Image").text("task_meals").findOnce().parent().parent().bounds();
-                var rwlb = className("android.view.View").scrollable(true).findOnce();
-                if (rwlb != null) {
-                    var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
-                    log("已找到任务列表");
-                    swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
-                }
-            } else {
-                toastLog("找不到滑动位置");
-            }
-
-            //开始完成逛逛会场任务
-            var Number = 20;
-            var OK = 0;
-            var rw = "逛逛会场（" + Number + "/" + Number + "）";
-            if (textContains("逛逛会场").exists()) {
-                context_xH = 1;
-                while (context_xH == 1) {
-                    var D = textContains("逛逛会场").findOnce();
-                    if (D != null) {
-                        toastLog("已找到“逛逛会场”");
-                        var AO = D.parent();
-                        var B = AO.children();
-                        try {
-                            if (OK > 8) { //最多只做8次
-                                if (H != null) {
-                                    if (H == B[1].text()) {
-                                        context_xH = 0;
-                                        toastLog("检测到上次任务未完成\n跳过此任务");
-                                    }
-                                }
-                            } else {
-                                var H = B[1].text();
-                            }
-                        } catch (e) {
-                            log(e);
-                        } finally {
-                            var H = B[1].text();
-                        }
-                        if (H == rw) {
-                            toastLog(H);
-                            context_xH = 0;
-                        } else if (Number != 0) {
-                            Number--;
-                            var rw = "逛逛会场（" + Number + "/" + Number + "）";
-                            if (H == rw) {
-                                toastLog(H);
-                                var Number = 0;
-                                context_xH = 0;
                             }
                         } else {
-                            var Number = 20;
-                            OK++;
-                            toastLog(H);
-                            var AB = B[3].bounds();
-                            click(AB.centerX(), AB.centerY());
-                            toastLog("已尝试点击去完成“逛逛会场”任务");
-                            sleep(2000);
-                            if (id("fd").findOnce() != null) {
-                                if (id("fd").findOnce().text() != "宠汪汪") {
-                                    var deng = 5;
-                                    for (deng == 5; deng > 0; deng--) {
-                                        toastLog("正在完成逛逛会场任务\n" + H + "\n剩余" + deng + "秒……");
-                                        sleep(2000);
+                            toastLog("未找到“关注店铺”重试中……")
+                            mainC();
+                            toastLog("跳过! 未找到“关注店铺”");
+                            context_xH = 0;
+                        }
+                    }
+                } //完成“关注店铺”任务
+                else {
+                    toastLog("未找到“关注店铺”重试中……")
+                    mainC();
+                    toastLog("跳过! 未找到“关注店铺”");
+                    context_xH = 0;
+                }
+                sleep(2000);
+                //在屏幕上滑动两个控件的距离
+                var Hd = className("android.widget.Image").text("task_sign").findOnce();
+                if (Hd != null) {
+                    var Hdgd = className("android.widget.Image").text("task_sign").findOnce().parent().parent().bounds();
+                    var rwlb = className("android.view.View").scrollable(true).findOnce();
+                    if (rwlb != null) {
+                        var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
+                        log("已找到任务列表");
+                        swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
+                    }
+                } else if (className("android.widget.Image").text("task_meals").findOnce() != null) {
+                    var Hdgd = className("android.widget.Image").text("task_meals").findOnce().parent().parent().bounds();
+                    var rwlb = className("android.view.View").scrollable(true).findOnce();
+                    if (rwlb != null) {
+                        var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
+                        log("已找到任务列表");
+                        swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
+                    }
+                } else {
+                    toastLog("找不到滑动位置");
+                }
+
+                //开始完成逛逛会场任务
+                var Number = 20;
+                var OK = 0;
+                var rw = "逛逛会场（" + Number + "/" + Number + "）";
+                if (textContains("逛逛会场").exists()) {
+                    context_xH = 1;
+                    while (context_xH == 1) {
+                        var D = textContains("逛逛会场").findOnce();
+                        if (D != null) {
+                            toastLog("已找到“逛逛会场”");
+                            var AO = D.parent();
+                            var B = AO.children();
+                            try {
+                                if (OK > 8) { //最多只做8次
+                                    if (H != null) {
+                                        if (H == B[1].text()) {
+                                            context_xH = 0;
+                                            toastLog("检测到上次任务未完成\n跳过此任务");
+                                        }
                                     }
-                                    Justback();
-                                    sleep(2000);
-                                    /*if (id("a96").findOnce() != null) {
+                                } else {
+                                    var H = B[1].text();
+                                }
+                            } catch (e) {
+                                log(e);
+                            } finally {
+                                var H = B[1].text();
+                            }
+                            if (H == rw) {
+                                toastLog(H);
+                                context_xH = 0;
+                            } else if (Number != 0) {
+                                Number--;
+                                var rw = "逛逛会场（" + Number + "/" + Number + "）";
+                                if (H == rw) {
+                                    toastLog(H);
+                                    var Number = 0;
+                                    context_xH = 0;
+                                }
+                            } else {
+                                var Number = 20;
+                                OK++;
+                                toastLog(H);
+                                var AB = B[3].bounds();
+                                click(AB.centerX(), AB.centerY());
+                                toastLog("已尝试点击去完成“逛逛会场”任务");
+                                sleep(2000);
+                                if (id("fd").findOnce() != null) {
+                                    if (id("fd").findOnce().text() != "宠汪汪") {
+                                        var deng = 5;
+                                        for (deng == 5; deng > 0; deng--) {
+                                            toastLog("正在完成逛逛会场任务\n" + H + "\n剩余" + deng + "秒……");
+                                            sleep(2000);
+                                        }
                                         Justback();
                                         sleep(2000);
-                                        if (id("a96").findOnce() != null) {
-                                            openJDinSearch();
-                                        }
-                                    }*/
-                                    if (id("fd").findOnce() != null) {
-                                        if (id("fd").findOnce().text() == "宠汪汪") {
-                                            if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
-                                                toastLog("已处于“做任务领狗粮”界面");
-                                            } else {
-                                                toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
-                                                var ZX = text("linggouliang").findOnce();
-                                                if (ZX != null) {
-                                                    var Zx = ZX.bounds();
-                                                    click(Zx.centerX(), Zx.centerY());
-                                                    sleep(2000);
-                                                } else {
-                                                    toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
-                                                    sleep(2000);
-                                                }
-                                            }
-                                        } else {
+                                        /*if (id("a96").findOnce() != null) {
                                             Justback();
-                                            sleep(3000);
+                                            sleep(2000);
+                                            if (id("a96").findOnce() != null) {
+                                                openJDinSearch();
+                                            }
+                                        }*/
+                                        if (id("fd").findOnce() != null) {
                                             if (id("fd").findOnce().text() == "宠汪汪") {
                                                 if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
                                                     toastLog("已处于“做任务领狗粮”界面");
@@ -1274,409 +1258,394 @@ function RunJs() {
                                                     }
                                                 }
                                             } else {
-                                                toastLog("仍然找不到顶栏标题\n尝试重新进入……");
+                                                Justback();
+                                                sleep(3000);
+                                                if (id("fd").findOnce().text() == "宠汪汪") {
+                                                    if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                                        toastLog("已处于“做任务领狗粮”界面");
+                                                    } else {
+                                                        toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
+                                                        var ZX = text("linggouliang").findOnce();
+                                                        if (ZX != null) {
+                                                            var Zx = ZX.bounds();
+                                                            click(Zx.centerX(), Zx.centerY());
+                                                            sleep(2000);
+                                                        } else {
+                                                            toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
+                                                            sleep(2000);
+                                                        }
+                                                    }
+                                                } else {
+                                                    toastLog("仍然找不到顶栏标题\n尝试重新进入……");
+                                                    sleep(2000);
+                                                    context_xH = 0;
+                                                    openJDinSearch();
+                                                }
+                                            }
+                                        } else {
+                                            toastLog("未找到顶栏标题\n等待加载重试中……");
+                                            sleep(2000);
+                                        }
+                                    } else if (id("fd").findOnce().text() == "宠汪汪") {
+                                        if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                            toastLog("已处于“做任务领狗粮”界面");
+                                        } else {
+                                            toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
+                                            var ZX = text("linggouliang").findOnce();
+                                            if (ZX != null) {
+                                                var Zx = ZX.bounds();
+                                                click(Zx.centerX(), Zx.centerY());
                                                 sleep(2000);
-                                                context_xH = 0;
-                                                openJDinSearch();
+                                            } else {
+                                                toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
+                                                sleep(2000);
                                             }
                                         }
-                                    } else {
-                                        toastLog("未找到顶栏标题\n等待加载重试中……");
+                                    }
+                                } else if (id("a96").findOnce() != null) {
+                                    var deng = 5;
+                                    for (deng == 5; deng > 0; deng--) {
+                                        toastLog("正在完成逛逛会场任务\n" + H + "\n剩余" + deng + "秒……");
                                         sleep(2000);
                                     }
-                                } else if (id("fd").findOnce().text() == "宠汪汪") {
-                                    if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
-                                        toastLog("已处于“做任务领狗粮”界面");
-                                    } else {
-                                        toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
-                                        var ZX = text("linggouliang").findOnce();
-                                        if (ZX != null) {
-                                            var Zx = ZX.bounds();
-                                            click(Zx.centerX(), Zx.centerY());
-                                            sleep(2000);
-                                        } else {
-                                            toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
-                                            sleep(2000);
-                                        }
-                                    }
-                                }
-                            } else if (id("a96").findOnce() != null) {
-                                var deng = 5;
-                                for (deng == 5; deng > 0; deng--) {
-                                    toastLog("正在完成逛逛会场任务\n" + H + "\n剩余" + deng + "秒……");
+                                    Justback();
+                                    sleep(2000);
+                                } else {
+                                    Justback();
                                     sleep(2000);
                                 }
-                                Justback();
-                                sleep(2000);
-                            } else {
-                                Justback();
-                                sleep(2000);
                             }
-                        }
-                    } else {
-                        toastLog("跳过! 未找到“逛逛会场”");
-                        context_xH = 0;
-                    }
-                }
-            } else {
-                toastLog("未找到“逛逛会场”重试中……")
-                mainC();
-                toastLog("跳过! 未找到“逛逛会场”");
-                context_xH = 0;
-            } //“逛逛会场”任务完成
-            sleep(2000);
-            /*
-            //在屏幕上滑动两个控件的距离
-            var Hd = className("android.widget.Image").text("task_sign").findOnce();
-            if (Hd != null) {
-                var Hdgd = className("android.widget.Image").text("task_sign").findOnce().parent().parent().bounds();
-                var rwlb = className("android.view.View").scrollable(true).findOnce();
-                if (rwlb != null) {
-                    var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
-                    log("已找到任务列表");
-                    swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
-                }
-            } else if (className("android.widget.Image").text("task_meals").findOnce() != null) {
-                var Hdgd = className("android.widget.Image").text("task_meals").findOnce().parent().parent().bounds();
-                var rwlb = className("android.view.View").scrollable(true).findOnce();
-                if (rwlb != null) {
-                    var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
-                    log("已找到任务列表");
-                    swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
-                }
-            } else {
-                toastLog("找不到滑动位置");
-            }*/
-            try {
-                className("android.view.View").scrollable(true).findOnce().scrollDown();
-            } catch (e) {
-                log(e);
-            }
-
-            //开始完成关注商品任务
-            var Number = 20;
-            var rw = "关注商品（" + Number + "/" + Number + "）";
-            if (textContains("关注商品").exists()) {
-                context_xH = 1;
-
-                while (context_xH == 1) {
-                    var D = textContains("关注商品").findOnce();
-                    if (D != null) {
-                        toastLog("已找到“关注商品”");
-                        var AO = D.parent();
-                        var B = AO.children();
-                        var H = B[1].text();
-                        if (H == rw) {
-                            toastLog(H);
+                        } else {
+                            toastLog("跳过! 未找到“逛逛会场”");
                             context_xH = 0;
-                        } else if (Number != 0) {
-                            Number--;
-                            var rw = "关注商品（" + Number + "/" + Number + "）";
+                        }
+                    }
+                } else {
+                    toastLog("未找到“逛逛会场”重试中……")
+                    mainC();
+                    toastLog("跳过! 未找到“逛逛会场”");
+                    context_xH = 0;
+                } //“逛逛会场”任务完成
+                sleep(2000);
+                /*
+                //在屏幕上滑动两个控件的距离
+                var Hd = className("android.widget.Image").text("task_sign").findOnce();
+                if (Hd != null) {
+                    var Hdgd = className("android.widget.Image").text("task_sign").findOnce().parent().parent().bounds();
+                    var rwlb = className("android.view.View").scrollable(true).findOnce();
+                    if (rwlb != null) {
+                        var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
+                        log("已找到任务列表");
+                        swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
+                    }
+                } else if (className("android.widget.Image").text("task_meals").findOnce() != null) {
+                    var Hdgd = className("android.widget.Image").text("task_meals").findOnce().parent().parent().bounds();
+                    var rwlb = className("android.view.View").scrollable(true).findOnce();
+                    if (rwlb != null) {
+                        var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
+                        log("已找到任务列表");
+                        swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
+                    }
+                } else {
+                    toastLog("找不到滑动位置");
+                }*/
+                try {
+                    className("android.view.View").scrollable(true).findOnce().scrollDown();
+                } catch (e) {
+                    log(e);
+                }
+
+                //开始完成关注商品任务
+                var Number = 20;
+                var rw = "关注商品（" + Number + "/" + Number + "）";
+                if (textContains("关注商品").exists()) {
+                    context_xH = 1;
+
+                    while (context_xH == 1) {
+                        var D = textContains("关注商品").findOnce();
+                        if (D != null) {
+                            toastLog("已找到“关注商品”");
+                            var AO = D.parent();
+                            var B = AO.children();
+                            var H = B[1].text();
                             if (H == rw) {
                                 toastLog(H);
-                                var Number = 0;
                                 context_xH = 0;
-                            }
-                        } else {
-                            var Number = 20;
-                            toastLog(H);
-                            var AB = B[3].bounds();
-                            click(AB.centerX(), AB.centerY());
-                            sleep(2000);
-                            if (currentActivity() == "com.jd.lib.productdetail.ProductDetailActivity") {
-                                var deng = 5;
-                                for (deng == 5; deng > 0; deng--) {
-                                    toastLog("正在完成关注商品任务\n" + H + "\n剩余" + deng + "秒……");
-                                    sleep(2000);
+                            } else if (Number != 0) {
+                                Number--;
+                                var rw = "关注商品（" + Number + "/" + Number + "）";
+                                if (H == rw) {
+                                    toastLog(H);
+                                    var Number = 0;
+                                    context_xH = 0;
                                 }
-                                Justback();
-                                sleep(1000);
-                                if (id("fd").findOnce() != null) {
-                                    if (id("fd").findOnce().text() == "宠汪汪") {
-                                        if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
-                                            toastLog("已返回“做任务领狗粮”界面");
-                                        }
-                                    }
-                                } else {
-                                    toastLog("关注商品任务\n没有找到顶栏标题");
-                                    sleep(2000);
-                                }
-                            } else if (id("fd").findOnce() != null) {
-                                if (id("fd").findOnce().text() == "宠汪汪") {
-                                    toastLog("还处于“做任务领狗粮”界面\n继续任务……");
-                                }
-                            } else if (id("fd").findOnce() == null) {
-                                var deng = 5;
-                                for (deng == 5; deng > 0; deng--) {
-                                    toastLog("正在完成关注商品任务\n" + H + "\n剩余" + deng + "秒……");
-                                    sleep(2000);
-                                }
-                                Justback();
-                                sleep(1000);
-                            }
-                        }
-                    } else {
-                        toastLog("跳过! 未找到“关注商品”");
-                        context_xH = 0;
-                    }
-                } //“关注商品”任务完成
-            } else {
-                toastLog("未找到“关注商品”重试中……")
-                mainC();
-                toastLog("跳过! 未找到“关注商品”");
-                context_xH = 0;
-            }
-
-            sleep(2000);
-            try {
-                className("android.view.View").scrollable(true).findOnce().scrollDown();
-            } catch (e) {
-                log(e);
-            }
-            /*
-                    //在屏幕上滑动两个控件的距离
-                    var Hd = className("android.widget.Image").text("task_sign").findOnce();
-                    if (Hd != null) {
-                        var Hdgd = className("android.widget.Image").text("task_sign").findOnce().parent().parent().bounds();
-                        var rwlb = className("android.view.View").scrollable(true).findOnce();
-                        if (rwlb != null) {
-                            var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
-                            log("已找到任务列表");
-                            swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
-                        }
-                    } else if (className("android.widget.Image").text("task_meals").findOnce() != null) {
-                        var Hdgd = className("android.widget.Image").text("task_meals").findOnce().parent().parent().bounds();
-                        var rwlb = className("android.view.View").scrollable(true).findOnce();
-                        if (rwlb != null) {
-                            var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
-                            log("已找到任务列表");
-                            swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
-                        }
-                    } else {
-                        toastLog("找不到滑动位置");
-                    }*/
-            //开始完成关注频道任务
-            var Number = 20;
-            var hd3 = "关注频道（" + Number + "/" + Number + "）";
-            if (textContains("关注频道").exists()) {
-                context_xH = 1;
-
-                while (context_xH == 1) {
-                    var D = textContains("关注频道").findOnce();
-                    if (D != null) {
-                        toastLog("已找到“关注频道”");
-                        var AO = D.parent();
-                        var B = AO.children();
-                        var H = B[1].text();
-                        if (H == hd3) {
-                            toastLog(H);
-                            context_xH = 0;
-                        } else if (Number != 0) {
-                            Number--;
-                            var hd3 = "关注频道（" + Number + "/" + Number + "）";
-                            if (H == hd3) {
+                            } else {
+                                var Number = 20;
                                 toastLog(H);
-                                var Number = 0;
-                                context_xH = 0;
-                            }
-                        } else {
-                            var Number = 20;
-                            toastLog(H);
-                            var AB = B[3].bounds();
-                            click(AB.centerX(), AB.centerY());
-                            toastLog("正在完成关注频道任务\n" + H)
-                            sleep(3000);
-                            //完成关注店铺任务
-                            var While = 1;
-                            while (While == 1) {
+                                var AB = B[3].bounds();
+                                click(AB.centerX(), AB.centerY());
                                 sleep(2000);
-                                var AZ = id("com.jingdong.app.mall:id/fd").findOnce();
-                                if (AZ != null) {
-                                    var AX = AZ.text();
-                                    if (AX == "关注频道任务") {
-                                        var AA = "关注频道任务";
+                                if (currentActivity() == "com.jd.lib.productdetail.ProductDetailActivity") {
+                                    var deng = 5;
+                                    for (deng == 5; deng > 0; deng--) {
+                                        toastLog("正在完成关注商品任务\n" + H + "\n剩余" + deng + "秒……");
+                                        sleep(2000);
                                     }
-                                }
-                                if (AA != null) {
-                                    var CC = text("已关注").find().length;
-                                    var A = text("进入并关注").find();
-                                    if (CC > 3) {
-                                        swipe(width / 2, height / 2, width / 2, 0, 1000);
-                                    }
-                                    if (A.length != 0) {
-                                        var A = text("进入并关注").find();
-                                        if (A.nonEmpty() == true) {
-                                            toastLog("需要关注的频道数量剩余：" + A.length + "个\n当前已关注" + CC + "个频道");
-                                            var B = A[0].bounds();
-                                            click(B.centerX(), B.centerY());
-                                            var deng = 5;
-                                            for (deng == 5; deng > 0; deng--) {
-                                                toastLog("已尝试点击进入频道\n" + deng + "秒后本频道浏览完成\n剩余" + A.length + "个频道未浏览");
-                                                sleep(1500);
+                                    Justback();
+                                    sleep(1000);
+                                    if (id("fd").findOnce() != null) {
+                                        if (id("fd").findOnce().text() == "宠汪汪") {
+                                            if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                                toastLog("已返回“做任务领狗粮”界面");
                                             }
-                                            Justback();
-                                        } else {
-                                            toastLog("进入并关注的Find是空的");
-                                            sleep(2000);
                                         }
                                     } else {
-                                        toastLog("已关注全部频道");
-                                        var While = 0;
+                                        toastLog("关注商品任务\n没有找到顶栏标题");
+                                        sleep(2000);
                                     }
-                                } else {
-                                    if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
-                                        if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "宠汪汪") {
-                                            if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
-                                                var While = 0;
-                                                toastLog("处于“做任务领狗粮”界面未进入关注频道任务中，尝试进入……");
+                                } else if (id("fd").findOnce() != null) {
+                                    if (id("fd").findOnce().text() == "宠汪汪") {
+                                        toastLog("还处于“做任务领狗粮”界面\n继续任务……");
+                                    }
+                                } else if (id("fd").findOnce() == null) {
+                                    var deng = 5;
+                                    for (deng == 5; deng > 0; deng--) {
+                                        toastLog("正在完成关注商品任务\n" + H + "\n剩余" + deng + "秒……");
+                                        sleep(2000);
+                                    }
+                                    Justback();
+                                    sleep(1000);
+                                }
+                            }
+                        } else {
+                            toastLog("跳过! 未找到“关注商品”");
+                            context_xH = 0;
+                        }
+                    } //“关注商品”任务完成
+                } else {
+                    toastLog("未找到“关注商品”重试中……")
+                    mainC();
+                    toastLog("跳过! 未找到“关注商品”");
+                    context_xH = 0;
+                }
+
+                sleep(2000);
+                try {
+                    className("android.view.View").scrollable(true).findOnce().scrollDown();
+                } catch (e) {
+                    log(e);
+                }
+                /*
+                        //在屏幕上滑动两个控件的距离
+                        var Hd = className("android.widget.Image").text("task_sign").findOnce();
+                        if (Hd != null) {
+                            var Hdgd = className("android.widget.Image").text("task_sign").findOnce().parent().parent().bounds();
+                            var rwlb = className("android.view.View").scrollable(true).findOnce();
+                            if (rwlb != null) {
+                                var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
+                                log("已找到任务列表");
+                                swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
+                            }
+                        } else if (className("android.widget.Image").text("task_meals").findOnce() != null) {
+                            var Hdgd = className("android.widget.Image").text("task_meals").findOnce().parent().parent().bounds();
+                            var rwlb = className("android.view.View").scrollable(true).findOnce();
+                            if (rwlb != null) {
+                                var rwlb = className("android.view.View").scrollable(true).findOnce().bounds();
+                                log("已找到任务列表");
+                                swipe(rwlb.centerX(), rwlb.centerY(), rwlb.centerX(), rwlb.centerY() - Hdgd.height(), 500);
+                            }
+                        } else {
+                            toastLog("找不到滑动位置");
+                        }*/
+                //开始完成关注频道任务
+                var Number = 20;
+                var hd3 = "关注频道（" + Number + "/" + Number + "）";
+                if (textContains("关注频道").exists()) {
+                    context_xH = 1;
+
+                    while (context_xH == 1) {
+                        var D = textContains("关注频道").findOnce();
+                        if (D != null) {
+                            toastLog("已找到“关注频道”");
+                            var AO = D.parent();
+                            var B = AO.children();
+                            var H = B[1].text();
+                            if (H == hd3) {
+                                toastLog(H);
+                                context_xH = 0;
+                            } else if (Number != 0) {
+                                Number--;
+                                var hd3 = "关注频道（" + Number + "/" + Number + "）";
+                                if (H == hd3) {
+                                    toastLog(H);
+                                    var Number = 0;
+                                    context_xH = 0;
+                                }
+                            } else {
+                                var Number = 20;
+                                toastLog(H);
+                                var AB = B[3].bounds();
+                                click(AB.centerX(), AB.centerY());
+                                toastLog("正在完成关注频道任务\n" + H)
+                                sleep(3000);
+                                //完成关注店铺任务
+                                var While = 1;
+                                while (While == 1) {
+                                    sleep(2000);
+                                    var AZ = id("com.jingdong.app.mall:id/fd").findOnce();
+                                    if (AZ != null) {
+                                        var AX = AZ.text();
+                                        if (AX == "关注频道任务") {
+                                            var AA = "关注频道任务";
+                                        }
+                                    }
+                                    if (AA != null) {
+                                        var CC = text("已关注").find().length;
+                                        var A = text("进入并关注").find();
+                                        if (CC > 3) {
+                                            swipe(width / 2, height / 2, width / 2, 0, 1000);
+                                        }
+                                        if (A.length != 0) {
+                                            var A = text("进入并关注").find();
+                                            if (A.nonEmpty() == true) {
+                                                toastLog("需要关注的频道数量剩余：" + A.length + "个\n当前已关注" + CC + "个频道");
+                                                var B = A[0].bounds();
+                                                click(B.centerX(), B.centerY());
+                                                var deng = 5;
+                                                for (deng == 5; deng > 0; deng--) {
+                                                    toastLog("已尝试点击进入频道\n" + deng + "秒后本频道浏览完成\n剩余" + A.length + "个频道未浏览");
+                                                    sleep(1500);
+                                                }
+                                                Justback();
+                                            } else {
+                                                toastLog("进入并关注的Find是空的");
+                                                sleep(2000);
+                                            }
+                                        } else {
+                                            toastLog("已关注全部频道");
+                                            var While = 0;
+                                        }
+                                    } else {
+                                        if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
+                                            if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "宠汪汪") {
+                                                if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                                    var While = 0;
+                                                    toastLog("处于“做任务领狗粮”界面未进入关注频道任务中，尝试进入……");
+                                                }
+                                            } else {
+                                                toastLog("尝试返回到任务界面中……");
+                                                Justback();
+                                                sleep(2000);
                                             }
                                         } else {
                                             toastLog("尝试返回到任务界面中……");
                                             Justback();
                                             sleep(2000);
                                         }
-                                    } else {
-                                        toastLog("尝试返回到任务界面中……");
-                                        Justback();
-                                        sleep(2000);
                                     }
                                 }
-                            }
-                            sleep(2000);
-                            if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
-                                if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "关注频道任务") {
-                                    //循环结束即任务完成返回
-                                    Justback();
-                                    toastLog("处于“关注频道任务”界面\n尝试返回……");
-                                    sleep(2000);
-                                } else if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "宠汪汪") {
-                                    if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
-                                        toastLog("已处于“做任务领狗粮”界面");
-                                    } else {
-                                        toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
-                                        var ZX = text("linggouliang").findOnce();
-                                        if (ZX != null) {
-                                            var Zx = ZX.bounds();
-                                            click(Zx.centerX(), Zx.centerY());
-                                            toastLog("已尝试点击“领狗粮”按钮");
-                                            sleep(2000);
+                                sleep(2000);
+                                if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
+                                    if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "关注频道任务") {
+                                        //循环结束即任务完成返回
+                                        Justback();
+                                        toastLog("处于“关注频道任务”界面\n尝试返回……");
+                                        sleep(2000);
+                                    } else if (id("com.jingdong.app.mall:id/fd").findOnce().text() == "宠汪汪") {
+                                        if (text("做任务得狗粮，喂养宠物可以获得更多积分哦～").exists()) {
+                                            toastLog("已处于“做任务领狗粮”界面");
                                         } else {
-                                            toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
-                                            sleep(2000);
+                                            toastLog("处于“宠汪汪”界面\n但未发现“做任务领狗粮”\n尝试点击“领狗粮”按钮");
+                                            var ZX = text("linggouliang").findOnce();
+                                            if (ZX != null) {
+                                                var Zx = ZX.bounds();
+                                                click(Zx.centerX(), Zx.centerY());
+                                                toastLog("已尝试点击“领狗粮”按钮");
+                                                sleep(2000);
+                                            } else {
+                                                toastLog("处于“宠汪汪”界面但未找到“领狗粮”按钮");
+                                                sleep(2000);
+                                            }
                                         }
                                     }
-                                }
-                            } else {
-                                toastLog("正在完成“关注频道”任务\n但没有找到顶栏标题\n重试中……");
-                                sleep(2000);
-                            }
-                        }
-                    } else {
-                        toastLog("未找到“关注频道”重试中……")
-                        mainC();
-                        toastLog("跳过! 未找到“关注频道”");
-                        context_xH = 0;
-                    }
-                }
-            } //完成“关注频道”任务
-            else {
-                toastLog("未找到“关注频道”重试中……")
-                mainC();
-                toastLog("跳过! 未找到“关注频道”");
-                context_xH = 0;
-            }
-
-            sleep(2000);
-            var A = className("android.widget.Image").text("Wyf3EG0V9Ic75ItYoAAAAAElFTkSuQmCC").findOnce();
-            if (A != null) {
-                var V = A.parent().bounds();
-                click(V.centerX(), V.centerY());
-                toastLog("已尝试关闭“做任务领狗粮”");
-                sleep(2000);
-            }
-            var A = className("android.widget.Image").text("Wyf3EG0V9Ic75ItYoAAAAAElFTkSuQmCC").findOnce();
-            if (A != null) {
-                var V = A.parent().bounds();
-                click(V.centerX(), V.centerY());
-                toastLog("已尝试关闭“做任务领狗粮”");
-                sleep(2000);
-            }
-
-            WY();
-            //开始帮喂汪汪
-            var OI = className("android.widget.Image").text("help_icon2").findOnce();
-            if (OI != null) {
-                var Op = OI.bounds();
-                click(Op.centerX(), Op.centerY());
-                toastLog("已找到“帮忙喂养按钮”\n尝试点击");
-                sleep(2500);
-                var m = text("可帮喂").find();
-                var l = text("已帮喂").find();
-                var ff = text("抢").find();
-                if (m.size() > 0) {
-                    var While = 1;
-                } else if (ff.size() > 0) {
-                    var While = 1;
-                } else {
-                    toastLog("未找到“可喂养”的汪汪\n跳过此任务！");
-                    var S = className("android.widget.Image").text("pop_close_btn").findOnce();
-                    if (S != null) {
-                        var ss = S.bounds();
-                        click(ss.centerX(), ss.centerY());
-                        toastLog("已尝试点击关闭蒙版按钮");
-                        sleep(2000);
-                    }
-                    dialogs.alert("脚本已运行完成");
-                    log("脚本已运行完成");
-                    exit();
-                }
-                while (While == 1) {
-                    var m = text("可帮喂").find();
-                    var l = text("已帮喂").find();
-                    var ff = text("抢").find();
-                    toastLog("当前还可以帮喂" + m.size() + "个宠物\n当前已帮喂" + l.size() + "个宠物\n当前可抢的狗粮剩余：" + ff.size());
-                    if (m.nonEmpty() == true) {
-                        var g = m[0].parent();
-                        var GG = g.children();
-                        var ww_title = GG[2].text() + "的汪汪";
-                    }
-                    var dian = text("可帮喂").findOnce();
-                    var dianM = text("抢").findOnce();
-
-                    function S_Wy_Qiang() {
-                        if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
-                            var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
-                            if (a == ww_title) {
-                                toastLog("正在喂养" + ww_title);
-                                sleep(2000);
-                                if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
-                                    var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
-                                    click(ns.centerX(), ns.centerY());
-                                    toastLog("已尝试点击了“狗粮骨头”");
-                                    sleep(2000);
-                                }
-                                if (text("dog-food-icon").findOnce() != null) {
-                                    var hv = text("dog-food-icon").findOnce().bounds();
-                                    click(hv.centerX(), hv.centerY());
-                                    toastLog("已尝试点击“帮TA喂养”按钮");
-                                    sleep(2000);
-                                    if (className("android.view.View").text("确定").findOnce() != null) {
-                                        var ed = className("android.view.View").text("确定").findOnce().bounds();
-                                        click(ed.centerX(), ed.centerY());
-                                        toastLog("已尝试点击“确定帮TA喂养按钮”");
-                                        sleep(2000);
-
-                                    }
-                                    Justback();
-                                    sleep(2000);
                                 } else {
-                                    toastLog("处于“喂养" + ww_title + "”界面\n但未发现喂养按钮\n返回上一级界面...");
-                                    Justback();
+                                    toastLog("正在完成“关注频道”任务\n但没有找到顶栏标题\n重试中……");
                                     sleep(2000);
                                 }
                             }
                         } else {
+                            toastLog("未找到“关注频道”重试中……")
+                            mainC();
+                            toastLog("跳过! 未找到“关注频道”");
+                            context_xH = 0;
+                        }
+                    }
+                } //完成“关注频道”任务
+                else {
+                    toastLog("未找到“关注频道”重试中……")
+                    mainC();
+                    toastLog("跳过! 未找到“关注频道”");
+                    context_xH = 0;
+                }
+
+                sleep(2000);
+                var A = className("android.widget.Image").text("Wyf3EG0V9Ic75ItYoAAAAAElFTkSuQmCC").findOnce();
+                if (A != null) {
+                    var V = A.parent().bounds();
+                    click(V.centerX(), V.centerY());
+                    toastLog("已尝试关闭“做任务领狗粮”");
+                    sleep(2000);
+                }
+                var A = className("android.widget.Image").text("Wyf3EG0V9Ic75ItYoAAAAAElFTkSuQmCC").findOnce();
+                if (A != null) {
+                    var V = A.parent().bounds();
+                    click(V.centerX(), V.centerY());
+                    toastLog("已尝试关闭“做任务领狗粮”");
+                    sleep(2000);
+                }
+
+                WY();
+                //开始帮喂汪汪
+                var OI = className("android.widget.Image").text("help_icon2").findOnce();
+                if (OI != null) {
+                    var Op = OI.bounds();
+                    click(Op.centerX(), Op.centerY());
+                    toastLog("已找到“帮忙喂养按钮”\n尝试点击");
+                    sleep(2500);
+                    var m = text("可帮喂").find();
+                    var l = text("已帮喂").find();
+                    var ff = text("抢").find();
+                    if (m.size() > 0) {
+                        var While = 1;
+                    } else if (ff.size() > 0) {
+                        var While = 1;
+                    } else {
+                        toastLog("未找到“可喂养”的汪汪\n跳过此任务！");
+                        var S = className("android.widget.Image").text("pop_close_btn").findOnce();
+                        if (S != null) {
+                            var ss = S.bounds();
+                            click(ss.centerX(), ss.centerY());
+                            toastLog("已尝试点击关闭蒙版按钮");
                             sleep(2000);
+                        }
+                        dialogs.alert("脚本已运行完成");
+                        log("脚本已运行完成");
+                        exit();
+                    }
+                    while (While == 1) {
+                        var m = text("可帮喂").find();
+                        var l = text("已帮喂").find();
+                        var ff = text("抢").find();
+                        toastLog("当前还可以帮喂" + m.size() + "个宠物\n当前已帮喂" + l.size() + "个宠物\n当前可抢的狗粮剩余：" + ff.size());
+                        if (m.nonEmpty() == true) {
+                            var g = m[0].parent();
+                            var GG = g.children();
+                            var ww_title = GG[2].text() + "的汪汪";
+                        }
+                        var dian = text("可帮喂").findOnce();
+                        var dianM = text("抢").findOnce();
+
+                        function S_Wy_Qiang() {
                             if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
                                 var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
                                 if (a == ww_title) {
@@ -1698,6 +1667,7 @@ function RunJs() {
                                             click(ed.centerX(), ed.centerY());
                                             toastLog("已尝试点击“确定帮TA喂养按钮”");
                                             sleep(2000);
+
                                         }
                                         Justback();
                                         sleep(2000);
@@ -1706,51 +1676,86 @@ function RunJs() {
                                         Justback();
                                         sleep(2000);
                                     }
-                                } else if (a == "宠汪汪") {
-                                    toastLog("还处于“宠汪汪”界面\n继续任务…");
                                 }
                             } else {
-                                toastLog("没有找到顶栏标题\n跳过此任务");
-                                var While = 0;
+                                sleep(2000);
+                                if (id("com.jingdong.app.mall:id/fd").findOnce() != null) {
+                                    var a = id("com.jingdong.app.mall:id/fd").findOnce().text();
+                                    if (a == ww_title) {
+                                        toastLog("正在喂养" + ww_title);
+                                        sleep(2000);
+                                        if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
+                                            var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
+                                            click(ns.centerX(), ns.centerY());
+                                            toastLog("已尝试点击了“狗粮骨头”");
+                                            sleep(2000);
+                                        }
+                                        if (text("dog-food-icon").findOnce() != null) {
+                                            var hv = text("dog-food-icon").findOnce().bounds();
+                                            click(hv.centerX(), hv.centerY());
+                                            toastLog("已尝试点击“帮TA喂养”按钮");
+                                            sleep(2000);
+                                            if (className("android.view.View").text("确定").findOnce() != null) {
+                                                var ed = className("android.view.View").text("确定").findOnce().bounds();
+                                                click(ed.centerX(), ed.centerY());
+                                                toastLog("已尝试点击“确定帮TA喂养按钮”");
+                                                sleep(2000);
+                                            }
+                                            Justback();
+                                            sleep(2000);
+                                        } else {
+                                            toastLog("处于“喂养" + ww_title + "”界面\n但未发现喂养按钮\n返回上一级界面...");
+                                            Justback();
+                                            sleep(2000);
+                                        }
+                                    } else if (a == "宠汪汪") {
+                                        toastLog("还处于“宠汪汪”界面\n继续任务…");
+                                    }
+                                } else {
+                                    toastLog("没有找到顶栏标题\n跳过此任务");
+                                    var While = 0;
+                                }
                             }
                         }
-                    }
-                    if (dian != null) {
-                        var fw = dian.bounds();
-                        click(fw.centerX(), fw.centerY());
-                        toastLog("已点击“可帮喂”按钮\n准备帮喂中……");
-                        sleep(3000);
-                        S_Wy_Qiang();
-                    } else if (dianM != null) {
-                        var fg = dianM.bounds();
-                        click(fg.centerX(), fg.centerY());
-                        toastLog("已点击“抢”按钮\n准备抢狗粮中……");
-                        sleep(3000);
-                        if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
-                            var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
-                            click(ns.centerX(), ns.centerY());
-                            toastLog("已尝试点击了“狗粮骨头”");
+                        if (dian != null) {
+                            var fw = dian.bounds();
+                            click(fw.centerX(), fw.centerY());
+                            toastLog("已点击“可帮喂”按钮\n准备帮喂中……");
+                            sleep(3000);
+                            S_Wy_Qiang();
+                        } else if (dianM != null) {
+                            var fg = dianM.bounds();
+                            click(fg.centerX(), fg.centerY());
+                            toastLog("已点击“抢”按钮\n准备抢狗粮中……");
+                            sleep(3000);
+                            if (className("android.widget.Image").text("bone_ava").findOnce() != null) {
+                                var ns = className("android.widget.Image").text("bone_ava").findOnce().bounds();
+                                click(ns.centerX(), ns.centerY());
+                                toastLog("已尝试点击了“狗粮骨头”");
+                                sleep(2000);
+                            }
+                            Justback();
                             sleep(2000);
+                        } else {
+                            toastLog("已找不到“可帮喂”按钮");
+                            var While = 0;
+                            dialogs.alert("脚本已运行完成");
+                            log("脚本已运行完成");
+                            exit();
                         }
-                        Justback();
-                        sleep(2000);
-                    } else {
-                        toastLog("已找不到“可帮喂”按钮");
-                        var While = 0;
-                        dialogs.alert("脚本已运行完成");
-                        log("脚本已运行完成");
-                        exit();
                     }
+                    dialogs.alert("脚本已运行完成");
+                    log("脚本已运行完成");
+                    exit();
+                } else {
+                    toastLog("未找到“帮忙喂养”按钮\n跳过此任务！");
+                    dialogs.alert("脚本已运行完成");
+                    log("脚本已运行完成");
+                    exit();
                 }
-                dialogs.alert("脚本已运行完成");
-                log("脚本已运行完成");
-                exit();
-            } else {
-                toastLog("未找到“帮忙喂养”按钮\n跳过此任务！");
-                dialogs.alert("脚本已运行完成");
-                log("脚本已运行完成");
-                exit();
             }
+        } catch (e) {
+            log(e);
         }
     }
 
