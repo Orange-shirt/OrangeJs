@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.tencent.mm");
-var SupportVersion = ["7.0.10", "7.0.4"]
+var SupportVersion = ["7.0.12", "7.0.10", "7.0.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -95,17 +95,14 @@ while (While == 1) {
             }).show();
         } else {
             engines.execScript("自动微信发消息", "RunJs()\n" + RunJs.toString());
-            exit();
         }
         var While = 0;
-        exit();
     } else if (SupportVersion[Each] != InstalledVersion) {
         Each--;
     } else {
         var While = 0;
         log("已安装支持的软件版本：" + SupportVersion[Each]);
         engines.execScript("自动微信发消息", "RunJs()\n" + RunJs.toString());
-        exit();
     }
 }
 
@@ -115,7 +112,7 @@ function RunJs() {
     var width = device.width;
 
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.1"); //版本
+        var ScriptVersion = ("Beta1.11"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🛠 修改脚本配置"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动微信发消息”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -863,7 +860,7 @@ function RunJs() {
     function Doit() {
         try {
             while (true) {
-                if (className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce() != null) {
+                if (className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce() != null) { //7.0.4
                     className("android.view.ViewGroup").id("com.tencent.mm:id/k1").findOnce().child(1).child(0).click();
                     toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
@@ -928,11 +925,72 @@ function RunJs() {
                             id("com.tencent.mm:id/s7").text(DX).findOnce().parent().parent().parent().parent().click();
                             toastLog("已尝试点击设定的“联系对象”")
                             sleep(2000);
+                            if (id("com.tencent.mm:id/aqz").findOnce() != null) {
+                                id("com.tencent.mm:id/aqz").findOnce().click();
+                                toastLog("已尝试点击“公众号输入按钮”");
+                                sleep(2000);
+                            } else {
+                                log("非公众号对象");
+                            }
                             if (id("com.tencent.mm:id/aqe").findOnce() != null) {
                                 id("com.tencent.mm:id/aqe").findOnce().setText(XX);
                                 sleep(1000);
                                 if (id("com.tencent.mm:id/aql").findOnce() != null) {
                                     id("com.tencent.mm:id/aql").findOnce().click();
+                                    toastLog("已点击“发送”按钮");
+                                    device.cancelKeepingAwake();
+                                    dialogs.alert("脚本已运行完成");
+                                    log("脚本已运行完成");
+                                    exit();
+                                    break;
+                                } else {
+                                    toastLog("当前界面找不到消息发送按钮\n正在重新进入搜寻……");
+                                    sleep(2000);
+                                    OpenWXcontent();
+                                }
+                            } else {
+                                toastLog("当前非正确的联系界面\n正在重新进入搜寻……");
+                                sleep(2000);
+                                OpenWXcontent();
+                            }
+                        } else {
+                            var WrongDX = 0;
+                            WrongDX++;
+                            toastLog("当前界面未找到设定的联系名称\n正在重新进入搜寻……");
+                            if (WrongDX >= 3) {
+                                dialogs.alert("无法找到配置的联系名称\n请确认您输入的联系名称是否正确", "在输入联系名称时请确保完全正确，您可重新运行脚本并在脚本配置中修改联系名称配置");
+                                exit();
+                            }
+                            OpenWXcontent();
+                        }
+                    } else {
+                        toastLog("当前界面未找到搜索框\n正在重新进入搜寻……");
+                        OpenWXcontent();
+                    }
+                } else if (className("android.view.ViewGroup").id("com.tencent.mm:id/bn").findOnce() != null) { //7.0.12
+                    className("android.view.ViewGroup").id("com.tencent.mm:id/bn").findOnce().child(1).child(0).click();
+                    toastLog("已尝试点击“搜索”按钮");
+                    sleep(2000);
+                    if (className("android.widget.EditText").id("com.tencent.mm:id/bem").findOnce() != null) {
+                        className("android.widget.EditText").id("com.tencent.mm:id/bem").findOnce().setText(DX);
+                        toastLog("已设置搜索文字")
+                        sleep(2000);
+                        if (id("com.tencent.mm:id/g2t").text(DX).findOnce() != null) {
+                            id("com.tencent.mm:id/g2t").text(DX).findOnce().parent().parent().parent().parent().click();
+                            toastLog("已尝试点击设定的“联系对象”")
+                            sleep(2000);
+                            if (id("com.tencent.mm:id/ake").findOnce() != null) {
+                                id("com.tencent.mm:id/ake").findOnce().click();
+                                toastLog("已尝试点击“公众号输入按钮”");
+                                sleep(2000);
+                            } else {
+                                log("非公众号对象");
+                            }
+                            if (id("com.tencent.mm:id/ajs").findOnce() != null) {
+                                id("com.tencent.mm:id/ajs").findOnce().setText(XX);
+                                sleep(1000);
+                                if (id("com.tencent.mm:id/amb").findOnce() != null) {
+                                    id("com.tencent.mm:id/amb").findOnce().click();
                                     toastLog("已点击“发送”按钮");
                                     device.cancelKeepingAwake();
                                     dialogs.alert("脚本已运行完成");
