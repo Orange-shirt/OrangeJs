@@ -836,6 +836,10 @@ function RunJs() {
                     id("dkb").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
                     toastLog("已尝试点击“通讯录”按钮");
                     sleep(2000);
+                } else if (id("civ").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.12
+                    id("civ").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
                 } else if (currentPackage() == "com.tencent.mm") {
                     Justback();
                     toastLog("已处于微信中但非主界面\n正在尝试返回主界面");
