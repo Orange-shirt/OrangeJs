@@ -1385,6 +1385,7 @@ function RunJs() {
     }
 
     function GiveWater() {
+        CloseAll();
         var While = 10;
         for (While == 10; While > 0; While--) {
             if (text("剩余水滴不足,完成任务得水滴").findOnce() != null) {
