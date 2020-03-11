@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.jingdong.app.mall");
-var SupportVersion = ["8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
+var SupportVersion = ["8.5.4","8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -113,7 +113,7 @@ function RunJs() {
 
     var GJCwords = "宠汪汪" //京东搜索关键词
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.53"); //版本
+        var ScriptVersion = ("Beta1.54"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -695,7 +695,7 @@ function RunJs() {
                         toastLog("已找到“京东搜索框”尝试搜索进入活动…");
                         BS();
                     }
-                } else {
+                } else { //8.5.2/8.5.4
                     var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a3b").findOnce();
                     if (Ac == null) {
                         className("android.view.View").desc("分类").findOnce().click();
@@ -705,26 +705,14 @@ function RunJs() {
                     if (Ac != null) {
                         Ac.click();
                         sleep(1000);
-                        toastLog("已尝试点击“分类搜索框8.5.2”");
-                        sleep(1000);
-                        if (id("com.jd.lib.search:id/a48").findOnce() == null) {
-                            sleep(2000);
-                            if (id("com.jd.lib.search:id/a48").findOnce() == null) {
-                                sleep(2000);
-                                if (id("com.jd.lib.search:id/a48").findOnce() == null) {
-                                    openJDinSearch();
-                                }
-                            }
-                        } else {
-                            toastLog("已找到“京东搜索框”尝试搜索进入活动…");
-                            BS();
-                        }
+                        toastLog("已尝试点击“分类搜索框8.5.2/4”");
+                        sleep(2000);
+                        BS();
                     } else {
                         toastLog("未找到“分类”中的搜索栏\n重试中……");
                         openJDinSearch();
                     }
                 }
-
             }
         }
     }
@@ -780,6 +768,20 @@ function RunJs() {
                     toastLog("正在等待“宠汪汪”活动入口加载\n剩余" + deng + "秒……");
                     sleep(1500);
                 }
+            } else if (id("com.jd.lib.search:id/akn").findOnce() != null) { //8.5.4
+                if (id("com.jd.lib.search:id/bw").findOnce() != null) {
+                    var d = id("com.jd.lib.search:id/bw").findOnce();
+                    if (d != null) {
+                        var dd = d.bounds();
+                        click(dd.centerX(), dd.centerY());
+                        toastLog("存在“重新加载”按钮\n已尝试点击……");
+                        sleep(2000);
+                        var deng = 10;
+                    }
+                } else {
+                    toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
+                    sleep(1500);
+                }
             } else {
                 var deng = 0;
                 toastLog("检测到当前并未处于京东搜索\n重试中……");
@@ -790,7 +792,7 @@ function RunJs() {
     }
 
     function D() {
-        var jr = id("com.jd.lib.search:id/ako").findOnce();
+        var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/ako").findOnce();
         if (jr != null) {
             var j = jr.bounds();
             click(j.centerX(), j.centerY());
@@ -803,7 +805,7 @@ function RunJs() {
             }
             mainC();
         } else {
-            var jr = id("com.jd.lib.search:id/aks").findOnce();
+            var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/aks").findOnce();
             if (jr != null) {
                 var j = jr.bounds();
                 click(j.centerX(), j.centerY());
@@ -816,11 +818,9 @@ function RunJs() {
                 }
                 mainC();
             } else {
-                var jr = id("com.jd.lib.search:id/aku").findOnce();
+                var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/aku").findOnce();
                 if (jr != null) {
                     jr.child(0).click();
-                    //var j = jr.bounds();
-                    //click(j.centerX(), j.centerY());
                     toastLog("已尝试点击“宠汪汪”活动入口…");
                     sleep(2000);
                     var deng = 8;
@@ -830,11 +830,9 @@ function RunJs() {
                     }
                     mainC();
                 } else {
-                    var jr = id("com.jd.lib.search:id/ali").findOnce(); //8.5.2
+                    var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/ali").findOnce(); //8.5.2
                     if (jr != null) {
                         jr.child(0).click();
-                        //var j = jr.bounds();
-                        //click(j.centerX(), j.centerY());
                         toastLog("已尝试点击“宠汪汪”活动入口…");
                         sleep(2000);
                         var deng = 8;
@@ -844,8 +842,21 @@ function RunJs() {
                         }
                         mainC();
                     } else {
-                        toastLog("找不到“宠汪汪”活动入口\n重试中……");
-                        C();
+                        var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/alq").findOnce(); //8.5.4
+                        if (jr != null) {
+                            jr.child(0).click();
+                            toastLog("已尝试点击“宠汪汪”活动入口…");
+                            sleep(2000);
+                            var deng = 8;
+                            for (deng == 8; deng > 0; deng--) {
+                                toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
+                                sleep(1000);
+                            }
+                            mainC();
+                        } else {
+                            toastLog("找不到“宠汪汪”活动入口\n重试中……");
+                            C();
+                        }
                     }
                 }
             }
