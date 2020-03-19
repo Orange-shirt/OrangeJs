@@ -1474,6 +1474,7 @@ function NotFirstRun() {
         }
         sleep(1000);
         className("android.view.View").text("提交信息").findOne(2000).click();
+        className("android.widget.Button").text("确认提交").findOne(3000).click();
         if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
             var stop = 0;
             while (true) {
