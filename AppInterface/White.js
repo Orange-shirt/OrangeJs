@@ -216,7 +216,28 @@ function mainUi() {
                 </card>
             </linear>
         </Horizo​​ntalScrollView>
-        <text text="关注疫情" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28"/>
+        <linear orientation="horizontal" align="left" margin="0">
+            //QQ脚本
+            <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
+                <View bg="#F02196F3" h="*" w="*"/>
+                <vertical padding="0 0" h="auto">
+                    <linear orientation="horizontal" align="left" margin="0">
+                        <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="40" h="40" margin="20 20 0 0"/>
+                        <vertical padding="0 0" h="auto">
+                            <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                            <text text="推荐8.2.7版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                        </vertical>
+                    </linear>
+                    <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                        <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                            <View w="*" h="*" bg="#90CAF9"/>
+                            <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                        </card>
+                    </linear>
+                </vertical>
+            </card>
+        </linear>
+        <text text="关注疫情" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" margin="28 5 0 0"/>
         <card h="1" margin="5 5" cardCornerRadius="1dp"
         cardElevation="0dp" gravity="center_vertical">
         <View bg="#FF832FFD" h="*" w="*"/>//分割线颜色1
@@ -481,6 +502,36 @@ function mainUi() {
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("自动健康打卡", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+    
+    ui.ScriptThi.click(() => {
+        engines.execScript("自动动态点赞", "runScriptThi();\n" + runScriptThi.toString());
+    });
+
+    function runScriptThi() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%8A%A8%E6%80%81%E7%82%B9%E8%B5%9E_QQ%E8%84%9A%E6%9C%AC.js"; //第十三个脚本网址
+        var res_script = http.get(ScriptTwo_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动动态点赞", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
