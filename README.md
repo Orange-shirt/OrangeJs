@@ -5,8 +5,8 @@
 
 **[点击下载OrangeJs（橘衫の脚本）APK（1.0）](https://www.lanzous.com/i8gs5li)**
 
-# 脚本总数：12
-## 当前可用：7
+# 脚本总数：13
+## 当前可用：8
 
 ## 【脚本】[自动集福气（淘宝脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
@@ -65,5 +65,12 @@
 **配置完成之后的运行可直接填写保存的配置信息，且在手机流畅的情况下，从打开软件到信息填写完成提交整个过程不会超过1分钟。**
 
 **此外脚本依然继承本项目其它脚本的无需ROOT，全自动一条龙服务，定时运行等特点**
+
+## 【脚本】[自动动态点赞（QQ脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E5%8A%A8%E6%80%81%E7%82%B9%E8%B5%9E%EF%BC%88QQ%E8%84%9A%E6%9C%AC%EF%BC%89)
+![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
+
+**这是一个自动在QQ中点赞好友动态中的说说或单个好友空间中的说说的脚本，现已支持QQ8.2.7和8.3.0版本并会向后兼容。**
+
+**脚本提供自动打开QQ至指定界面点赞的功能，同时也提供自定义点赞界面功能。支持在QQ各种主题下运行，支持普通模式和简洁模式下的QQ，支持对单条说说最高99次点赞并提供自定义点赞次数功能，支持计时运行和定时运行脚本。同时本脚本也开始率先测试返回方法的保存功能，您可在6种不同的返回方法中选择适用您设备的返回方法来实现返回操作。**
 
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
