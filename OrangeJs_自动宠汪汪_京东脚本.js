@@ -115,7 +115,7 @@ function RunJs() {
     function dialogs_js() {
         var ScriptVersion = ("Beta1.55"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-        var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式"]
+        var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
         if (i < 0) {
             toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
@@ -124,7 +124,7 @@ function RunJs() {
             toastLog(options_[i]);
             context_Manualstate = 0;
             Set_Back_way();
-        } else if (i == 2) {
+        } else if (i == 3) {
             toastLog(options_[i]);
             exit();
         } else if (i == 1) {
@@ -151,7 +151,33 @@ function RunJs() {
             toastLog("悬浮窗权限已开启！");
             sleep(2000);
             wait_Time_over();
-        } else if (i == 3) {
+        } else if (i == 2) {
+            toastLog("请稍候，正在检测权限...")
+            context_Manualstate = 0;
+            toastLog(options_[i]);
+            device.keepScreenDim();
+            toastLog("检测权限设置……");
+            context_Manualstate = 0;
+            toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
+            auto.waitFor();
+            toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+            sleep(2000);
+            toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
+            sleep(2000);
+            var test_rawWindow = floaty.rawWindow(
+                <frame gravity="center" bg="#00000000"/>
+            );
+            test_rawWindow.setSize(-1, -1);
+            test_rawWindow.setTouchable(false);
+            setTimeout(() => {
+                test_rawWindow.close();
+            }, 1000);
+            toastLog("悬浮窗权限已开启！");
+            context_Manualstate = 0;
+            Set_Back_way();
+            DS();
+            device.keepScreenDim();
+        } else if (i == 4) {
             toastLog(options_[i]);
             if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true && files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") > 2 && files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt") == false) {
                 files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
@@ -164,7 +190,7 @@ function RunJs() {
                 dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
                 dialogs_js();
             }
-        } else if (i == 4) {
+        } else if (i == 5) {
             toastLog(options_[i]);
             context_Manualstate = 1;
             Set_Back_way() //设置手动模式
@@ -481,6 +507,85 @@ function RunJs() {
         }
     }
 
+    function DS() {
+        var While = 1;
+        while (While == 1) {
+            var 时 = dialogs.rawInput("🔵定时→定分→定秒→确认\n\n请输入0-23的小时数\n到此时间脚本会自动运行");
+            if (时 == null) {
+                //没有输入
+                toastLog("没有输入！返回主菜单");
+                var While = 0;
+                dialogs_js();
+            } else if (时 == "") {
+                //没有输入
+                toastLog("没有输入！返回主菜单");
+                var While = 0;
+                dialogs_js();
+            } else if (时 >= 0) {
+                if (时 < 24) {
+                    var While = 2;
+                    while (While == 2) {
+                        var 分 = dialogs.rawInput("✔️定时🔵定分→定秒→确认\n\n请输入0-59的分钟数\n\n" + 时 + "时" + "❓分❓秒");
+                        if (分 == null) {
+                            toastLog("没有输入！返回上级");
+                            var While = 1;
+                        } else if (分 == null) {
+                            toastLog("没有输入！返回上级");
+                            var While = 1;
+                        } else if (分 >= 0) {
+                            if (分 < 60) {
+                                var While = 3;
+                                while (While == 3) {
+                                    var 秒 = dialogs.rawInput("✔️定时✔️定分🔵定秒→确认\n\n请输入0-59的秒数\n\n" + 时 + "时" + 分 + "分❓秒");
+                                    if (秒 == null) {
+                                        toastLog("没有输入！返回上级");
+                                        var While = 2;
+                                    } else if (秒 == null) {
+                                        toastLog("没有输入！返回上级");
+                                        var While = 2;
+                                    } else if (秒 >= 0) {
+                                        if (秒 < 60) {
+                                            var QR = dialogs.confirm("脚本将在\n⏰" + 时 + "时" + 分 + "分" + 秒 + "秒\n准时运行！", "如需更改请点击取消\n点击确定定时，定时状态可以在日志中查看");
+                                            if (QR == false) {
+                                                //返回主菜单
+                                                var While = 1;
+                                            } else {
+                                                var While = 0;
+                                                //仅定时运行一次
+                                                while (true) {
+                                                    var myDate = new Date();
+                                                    if (myDate.getHours() == 时 && myDate.getMinutes() == 分 && myDate.getSeconds() == 秒) {
+                                                        console.warn("时间到！开始运行脚本！" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒");
+                                                        device.wakeUpIfNeeded();
+                                                        break;
+                                                    }
+                                                    sleep(1000);
+                                                    console.info("现在是" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒\n脚本将在" + 时 + "时" + 分 + "分" + 秒 + "秒，准时运行！\n请保持手机处于工作状态，不要锁屏关机等");
+                                                }
+                                            }
+                                        } else {
+                                            toastLog("输入错误！秒必须小于等于60");
+                                        }
+                                    } else {
+                                        toastLog("输入错误！秒必须大于等于0");
+                                    }
+                                }
+                            } else {
+                                toastLog("输入错误！分钟必须小于60");
+                            }
+                        } else {
+                            toastLog("输入错误！分钟必须大于等于0");
+                        }
+                    }
+                } else {
+                    toastLog("输入错误！时间必须小于24");
+                }
+            } else {
+                toastLog("输入错误！时间必须大于等于0");
+            }
+        }
+    }
+
     //下面是悬浮窗
     var window = floaty.window(
         <frame>
@@ -616,7 +721,7 @@ function RunJs() {
                 toastLog("当前未处于京东主界面\n尝试返回京东主界面中……");
                 Justback();
                 sleep(2000);
-                if (desc("分类").findOnce() != null) {
+                if (desc("分类").findOnce() != null && currentActivity() == "com.jingdong.app.mall.MainFrameActivity") {
                     var While = 0;
                     toastLog("已返回京东主界面");
                     sleep(2000);
@@ -1673,8 +1778,8 @@ function RunJs() {
                             toastLog("已尝试点击关闭蒙版按钮");
                             sleep(2000);
                         }
-                        dialogs.alert("脚本已运行完成");
-                        log("脚本已运行完成");
+                        dialogs.alert("自动宠汪汪：\n脚本已运行完成");
+                        log("自动宠汪汪：\n脚本已运行完成");
                         exit();
                     }
                     while (While == 1) {
@@ -1784,18 +1889,18 @@ function RunJs() {
                         } else {
                             toastLog("已找不到“可帮喂”按钮");
                             var While = 0;
-                            dialogs.alert("脚本已运行完成");
-                            log("脚本已运行完成");
+                            dialogs.alert("自动宠汪汪：\n脚本已运行完成");
+                            log("自动宠汪汪：\n脚本已运行完成");
                             exit();
                         }
                     }
-                    dialogs.alert("脚本已运行完成");
-                    log("脚本已运行完成");
+                    dialogs.alert("自动宠汪汪：\n脚本已运行完成");
+                    log("自动宠汪汪：\n脚本已运行完成");
                     exit();
                 } else {
                     toastLog("未找到“帮忙喂养”按钮\n跳过此任务！");
-                    dialogs.alert("脚本已运行完成");
-                    log("脚本已运行完成");
+                    dialogs.alert("自动宠汪汪：\n脚本已运行完成");
+                    log("自动宠汪汪：\n脚本已运行完成");
                     exit();
                 }
             }
@@ -1843,7 +1948,7 @@ function RunJs() {
             openJDinSearch();
         }
     }
-    dialogs.alert("脚本已运行完成");
-    log("脚本已运行完成");
+    dialogs.alert("自动宠汪汪：\n脚本已运行完成");
+    log("自动宠汪汪：\n脚本已运行完成");
     exit();
 }
