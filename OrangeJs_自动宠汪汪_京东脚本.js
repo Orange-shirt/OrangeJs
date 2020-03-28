@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.jingdong.app.mall");
-var SupportVersion = ["8.5.4","8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
+var SupportVersion = ["8.5.6", "8.5.4", "8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -113,9 +113,9 @@ function RunJs() {
 
     var GJCwords = "宠汪汪" //京东搜索关键词
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.54"); //版本
+        var ScriptVersion = ("Beta1.55"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-        var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息", "ℹ️ Q&A常见问题解答", "🔧 手动打开模式"]
+        var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
         if (i < 0) {
             toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
@@ -127,14 +127,6 @@ function RunJs() {
         } else if (i == 2) {
             toastLog(options_[i]);
             exit();
-        } else if (i == 3) {
-            toastLog(options_[i]);
-            app.openUrl("https://wj.qq.com/s2/5238744/d982");
-            dialogs_js();
-        } else if (i == 4) {
-            toastLog(options_[i]);
-            alert("=(^･ω･^)=  脚本作者\n酷安@橘衫下邂逅的时光", "“自动宠汪汪” " + ScriptVersion + "\n当前软件版本" + app.versionName + "(" + app.versionCode + ")\n\n全自动的京东活动脚本！\n支持多种分辨率，安卓7+无需ROOT！\n支持启动后自动更新脚本，无需费心即可保持最新，且开放全部的脚本代码！\n脚本的全部运行不加任何广告，不干任何不相关的事情！不触碰任何个人隐私！\n此脚本为兴趣制作，仅供参考，严禁售卖\n\n如有任何问题，欢迎向作者反馈哦～");
-            dialogs_js();
         } else if (i == 1) {
             toastLog("请稍候，正在检测权限...")
             context_Manualstate = 0;
@@ -159,107 +151,110 @@ function RunJs() {
             toastLog("悬浮窗权限已开启！");
             sleep(2000);
             wait_Time_over();
-        } else if (i == 5) {
+        } else if (i == 3) {
             toastLog(options_[i]);
-            Q_A_();
-        } else if (i == 6) {
+            if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true && files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") > 2 && files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt") == false) {
+                files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+                log("当前返回方法设置为滑动返回但未设置滑动返回速度");
+            }
+            if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true) {
+                files.rename("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt", "X返回方法设置.txt");
+                Set_Back_way();
+            } else {
+                dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
+                dialogs_js();
+            }
+        } else if (i == 4) {
             toastLog(options_[i]);
             context_Manualstate = 1;
             Set_Back_way() //设置手动模式
         }
     }
 
-    function Q_A_() {
-        var Q1 = ("1⃣MIUI11如何开启无障碍服务？");
-        var A1 = ("💬一般情况下脚本运行会自动调出无障碍服务设置，之后只需在无障碍服务设置中找到“已下载的服务”点击后找到“橘衫の脚本”打开即可。\n手动打开无障碍权限的方法为\n①打开“设置”→②在“搜索系统设置项”搜索“无障碍”点击第一项→③再在无障碍设置中找到“已下载的服务”点击进入后找到“橘衫の脚本”打开即可");
 
-        var Q2 = ("2⃣脚本突然停到京东搜索框不运行了，怎么办？");
-        var A2 = ("💬这种情况一般是京东卡顿引起的。如脚本停到搜索框不动且日志中提示“找不到搜索按钮”您就可以尝试关掉京东再打开至京东搜索界面即可。若依然没有运行可尝试重启手机后再次运行脚本");
-
-        var Q3 = ("3⃣脚本运行到活动界面提示找不到任务");
-        var A3 = ("💬如出现此问题请先检查一下“活动界面”中是不是真的没有任务了，如果有任务可以尝试重启手机后重新运行脚本，若重启后依然在活动界面提示找不到任务请立即向作者反馈。");
-
-        var Q4 = ("4⃣安卓6.0以下系统能否使用本脚本？");
-        var A4 = ("💬本脚本完全使用Auto.js制作。因此在安卓6.0以下系统会不支持无障碍服务以及造成大量函数失效，因此本脚本是不支持安卓6.0及以下系统的，敬请谅解");
-
-        var Q5 = ("5⃣定时运行之后却没有在预定的时间运行脚本");
-        var A5 = ("💬使用定时运行脚本会自动设置屏幕常亮并驻留后台，但清理本软件或者锁屏甚至关机以及关闭本软件必要的无障碍权限和悬浮窗权限都将会使定时运行失效，建议在定时运行时将本软件加入清理白名单或锁定本软件后台且不要锁屏以及不要关闭无障碍与悬浮窗权限即可");
-
-        var Q_A_options = [Q1, Q2, Q3, Q4, Q5]
-        var Q_A = dialogs.select("◖⚆ᴥ⚆◗\n Q&A常见问题解答", Q_A_options);
-        if (Q_A == 0) {
-            dialogs.alert(Q1, A1);
-            Q_A_();
-        } else if (Q_A == 1) {
-            dialogs.alert(Q2, A2);
-            Q_A_();
-        } else if (Q_A == 2) {
-            dialogs.alert(Q3, A3);
-            Q_A_();
-        } else if (Q_A == 3) {
-            dialogs.alert(Q4, A4);
-            Q_A_();
-        } else if (Q_A == 4) {
-            dialogs.alert(Q5, A5);
-            Q_A_();
-        } else if (Q_A < 0) {
-            dialogs_js();
-        }
-    }
 
     function Set_Back_way() {
-        //💟🕎⛎设定返回方法及滑动速度的代码
-        var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
-        var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
-        if (i_back >= 0) {
-            toastLog("您选择的是" + options_hq[i_back]);
-            sleep(2000);
-            var options_select = options_hq[i_back];
-            context_i_back = i_back;
+        if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true) {
+            context_i_back = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+            log("返回方法：" + context_i_back);
+            if (context_i_back > 2) {
+                try {
+                    context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt")
+                    log("滑动返回速度：" + context_gestures_speed)
+                } catch (e) {
+                    log("上次未完成滑动返回速度设置");
+                    files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+                    Set_Back_way();
+                }
+            }
         } else {
-            toastLog("没有选择返回方法！");
-            device.cancelKeepingAwake();
-            dialogs_js();
-        }
-        if (i_back > 2) {
-            var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
-            var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
-        }
-        if (iix == 0) {
-            context_gestures_speed = 200;
-            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-            sleep(2000);
-        }
-        if (iix == 1) {
-            context_gestures_speed = 500;
-            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-            sleep(2000);
-        }
-        if (iix == 2) {
-            context_gestures_speed = 800;
-            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-            sleep(2000);
-        }
-        if (iix == 3) {
-            context_gestures_speed = 1000;
-            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-            sleep(2000);
-        }
-        if (iix == 4) {
-            context_gestures_speed = 1500;
-            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-            sleep(2000);
-        }
-        if (iix == 5) {
-            context_gestures_speed = 2000;
-            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-            sleep(2000);
-        }
-        if (iix < 0) {
-            toastLog("没有选择滑动速度");
-            Set_Back_way();
+            //💟🕎⛎设定返回方法及滑动速度的代码
+            var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+            var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
+            if (i_back >= 0) {
+                toastLog("您选择的是" + options_hq[i_back]);
+                sleep(2000);
+                var options_select = options_hq[i_back];
+                context_i_back = i_back;
+                files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+                files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt", context_i_back);
+            } else {
+                toastLog("没有选择返回方法！");
+                device.cancelKeepingAwake();
+            }
+            if (i_back > 2) {
+                var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
+                var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
+                if (iix < 0) {
+                    toastLog("没有选择滑动速度");
+                    Set_Back_way();
+                } else {
+                    if (iix == 0) {
+                        context_gestures_speed = 200;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 1) {
+                        context_gestures_speed = 500;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 2) {
+                        context_gestures_speed = 800;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 3) {
+                        context_gestures_speed = 1000;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 4) {
+                        context_gestures_speed = 1500;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 5) {
+                        context_gestures_speed = 2000;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt");
+                    files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt", context_gestures_speed);
+                }
+            }
+            if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt") == true) {
+                log("删除");
+                files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt");
+                dialogs_js();
+            } else if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt") == true) {
+                log("重命名");
+                files.rename("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt", "返回方法设置.txt");
+                dialogs_js();
+            }
         }
     }
+
     sleep(1000);
     toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
     auto.waitFor();
@@ -673,7 +668,7 @@ function RunJs() {
                 }
             } else { //京东8.5.0
                 var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a2v").findOnce();
-                if (Ac == null) {
+                if (Ac == null && className("android.view.View").desc("分类").findOnce() != null) {
                     className("android.view.View").desc("分类").findOnce().click();
                     toastLog("已尝试点击“分类”按钮");
                     sleep(2000);
@@ -697,20 +692,24 @@ function RunJs() {
                     }
                 } else { //8.5.2/8.5.4
                     var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a3b").findOnce();
-                    if (Ac == null) {
-                        className("android.view.View").desc("分类").findOnce().click();
-                        toastLog("已尝试点击“分类”按钮");
-                        sleep(2000);
-                    }
                     if (Ac != null) {
                         Ac.click();
                         sleep(1000);
                         toastLog("已尝试点击“分类搜索框8.5.2/4”");
                         sleep(2000);
                         BS();
-                    } else {
-                        toastLog("未找到“分类”中的搜索栏\n重试中……");
-                        openJDinSearch();
+                    } else { //8.5.6
+                        var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a3c").findOnce();
+                        if (Ac != null) {
+                            Ac.click();
+                            sleep(1000);
+                            toastLog("已尝试点击“分类搜索框8.5.6”");
+                            sleep(2000);
+                            BS();
+                        } else {
+                            toastLog("未找到“分类”中的搜索栏\n重试中……");
+                            openJDinSearch();
+                        }
                     }
                 }
             }
@@ -722,9 +721,11 @@ function RunJs() {
         sleep(1000);
         var Z = id("com.jingdong.app.mall:id/a9b").findOnce();
         if (Z != null) {
-            Z.click();
-            sleep(2000);
-            if (id("com.jingdong.app.mall:id/a9b").findOnce() != null) {
+            if (id("com.jingdong.app.mall:id/a9b").clickable(true).findOnce() != null) {
+                Z.click();
+                toastLog("已找到搜索按钮\n并已尝试盲点…");
+                sleep(2000);
+            } else if (id("com.jingdong.app.mall:id/a9b").findOnce() != null) {
                 var z = Z.bounds();
                 click(z.centerX(), z.centerY());
                 toastLog("已找到搜索按钮\n并已尝试点击…");
@@ -782,6 +783,20 @@ function RunJs() {
                     toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
                     sleep(1500);
                 }
+            } else if (id("com.jd.lib.search:id/akw").findOnce() != null) { //8.5.6
+                if (id("com.jd.lib.search:id/bw").findOnce() != null) {
+                    var d = id("com.jd.lib.search:id/bw").findOnce();
+                    if (d != null) {
+                        var dd = d.bounds();
+                        click(dd.centerX(), dd.centerY());
+                        toastLog("存在“重新加载”按钮\n已尝试点击……");
+                        sleep(2000);
+                        var deng = 10;
+                    }
+                } else {
+                    toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
+                    sleep(1500);
+                }
             } else {
                 var deng = 0;
                 toastLog("检测到当前并未处于京东搜索\n重试中……");
@@ -794,6 +809,7 @@ function RunJs() {
     function D() {
         var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/ako").findOnce();
         if (jr != null) {
+
             var j = jr.bounds();
             click(j.centerX(), j.centerY());
             toastLog("已尝试点击“宠汪汪”活动入口…");
@@ -807,6 +823,7 @@ function RunJs() {
         } else {
             var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/aks").findOnce();
             if (jr != null) {
+
                 var j = jr.bounds();
                 click(j.centerX(), j.centerY());
                 toastLog("已尝试点击“宠汪汪”活动入口…");
@@ -820,6 +837,7 @@ function RunJs() {
             } else {
                 var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/aku").findOnce();
                 if (jr != null) {
+
                     jr.child(0).click();
                     toastLog("已尝试点击“宠汪汪”活动入口…");
                     sleep(2000);
@@ -832,6 +850,7 @@ function RunJs() {
                 } else {
                     var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/ali").findOnce(); //8.5.2
                     if (jr != null) {
+
                         jr.child(0).click();
                         toastLog("已尝试点击“宠汪汪”活动入口…");
                         sleep(2000);
@@ -843,7 +862,9 @@ function RunJs() {
                         mainC();
                     } else {
                         var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/alq").findOnce(); //8.5.4
+
                         if (jr != null) {
+
                             jr.child(0).click();
                             toastLog("已尝试点击“宠汪汪”活动入口…");
                             sleep(2000);
@@ -854,8 +875,21 @@ function RunJs() {
                             }
                             mainC();
                         } else {
-                            toastLog("找不到“宠汪汪”活动入口\n重试中……");
-                            C();
+                            var KC = className("android.support.v4.widget.DrawerLayout").id("com.jd.lib.search:id/a4z").findOnce(); //8.5.6
+                            if (KC != null && KC.child(0).childCount() > 3 && KC.child(0).child(2).className() == "android.widget.ImageView" && KC.child(0).child(2).clickable() == true) {
+                                KC.child(0).child(2).click();
+                                toastLog("已尝试点击“宠汪汪”活动入口…");
+                                sleep(2000);
+                                var deng = 8;
+                                for (deng == 8; deng > 0; deng--) {
+                                    toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
+                                    sleep(1000);
+                                }
+                                mainC();
+                            } else {
+                                toastLog("找不到“宠汪汪”活动入口\n重试中……");
+                                openJDinSearch();
+                            }
                         }
                     }
                 }
