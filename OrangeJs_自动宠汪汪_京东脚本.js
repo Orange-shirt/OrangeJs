@@ -980,6 +980,7 @@ function RunJs() {
                             }
                             mainC();
                         } else {
+                            log("8.5.6"+className("android.widget.ImageView").depth(3).findOnce(2));
                             if (className("android.widget.ImageView").depth(3).findOnce(2) != null) {//8.5.6
                                 className("android.widget.ImageView").depth(3).findOnce(2).click();
                                 toastLog("已尝试点击“宠汪汪”活动入口…");
