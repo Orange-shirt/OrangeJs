@@ -979,28 +979,20 @@ function RunJs() {
                                 sleep(1000);
                             }
                             mainC();
-                        } else {
-                            log("8.5.6入口"+className("android.widget.ImageView").depth(3).findOnce(2));
-                            try{
-                            log("8.5.6浏览记录按钮"+className("android.widget.ImageView").desc("浏览记录").id("com.jd.lib.search:id/aj8").findOnce().parent().child(2));
-                            }catch(e){
-                                log(e);
-                                } try{
-                            log("8.5.6ViewGroup"+className("android.view.ViewGroup").findOnce().child(2).child(0).click());
-                            }catch(e){
-                                log(e);
-                                }
-                            if (className("android.widget.ImageView").depth(3).findOnce(2) != null) {//8.5.6
-                                className("android.widget.ImageView").depth(3).findOnce(2).click();
-                                toastLog("已尝试点击“宠汪汪”活动入口…");
-                                sleep(2000);
-                                var deng = 8;
-                                for (deng == 8; deng > 0; deng--) {
-                                    toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
-                                    sleep(1000);
-                                }
-                                mainC();
-                            } else {
+                        } else {var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/alw").findOnce(); //8.5.6
+
+                        if (jr != null) {
+
+                            jr.child(0).click();
+                            toastLog("已尝试点击“宠汪汪”活动入口…");
+                            sleep(2000);
+                            var deng = 8;
+                            for (deng == 8; deng > 0; deng--) {
+                                toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
+                                sleep(1000);
+                            }
+                            mainC();
+                        }else {
                                 toastLog("找不到“宠汪汪”活动入口\n重试中……");
                                 openJDinSearch();
                             }
