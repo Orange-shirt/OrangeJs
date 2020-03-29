@@ -980,9 +980,9 @@ function RunJs() {
                             }
                             mainC();
                         } else {
-                            var KC = className("android.support.v4.widget.DrawerLayout").id("com.jd.lib.search:id/a4z").findOnce(); //8.5.6
-                            if (KC != null && KC.child(0).childCount() > 3 && KC.child(0).child(2).className() == "android.widget.ImageView" && KC.child(0).child(2).clickable() == true) {
-                                KC.child(0).child(2).click();
+                            var KC = className("android.widget.RelativeLayout").id("com.jd.lib.search:id/aet").findOnce().parent(); //8.5.6
+                            if (KC != null && KC.childCount() > 3 && KC.child(2).className() == "android.widget.ImageView" && KC.child(2).clickable() == true) {
+                                KC.child(2).click();
                                 toastLog("已尝试点击“宠汪汪”活动入口…");
                                 sleep(2000);
                                 var deng = 8;
