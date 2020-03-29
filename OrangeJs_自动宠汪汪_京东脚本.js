@@ -113,7 +113,7 @@ function RunJs() {
 
     var GJCwords = "宠汪汪" //京东搜索关键词
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.55"); //版本
+        var ScriptVersion = ("Beta1.56"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -179,15 +179,20 @@ function RunJs() {
             device.keepScreenDim();
         } else if (i == 4) {
             toastLog(options_[i]);
-            if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true && files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") > 2 && files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt") == false) {
-                files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
-                log("当前返回方法设置为滑动返回但未设置滑动返回速度");
-            }
-            if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true) {
-                files.rename("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt", "X返回方法设置.txt");
-                Set_Back_way();
-            } else {
-                dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
+            try {
+                if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true && files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") > 2 && files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt") == false) {
+                    files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+                    log("当前返回方法设置为滑动返回但未设置滑动返回速度");
+                }
+                if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true) {
+                    files.rename("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt", "X返回方法设置.txt");
+                    Set_Back_way();
+                } else {
+                    dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
+                    dialogs_js();
+                }
+            } catch (e) {
+                dialogs.alert("未授予本软件“存储权限”", "软件内的设置存储都需要“存储权限”才能正常保存设置，您需要自行授予本软件“存储权限”才能正常使用设置保存功能");
                 dialogs_js();
             }
         } else if (i == 5) {
@@ -200,22 +205,88 @@ function RunJs() {
 
 
     function Set_Back_way() {
-        try{
-        if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true) {
-            context_i_back = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
-            log("返回方法：" + context_i_back);
-            if (context_i_back > 2) {
-                try {
-                    context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt")
-                    log("滑动返回速度：" + context_gestures_speed)
-                } catch (e) {
-                    log("上次未完成滑动返回速度设置");
-                    files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
-                    Set_Back_way();
+        try {
+            if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true) {
+                context_i_back = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+                log("返回方法：" + context_i_back);
+                if (context_i_back > 2) {
+                    try {
+                        context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt")
+                        log("滑动返回速度：" + context_gestures_speed)
+                    } catch (e) {
+                        log("上次未完成滑动返回速度设置");
+                        files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+                        Set_Back_way();
+                    }
+                }
+            } else {
+                //💟🕎⛎设定返回方法及滑动速度的代码
+                var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+                var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
+                if (i_back >= 0) {
+                    toastLog("您选择的是" + options_hq[i_back]);
+                    sleep(2000);
+                    var options_select = options_hq[i_back];
+                    context_i_back = i_back;
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
+                    files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt", context_i_back);
+                } else {
+                    toastLog("没有选择返回方法！");
+                    device.cancelKeepingAwake();
+                }
+                if (i_back > 2) {
+                    var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
+                    var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
+                    if (iix < 0) {
+                        toastLog("没有选择滑动速度");
+                        Set_Back_way();
+                    } else {
+                        if (iix == 0) {
+                            context_gestures_speed = 200;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 1) {
+                            context_gestures_speed = 500;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 2) {
+                            context_gestures_speed = 800;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 3) {
+                            context_gestures_speed = 1000;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 4) {
+                            context_gestures_speed = 1500;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 5) {
+                            context_gestures_speed = 2000;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt");
+                        files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt", context_gestures_speed);
+                    }
+                }
+                if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt") == true) {
+                    log("删除");
+                    files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt");
+                    dialogs_js();
+                } else if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt") == true) {
+                    log("重命名");
+                    files.rename("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt", "返回方法设置.txt");
+                    dialogs_js();
                 }
             }
-        } else {
-            //💟🕎⛎设定返回方法及滑动速度的代码
+        } catch (e) {
+            log("未授予“存储权限”");
             var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
             var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
             if (i_back >= 0) {
@@ -223,8 +294,6 @@ function RunJs() {
                 sleep(2000);
                 var options_select = options_hq[i_back];
                 context_i_back = i_back;
-                files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
-                files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt", context_i_back);
             } else {
                 toastLog("没有选择返回方法！");
                 device.cancelKeepingAwake();
@@ -266,74 +335,6 @@ function RunJs() {
                         toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
                         sleep(2000);
                     }
-                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt");
-                    files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt", context_gestures_speed);
-                }
-            }
-            if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt") == true) {
-                log("删除");
-                files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt");
-                dialogs_js();
-            } else if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt") == true) {
-                log("重命名");
-                files.rename("/storage/emulated/0/OrangeJs/自动宠汪汪/X返回方法设置.txt", "返回方法设置.txt");
-                dialogs_js();
-            }
-        }
-    }catch(e){
-        log("未授予“存储权限”");
-        var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
-            var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
-            if (i_back >= 0) {
-                toastLog("您选择的是" + options_hq[i_back]);
-                sleep(2000);
-                var options_select = options_hq[i_back];
-                context_i_back = i_back;
-                files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt");
-                files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/返回方法设置.txt", context_i_back);
-            } else {
-                toastLog("没有选择返回方法！");
-                device.cancelKeepingAwake();
-            }
-            if (i_back > 2) {
-                var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
-                var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
-                if (iix < 0) {
-                    toastLog("没有选择滑动速度");
-                    Set_Back_way();
-                } else {
-                    if (iix == 0) {
-                        context_gestures_speed = 200;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 1) {
-                        context_gestures_speed = 500;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 2) {
-                        context_gestures_speed = 800;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 3) {
-                        context_gestures_speed = 1000;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 4) {
-                        context_gestures_speed = 1500;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 5) {
-                        context_gestures_speed = 2000;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt");
-                    files.write("/storage/emulated/0/OrangeJs/自动宠汪汪/滑动返回速度.txt", context_gestures_speed);
                 }
             }
         }
