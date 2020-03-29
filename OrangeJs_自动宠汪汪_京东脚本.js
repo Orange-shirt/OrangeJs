@@ -983,8 +983,13 @@ function RunJs() {
                             log("8.5.6入口"+className("android.widget.ImageView").depth(3).findOnce(2));
                             try{
                             log("8.5.6浏览记录按钮"+className("android.widget.ImageView").desc("浏览记录").id("com.jd.lib.search:id/aj8").findOnce().parent().child(2));
+                            }catch(e){
+                                log(e);
+                                } try{
                             log("8.5.6ViewGroup"+className("android.view.ViewGroup").findOnce().child(2));
-                            }
+                            }catch(e){
+                                log(e);
+                                }
                             if (className("android.widget.ImageView").depth(3).findOnce(2) != null) {//8.5.6
                                 className("android.widget.ImageView").depth(3).findOnce(2).click();
                                 toastLog("已尝试点击“宠汪汪”活动入口…");
