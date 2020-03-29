@@ -986,7 +986,7 @@ function RunJs() {
                             }catch(e){
                                 log(e);
                                 } try{
-                            log("8.5.6ViewGroup"+className("android.view.ViewGroup").findOnce().child(2));
+                            log("8.5.6ViewGroup"+className("android.view.ViewGroup").findOnce().child(2).child(0));
                             }catch(e){
                                 log(e);
                                 }
