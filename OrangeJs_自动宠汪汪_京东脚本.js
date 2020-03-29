@@ -980,7 +980,9 @@ function RunJs() {
                             }
                             mainC();
                         } else {
-                            log("8.5.6"+className("android.widget.ImageView").depth(3).findOnce(2));
+                            log("8.5.6入口"+className("android.widget.ImageView").depth(3).findOnce(2));
+                            log("8.5.6浏览记录按钮"+className("android.widget.ImageView").desc("浏览记录").id("com.jd.lib.search:id/aj8").findOnce());
+                            log("8.5.6ViewGroup"+className("android.view.ViewGroup").findOnce());
                             if (className("android.widget.ImageView").depth(3).findOnce(2) != null) {//8.5.6
                                 className("android.widget.ImageView").depth(3).findOnce(2).click();
                                 toastLog("已尝试点击“宠汪汪”活动入口…");
