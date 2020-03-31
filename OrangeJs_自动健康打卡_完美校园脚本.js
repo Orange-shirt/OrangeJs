@@ -663,7 +663,7 @@ if (context_Run == 0) {
     FirstDo();
 } else {
     for (let deng = 8; deng > 0; deng--) {
-        if (className("android.view.View").clickable(true).text("提交信息").findOnce() == null) {
+        if (className("android.view.View").clickable(true).text("提交信息").findOnce() == null||className("android.widget.Button").clickable(true).text("提交信息").findOnce()==null) {
             toastLog("正在等待“健康打卡”界面加载……");
             sleep(1000);
         } else {
@@ -1474,6 +1474,7 @@ function NotFirstRun() {
         }
         sleep(1000);
         className("android.view.View").text("提交信息").findOne(2000).click();
+        className("android.widget.Button").clickable(true).text("提交信息").findOnce(2000).click();
         className("android.widget.Button").text("确认提交").findOne(3000).click();
         if (files.exists("/storage/emulated/0/OrangeJs/自动健康打卡/附加功能.txt") == true) {
             var stop = 0;
