@@ -111,7 +111,7 @@ function RunJs() {
     var height = device.height;
     var width = device.width;
 
-    var GJCwords = "宠汪汪" //京东搜索关键词
+    var GJCwords = "京东宠汪汪" //京东搜索关键词
     function dialogs_js() {
         var ScriptVersion = ("Beta1.56"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
