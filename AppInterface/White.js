@@ -3,26 +3,26 @@ context_DayOrNight = 1;
 context_widthofTen = device.width / 10;
 
 function setDayMode() {
-    context_framebg = "#FAFAFA" //全局背景
-    context_sBarColor = "#BDBDBD"; //通知栏颜色
+    context_framebg = "#4C4C4C" //全局背景
+    context_sBarColor = "#4C4C4C"; //通知栏颜色
     context_textColor = "#000000" //文字颜色
     context_textBg = "#FAFAFA" //文字背景
     context_QxtextBg = "#FAFAFA" //权限设置中的背景
     context_FctextBg = "#FAFAFA" //悬浮窗权限中的背景
     context_SunMoon = "@drawable/ic_wb_sunny_black_48dp"; //☀️
-    context_Logo = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" //黑色logo
+    context_Logo = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/PicsArt_04-04-01.46.44.jpg" //黑色logo
 }
 importClass(android.animation.ObjectAnimator);
 
 function setNightMode() {
-    context_framebg = "#000000"; //全局背景
+    context_framebg = "#4C4C4C"; //全局背景
     context_sBarColor = "#000000"; //通知栏颜色
-    context_textColor = "#FFFFFF" //文字颜色
+    context_textColor = "#000000" //文字颜色
     context_textBg = "#000000" //文字背景
     context_QxtextBg = "#903F3F3F" //权限设置中的背景
     context_FctextBg = "#646464" //悬浮窗的背景
     context_SunMoon = "@drawable/ic_brightness_2_black_48dp" //🌙
-    context_Logo = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" //白色Logo
+    context_Logo = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/PicsArt_04-04-01.46.44.jpg" //白色Logo
 }
 mainUi();
 
@@ -37,44 +37,44 @@ function mainUi() {
     ui.layout(
         <ScrollView>
             <frame id="main" background="{{context_framebg}}">//全局背景颜色
-                <vertical align="center" paddingTop="5" margin="0">
-                    <img src="{{context_Logo}}" h="40" margin="0 0 0 10"/>//黑色logo
-                    <text id="text" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28"/>
+                <vertical align="center" paddingTop="0" margin="0">
+                    <img src="{{context_Logo}}" w="*" h="200" margin="0" bg="#4C4C4C"/>//logo
+                    <text id="text" textStyle="bold" color="{{context_textColor}}" gravity="left" size="0" marginLeft="28"/>
                     //水平线性布局
-                    <linear orientation="horizontal" align="center" margin="5">
-                        <card layout_weight="50" h="50" marginRight="2" cardCornerRadius="25dp"
+                    <linear orientation="horizontal" align="center" margin="0" bg="#4C4C4C">
+                        <card layout_weight="50" h="50" margin="0 10 2 10" cardCornerRadius="25dp"
                         cardElevation="0dp" gravity="center_vertical">
                         <vertical padding="10 0" h="auto">
                         </vertical>
-                        <View bg="#FFEA3324" h="*" w="*"/>//卡片颜色1
+                        <View bg="#000000" h="*" w="*"/>//卡片颜色1
                         <View bg="#FF4395FB" h="*" w="0"/>//卡片颜色2
                         <card layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
                         cardElevation="0dp" align="center" >
                         <vertical padding="10 0" h="auto">
                         </vertical>
-                        <View bg="{{context_QxtextBg}}" h="*" w="*"/>
-                        <Switch id="autoService" text="无障碍服务" textColor="{{context_textColor}}" gravity="center" textStyle="bold" bg="{{context_QxtextBg}}" checked="{{auto.service != null}}" padding="5 5 5 5" textSize="15sp"/>
+                        
+                        <Switch id="autoService" text="无障碍服务" textColor="#000000" gravity="center" textStyle="bold" bg="#4C4C4C" checked="{{auto.service != null}}" padding="5 5 5 5" textSize="15sp"/>
                     </card>
                 </card>
                 
-                <card layout_weight="50" h="50" marginLeft="2" cardCornerRadius="25dp"
+                <card layout_weight="50" h="50" margin="5 10 2 10" cardCornerRadius="25dp"
                 cardElevation="0dp" gravity="center">
                 <vertical padding="10 0" h="auto">
                 </vertical>
-                <View id="TEST" bg="#FF007CF3" h="*" w="*"/>//卡片颜色1
+                <View id="TEST" bg="#000000" h="*" w="*"/>//卡片颜色1
                 <View bg="#FF4395FB" h="*" w="0"/>//卡片颜色2
                 
                 <card layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
                 cardElevation="0dp" align="center">
                 <vertical padding="10 0" h="auto">
                 </vertical>
-                <View bg="{{context_FctextBg}}" h="*" w="*"/>//悬浮窗权限中的卡片颜色
-                <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto" bg="?attr/selectableItemBackground" clickable="true"/>
+                <View bg="#4C4C4C" h="*" w="*"/>//悬浮窗权限中的卡片颜色
+                <text id="xfc_text" textStyle="bold" color="#000000" gravity="center" size="15" h="auto" bg="?attr/selectableItemBackground" clickable="true"/>
                 
             </card>
         </card>
         </linear>
-        <card h="1" margin="5 5" cardCornerRadius="1dp"
+        <card h="0"cardCornerRadius="1dp"
         cardElevation="0dp" gravity="center_vertical">
         <View bg="#FF832FFD" h="*" w="*"/>//分割线颜色1
         <View bg="#FF4395FB" h="*" marginRight="63"/>//分割线颜色2
@@ -83,45 +83,45 @@ function mainUi() {
         <View bg="#FFFE8E2D" h="*" marginRight="252"/>//分割线颜色5
         <View bg="#FFFC3032" h="*" marginRight="315"/>//分割线颜色6
         </card>
-        <text id="NowScript" text="可运行脚本" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28">
+        <text id="NowScript" text="可运行脚本" textStyle="bold" color="{{context_textColor}}" gravity="left" size="0" marginLeft="28">
         </text>
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0 5 0 0">
                 //淘宝脚本
                 <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#FF5722" h="*" w="*"/>
+                    <View bg="#616161" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_5080_1577343737/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_04-04-02.19.24.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="手机淘宝" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐9.4.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="手机淘宝" typeface="sans" textStyle="bold" color="#000000"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐9.4.0版本" typeface="monospace"  color="#000000"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         //
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#FFAB91"/>
-                                <text id="ScriptTwo" text="自动集福气" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                                <View w="*" h="*" bg="#757575"/>
+                                <text id="ScriptTwo" text="自动集福气" typeface="sans" color="#000000"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
                 </card>
                 //拼多多脚本
                 <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                    <View bg="#FF1744" h="*" w="*"/>
+                    <View bg="#616161" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://image.coolapk.com/apk_logo/2019/1218/11/512E5B9B4E8B4A7-32664-o_1dsbg23j210ns1ee110u7evuevcr-uid-1871800@512x512.png" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_04-04-02.33.31.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="拼多多" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐4.90.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="拼多多" typeface="sans" textStyle="bold" color="#000000"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐4.90.0版本" typeface="monospace"  color="#000000"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#90FF1744"/>
-                                <text id="ScriptTen" text="多多果园自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                                <View w="*" h="*" bg="#757575"/>
+                                <text id="ScriptTen" text="多多果园自动脚本" typeface="sans" color="#000000"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
@@ -134,38 +134,38 @@ function mainUi() {
             <linear orientation="horizontal" align="left" margin="0">
                 //微博脚本
                 <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#FF8F00" h="*" w="*"/>
+                    <View bg="#616161" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://pp.myapp.com/ma_icon/0/icon_9926_1579487446/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_04-04-02.21.53.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="微博" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐9.9.3版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="微博" typeface="sans" textStyle="bold" color="#000000"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐9.9.3版本" typeface="monospace"  color="#000000"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#90FF8F00"/>
-                                <text id="ScriptNine" text="微博任务自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                                <View w="*" h="*" bg="#757575"/>
+                                <text id="ScriptNine" text="微博任务自动脚本" typeface="sans" color="#000000"  gravity="center" size="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
                 </card>
                 //微信脚本
                 <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                    <View bg="#4CAF50" h="*" w="*"/>
+                    <View bg="#616161" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://pp.myapp.com/ma_icon/0/icon_10910_1577346809/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_04-04-02.20.41.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐7.0.10版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="微信" typeface="sans" textStyle="bold" color="#000000"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐7.0.10版本" typeface="monospace"  color="#000000"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#A5D6A7"/>
-                                <text id="ScriptOne" text="自动微信发消息" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                                <View w="*" h="*" bg="#757575"/>
+                                <text id="ScriptOne" text="自动微信发消息" typeface="sans" color="#000000"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
@@ -177,39 +177,39 @@ function mainUi() {
             <linear orientation="horizontal" align="left" margin="0">
                 //京东脚本
                 <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#F44336" h="*" w="*"/>
+                    <View bg="#616161" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_04-04-02.30.02.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐8.4.6版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="京东" typeface="sans" textStyle="bold" color="#000000"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐8.4.6版本" typeface="monospace"  color="#000000"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
-                                <View bg="#EF9A9A"/>
-                                <spinner id="sp_Jd1" entries="自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
+                                <View bg="#757575"/>
+                                <spinner id="sp_Jd1" entries="自动宠汪汪|东东农场自动脚本" textColor="#000000" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
                             </card>
-                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
+                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#757575" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
                         </linear>
                     </vertical>
                 </card>
                 //完美校园脚本
                 <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                    <View bg="#F0FD7034" h="*" w="*"/>
+                    <View bg="#616161" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://android-artworks.25pp.com/fs08/2020/01/22/8/110_30d36bea2b970bda26ac38b5eb3a2935_con_130x130.png" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_04-04-02.36.16.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="完美校园" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐5.1.2版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="完美校园" typeface="sans" textStyle="bold" color="#000000"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐5.1.2版本" typeface="monospace"  color="#000000"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#80FD7034"/>
-                                <text id="ScriptTwe" text="自动健康打卡" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                                <View w="*" h="*" bg="#757575"/>
+                                <text id="ScriptTwe" text="自动健康打卡" typeface="sans" color="#000000"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
@@ -219,43 +219,38 @@ function mainUi() {
         <linear orientation="horizontal" align="left" margin="0">
             //QQ脚本
             <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                <View bg="#F02196F3" h="*" w="*"/>
+                <View bg="#616161" h="*" w="*"/>
                 <vertical padding="0 0" h="auto">
                     <linear orientation="horizontal" align="left" margin="0">
-                        <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="40" h="40" margin="20 20 0 0"/>
+                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_04-04-02.27.40.png" w="40" h="40" margin="20 20 0 0"/>
                         <vertical padding="0 0" h="auto">
-                            <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                            <text text="推荐8.2.7版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            <text text="QQ" typeface="sans" textStyle="bold" color="#000000"  gravity="center" size="20" margin="10 20 0 0"/>
+                            <text text="推荐8.2.7版本" typeface="monospace"  color="#000000"  gravity="center" size="5" margin="10 0 0 0"/>
                         </vertical>
                     </linear>
                     <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                         <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                            <View w="*" h="*" bg="#90CAF9"/>
-                            <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                            <View w="*" h="*" bg="#757575"/>
+                            <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#000000"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                         </card>
                     </linear>
                 </vertical>
             </card>
         </linear>
-        <text text="关注疫情" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" margin="28 5 0 0"/>
+        <text text="关注疫情" textStyle="bold" color="{{context_textColor}}" gravity="left" size="0" margin="28 5 0 0"/>
         <card h="1" margin="5 5" cardCornerRadius="1dp"
         cardElevation="0dp" gravity="center_vertical">
-        <View bg="#FF832FFD" h="*" w="*"/>//分割线颜色1
-        <View bg="#FF4395FB" h="*" marginRight="63"/>//分割线颜色2
-        <View bg="#FF32F558" h="*" marginRight="126"/>//分割线颜色3
-        <View bg="#FFFCD830" h="*" marginRight="189"/>//分割线颜色4
-        <View bg="#FFFE8E2D" h="*" marginRight="252"/>//分割线颜色5
-        <View bg="#FFFC3032" h="*" marginRight="315"/>//分割线颜色6
+        <View bg="#000000" h="*" w="*"/>//分割线颜色1
         </card>
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0">
                 //实时疫情
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
+                <card h="0" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
                     <img id="YQ" src="https://x0.ifengimg.com/ucms/2020_04/83F0FE405D7CD5A09187BE43FD34FBB7316556AA_w750_h300.jpg" scaleType="fitXY" bg="?attr/selectableItemBackground" clickable="true"/>
                 </card>
                 
                 //驰援疫情
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
+                <card h="0" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
                     <img id="JK" src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/PicsArt_02-22-05.46.41.jpg" scaleType="fitXY"/>
                 </card>
             </linear>
@@ -507,7 +502,7 @@ function mainUi() {
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
-    
+
     ui.ScriptThi.click(() => {
         engines.execScript("自动动态点赞", "runScriptThi();\n" + runScriptThi.toString());
     });
@@ -551,7 +546,7 @@ function mainUi() {
                         <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
                         <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
                         <text text="问题反馈" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
-                        <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
+                        <View bg="#000000" h="*" w="*"/>//打底卡片颜色1
                     </linear>
                     <progressbar id="progressX" style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"layout_gravity="top"/>
                     <ScrollView>
@@ -597,7 +592,7 @@ function mainUi() {
                         <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
                         <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
                         <text text="疫情动态" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
-                        <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
+                        <View bg="#000000" h="*" w="*"/>//打底卡片颜色1
                     </linear>
                     <progressbar id="progress" style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"layout_gravity="top"/>
                     <ScrollView>
@@ -791,16 +786,16 @@ function SP() {
                 </linear>
                 <ScrollView>
                     <linear orientation="vertical" align="left" margin="0" paddingTop="0">
-                        <text text="隐私与安全（完善中……）" textSize="20" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text text="文档日期:2020年1月4日" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans"/>
+                        <text text="隐私与安全（完善中……）" textSize="20" color="#000000" textStyle="bold" typeface="sans" paddingTop="5"/>
+                        <text text="文档日期:2020年1月4日" textSize="15" color="#000000" textStyle="bold" typeface="sans"/>
                         <text id="Privacy" color="#F5F5F5" textStyle="bold" typeface="sans">
                         </text>
-                        <text id="Q0" text="软件需要什么权限？" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text id="A0" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#FFFFFF"/>
-                        <text id="Q1" text="为什么要收集信息？" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text id="A1" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#FFFFFF"/>
-                        <text id="Q2" text="本软件会收集哪些信息？" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text id="A2" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#FFFFFF"/>
+                        <text id="Q0" text="软件需要什么权限？" textSize="15" color="#000000" textStyle="bold" typeface="sans" paddingTop="5"/>
+                        <text id="A0" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#000000"/>
+                        <text id="Q1" text="为什么要收集信息？" textSize="15" color="#000000" textStyle="bold" typeface="sans" paddingTop="5"/>
+                        <text id="A1" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#000000"/>
+                        <text id="Q2" text="本软件会收集哪些信息？" textSize="15" color="#000000" textStyle="bold" typeface="sans" paddingTop="5"/>
+                        <text id="A2" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#000000"/>
                         
                     </linear>
                 </ScrollView>
