@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.jingdong.app.mall");
-var SupportVersion = ["8.5.6", "8.5.4", "8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
+var SupportVersion = ["8.5.8","8.5.6", "8.5.4", "8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -113,7 +113,7 @@ function RunJs() {
 
     var GJCwords = "京东宠汪汪" //京东搜索关键词
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.56"); //版本
+        var ScriptVersion = ("Beta1.57"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1110,7 +1110,6 @@ function RunJs() {
 
 
     function mainC() {
-        try {
             var M = text("下一页").findOnce();
             if (M != null) {
                 var P = M.bounds();
@@ -2005,9 +2004,6 @@ function RunJs() {
                     exit();
                 }
             }
-        } catch (e) {
-            log(e);
-        }
     }
 
     firstD();
