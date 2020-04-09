@@ -870,9 +870,18 @@ function RunJs() {
                             toastLog("已尝试点击“分类搜索框8.5.6”");
                             sleep(2000);
                             BS();
+                        } else {//8.5.8
+                        var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a3h").findOnce();
+                        if (Ac != null) {
+                            Ac.click();
+                            sleep(1000);
+                            toastLog("已尝试点击“分类搜索框8.5.8”");
+                            sleep(2000);
+                            BS();
                         } else {
                             toastLog("未找到“分类”中的搜索栏\n重试中……");
                             openJDinSearch();
+                            }
                         }
                     }
                 }
@@ -961,7 +970,21 @@ function RunJs() {
                     toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
                     sleep(1500);
                 }
-            } else {
+            } else if (id("com.jd.lib.search:id/al3").findOnce() != null) { //8.5.8
+                if (id("com.jd.lib.search:id/bw").findOnce() != null) {
+                    var d = id("com.jd.lib.search:id/bw").findOnce();
+                    if (d != null) {
+                        var dd = d.bounds();
+                        click(dd.centerX(), dd.centerY());
+                        toastLog("存在“重新加载”按钮\n已尝试点击……");
+                        sleep(2000);
+                        var deng = 10;
+                    }
+                } else {
+                    toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
+                    sleep(1500);
+                }
+            }else {
                 var deng = 0;
                 toastLog("检测到当前并未处于京东搜索\n重试中……");
                 BS();
@@ -1053,8 +1076,23 @@ function RunJs() {
                                 }
                                 mainC();
                             } else {
+                                var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/am4").findOnce(); //8.5.8
+
+                            if (jr != null) {
+
+                                jr.child(0).click();
+                                toastLog("已尝试点击“宠汪汪”活动入口…");
+                                sleep(2000);
+                                var deng = 8;
+                                for (deng == 8; deng > 0; deng--) {
+                                    toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
+                                    sleep(1000);
+                                }
+                                mainC();
+                            } else {
                                 toastLog("找不到“宠汪汪”活动入口\n重试中……");
                                 openJDinSearch();
+                                }
                             }
                         }
                     }
@@ -1271,7 +1309,9 @@ function RunJs() {
                                     var Number = 0;
                                     context_xH = 0;
                                 }
-                            } else {
+                            }else if (Number == 0) {
+                                
+                                } else {
                                 var Number = 20;
                                 toastLog(H);
                                 var AB = B[3].bounds();
