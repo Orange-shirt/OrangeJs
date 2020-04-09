@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.jingdong.app.mall");
-var SupportVersion = ["8.5.6", "8.5.4", "8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
+var SupportVersion = ["8.5.8","8.5.6", "8.5.4", "8.5.2", "8.5.1", "8.5.0", "8.4.6", "8.4.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -111,9 +111,9 @@ function RunJs() {
     var height = device.height;
     var width = device.width;
 
-    var GJCwords = "宠汪汪" //京东搜索关键词
+    var GJCwords = "京东宠汪汪" //京东搜索关键词
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.56"); //版本
+        var ScriptVersion = ("Beta1.57"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -870,9 +870,18 @@ function RunJs() {
                             toastLog("已尝试点击“分类搜索框8.5.6”");
                             sleep(2000);
                             BS();
+                        } else {//8.5.8
+                        var Ac = className("android.widget.RelativeLayout").id("com.jd.lib.category:id/a3h").findOnce();
+                        if (Ac != null) {
+                            Ac.click();
+                            sleep(1000);
+                            toastLog("已尝试点击“分类搜索框8.5.8”");
+                            sleep(2000);
+                            BS();
                         } else {
                             toastLog("未找到“分类”中的搜索栏\n重试中……");
                             openJDinSearch();
+                            }
                         }
                     }
                 }
@@ -961,7 +970,21 @@ function RunJs() {
                     toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
                     sleep(1500);
                 }
-            } else {
+            } else if (id("com.jd.lib.search:id/al3").findOnce() != null) { //8.5.8
+                if (id("com.jd.lib.search:id/bw").findOnce() != null) {
+                    var d = id("com.jd.lib.search:id/bw").findOnce();
+                    if (d != null) {
+                        var dd = d.bounds();
+                        click(dd.centerX(), dd.centerY());
+                        toastLog("存在“重新加载”按钮\n已尝试点击……");
+                        sleep(2000);
+                        var deng = 10;
+                    }
+                } else {
+                    toastLog("正在等待“宠汪汪”活动加载\n剩余" + deng + "秒……");
+                    sleep(1500);
+                }
+            }else {
                 var deng = 0;
                 toastLog("检测到当前并未处于京东搜索\n重试中……");
                 BS();
@@ -1053,8 +1076,23 @@ function RunJs() {
                                 }
                                 mainC();
                             } else {
+                                var jr = className("android.widget.LinearLayout").id("com.jd.lib.search:id/am4").findOnce(); //8.5.8
+
+                            if (jr != null) {
+
+                                jr.child(0).click();
+                                toastLog("已尝试点击“宠汪汪”活动入口…");
+                                sleep(2000);
+                                var deng = 8;
+                                for (deng == 8; deng > 0; deng--) {
+                                    toastLog("正在等待宠汪汪活动界面加载\n请稍等" + deng + "秒……");
+                                    sleep(1000);
+                                }
+                                mainC();
+                            } else {
                                 toastLog("找不到“宠汪汪”活动入口\n重试中……");
                                 openJDinSearch();
+                                }
                             }
                         }
                     }
@@ -1072,7 +1110,6 @@ function RunJs() {
 
 
     function mainC() {
-        try {
             var M = text("下一页").findOnce();
             if (M != null) {
                 var P = M.bounds();
@@ -1260,10 +1297,10 @@ function RunJs() {
                             var AO = D.parent();
                             var B = AO.children();
                             var H = B[1].text();
-                            if (H == hd3) {
+                            if (H == hd3) {//任务已完成
                                 toastLog(H);
                                 context_xH = 0;
-                            } else if (Number != 0) {
+                            } else if (Number >0) {
                                 Number--;
                                 var hd3 = "关注店铺（" + Number + "/" + Number + "）";
                                 if (H == hd3) {
@@ -1271,7 +1308,10 @@ function RunJs() {
                                     var Number = 0;
                                     context_xH = 0;
                                 }
-                            } else {
+                            }else if (Number == 0) {
+                                Number--;
+                                log("已遍历完20");
+                                } else {
                                 var Number = 20;
                                 toastLog(H);
                                 var AB = B[3].bounds();
@@ -1965,9 +2005,6 @@ function RunJs() {
                     exit();
                 }
             }
-        } catch (e) {
-            log(e);
-        }
     }
 
     firstD();
