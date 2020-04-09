@@ -1297,10 +1297,10 @@ function RunJs() {
                             var AO = D.parent();
                             var B = AO.children();
                             var H = B[1].text();
-                            if (H == hd3) {
+                            if (H == hd3) {//任务已完成
                                 toastLog(H);
                                 context_xH = 0;
-                            } else if (Number != 0) {
+                            } else if (Number >0) {
                                 Number--;
                                 var hd3 = "关注店铺（" + Number + "/" + Number + "）";
                                 if (H == hd3) {
@@ -1309,7 +1309,8 @@ function RunJs() {
                                     context_xH = 0;
                                 }
                             }else if (Number == 0) {
-                                
+                                Number--;
+                                log("已遍历完20");
                                 } else {
                                 var Number = 20;
                                 toastLog(H);
