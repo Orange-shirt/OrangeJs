@@ -844,7 +844,7 @@ function DoTask() {
                 openInTask();
                 DoTask();
             }
-            while (A.parent().child(2).text() != "x0" && className("android.view.View").text("营养液不足，完成下方任务获取").findOnce() != null) {
+            while (A.parent().child(2).text() != "x0" && className("android.view.View").text("营养液不足，完成下方任务获取").findOnce() == null) {
                 let a = A.parent().child(2).bounds();
                 click(a.centerX(), a.centerY());
                 toastLog("当前培养液" + A.parent().child(2).text() + "\n已尝试点击培养");
