@@ -744,8 +744,8 @@ if (T == 1) {
     w.setTouchable(false);
     w.setPosition(0, device.height - 500);
 
-        w.ConS.setConsole(org.autojs.autojs.autojs.AutoJs.getInstance().getGlobalConsole());
-        w.ConS.findViewById(org.autojs.autojs.R.id.input_container).setVisibility(android.view.View.GONE);
+        w.ConS.setConsole(com.orange.orangejs.AutoJs.getInstance().getGlobalConsole());
+        w.ConS.findViewById(com.orange.orangejs.R.id.input_container).setVisibility(android.view.View.GONE);
   
 } else if (T == 0) {
     log("使用脚本自带“吐司”");
