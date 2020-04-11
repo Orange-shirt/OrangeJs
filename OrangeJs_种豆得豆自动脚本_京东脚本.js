@@ -317,9 +317,9 @@ if (files.exists("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or
 } else {
     try {
         files.createWithDirs("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
-        files.write("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt", "日志");
-        var T = 1;
-        log("默认开启悬浮日志，如需更改请在主菜单进行");
+        files.write("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt", "吐司");
+        var T = 0;
+        log("默认使用吐司，如需更改请在主菜单进行");
     } catch (e) {
         log("未授予存储权限或存储权限错误，默认开启悬浮日志");
         var T = 1;
@@ -743,10 +743,10 @@ if (T == 1) {
     w.setSize(device.width, 500);
     w.setTouchable(false);
     w.setPosition(0, device.height - 500);
-
-        w.ConS.setConsole(com.orange.orangejs.橘衫の脚本.getInstance().getGlobalConsole());
-        w.ConS.findViewById(com.orange.orangejs.R.id.input_container).setVisibility(android.view.View.GONE);
-  
+    ui.run(() => {
+        w.ConS.setConsole(org.autojs.autojs.autojs.AutoJs.getInstance().getGlobalConsole());
+        w.ConS.findViewById(org.autojs.autojs.R.id.input_container).setVisibility(android.view.View.GONE);
+    });
 } else if (T == 0) {
     log("使用脚本自带“吐司”");
 }
