@@ -5,8 +5,8 @@
 
 **[点击下载OrangeJs（橘衫の脚本）APK（1.0）](https://www.lanzous.com/i8gs5li)**
 
-# 脚本总数：13
-## 当前可用：8
+# 脚本总数：14
+## 当前可用：9
 
 ## 【脚本】[自动集福气（淘宝脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
@@ -72,5 +72,16 @@
 **这是一个自动在QQ中点赞好友动态中的说说或单个好友空间中的说说的脚本，现已支持QQ8.2.7和8.3.0版本并会向后兼容。**
 
 **脚本提供自动打开QQ至指定界面点赞的功能，同时也提供自定义点赞界面功能。支持在QQ各种主题下运行，支持普通模式和简洁模式下的QQ，支持对单条说说最高99次点赞并提供自定义点赞次数功能，支持计时运行和定时运行脚本。同时本脚本也开始率先测试返回方法的保存功能，您可在6种不同的返回方法中选择适用您设备的返回方法来实现返回操作。**
+
+## 【脚本】[种豆得豆自动脚本（京东脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E7%A7%8D%E8%B1%86%E5%BE%97%E8%B1%86%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%EF%BC%88%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC%EF%BC%89)
+![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
+
+**支持安卓7及以上系统全分辨率的设备使用无障碍服务无需ROOT运行**
+
+**支持自动打开JD至活动页面完成各项任务，支持判断各种任务完成状态，每日上限，支持自动收集等**
+
+**支持检测到异常界面自动跳转活动目标页面防止误触，支持计时运行与定时运行，支持保存返回方法，支持切换吐司（Toast）/悬浮日志 等**
+
+**在最新版JD已测试通过，可能支持多个JD版本具体请自行测试本脚本未对JD版本进行限制**
 
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
