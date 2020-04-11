@@ -189,7 +189,7 @@ function mainUi() {
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
                                 <View bg="#EF9A9A"/>
-                                <spinner id="sp_Jd1" entries="自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
+                                <spinner id="sp_Jd1" entries="种豆得豆自动脚本|自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
                             </card>
                             <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
                         </linear>
@@ -330,10 +330,12 @@ function mainUi() {
     }
 
     ui.R_JD.click(() => {
-        if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
+        if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
             engines.execScript("东东农场自动脚本", "runScriptEight();\n" + runScriptEight.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
             engines.execScript("自动宠汪汪", "runScriptSix();\n" + runScriptSix.toString());
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
+            engines.execScript("种豆得豆自动脚本", "runScriptFourt();\n" + runScriptFourt.toString());
         }
     });
 
@@ -357,6 +359,32 @@ function mainUi() {
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("东东农场自动脚本", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
+    function runScriptFourt() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptFourt_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E7%A7%8D%E8%B1%86%E5%BE%97%E8%B1%86%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第十四个脚本网址
+        var res_script = http.get(ScriptFourt_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("种豆得豆自动脚本", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
@@ -507,7 +535,7 @@ function mainUi() {
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
-    
+
     ui.ScriptThi.click(() => {
         engines.execScript("自动动态点赞", "runScriptThi();\n" + runScriptThi.toString());
     });
