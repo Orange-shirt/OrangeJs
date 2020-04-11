@@ -78,10 +78,10 @@
 
 **支持安卓7及以上系统全分辨率的设备使用无障碍服务无需ROOT运行**
 
-**支持自动打开JD至活动页面完成各项任务，支持判断各种任务完成状态，每日上限，支持自动收集等**
+**支持自动打开京东至活动页面完成各项任务，支持判断各种任务完成状态，每日上限，支持自动收集等**
 
 **支持检测到异常界面自动跳转活动目标页面防止误触，支持计时运行与定时运行，支持保存返回方法，支持切换吐司（Toast）/悬浮日志 等**
 
-**在最新版JD已测试通过，可能支持多个JD版本具体请自行测试本脚本未对JD版本进行限制**
+**在最新版京东已测试通过，可能支持多个京东版本具体请自行测试本脚本未对京东版本进行限制**
 
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
