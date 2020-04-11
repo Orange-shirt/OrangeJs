@@ -744,7 +744,7 @@ if (T == 1) {
     w.setTouchable(false);
     w.setPosition(0, device.height - 500);
 
-        w.ConS.setConsole(com.orange.orangejs.AutoJs.getInstance().getGlobalConsole());
+        w.ConS.setConsole(com.orange.orangejs.橘衫の脚本.getInstance().getGlobalConsole());
         w.ConS.findViewById(com.orange.orangejs.R.id.input_container).setVisibility(android.view.View.GONE);
   
 } else if (T == 0) {
