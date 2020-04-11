@@ -743,10 +743,10 @@ if (T == 1) {
     w.setSize(device.width, 500);
     w.setTouchable(false);
     w.setPosition(0, device.height - 500);
-    ui.run(() => {
+
         w.ConS.setConsole(org.autojs.autojs.autojs.AutoJs.getInstance().getGlobalConsole());
         w.ConS.findViewById(org.autojs.autojs.R.id.input_container).setVisibility(android.view.View.GONE);
-    });
+  
 } else if (T == 0) {
     log("使用脚本自带“吐司”");
 }
