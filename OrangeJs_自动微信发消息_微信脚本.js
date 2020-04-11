@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.tencent.mm");
-var SupportVersion = ["7.0.12Play版", "7.0.12", "7.0.10", "7.0.4"]
+var SupportVersion = ["7.0.13","7.0.12Play版", "7.0.12", "7.0.10", "7.0.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -112,7 +112,7 @@ function RunJs() {
     var width = device.width;
 
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.2"); //版本
+        var ScriptVersion = ("Beta1.21"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🛠 修改脚本配置", "🔙 返回方法设置"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动微信发消息”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
