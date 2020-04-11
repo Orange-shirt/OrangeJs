@@ -728,6 +728,7 @@ function Justback() {
 
 if (T == 1) {
     log("使用“悬浮日志”");
+
     function toastLog(message) {
         log(message);
     }
@@ -755,9 +756,16 @@ if (T == 1) {
 function openInTask() {
     while (true) {
         if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null) {
-            text("种豆得豆").className("android.widget.TextView").findOnce().parent().click();
-            toastLog("已尝试点击“种豆得豆”入口按钮");
-            sleep(3000);
+            if (text("种豆得豆").className("android.widget.TextView").findOnce().parent().clickable() == true) {
+                text("种豆得豆").className("android.widget.TextView").findOnce().parent().click();
+                toastLog("已尝试盲点“种豆得豆”入口按钮");
+                sleep(3000);
+            } else {
+                let a = text("种豆得豆").className("android.widget.TextView").findOnce().parent().bounds();
+                click(a.centerX(), a.centerY());
+                toastLog("已尝试点击“种豆得豆”入口按钮");
+                sleep(3000);
+            }
             break;
         } else if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null) {
             className("android.view.View").desc("我的").findOnce().click();
