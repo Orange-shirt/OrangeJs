@@ -757,7 +757,7 @@ function openInTask() {
         if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null) {
             text("种豆得豆").className("android.widget.TextView").findOnce().parent().click();
             toastLog("已尝试点击“种豆得豆”入口按钮");
-            sleep(2000);
+            sleep(3000);
             break;
         } else if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null) {
             className("android.view.View").desc("我的").findOnce().click();
@@ -783,15 +783,15 @@ function openInTask() {
             sleep(2000);
         }
     }
-    for (let d = 10; d > 0; d--) {
+    for (var d = 10; d > 0; d--) {
         if (id("com.jingdong.app.mall:id/fd").text("种豆得豆").findOnce() != null && className("android.view.View").text("培养").findOnce() != null) { //8.5.6
-            let d = 0;
+            var d = 0;
         } else if (currentActivity() == "com.jingdong.app.mall.WebActivity") {
             toastLog("正在等待“种豆得豆”活动界面加载\n剩余" + d + "秒……");
             sleep(2000);
         } else {
-            let d = 0;
-            toastLog("当前活动错误，正在重试……");
+            var d = 0;
+            toastLog("当前未处于“种豆得豆”活动加载界面，正在重试……");
         }
     }
 }
