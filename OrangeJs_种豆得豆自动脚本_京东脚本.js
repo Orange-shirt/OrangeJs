@@ -755,7 +755,7 @@ if (T == 1) {
 
 function openInTask() {
     while (true) {
-        if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null) {
+        if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null&&text("瓜分亿万京豆").className("android.widget.TextView").findOnce()!=null) {
             if (text("种豆得豆").className("android.widget.TextView").findOnce().parent().clickable() == true) {
                 text("种豆得豆").className("android.widget.TextView").findOnce().parent().click();
                 toastLog("已尝试盲点“种豆得豆”入口按钮");
