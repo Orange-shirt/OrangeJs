@@ -755,7 +755,7 @@ if (T == 1) {
 
 function openInTask() {
     while (true) {
-        if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null&&text("瓜分亿万京豆").className("android.widget.TextView").findOnce()!=null) {
+        if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null && text("瓜分亿万京豆").className("android.widget.TextView").findOnce() != null) {
             if (text("种豆得豆").className("android.widget.TextView").findOnce().parent().clickable() == true) {
                 text("种豆得豆").className("android.widget.TextView").findOnce().parent().click();
                 toastLog("已尝试盲点“种豆得豆”入口按钮");
@@ -1381,7 +1381,12 @@ function DoTask() {
         let a = B.child(3).bounds(); //逛逛会场按钮
         click(a.centerX(), a.centerY());
         toastLog("已尝试点击“逛逛会场”按钮");
-        sleep(2000);
+        if (className("android.widget.Image").text("53lRFGmtboD5P17e27NNUN5iAAAAAElFTkSuQmCC").findOne(3000) != null) {
+            let a = className("android.widget.Image").text("53lRFGmtboD5P17e27NNUN5iAAAAAElFTkSuQmCC").findOnce().bounds();
+            click(a.centerX(), a.centerY());
+            toastLog("已尝试点击蒙版“逛逛会场”按钮");
+            sleep(2000);
+        }
         for (var w = 10; w > 0; w--) {
             toastLog("正在等待“会场”加载，剩余" + w + "秒……");
             sleep(1000);
