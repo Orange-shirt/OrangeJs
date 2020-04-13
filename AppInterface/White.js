@@ -298,7 +298,7 @@ function mainUi() {
         engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
     });
     ui.AboutApp.click(() => {
-        engines.execScript(AboutApp());
+        AboutApp();
     });
 
 
@@ -567,10 +567,11 @@ function mainUi() {
     }
 
     ui.TalktoDeveloper.click(() => {
-        engines.execScript(TalkToDeveloper());
+        engines.execScript("问题反馈", "\"ui\";TalkToDeveloper();" + TalkToDeveloper.toString());
     });
 
     function TalkToDeveloper() {
+        ui.statusBarColor("#BDBDBD"); //通知栏颜色
         events.removeAllListeners();
         ui.layout(
             <frame w="*" h="*">
@@ -594,7 +595,7 @@ function mainUi() {
         ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
         ui.Back.click(() => {
             clearInterval(JdtX);
-            engines.execScript(mainUi());
+            ui.finish();
         });
         var JdtX = setInterval(() => {
             var P = ui.webview.getProgress(); //获取进度
@@ -613,11 +614,12 @@ function mainUi() {
     }
 
     ui.YQ.click(() => {
-        engines.execScript(YQ());
+        engines.execScript("疫情动态", "\"ui\";YQ();" + YQ.toString());
     });
 
     function YQ() {
         events.removeAllListeners();
+        ui.statusBarColor("#BDBDBD"); //通知栏颜色
         ui.layout(
             <frame w="*" h="*">
                 <vertical align="left">
@@ -640,7 +642,8 @@ function mainUi() {
         ui.webview.loadUrl("https://news.ifeng.com/c/special/7tPlDSzDgVk");
         ui.Back.click(() => {
             clearInterval(Jdt);
-            engines.execScript(mainUi());
+            ui.finish();
+            //engines.execScript(mainUi());
         });
 
         var Jdt = setInterval(() => {
@@ -720,16 +723,16 @@ function mainUi() {
             <View bg="#FF4285F4" h="*" w="*"/>//卡片颜色1
             </card>
             <text id="Ttip"  color="{{context_textColor}}" textSize="15" textStyle="normal" marginTop="5" gravity="center"/>
-            <card  h="5" margin="0 10 0 100" cardCornerRadius="0dp"
+            <card  h="5" margin="0 10 0 10" cardCornerRadius="0dp"
             cardElevation="0dp" gravity="center_vertical">
             <vertical padding="0 0" h="auto">
             </vertical>
             <View bg="#FF9D41F9" h="*" w="*"/>//卡片颜色1
             </card>
-            
+            <button id="TESTcode" text="代码测试台" color="#FFFFFF" bg="#90A4AE" textSize="15" textStyle="normal" margin="5 5 5 200" gravity="center"/>
             </vertical>
             <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-            margin="16" layout_gravity="bottom|right" tint="#ffffff" />
+            margin="0 0 15 120" layout_gravity="bottom|right" tint="#ffffff" />
             </frame>
             </ScrollView>
         );
@@ -740,6 +743,54 @@ function mainUi() {
         ui.Back.click(() => {
             engines.execScript(mainUi());
         });
+        ui.TESTcode.click(() => {
+            engines.execScript("代码测试台", "\"ui\";TESTCode();\n" + TESTCode.toString());
+        });
+
+        function TESTCode() {
+            ui.statusBarColor("#000000"); //通知栏颜色
+            ui.layout(
+                <vertical bg="#000000">
+                    <!-- lines属性用来设置输入框的行数 -->
+                    <text text="请输入要运行的代码" textColor="white" textSize="16sp" marginTop="16"/>
+                    <input id="x" color="#FFFFFF" lines="20"/>
+                    //水平线性布局
+                    <linear orientation="horizontal" align="center" margin="5 0 5 0" weightSum="10">
+                        <button id="ru" layout_weight="5" h="50" bg="#4CAF50" color="#FFFFFF" marginRight="5" text="运行" gravity="center"/>
+                        <button id="qk" layout_weight="5" h="50" bg="#FF5722" color="#FFFFFF" marginLeft="5" text="清空" gravity="center"/>
+                    </linear>
+                    <button id="con" w="*" h="50" bg="#2196F3" color="#FFFFFF" margin="5 5 5 0" text="打开控制台" gravity="center"/>
+                    <text text="* 使用 Auto.js(4.0) 作为脚本引擎" color="#9e9e9e" textSize="10" marginTop="10"gravity="center"/>
+                    <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
+                    margin="10" layout_gravity="bottom|right" tint="#ffffff" />
+                </vertical>
+
+            );
+            ui.ru.on("click", () => {
+                var text = ui.x.getText();
+                if (text != "") {
+                    engines.execScript("测试运行", text);
+                } else {
+                    toastLog("没有输入任何代码");
+                }
+            });
+            ui.qk.on("click", () => {
+                dialogs.confirm("您确定要清空吗？", "此操作将无法撤销").then(value => {
+                    if (value == true) {
+                        ui.x.text("");
+                        toastLog("已清空");
+                    }
+                })
+            });
+            ui.con.on("click", () => {
+                threads.start(function() {
+                    console.show();
+                });
+            });
+            ui.Back.click(() => {
+                ui.finish();
+            });
+        }
     }
 
 
@@ -789,7 +840,7 @@ function mainUi() {
     });
 
 
-    ui.changeColor.click(() => { //更换主题(仅可更换10次)
+    ui.changeColor.click(() => {
         if (context_DayOrNight == 1) {
             context_DayOrNight = 0;
         } else {
@@ -800,13 +851,12 @@ function mainUi() {
 
 
     ui.Privacy_Security.click(() => {
-        engines.execScript(SP());
+        engines.execScript("隐私与安全", "\"ui\";SP();" + SP.toString());
     });
 
 }
 
 function SP() {
-
     events.removeAllListeners();
     ui.statusBarColor("#2196F3"); //通知栏颜色
     //Not pink色是#DFC8C6
@@ -848,7 +898,7 @@ function SP() {
 
     });
     ui.back.click(() => {
-        engines.execScript(mainUi());
+        ui.finish();
     });
     ui.Q1.click(() => { //为什么要收集信息？
         ui.A1.text("");
