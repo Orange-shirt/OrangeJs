@@ -51,9 +51,9 @@
 ## 【脚本】[自动微信发消息（微信脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E5%8F%91%E6%B6%88%E6%81%AF%EF%BC%88%E5%BE%AE%E4%BF%A1%E8%84%9A%E6%9C%AC%EF%BC%89)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
 
-**本脚本支持定时运行，支持安卓7及以上系统无需ROOT运行，支持防误触等，在最新版微信7.0.10和7.0.4版本上已测试通过**
+**本脚本支持定时运行，支持安卓7及以上系统无需ROOT运行，支持防误触等**
 
-**脚本目前仅可发送文字消息，但发送对象可以是“联系人”,“群聊”,“公众号”**
+**目前在微信7.0.13（Play版与国内版），7.0.12（Play版与国内版），7.0.10（国内版）和7.0.4（国内版）已测试通过，同时在微信7.0.12及之后更新的版本上可发送任意文件消息，仅需在消息框内输入文件的全路径即可，脚本的发送对象可以是“联系人”,“群聊”,“公众号”**
 
 ## 【脚本】[自动健康打卡（完美校园脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1%EF%BC%88%E5%AE%8C%E7%BE%8E%E6%A0%A1%E5%9B%AD%E8%84%9A%E6%9C%AC%EF%BC%89)
 ![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
