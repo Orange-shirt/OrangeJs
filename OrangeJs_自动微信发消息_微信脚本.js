@@ -108,13 +108,6 @@ while (While == 1) {
 
 function RunJs() {
     dialogs_js();
-    var TongXunlu = ["d9a", //7.0.4
-        "dkb", //7.0.10
-        "civ", //7.0.12
-        "cj6", //7.0.12play
-        "cl7", //7.0.13
-        "cl9" //7.0.13play
-    ]; //微信首页“通讯录”按钮文字ID
     function toastLog(message) {
         toast(message);
         log(message);
@@ -1516,30 +1509,35 @@ function RunJs() {
 
     function OpenWXcontent() { //自动打开微信至主页通讯录界面
         try {
-            function FindKj_txl(TongXunlu) { //找微信主页通讯录文字，后续在代码开头添加微信通讯录文字ID即可
-                var al = TongXunlu.length - 1;
-                while (true) {
-                    if (al < 0) {
-                        break;
-                    } else {
-                        if (id("com.tencent.mm:id/" + TongXunlu[al]).className("android.widget.TextView").text("通讯录").findOnce() != null) {
-                            let a = id("com.tencent.mm:id/" + TongXunlu[al]).className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
-                            toastLog("已尝试点击“通讯录”按钮（" + TongXunlu[al] + "）点击状态：" + a);
-                            sleep(2000);
-                            return true;
-                            break;
-                        } else {
-                            return false;
-                        }
-                        al--;
-                    }
-                }
-            }
             while (true) {
                 if (id("android:id/text1").text("通讯录").findOnce() != null) {
                     toastLog("已处于“微信通讯录”界面");
                     break;
-                } else if (FindKj_txl(TongXunlu) == true) {} else if (currentPackage() == "com.tencent.mm") {
+                }else if (id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.4
+                    id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                } else if (id("com.tencent.mm:id/dkb").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.10
+                    id("com.tencent.mm:id/dkb").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                } else if (id("com.tencent.mm:id/civ").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.12
+                    id("com.tencent.mm:id/civ").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                } else if (id("com.tencent.mm:id/cj6").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.12play
+                    id("com.tencent.mm:id/cj6").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                } else if (id("com.tencent.mm:id/cl7").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.13
+                    id("com.tencent.mm:id/cl7").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                } else if (id("com.tencent.mm:id/cl9").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.13play
+                    id("com.tencent.mm:id/cl9").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                }else if (currentPackage() == "com.tencent.mm") {
                     Justback();
                     toastLog("已处于微信中但非主界面，正在尝试返回主界面");
                     sleep(2000);
