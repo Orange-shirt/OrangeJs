@@ -1,0 +1,84 @@
+var absPermittedByshell = false;
+
+enableAbs();
+
+function enableAbs() {
+
+    importClass(android.content.Context);
+
+    importClass(android.provider.Settings);
+
+    var packageName = context.getPackageName();
+
+    //log("当前应用包名：",packageName);
+
+    try {
+
+        var enabledServices = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+
+        log('当前已启用的辅助服务\n', enabledServices);
+
+        if (enabledServices.indexOf(packageName) >= 0 && auto.service != null) {
+
+            toastLog("已经开启无障碍服务，无需重复开启");
+
+        } else {
+
+            var Services = enabledServices + ":" + packageName + "/com.stardust.autojs.core.accessibility.AccessibilityService";
+
+            Settings.Secure.putString(context.getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, Services);
+
+            Settings.Secure.putString(context.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED, '1');
+
+            toastLog("成功开启无障碍服务");
+
+        }
+
+        return true
+
+    } catch (error) {
+
+        //授权方法：开启usb调试并使用adb工具连接手机，执行 adb shell pm grant org.autojs.autojspro android.permission.WRITE_SECURE_SETTING                  
+
+        if (absPermittedByshell == false && shell("pm grant " + packageName + " android.permission.WRITE_SECURE_SETTINGS", true).code == 0) {
+
+            toastLog("成功使用shell开启授权");
+
+            toastLog("再次尝试打开无障碍服务...");
+
+            absPermittedByshell = true;
+
+            return this.enableAbs()
+
+        } else {
+
+            if (absPermittedByshell == true) {
+
+                toastLog("shell开启授权成功，但仍然无法顺利开启无障碍服务，请手动开启！");
+
+                return false;
+
+            } else {
+
+                toastLog("使用shell开启授权失败");
+
+                toastLog("请确保已给予 WRITE_SECURE_SETTINGS 权限\n授权代码已复制，请使用adb工具连接手机执行(重启不失效)\n", error);
+
+                setClip("adb shell pm grant " + packageName + " android.permission.WRITE_SECURE_SETTINGS");
+
+                return false
+
+            }
+
+        }
+
+
+
+    }
+
+}
+
+/*这段代码一部分参考了https://blog.csdn.net/feiyunjs/article/details/93855262
+
+代码优化@℡幻想家
+
