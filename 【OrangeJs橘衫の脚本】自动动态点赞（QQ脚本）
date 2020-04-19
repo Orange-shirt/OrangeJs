@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.tencent.mobileqq");
-var SupportVersion = ["8.3.0", "8.2.7"]//支持的版本
+var SupportVersion = ["8.3.3", "8.3.0", "8.2.7"] //支持的版本
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -107,14 +107,18 @@ while (While == 1) {
 }
 
 function RunJs() {
+    function toastLog(message) {
+        toast(message);
+        log(message);
+    }
     dialogs_js();
     var height = device.height;
     var width = device.width;
 
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.0"); //版本
+        var ScriptVersion = ("Beta1.1"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-        var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🛠 脚本运行配置", "🔙 返回方法设置"]
+        var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🛠 脚本运行配置", "🔙 返回方法设置", "💬 吐司/日志切换"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动动态点赞”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
         if (i < 0) {
             toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
@@ -145,6 +149,48 @@ function RunJs() {
                 dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
                 dialogs_js();
             }
+        } else if (i == 6) {
+            toastLog(options_[i]);
+            context_Manualstate = 0;
+            if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt") == true) {
+                var z = files.read("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt");
+                if (z != "吐司" && z != "日志") {
+                    alert("“吐司or日志”文件错误，已尝试删除错误文件");
+                    try {
+                        files.remove("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt");
+                    } catch (e) {
+                        toastLog("删除“吐司or日志”文件失败！");
+                    }
+                    var Z = "";
+                } else {
+                    var Z = "当前脚本使用：" + z + "\n";
+                }
+            } else {
+                var Z = "";
+            }
+            let da = dialogs.select(Z + "请选择一个选项", "使用吐司（Toast）", "使用脚本悬浮日志")
+            if (da == 0) {
+                toastLog("您选择了：使用吐司");
+                try {
+                    var T = 0;
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt");
+                    files.write("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt", "吐司");
+                } catch (e) {
+                    log("未授予存储权限或存储权限错误，当前设置为吐司");
+                    var T = 0;
+                }
+            } else if (da == 1) {
+                toastLog("您选择了：使用悬浮日志");
+                try {
+                    var T = 1;
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt");
+                    files.write("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt", "日志");
+                } catch (e) {
+                    log("未授予存储权限或存储权限错误，开启悬浮日志");
+                    var T = 1;
+                }
+            }
+            dialogs_js();
         } else if (i == 1) {
             if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/点赞次数设置.txt") == false || files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/点赞界面设置.txt") == false) {
                 dialogs.alert("您还没有配置脚本，不能计时运行哦(^_^)", "请在脚本主菜单中选择“脚本运行配置”进行相关操作后再运行脚本");
@@ -309,36 +355,101 @@ function RunJs() {
     }
 
     function Set_Back_way() {
-        if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt") == true) {
-            context_i_back = files.read("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt");
-            log("返回方法：" + context_i_back);
-            if (context_i_back > 1) {
-                try {
-                    context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/自动动态点赞/滑动返回速度.txt")
-                    log("滑动返回速度：" + context_gestures_speed)
-                } catch (e) {
-                    log("上次未完成滑动返回速度设置");
-                    files.remove("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt");
-                    Set_Back_way();
+        try {
+            if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt") == true) {
+                context_i_back = files.read("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt");
+                log("返回方法：" + context_i_back);
+                if (context_i_back > 1) {
+                    try {
+                        context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/自动动态点赞/滑动返回速度.txt")
+                        log("滑动返回速度：" + context_gestures_speed)
+                    } catch (e) {
+                        log("上次未完成滑动返回速度设置");
+                        files.remove("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt");
+                        Set_Back_way();
+                    }
+                }
+            } else {
+                //💟🕎⛎设定返回方法及滑动速度的代码
+                var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+                var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
+                if (i_back >= 0) {
+                    toastLog("您选择的是" + options_hq[i_back]);
+                    sleep(2000);
+                    var options_select = options_hq[i_back];
+                    context_i_back = i_back;
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt");
+                    files.write("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt", context_i_back);
+                } else {
+                    dialogs_js();
+                    toastLog("没有选择返回方法！");
+                    device.cancelKeepingAwake();
+                }
+                if (i_back > 1) {
+                    var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
+                    var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
+                    if (iix < 0) {
+                        toastLog("没有选择滑动速度");
+                        Set_Back_way();
+                    } else {
+                        if (iix == 0) {
+                            context_gestures_speed = 200;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 1) {
+                            context_gestures_speed = 500;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 2) {
+                            context_gestures_speed = 800;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 3) {
+                            context_gestures_speed = 1000;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 4) {
+                            context_gestures_speed = 1500;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        if (iix == 5) {
+                            context_gestures_speed = 2000;
+                            toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                            sleep(2000);
+                        }
+                        files.createWithDirs("/storage/emulated/0/OrangeJs/自动动态点赞/滑动返回速度.txt");
+                        files.write("/storage/emulated/0/OrangeJs/自动动态点赞/滑动返回速度.txt", context_gestures_speed);
+                    }
+                }
+                if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt") == true) {
+                    log("删除");
+                    files.remove("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt");
+                    dialogs_js();
+                } else if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt") == true) {
+                    log("重命名");
+                    files.rename("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt", "返回方法设置.txt");
+                    dialogs_js();
                 }
             }
-        } else {
-            //💟🕎⛎设定返回方法及滑动速度的代码
-            var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+        } catch (e) {
+            log("未授予“存储权限”");
+            var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
             var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
             if (i_back >= 0) {
                 toastLog("您选择的是" + options_hq[i_back]);
                 sleep(2000);
                 var options_select = options_hq[i_back];
                 context_i_back = i_back;
-                files.createWithDirs("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt");
-                files.write("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt", context_i_back);
             } else {
-
                 toastLog("没有选择返回方法！");
                 device.cancelKeepingAwake();
             }
-            if (i_back > 1) {
+            if (i_back > 2) {
                 var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
                 var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
                 if (iix < 0) {
@@ -375,18 +486,7 @@ function RunJs() {
                         toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
                         sleep(2000);
                     }
-                    files.createWithDirs("/storage/emulated/0/OrangeJs/自动动态点赞/滑动返回速度.txt");
-                    files.write("/storage/emulated/0/OrangeJs/自动动态点赞/滑动返回速度.txt", context_gestures_speed);
                 }
-            }
-            if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt") == true) {
-                log("删除");
-                files.remove("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt");
-                dialogs_js();
-            } else if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt") == true) {
-                log("重命名");
-                files.rename("/storage/emulated/0/OrangeJs/自动动态点赞/X返回方法设置.txt", "返回方法设置.txt");
-                dialogs_js();
             }
         }
     }
@@ -395,6 +495,32 @@ function RunJs() {
     toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
     auto.waitFor();
     toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+    if (files.exists("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt") == true) {
+        let z = files.read("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt");
+        if (z == "吐司") {
+            var T = 0;
+        } else if (z == "日志") {
+            var T = 1;
+        } else {
+            toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
+            try {
+                files.remove("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt");
+            } catch (e) {
+                toastLog("删除“吐司or日志”文件失败！");
+            }
+            var T = 1;
+        }
+    } else {
+        try {
+            files.createWithDirs("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt");
+            files.write("/storage/emulated/0/OrangeJs/自动动态点赞/吐司or日志.txt", "日志");
+            var T = 1;
+            log("默认使用日志，如需更改请在主菜单进行");
+        } catch (e) {
+            log("未授予存储权限或存储权限错误，默认开启悬浮日志");
+            var T = 1;
+        }
+    }
 
     function DS() {
         var While = 1;
@@ -910,6 +1036,32 @@ function RunJs() {
             ]);
             sleep(1000);
         }
+    }
+    if (T == 1) {
+        log("使用“悬浮日志”");
+
+        function toastLog(message) {
+            log(message);
+            var myDate = new Date();
+            ui.run(() => {
+                w.WZ.setText(myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒：" + message + "\n" + w.WZ.getText());
+                return true;
+            });
+        }
+        var w = floaty.rawWindow(
+            <card bg="#80000000">
+                <vertical align="center">
+                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
+                    <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
+                    <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
+                </vertical>
+            </card>
+        );
+        w.setSize(device.width, 500);
+        w.setTouchable(false);
+        w.setPosition(0, device.height - 500);
+    } else if (T == 0) {
+        log("使用脚本自带“吐司”");
     }
     let a = open("/storage/emulated/0/OrangeJs/自动动态点赞/点赞界面设置.txt");
     let b = a.readlines();
