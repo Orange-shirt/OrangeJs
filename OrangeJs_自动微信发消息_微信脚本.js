@@ -1549,7 +1549,7 @@ function RunJs() {
                         //此处可以加入其他内容，如data、extras
                     });
                     toastLog("当前未处于微信中，正在重新打开微信");
-                    log("当前包名：" + currentPackage());
+                    console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
                     sleep(3000);
                 }
             }
@@ -1829,5 +1829,7 @@ function RunJs() {
             Doit();
         }
     }
+    device.wakeUp();//唤醒设备
+    device.keepScreenOn(3600 * 1000);//屏幕常亮
     Doit();
 }
