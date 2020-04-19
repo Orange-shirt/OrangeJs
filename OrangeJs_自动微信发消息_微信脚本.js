@@ -1366,7 +1366,7 @@ function RunJs() {
                                 sleep(2000);
                             }
                             device.cancelKeepingAwake();
-                            dialogs.alert("脚本已运行完成");
+                            dialogs.alert("自动微信发消息：n脚本已运行完成");
                             log("脚本已运行完成");
                             exit();
                         }
@@ -1385,7 +1385,7 @@ function RunJs() {
                                 sleep(2000);
                             }
                             device.cancelKeepingAwake();
-                            dialogs.alert("脚本已运行完成");
+                            dialogs.alert("自动微信发消息：n脚本已运行完成");
                             log("脚本已运行完成");
                             exit();
                         }
@@ -1404,7 +1404,7 @@ function RunJs() {
                                 sleep(2000);
                             }
                             device.cancelKeepingAwake();
-                            dialogs.alert("脚本已运行完成");
+                            dialogs.alert("自动微信发消息：n脚本已运行完成");
                             log("脚本已运行完成");
                             exit();
                         }
@@ -1423,7 +1423,7 @@ function RunJs() {
                                 sleep(2000);
                             }
                             device.cancelKeepingAwake();
-                            dialogs.alert("脚本已运行完成");
+                            dialogs.alert("自动微信发消息：\n脚本已运行完成");
                             log("脚本已运行完成");
                             exit();
                         }
@@ -1440,7 +1440,7 @@ function RunJs() {
                         id("com.tencent.mm:id/amb").findOnce().click();
                         toastLog("已点击“发送”按钮");
                         device.cancelKeepingAwake();
-                        dialogs.alert("脚本已运行完成");
+                        dialogs.alert("自动微信发消息：n脚本已运行完成");
                         log("脚本已运行完成");
                         exit();
                     } else {
@@ -1455,7 +1455,7 @@ function RunJs() {
                         id("com.tencent.mm:id/amg").findOnce().click();
                         toastLog("已点击“发送”按钮");
                         device.cancelKeepingAwake();
-                        dialogs.alert("脚本已运行完成");
+                        dialogs.alert("自动微信发消息：n脚本已运行完成");
                         log("脚本已运行完成");
                         exit();
                     } else {
@@ -1470,14 +1470,14 @@ function RunJs() {
                         id("com.tencent.mm:id/amr").findOnce().click();
                         toastLog("已点击“发送”按钮");
                         device.cancelKeepingAwake();
-                        dialogs.alert("脚本已运行完成");
+                        dialogs.alert("自动微信发消息：n脚本已运行完成");
                         log("脚本已运行完成");
                         exit();
                     } else if (id("com.tencent.mm:id/ams").findOnce() != null) { //7.0.13play
                         id("com.tencent.mm:id/ams").findOnce().click();
                         toastLog("已点击“发送”按钮");
                         device.cancelKeepingAwake();
-                        dialogs.alert("脚本已运行完成");
+                        dialogs.alert("自动微信发消息：n脚本已运行完成");
                         log("脚本已运行完成");
                         exit();
                     } else {
@@ -1585,7 +1585,7 @@ function RunJs() {
                                         id("com.tencent.mm:id/amp").findOnce().click();
                                         toastLog("已点击“发送”按钮");
                                         device.cancelKeepingAwake();
-                                        dialogs.alert("脚本已运行完成");
+                                        dialogs.alert("自动微信发消息：n脚本已运行完成");
                                         log("脚本已运行完成");
                                         exit();
                                         break;
@@ -1645,7 +1645,7 @@ function RunJs() {
                                     id("com.tencent.mm:id/aql").findOnce().click();
                                     toastLog("已点击“发送”按钮");
                                     device.cancelKeepingAwake();
-                                    dialogs.alert("脚本已运行完成");
+                                    dialogs.alert("自动微信发消息：n脚本已运行完成");
                                     log("脚本已运行完成");
                                     exit();
                                     break;
