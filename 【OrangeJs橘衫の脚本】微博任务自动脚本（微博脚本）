@@ -29,9 +29,9 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.11"); //版本
+    var ScriptVersion = ("Beta1.12"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-    var options_ = ["▶️ 开始运行脚本", "🕒 定时运行脚本", "⏹ 停止运行脚本", "🌐 向作者反馈问题", "*️⃣ 脚本介绍/作者信息"]
+    var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“微博任务自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
     if (i < 0) {
         toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
@@ -40,16 +40,63 @@ function dialogs_js() {
         toastLog(options_[i]);
         context_Manualstate = 0;
         Set_Back_way();
-    } else if (i == 2) {
-        toastLog(options_[i]);
-        exit();
     } else if (i == 3) {
         toastLog(options_[i]);
-        app.openUrl("https://wj.qq.com/s2/5238744/d982");
-        dialogs_js();
+        exit();
     } else if (i == 4) {
         toastLog(options_[i]);
-        alert("=(^･ω･^)=  脚本作者\n酷安@橘衫下邂逅的时光", "“微博任务自动脚本” " + ScriptVersion + "\n当前软件版本" + app.versionName + "(" + app.versionCode + ")\n\n全自动的微博活动脚本！\n支持多种分辨率，安卓7+无需ROOT！\n支持启动后自动更新脚本，无需费心即可保持最新，且开放全部的脚本代码！\n脚本的全部运行不加任何广告，不干任何不相关的事情！不触碰任何个人隐私！\n此脚本为兴趣制作，仅供参考，严禁售卖\n\n如有任何问题，欢迎向作者反馈哦～");
+        if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true && files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") > 1 && files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt")) {
+            files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
+            log("当前返回方法设置为滑动返回但未设置滑动返回速度");
+        }
+        if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true) {
+            files.rename("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt", "X返回方法设置.txt");
+            Set_Back_way();
+        } else {
+            dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
+            dialogs_js();
+        }
+    } else if (i == 5) {
+        toastLog(options_[i]);
+        context_Manualstate = 0;
+        if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt") == true) {
+            var z = files.read("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
+            if (z != "吐司" && z != "日志") {
+                alert("“吐司or日志”文件错误，已尝试删除错误文件");
+                try {
+                    files.remove("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
+                } catch (e) {
+                    toastLog("删除“吐司or日志”文件失败！");
+                }
+                var Z = "";
+            } else {
+                var Z = "当前脚本使用：" + z + "\n";
+            }
+        } else {
+            var Z = "";
+        }
+        let da = dialogs.select(Z + "请选择一个选项", "使用吐司（Toast）", "使用脚本悬浮日志")
+        if (da == 0) {
+            toastLog("您选择了：使用吐司");
+            try {
+                var T = 0;
+                files.createWithDirs("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
+                files.write("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt", "吐司");
+            } catch (e) {
+                log("未授予存储权限或存储权限错误，当前设置为吐司");
+                var T = 0;
+            }
+        } else if (da == 1) {
+            toastLog("您选择了：使用悬浮日志");
+            try {
+                var T = 1;
+                files.createWithDirs("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
+                files.write("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt", "日志");
+            } catch (e) {
+                log("未授予存储权限或存储权限错误，开启悬浮日志");
+                var T = 1;
+            }
+        }
         dialogs_js();
     } else if (i == 1) {
         toastLog("请稍候，正在检测权限...")
@@ -75,70 +122,283 @@ function dialogs_js() {
         toastLog("悬浮窗权限已开启！");
         sleep(2000);
         wait_Time_over();
+    } else if (i == 2) {
+        toastLog("请稍候，正在检测权限...")
+        context_Manualstate = 0;
+        toastLog(options_[i]);
+        device.keepScreenDim();
+        toastLog("检测权限设置……");
+        context_Manualstate = 0;
+        toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
+        auto.waitFor();
+        toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+        sleep(2000);
+        toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
+        sleep(2000);
+        var test_rawWindow = floaty.rawWindow(
+            <frame gravity="center" bg="#00000000"/>
+        );
+        test_rawWindow.setSize(-1, -1);
+        test_rawWindow.setTouchable(false);
+        setTimeout(() => {
+            test_rawWindow.close();
+        }, 1000);
+        toastLog("悬浮窗权限已开启！");
+        context_Manualstate = 0;
+        Set_Back_way();
+        DS();
+        device.keepScreenDim();
     }
 }
 
-
 function Set_Back_way() {
-    //💟🕎⛎设定返回方法及滑动速度的代码
-    var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
-    var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
-    if (i_back >= 0) {
-        toastLog("您选择的是" + options_hq[i_back]);
-        sleep(2000);
-        var options_select = options_hq[i_back];
-        context_i_back = i_back;
-    } else {
-        toastLog("没有选择返回方法！");
-        device.cancelKeepingAwake();
-        dialogs_js();
-    }
-    if (i_back > 2) {
-        var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
-        var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
-    }
-    if (iix == 0) {
-        context_gestures_speed = 200;
-        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-        sleep(2000);
-    }
-    if (iix == 1) {
-        context_gestures_speed = 500;
-        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-        sleep(2000);
-    }
-    if (iix == 2) {
-        context_gestures_speed = 800;
-        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-        sleep(2000);
-    }
-    if (iix == 3) {
-        context_gestures_speed = 1000;
-        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-        sleep(2000);
-    }
-    if (iix == 4) {
-        context_gestures_speed = 1500;
-        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-        sleep(2000);
-    }
-    if (iix == 5) {
-        context_gestures_speed = 2000;
-        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-        sleep(2000);
-    }
-    if (iix < 0) {
-        toastLog("没有选择滑动速度");
-        Set_Back_way();
+    try {
+        if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true) {
+            context_i_back = files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
+            log("返回方法：" + context_i_back);
+            if (context_i_back > 1) {
+                try {
+                    context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt")
+                    log("滑动返回速度：" + context_gestures_speed)
+                } catch (e) {
+                    log("上次未完成滑动返回速度设置");
+                    files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
+                    Set_Back_way();
+                }
+            }
+        } else {
+            //💟🕎⛎设定返回方法及滑动速度的代码
+            var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+            var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
+            if (i_back >= 0) {
+                toastLog("您选择的是" + options_hq[i_back]);
+                sleep(2000);
+                var options_select = options_hq[i_back];
+                context_i_back = i_back;
+                files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
+                files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt", context_i_back);
+            } else {
+                dialogs_js();
+                toastLog("没有选择返回方法！");
+                device.cancelKeepingAwake();
+            }
+            if (i_back > 1) {
+                var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
+                var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
+                if (iix < 0) {
+                    toastLog("没有选择滑动速度");
+                    Set_Back_way();
+                } else {
+                    if (iix == 0) {
+                        context_gestures_speed = 200;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 1) {
+                        context_gestures_speed = 500;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 2) {
+                        context_gestures_speed = 800;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 3) {
+                        context_gestures_speed = 1000;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 4) {
+                        context_gestures_speed = 1500;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 5) {
+                        context_gestures_speed = 2000;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt");
+                    files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt", context_gestures_speed);
+                }
+            }
+            if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt") == true) {
+                log("删除");
+                files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt");
+                dialogs_js();
+            } else if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt") == true) {
+                log("重命名");
+                files.rename("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt", "返回方法设置.txt");
+                dialogs_js();
+            }
+        }
+    } catch (e) {
+        log("未授予“存储权限”");
+        var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+        var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
+        if (i_back >= 0) {
+            toastLog("您选择的是" + options_hq[i_back]);
+            sleep(2000);
+            var options_select = options_hq[i_back];
+            context_i_back = i_back;
+        } else {
+            toastLog("没有选择返回方法！");
+            device.cancelKeepingAwake();
+        }
+        if (i_back > 2) {
+            var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
+            var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
+            if (iix < 0) {
+                toastLog("没有选择滑动速度");
+                Set_Back_way();
+            } else {
+                if (iix == 0) {
+                    context_gestures_speed = 200;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 1) {
+                    context_gestures_speed = 500;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 2) {
+                    context_gestures_speed = 800;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 3) {
+                    context_gestures_speed = 1000;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 4) {
+                    context_gestures_speed = 1500;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 5) {
+                    context_gestures_speed = 2000;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+            }
+        }
     }
 }
 sleep(1000);
 toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
 auto.waitFor();
 toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == true) {
+    let z = files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
+    if (z == "吐司") {
+        var T = 0;
+    } else if (z == "日志") {
+        var T = 1;
+    } else {
+        toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
+        try {
+            files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
+        } catch (e) {
+            toastLog("删除“吐司or日志”文件失败！");
+        }
+        var T = 1;
+    }
+} else {
+    try {
+        files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
+        files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt", "日志");
+        var T = 1;
+        log("默认使用日志，如需更改请在主菜单进行");
+    } catch (e) {
+        log("未授予存储权限或存储权限错误，默认开启悬浮日志");
+        var T = 1;
+    }
+}
+
+function DS() {
+    var While = 1;
+    while (While == 1) {
+        var 时 = dialogs.rawInput("🔵定时→定分→定秒→确认\n\n请输入0-23的小时数\n到此时间脚本会自动运行");
+        if (时 == null) {
+            //没有输入
+            toastLog("没有输入！返回主菜单");
+            var While = 0;
+            dialogs_js();
+        } else if (时 == "") {
+            //没有输入
+            toastLog("没有输入！返回主菜单");
+            var While = 0;
+            dialogs_js();
+        } else if (时 >= 0) {
+            if (时 < 24) {
+                var While = 2;
+                while (While == 2) {
+                    var 分 = dialogs.rawInput("✔️定时🔵定分→定秒→确认\n\n请输入0-59的分钟数\n\n" + 时 + "时" + "❓分❓秒");
+                    if (分 == null) {
+                        toastLog("没有输入！返回上级");
+                        var While = 1;
+                    } else if (分 == null) {
+                        toastLog("没有输入！返回上级");
+                        var While = 1;
+                    } else if (分 >= 0) {
+                        if (分 < 60) {
+                            var While = 3;
+                            while (While == 3) {
+                                var 秒 = dialogs.rawInput("✔️定时✔️定分🔵定秒→确认\n\n请输入0-59的秒数\n\n" + 时 + "时" + 分 + "分❓秒");
+                                if (秒 == null) {
+                                    toastLog("没有输入！返回上级");
+                                    var While = 2;
+                                } else if (秒 == null) {
+                                    toastLog("没有输入！返回上级");
+                                    var While = 2;
+                                } else if (秒 >= 0) {
+                                    if (秒 < 60) {
+                                        var QR = dialogs.confirm("脚本将在\n⏰" + 时 + "时" + 分 + "分" + 秒 + "秒\n准时运行！", "如需更改请点击取消\n点击确定定时，定时状态可以在日志中查看");
+                                        if (QR == false) {
+                                            //返回主菜单
+                                            var While = 1;
+                                        } else {
+                                            var While = 0;
+                                            //仅定时运行一次
+                                            while (true) {
+                                                var myDate = new Date();
+                                                if (myDate.getHours() == 时 && myDate.getMinutes() == 分 && myDate.getSeconds() == 秒) {
+                                                    console.warn("时间到！开始运行脚本！" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒");
+                                                    device.wakeUpIfNeeded();
+                                                    break;
+                                                }
+                                                sleep(1000);
+                                                console.info("现在是" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒\n脚本将在" + 时 + "时" + 分 + "分" + 秒 + "秒，准时运行！\n请保持手机处于工作状态，不要锁屏关机等");
+                                            }
+                                        }
+                                    } else {
+                                        toastLog("输入错误！秒必须小于等于60");
+                                    }
+                                } else {
+                                    toastLog("输入错误！秒必须大于等于0");
+                                }
+                            }
+                        } else {
+                            toastLog("输入错误！分钟必须小于60");
+                        }
+                    } else {
+                        toastLog("输入错误！分钟必须大于等于0");
+                    }
+                }
+            } else {
+                toastLog("输入错误！时间必须小于24");
+            }
+        } else {
+            toastLog("输入错误！时间必须大于等于0");
+        }
+    }
+}
 
 function wait_Time_over() {
-    var i_wait = dialogs.singleChoice("🕗 定时运行\n\n(＾∇＾)ﾉ♪\n请选择一个选项\n计时结束会自动运行", ["1分钟后运行", "5分钟后运行", "10分钟后运行", "30分钟后运行", "一小时后运行", "两小时后运行", "三小时后运行", "五小时后运行", "八小时后运行"], 2);
+    var i_wait = dialogs.singleChoice("🕗 定时运行\n\n(＾∇＾)ﾉ♪\n请选择一个选项\n计时结束会自动运行", ["1分钟后运行", "5分钟后运行", "10分钟后运行", "30分钟后运行", "一小时后运行", "两小时后运行", "三小时后运行", "四小时后运行", "五小时后运行", "六小时后运行", "七小时后运行", "八小时后运行", "九小时后运行", "十小时后运行"], 2);
     if (i_wait < 0) {
         toast("您取消了选择");
         device.cancelKeepingAwake();
@@ -218,17 +478,67 @@ function wait_Time_over() {
         }
     }
     if (i_wait == 7) {
-        var choice_confirm = dialogs.confirm("您选择了五小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        var choice_confirm = dialogs.confirm("您选择了四小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
         if (choice_confirm == false) {
             toastLog("取消了定时运行确认");
-            wait_Time_over
+            wait_Time_over();
         } else {
             Set_Back_way();
             waiting_time();
         }
     }
     if (i_wait == 8) {
+        var choice_confirm = dialogs.confirm("您选择了五小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over()
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 9) {
+        var choice_confirm = dialogs.confirm("您选择了六小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 10) {
+        var choice_confirm = dialogs.confirm("您选择了七小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 11) {
         var choice_confirm = dialogs.confirm("您选择了八小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 12) {
+        var choice_confirm = dialogs.confirm("您选择了九小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 13) {
+        var choice_confirm = dialogs.confirm("您选择了十小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
         if (choice_confirm == false) {
             toastLog("取消了定时运行确认");
             wait_Time_over();
@@ -327,6 +637,21 @@ function waiting_time() {
         }
     }
     if (context_i_wait == 7) {
+        var Hours = 3;
+        for (Hours == 3; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 8) {
         var Hours = 4;
         for (Hours == 4; Hours >= 0; Hours--) {
             var Minutes = 59;
@@ -341,9 +666,69 @@ function waiting_time() {
             }
         }
     }
-    if (context_i_wait == 8) {
+    if (context_i_wait == 9) {
+        var Hours = 5;
+        for (Hours == 5; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 10) {
+        var Hours = 6;
+        for (Hours == 6; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 11) {
         var Hours = 7;
         for (Hours == 7; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 12) {
+        var Hours = 8;
+        for (Hours == 8; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 13) {
+        var Hours = 9;
+        for (Hours == 9; Hours >= 0; Hours--) {
             var Minutes = 59;
             for (Minutes == 59; Minutes >= 0; Minutes--) {
                 if (Minutes >= 0) {
@@ -415,12 +800,12 @@ function Justback() {
         sleep(1000);
     }
     if (context_i_back == 1) {
-        toastLog("使用ROOT返回\n请确保已给ROOT权限！");
+        toastLog("使用ROOT返回，请确保已给ROOT权限！");
         Back();
         sleep(1000);
     }
     if (context_i_back == 2) {
-        NOpeninHd();
+        OpeninHd();
     }
     if (context_i_back == 3) {
         toastLog("从屏幕中间向从左向内滑动来返回");
@@ -451,173 +836,138 @@ function Justback() {
         sleep(1000);
     }
 }
+if (T == 1) {
+    log("使用“悬浮日志”");
 
-OpeninHd();
+    function toastLog(message) {
+        log(message);
+        var myDate = new Date();
+        ui.run(() => {
+            w.WZ.setText(myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒：" + message + "\n" + w.WZ.getText());
+            return true;
+        });
+    }
+    var w = floaty.rawWindow(
+        <card bg="#80000000">
+            <vertical align="center">
+                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
+                <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
+                <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
+            </vertical>
+        </card>
+    );
+    w.setSize(device.width, 500);
+    w.setTouchable(false);
+    w.setPosition(0, device.height - 500);
+} else if (T == 0) {
+    log("使用脚本自带“吐司”");
+}
 
 function OpeninHd() {
-    app.startActivity({
-        action: "android.intent.action.VIEW", //此处可为其他值
-        packageName: "com.sina.weibo",
-        className: "com.sina.weibo.feed.HomeActivity"
-        //此处可以加入其他内容，如data、extras
-    });
-    var deng = 5;
-    for (deng == 5; deng > 0; deng--) {
-        if (id("titleSave").findOnce() == null) {
-            toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
+    while (true) {
+        if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.view.View").text("日常任务").findOnce() != null) {
+            toastLog("已处于“用户任务中心”任务界面");
+            break;
+        } else if (className("android.widget.FrameLayout").clickable(true).id("com.sina.weibo:id/rlredpacketSave").findOnce() != null) {
+            className("android.widget.FrameLayout").clickable(true).id("com.sina.weibo:id/rlredpacketSave").findOnce().click();
+            toastLog("已尝试点击主页活动入口按钮");
             sleep(2000);
-            if (className("android.view.View").desc("首页").findOnce() != null) {
-                className("android.view.View").desc("首页").findOnce().click();
-                toastLog("已尝试点击“首页”按钮");
-                sleep(2000);
-            }
-        } else {
-            toastLog("已到达主页");
-            var deng = 0;
-        }
-    }
-    if (id("titleSave").findOnce() == null) {
-        toastLog("HomeIntent打开失败\n自动切换Intent\n尝试再次打开…");
-        sleep(1000);
-        app.startActivity({
-            action: "android.intent.action.VIEW", //此处可为其他值
-            packageName: "com.sina.weibo",
-            className: "com.sina.weibo.MainTabActivity"
-            //此处可以加入其他内容，如data、extras
-        });
-        var deng = 5;
-        for (deng == 5; deng > 0; deng--) {
-            if (id("titleSave").findOnce() == null) {
-                toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
-                sleep(2000);
-                if (className("android.view.View").desc("首页").findOnce() != null) {
-                    className("android.view.View").desc("首页").findOnce().click();
-                    toastLog("已尝试点击“首页”按钮");
+        } else if (currentActivity() == "com.sina.weibo.MainTabActivity") {
+            app.startActivity({
+                action: "android.intent.action.VIEW",
+                packageName: "com.sina.weibo",
+                className: "com.sina.weibo.browser.WeiboBrowser",
+                data: app.parseUri("https://m.weibo.cn/feature/applink?scheme=sinaweibo%3A%2F%2Fbrowser%3Furl%3Dhttps%253A%252F%252Fm.weibo.cn%252Fc%252Fcheckin%253Ffeaturecode%253Dfrom_sharingpage_to_mtask%26featurecode%3Dfrom_sharingpage_to_mtask&yingyongbao=0&golight=0&goxianzhi=0&url=https%3A%2F%2Fc.weibo.cn%3Fscheme%3Dsinaweibo%253A%252F%252Fbrowser%253Furl%253Dhttps%25253A%25252F%25252Fm.weibo.cn%25252Fc%25252Fcheckin%25253Ffeaturecode%25253Dfrom_sharingpage_to_mtask%2526featurecode%253Dfrom_sharingpage_to_mtask%26directdownload%3D0"),
+                flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
+            });
+            toastLog("处于主页，已尝试使用Intent调起活动界面");
+            sleep(2000);
+        } else if (currentActivity() == "com.sina.weibo.browser.WeiboBrowser") {
+            sleep(2000);
+            for (let a = 10; a > 0; a--) {
+                if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.view.View").text("日常任务").findOnce() != null) {
+                    break;
+                } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null) {
+                    toastLog("正在等待“用户任务中心”加载，剩余" + a + "秒……");
                     sleep(2000);
+                } else {
+                    if (className("android.widget.TextView").text("网页无法打开").findOnce() != null) {
+                        toastLog("网页无法打开");
+                    }
+                    break;
                 }
-            } else {
-                toastLog("已到达主页");
-                var deng = 0;
             }
-        }
-    }
-    sleep(2000);
-    if (id("com.sina.weibo:id/rlredpacketSave").findOnce() != null) {
-        id("com.sina.weibo:id/rlredpacketSave").findOnce().click();
-        toastLog("已找到活动入口按钮\n已尝试点击…");
-        sleep(2000);
-    } else {
-        toastLog("使用Intent尝试打开活动中…");
-        app.startActivity({
-            action: "android.intent.action.VIEW",
-            packageName: "com.sina.weibo",
-            className: "com.sina.weibo.browser.WeiboBrowser",
-            data: app.parseUri("https://m.weibo.cn/feature/applink?scheme=sinaweibo%3A%2F%2Fbrowser%3Furl%3Dhttps%253A%252F%252Fm.weibo.cn%252Fc%252Fcheckin%253Ffeaturecode%253Dfrom_sharingpage_to_mtask%26featurecode%3Dfrom_sharingpage_to_mtask&yingyongbao=0&golight=0&goxianzhi=0&url=https%3A%2F%2Fc.weibo.cn%3Fscheme%3Dsinaweibo%253A%252F%252Fbrowser%253Furl%253Dhttps%25253A%25252F%25252Fm.weibo.cn%25252Fc%25252Fcheckin%25253Ffeaturecode%25253Dfrom_sharingpage_to_mtask%2526featurecode%253Dfrom_sharingpage_to_mtask%26directdownload%3D0"),
-            flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
-        });
-    }
-
-    var While = 1;
-    var time = 0;
-    while (While == 1) {
-        if (text("日常任务").exists()) {
-            toastLog("已处于微博任务界面")
-            var While = 0;
-        } else if (text("微博-出错了").findOnce() != null) {
-            var While = 0;
-            OpeninHd();
-        } else if (time > 10) {
-            toastLog("打开活动已超时\n尝试重新进入活动");
-            var While = 0;
-            OpeninHd();
+            if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.view.View").text("日常任务").findOnce() != null) {
+                toastLog("已处于“用户任务中心”任务界面");
+                break;
+            } else {
+                if (id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce() != null) {
+                    id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce().click();
+                    toastLog("“用户任务中心”加载超时，已尝试盲点关闭按钮，重试中……");
+                    sleep(2000);
+                } else {
+                    toastLog("“用户任务中心”加载超时，重试中……");
+                    Justback();
+                    sleep(1000);
+                }
+            }
+        } else if (currentPackage() != "com.sina.weibo") {
+            app.startActivity({
+                action: "android.intent.action.VIEW", //此处可为其他值
+                packageName: "com.sina.weibo",
+                className: "com.sina.weibo.feed.HomeActivity"
+                //此处可以加入其他内容，如data、extras
+            });
+            var deng = 5;
+            for (deng == 5; deng > 0; deng--) {
+                if (id("titleSave").findOnce() == null) {
+                    toastLog("正在等待微博APP启动至主页，当前剩余" + deng + "秒……");
+                    sleep(2000);
+                    if (className("android.view.View").desc("首页").findOnce() != null) {
+                        className("android.view.View").desc("首页").findOnce().click();
+                        toastLog("已尝试点击“首页”按钮");
+                    }
+                } else {
+                    toastLog("已到达主页");
+                    var deng = 0;
+                }
+            }
+            if (currentPackage() != "com.sina.weibo") {
+                toastLog("尝试打开微博失败，已尝试再次打开微博");
+                app.startActivity({
+                    action: "android.intent.action.VIEW", //此处可为其他值
+                    packageName: "com.sina.weibo",
+                    className: "com.sina.weibo.MainTabActivity"
+                    //此处可以加入其他内容，如data、extras
+                });
+                sleep(2000);
+            }
         } else {
-            toastLog("正在等待微博任务界面加载……");
-            sleep(2000);
-            time++;
-        }
-    }
-    DoTask();
-}
-
-function NOpeninHd() {
-    //此功能无链式调用
-    app.startActivity({
-        action: "android.intent.action.VIEW", //此处可为其他值
-        packageName: "com.sina.weibo",
-        className: "com.sina.weibo.feed.HomeActivity"
-        //此处可以加入其他内容，如data、extras
-    });
-    var deng = 5;
-    for (deng == 5; deng > 0; deng--) {
-        if (id("titleSave").findOnce() == null) {
-            toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
-            sleep(2000);
-        } else {
-            toastLog("已到达主页");
-            var deng = 0;
-        }
-    }
-    if (id("titleSave").findOnce() == null) {
-        toastLog("HomeIntent打开失败\n自动切换Intent\n尝试再次打开…");
-        sleep(1000);
-        app.startActivity({
-            action: "android.intent.action.VIEW", //此处可为其他值
-            packageName: "com.sina.weibo",
-            className: "com.sina.weibo.MainTabActivity"
-            //此处可以加入其他内容，如data、extras
-        });
-        var deng = 5;
-        for (deng == 5; deng > 0; deng--) {
-            if (id("titleSave").findOnce() == null) {
-                toastLog("正在等待微博APP启动至主页\n当前剩余" + deng + "秒……");
+            if (className("android.widget.ImageView").clickable(true).desc("返回").findOnce() != null) {
+                className("android.widget.ImageView").clickable(true).desc("返回").findOnce().click();
+                toastLog("已尝试盲点“返回按钮”");
+                sleep(2000);
+            } else if (id("com.sina.weibo:id/rltitleBack").findOnce() != null) {
+                id("com.sina.weibo:id/rltitleBack").findOnce().click();
+                toastLog("已尝试盲点ID“返回按钮”");
+                sleep(2000);
+            } else if (className("android.widget.TextView").desc("返回").findOnce() != null && className("android.widget.TextView").desc("返回").findOnce().parent().parent().clickable() == true) {
+                className("android.widget.TextView").desc("返回").findOnce().parent().parent().click();
+                toastLog("已尝试盲点父级“返回按钮”");
+                sleep(2000);
+            } else if (id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce() != null) {
+                id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce().click();
+                toastLog("已尝试盲点左关闭按钮，重试中……");
                 sleep(2000);
             } else {
-                toastLog("已到达主页");
-                var deng = 0;
+                Justback();
+                sleep(1000);
             }
         }
     }
-    sleep(2000);
-    if (id("com.sina.weibo:id/rlredpacketSave").findOnce() != null) {
-        id("com.sina.weibo:id/rlredpacketSave").findOnce().click();
-        toastLog("已找到活动入口按钮\n已尝试点击…");
-        sleep(2000);
-    } else {
-        toastLog("使用Intent尝试打开活动中…");
-        app.startActivity({
-            action: "android.intent.action.VIEW",
-            packageName: "com.sina.weibo",
-            className: "com.sina.weibo.browser.WeiboBrowser",
-            data: app.parseUri("https://m.weibo.cn/feature/applink?scheme=sinaweibo%3A%2F%2Fbrowser%3Furl%3Dhttps%253A%252F%252Fm.weibo.cn%252Fc%252Fcheckin%253Ffeaturecode%253Dfrom_sharingpage_to_mtask%26featurecode%3Dfrom_sharingpage_to_mtask&yingyongbao=0&golight=0&goxianzhi=0&url=https%3A%2F%2Fc.weibo.cn%3Fscheme%3Dsinaweibo%253A%252F%252Fbrowser%253Furl%253Dhttps%25253A%25252F%25252Fm.weibo.cn%25252Fc%25252Fcheckin%25253Ffeaturecode%25253Dfrom_sharingpage_to_mtask%2526featurecode%253Dfrom_sharingpage_to_mtask%26directdownload%3D0"),
-            flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
-        });
-    }
-
-    var While = 1;
-    var time = 0;
-    while (While == 1) {
-        if (text("日常任务").exists()) {
-            toastLog("已处于微博任务界面")
-            var While = 0;
-        } else if (text("微博-出错了").findOnce() != null) {
-            var While = 0;
-            NOpeninHd();
-        } else if (time > 10) {
-            toastLog("打开活动已超时\n尝试重新进入活动");
-            var While = 0;
-            NOpeninHd();
-        } else {
-            toastLog("正在等待微博任务界面加载……");
-            sleep(2000);
-            time++;
-        }
-    }
 }
-
-
 
 function DoTask() {
-
     //完成“关注”任务
     var While = 1;
     while (While == 1) {
@@ -698,18 +1048,18 @@ function DoTask() {
                     }
                 } else {
                     var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "\n即将重新进入活动…");
+                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
                     sleep(2000);
                 }
             } else {
-                toastLog("未找到微博顶栏标题\n即将重新进入活动…");
+                toastLog("未找到微博顶栏标题，即将重新进入活动…");
                 sleep(2000);
             }
         } else {
             var While = 0;
             toastLog("跳过！已找不到“关注任务”");
         }
-        NOpeninHd();
+        OpeninHd();
     }
 
     //完成“转发”任务
@@ -755,18 +1105,18 @@ function DoTask() {
                     }
                 } else {
                     var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "\n即将重新进入活动…");
+                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
                     sleep(2000);
                 }
             } else {
-                toastLog("未找到微博顶栏标题\n即将重新进入活动…");
+                toastLog("未找到微博顶栏标题，即将重新进入活动…");
                 sleep(2000);
             }
         } else {
             var While = 0;
             toastLog("跳过！已找不到“转发任务”");
         }
-        NOpeninHd();
+        OpeninHd();
     }
 
     //完成“评论”任务
@@ -916,11 +1266,11 @@ function DoTask() {
                                                 className("android.widget.TextView").text("确定").findOnce().click();
                                                 toastLog("已尝试点击确定删除“任务评论”");
                                                 sleep(2000);
-                                                toastLog("已成功完成一次评论任务\n正在尝试返回活动界面");
+                                                toastLog("已成功完成一次评论任务，正在尝试返回活动界面");
                                             }
                                         }
                                     } else {
-                                        toastLog("未找到发送的评论\n尝试下拉刷新…");
+                                        toastLog("未找到发送的评论，尝试下拉刷新…");
                                         swipe(device.width / 2, device.height / 2, device.width / 2, device.height, 500);
                                         sleep(3000);
                                         if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
@@ -936,7 +1286,7 @@ function DoTask() {
                                                     className("android.widget.TextView").text("确定").findOnce().click();
                                                     toastLog("已尝试点击确定删除“任务评论”");
                                                     sleep(2000);
-                                                    toastLog("已成功完成一次评论任务\n正在尝试返回活动界面");
+                                                    toastLog("已成功完成一次评论任务，正在尝试返回活动界面");
                                                 }
                                             }
                                         }
@@ -946,11 +1296,11 @@ function DoTask() {
                         }
                     } else {
                         var CW = id("titleText").findOnce().text();
-                        toastLog("处于错误的界面:" + CW + "\n即将重新进入活动…");
+                        toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
                         sleep(2000);
                     }
                 } else {
-                    toastLog("未找到微博顶栏标题\n即将重新进入活动…");
+                    toastLog("未找到微博顶栏标题，即将重新进入活动…");
                     sleep(2000);
                 }
             } else {
@@ -961,7 +1311,7 @@ function DoTask() {
             var While = 0;
             toastLog("跳过！已找不到“评论任务”");
         }
-        NOpeninHd();
+        OpeninHd();
     }
 
     //完成“发微博”任务
@@ -995,24 +1345,24 @@ function DoTask() {
                     }
                 } else {
                     var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "\n即将重新进入活动…");
+                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
                     sleep(2000);
                 }
             } else {
-                toastLog("未找到微博顶栏标题\n即将重新进入活动…");
+                toastLog("未找到微博顶栏标题，即将重新进入活动…");
                 sleep(2000);
             }
         } else {
             if (text("限时福利").findOnce() != null) {
                 toastLog("跳过!已找不到“发微博”任务");
                 var While = 0;
-                NOpeninHd();
+                OpeninHd();
             } else if (text("日常任务").findOnce() != null) {
                 toastLog("跳过!已找不到“发微博”任务");
                 var While = 0;
-                NOpeninHd();
+                OpeninHd();
             } else {
-                NOpeninHd();
+                OpeninHd();
             }
         }
     }
@@ -1055,11 +1405,11 @@ function DoTask() {
                     }*/
                 } else {
                     var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "\n即将重新进入活动…");
+                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
                     sleep(2000);
                 }
             } else {
-                toastLog("未找到微博顶栏标题\n即将重新进入活动…");
+                toastLog("未找到微博顶栏标题，即将重新进入活动…");
                 sleep(2000);
             }
         } else {
@@ -1071,68 +1421,29 @@ function DoTask() {
                 var While = 0;
             }
         }
-        NOpeninHd();
+        OpeninHd();
     }
-
+    toastLog("正在查找可领取的积分，请稍等……");
     //领取未领取的积分
-    var While = 1;
-    while (While == 1) {
-        var A = className("android.widget.Button").text("领取3积分").findOnce();
-        var B = className("android.widget.Button").text("领取5积分").findOnce();
-        var C = className("android.widget.Button").text("领取30积分").findOnce();
-        var D = className("android.widget.Button").text("领取10积分").findOnce();
-        var E = className("android.widget.Button").text("领取50积分").findOnce();
-        var F = className("android.widget.Button").text("领0.01元").findOnce();
-        var G = className("android.widget.Button").text("领0.05元").findOnce();
-        var H = className("android.widget.Button").text("领0.3元").findOnce();
-        var I = className("android.widget.Button").text("领取90积分").findOnce();
-        var J = className("android.widget.Button").text("领取80积分").findOnce();
-        if (A != null) {
-            A.click();
-            toastLog("已找到“领取3积分”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (B != null) {
-            B.click();
-            toastLog("已找到“领取5积分”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (C != null) {
-            C.click();
-            toastLog("已找到“领取30积分”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (D != null) {
-            D.click();
-            toastLog("已找到“领取10积分”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (E != null) {
-            E.click();
-            toastLog("已找到“领取50积分”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (F != null) {
-            F.click();
-            toastLog("已找到“领0.01元”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (G != null) {
-            G.click();
-            toastLog("已找到“领0.05元”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (H != null) {
-            H.click();
-            toastLog("已找到“领0.3元”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (I != null) {
-            I.click();
-            toastLog("已找到“领取90积分”按钮\n已尝试点击……");
-            sleep(2000);
-        } else if (J != null) {
-            J.click();
-            toastLog("已找到“领取80积分”按钮\n已尝试点击……");
-            sleep(2000);
-        } else {
-            var While = 0;
-            toastLog("跳过！已找不到“领取积分”按钮");
+    var x = 4;
+    for (x == x; x > 0; x--) {
+        var a = 100;
+        for (a == a; a > 0; a--) {
+            var A = className("android.widget.Button").text("领取" + a + "积分").findOnce();
+            var B = className("android.widget.Button").text("领0." + a + "元").findOnce();
+            if (A != null && A.clickable() == true) {
+                A.click();
+                toastLog("已找到“领取" + a + "积分”按钮，已尝试点击……");
+                sleep(2000);
+            } else if (B != null && B.clickable() == true) {
+                B.click();
+                toastLog("已找到“领0." + a + "元”按钮，已尝试点击……");
+                sleep(2000);
+            }
         }
     }
-
+    sleep(1000);
+    toastLog("查找&领取完毕，正在跳转至我的微博界面删除转发的任务微博");
     //删除 转发&发送 的任务微博
     app.startActivity({
         action: "android.intent.action.VIEW", //此处可为其他值
@@ -1261,6 +1572,8 @@ function DoTask() {
     }
 }
 
-dialogs.alert("脚本已运行完成");
-log("脚本已运行完成");
+OpeninHd();
+DoTask();
+dialogs.alert("微博任务自动脚本：\n脚本已运行完成");
+log("微博任务自动脚本：脚本已运行完成");
 exit();
