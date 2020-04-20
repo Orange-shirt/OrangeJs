@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.12"); //版本
+    var ScriptVersion = ("Beta1.13"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“微博任务自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1431,6 +1431,7 @@ function DoTask() {
         for (a == a; a > 0; a--) {
             var A = className("android.widget.Button").text("领取" + a + "积分").findOnce();
             var B = className("android.widget.Button").text("领0." + a + "元").findOnce();
+            var C = className("android.widget.Button").text("领0.0" + a + "元").findOnce();
             if (A != null && A.clickable() == true) {
                 A.click();
                 toastLog("已找到“领取" + a + "积分”按钮，已尝试点击……");
@@ -1439,28 +1440,75 @@ function DoTask() {
                 B.click();
                 toastLog("已找到“领0." + a + "元”按钮，已尝试点击……");
                 sleep(2000);
+            }else if (C != null && C.clickable() == true) {
+                C.click();
+                toastLog("已找到“领0.0" + a + "元”按钮，已尝试点击……");
+                sleep(2000);
             }
         }
     }
     sleep(1000);
     toastLog("查找&领取完毕，正在跳转至我的微博界面删除转发的任务微博");
     //删除 转发&发送 的任务微博
-    app.startActivity({
-        action: "android.intent.action.VIEW", //此处可为其他值
-        packageName: "com.sina.weibo",
-        className: "com.sina.weibo.MainTabActivity"
-        //此处可以加入其他内容，如data、extras
-    });
-    while (id("titleSave").findOnce() == null) {
-        toastLog("正在等待微博APP启动至主页");
-        sleep(2000);
-        if (className("android.view.View").desc("首页").findOnce() != null) {
-            className("android.view.View").desc("首页").findOnce().click();
-            toastLog("已尝试点击“首页”按钮");
+    while (true) {
+        if (currentActivity() == "com.sina.weibo.MainTabActivity" && className("android.view.ViewGroup").desc("我").findOnce() != null && className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce() == null) {
+            toastLog("已处于微博主页");
             sleep(2000);
+            break;
+        } else if (currentActivity() == "com.sina.weibo.MainTabActivity" && className("android.view.ViewGroup").desc("我").findOnce() != null && className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce() == null) {
+            className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce().click();
+            toastLog("已尝试点击关闭“微博故事”按钮");
+            sleep(2000);
+        } else if (currentPackage() != "com.sina.weibo") {
+            app.startActivity({
+                action: "android.intent.action.VIEW", //此处可为其他值
+                packageName: "com.sina.weibo",
+                className: "com.sina.weibo.MainTabActivity"
+                //此处可以加入其他内容，如data、extras
+            });
+            var deng = 5;
+            for (deng == 5; deng > 0; deng--) {
+                if (id("titleSave").findOnce() == null) {
+                    toastLog("正在等待微博APP启动至主页，当前剩余" + deng + "秒……");
+                    sleep(2000);
+                    if (className("android.view.View").desc("首页").findOnce() != null) {
+                        className("android.view.View").desc("首页").findOnce().click();
+                        toastLog("已尝试点击“首页”按钮");
+                    }
+                } else {
+                    toastLog("已到达主页");
+                    var deng = 0;
+                }
+            }
+            if (currentPackage() != "com.sina.weibo") {
+                toastLog("尝试打开至微博失败，已尝试再次打开微博");
+                app.startActivity({
+                    action: "android.intent.action.VIEW", //此处可为其他值
+                    packageName: "com.sina.weibo",
+                    className: "com.sina.weibo.MainTabActivity"
+                    //此处可以加入其他内容，如data、extras
+                });
+                sleep(2000);
+            }
+        } else {
+            if (className("android.widget.ImageView").clickable(true).desc("返回").findOnce() != null) {
+                className("android.widget.ImageView").clickable(true).desc("返回").findOnce().click();
+                toastLog("已尝试盲点“返回按钮”");
+                sleep(2000);
+            } else if (className("android.widget.TextView").desc("返回").findOnce() != null && className("android.widget.TextView").desc("返回").findOnce().parent().parent().clickable() == true) {
+                className("android.widget.TextView").desc("返回").findOnce().parent().parent().click();
+                toastLog("已尝试盲点父级“返回按钮”");
+                sleep(2000);
+            } else if (id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce() != null) {
+                id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce().click();
+                toastLog("已尝试盲点左关闭按钮，重试中……");
+                sleep(2000);
+            } else {
+                Justback();
+                sleep(1000);
+            }
         }
     }
-    sleep(2000);
     if (className("android.view.ViewGroup").desc("我").findOnce() != null) {
         className("android.view.ViewGroup").desc("我").findOnce().click();
         toastLog("已尝试点击主页“我”按钮");
