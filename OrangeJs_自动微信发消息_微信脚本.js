@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.tencent.mm");
-var SupportVersion = ["7.0.13Play版","7.0.13", "7.0.12Play版", "7.0.12", "7.0.10", "7.0.4"]
+var SupportVersion = ["7.0.13Play版", "7.0.13", "7.0.12Play版", "7.0.12", "7.0.10", "7.0.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -108,6 +108,7 @@ while (While == 1) {
 
 function RunJs() {
     dialogs_js();
+
     function toastLog(message) {
         toast(message);
         log(message);
@@ -125,6 +126,15 @@ function RunJs() {
             toastLog(options_[i]);
             context_Manualstate = 0;
             Set_Back_way();
+            if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
+                InformationSettings();
+            } else {
+                var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
+                var Pz = PZ.readlines();
+                PZ.close();
+                var DX = Pz[0];
+                var XX = Pz[1];
+            }
         } else if (i == 3) {
             toastLog(options_[i]);
             exit();
@@ -203,6 +213,15 @@ function RunJs() {
                 dialogs_js();
             } else {
                 toastLog("请稍候，正在检测权限...")
+                if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
+                    InformationSettings();
+                } else {
+                    var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
+                    var Pz = PZ.readlines();
+                    PZ.close();
+                    var DX = Pz[0];
+                    var XX = Pz[1];
+                }
                 context_Manualstate = 0;
                 toastLog(options_[i]);
                 device.keepScreenDim();
@@ -235,6 +254,15 @@ function RunJs() {
                 toastLog("请稍候，正在检测权限...")
                 context_Manualstate = 0;
                 toastLog(options_[i]);
+                if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
+                    InformationSettings();
+                } else {
+                    var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
+                    var Pz = PZ.readlines();
+                    PZ.close();
+                    var DX = Pz[0];
+                    var XX = Pz[1];
+                }
                 device.keepScreenDim();
                 toastLog("检测权限设置……");
                 context_Manualstate = 0;
@@ -1497,15 +1525,7 @@ function RunJs() {
             Doit();
         }
     }
-    if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
-        InformationSettings();
-    } else {
-        var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
-        var Pz = PZ.readlines();
-        PZ.close();
-        var DX = Pz[0];
-        var XX = Pz[1];
-    }
+
 
     function OpenWXcontent() { //自动打开微信至主页通讯录界面
         try {
@@ -1513,7 +1533,7 @@ function RunJs() {
                 if (id("android:id/text1").text("通讯录").findOnce() != null) {
                     toastLog("已处于“微信通讯录”界面");
                     break;
-                }else if (id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.4
+                } else if (id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.4
                     id("com.tencent.mm:id/d9a").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
                     toastLog("已尝试点击“通讯录”按钮");
                     sleep(2000);
@@ -1537,7 +1557,7 @@ function RunJs() {
                     id("com.tencent.mm:id/cl9").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
                     toastLog("已尝试点击“通讯录”按钮");
                     sleep(2000);
-                }else if (currentPackage() == "com.tencent.mm") {
+                } else if (currentPackage() == "com.tencent.mm") {
                     Justback();
                     toastLog("已处于微信中但非主界面，正在尝试返回主界面");
                     sleep(2000);
@@ -1829,7 +1849,7 @@ function RunJs() {
             Doit();
         }
     }
-    device.wakeUp();//唤醒设备
-    device.keepScreenOn(3600 * 1000);//屏幕常亮
+    device.wakeUp(); //唤醒设备
+    device.keepScreenOn(3600 * 1000); //屏幕常亮
     Doit();
 }
