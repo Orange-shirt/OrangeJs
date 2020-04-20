@@ -1768,10 +1768,9 @@ function RunJs() {
                         OpenWXcontent();
                     }
                 } else if (className("android.widget.RelativeLayout").id("com.tencent.mm:id/dka").clickable(true).desc("搜索").findOnce() != null) { //7.0.13 D35
-                    log("7.0.13")
+                    log("7.0.13");
                     className("android.widget.RelativeLayout").id("com.tencent.mm:id/dka").findOnce().click();
                     toastLog("已尝试点击“搜索”按钮");
-                    activity.getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     sleep(2000);
                     if (className("android.widget.EditText").id("com.tencent.mm:id/bfl").findOnce() != null) {
                         className("android.widget.EditText").id("com.tencent.mm:id/bfl").findOnce().setText(context_DX);
@@ -1804,7 +1803,7 @@ function RunJs() {
                         OpenWXcontent();
                     }
                 } else if (className("android.widget.RelativeLayout").id("com.tencent.mm:id/dkd").clickable(true).desc("搜索").findOnce() != null) { //7.0.13play
-                    log("7.0.13")
+                    log("7.0.13play")
                     className("android.widget.RelativeLayout").id("com.tencent.mm:id/dkd").findOnce().click();
                     toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
