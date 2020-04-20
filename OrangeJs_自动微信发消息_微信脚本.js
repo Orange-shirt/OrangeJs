@@ -125,16 +125,16 @@ function RunJs() {
         } else if (i == 0) {
             toastLog(options_[i]);
             context_Manualstate = 0;
-            Set_Back_way();
             if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
-                InformationSettings();
-            } else {
-                var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
-                var Pz = PZ.readlines();
-                PZ.close();
-                var DX = Pz[0];
-                var XX = Pz[1];
-            }
+                    InformationSettings();
+                } else {
+                    var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
+                    var Pz = PZ.readlines();
+                    PZ.close();
+                    context_DX = Pz[0];
+                    context_XX = Pz[1];
+                }
+            Set_Back_way();
         } else if (i == 3) {
             toastLog(options_[i]);
             exit();
@@ -145,9 +145,9 @@ function RunJs() {
                 var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
                 var Pz = PZ.readlines();
                 PZ.close();
-                var DX = Pz[0];
-                var XX = Pz[1];
-                var PZxg = dialogs.confirm("您当前的运行信息配置如下", "联系人备注/群聊名称/公众号名称：\n" + DX + "\n\n将发送的消息内容：" + XX + "\n\n您确定要修改吗？");
+                context_DX = Pz[0];
+                context_XX = Pz[1];
+                var PZxg = dialogs.confirm("您当前的运行信息配置如下", "联系人备注/群聊名称/公众号名称：\n" + context_DX + "\n\n将发送的消息内容：" + context_XX + "\n\n您确定要修改吗？");
                 if (PZxg == true) {
                     InformationSettings();
                 }
@@ -212,18 +212,18 @@ function RunJs() {
                 dialogs.alert("您还没有配置脚本，不能定时运行哦");
                 dialogs_js();
             } else {
-                toastLog("请稍候，正在检测权限...")
+                toastLog("请稍候，正在检测权限...");
+                context_Manualstate = 0;
+                toastLog(options_[i]);
                 if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
                     InformationSettings();
                 } else {
                     var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
                     var Pz = PZ.readlines();
                     PZ.close();
-                    var DX = Pz[0];
-                    var XX = Pz[1];
+                    context_DX = Pz[0];
+                    context_XX = Pz[1];
                 }
-                context_Manualstate = 0;
-                toastLog(options_[i]);
                 device.keepScreenDim();
                 toastLog("检测权限设置……");
                 context_Manualstate = 0;
@@ -251,18 +251,18 @@ function RunJs() {
                 dialogs.alert("您还没有配置脚本，不能定时运行哦");
                 dialogs_js();
             } else {
-                toastLog("请稍候，正在检测权限...")
-                context_Manualstate = 0;
-                toastLog(options_[i]);
+                toastLog("请稍候，正在检测权限...");
                 if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt") != true) {
                     InformationSettings();
                 } else {
                     var PZ = open("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
                     var Pz = PZ.readlines();
                     PZ.close();
-                    var DX = Pz[0];
-                    var XX = Pz[1];
+                    context_DX = Pz[0];
+                    context_XX = Pz[1];
                 }
+                context_Manualstate = 0;
+                toastLog(options_[i]);
                 device.keepScreenDim();
                 toastLog("检测权限设置……");
                 context_Manualstate = 0;
@@ -291,21 +291,21 @@ function RunJs() {
 
     function InformationSettings() {
         while (true) {
-            var DX = dialogs.prompt("请输入联系名称");
-            if (DX != "") {
-                if (DX != null) {
+            context_DX = dialogs.prompt("请输入联系名称");
+            if (context_DX != "") {
+                if (context_DX != null) {
                     break;
                 }
             }
         }
         while (true) {
-            var XX = dialogs.prompt("请输入要发送的消息内容");
-            if (XX != "") {
-                if (XX != null) {
-                    var QR = dialogs.confirm("请确认以下信息", "联系人备注/群聊名称/公众号名称：\n" + DX + "\n" + "将发送的消息内容：" + XX + "\n\n之后运行将默认使用此配置，确定之后如需更改请在脚本配置中进行")
+            context_XX = dialogs.prompt("请输入要发送的消息内容");
+            if (context_XX != "") {
+                if (context_XX != null) {
+                    var QR = dialogs.confirm("请确认以下信息", "联系人备注/群聊名称/公众号名称：\n" + context_DX + "\n" + "将发送的消息内容：" + context_XX + "\n\n之后运行将默认使用此配置，确定之后如需更改请在脚本配置中进行")
                     if (QR == true) {
                         files.createWithDirs("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt");
-                        files.write("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt", DX + "\n" + XX);
+                        files.write("/storage/emulated/0/OrangeJs/自动微信发消息/消息设置.txt", context_DX + "\n" + context_XX);
                         break;
                     } else {
                         InformationSettings();
@@ -1027,9 +1027,9 @@ function RunJs() {
         log("使用脚本自带“吐司”");
     }
 
-    function SendTAF(XX) {
+    function SendTAF(context_XX) {
         try {
-            var str = XX;
+            var str = context_XX;
             if (str.search("/storage/emulated/0/") == 0) {
                 log("文件路径：" + str);
                 if (files.exists(str) == true) {
@@ -1105,17 +1105,17 @@ function RunJs() {
                         id("com.tencent.mm:id/ajs").findOnce().setText("");
                         toastLog("已尝试清除输入框文字");
                         sleep(2000);
-                        SendTAF(XX);
+                        SendTAF(context_XX);
                     } else if (id("com.tencent.mm:id/ajx").findOnce() != null && id("com.tencent.mm:id/ajx").findOnce().text() != "") { //7.0.12Play
                         id("com.tencent.mm:id/ajx").findOnce().setText("");
                         toastLog("已尝试清除输入框文字");
                         sleep(2000);
-                        SendTAF(XX);
+                        SendTAF(context_XX);
                     } else if (id("com.tencent.mm:id/ak7").findOnce() != null && id("com.tencent.mm:id/ak7").findOnce().text() != "") { //7.0.13&7.0.13play
                         id("com.tencent.mm:id/ak7").findOnce().setText("");
                         toastLog("已尝试清除输入框文字");
                         sleep(2000);
-                        SendTAF(XX);
+                        SendTAF(context_XX);
                     } else {
                         toastLog("未知错误！找不到加号按钮！");
                         sleep(2000);
@@ -1590,16 +1590,16 @@ function RunJs() {
                     toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
                     if (className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce() != null) {
-                        className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce().setText(DX);
+                        className("android.widget.EditText").id("com.tencent.mm:id/l3").findOnce().setText(context_DX);
                         toastLog("已设置搜索文字")
                         sleep(2000);
-                        if (id("com.tencent.mm:id/qm").text(DX).findOnce() != null) {
-                            id("com.tencent.mm:id/qm").text(DX).findOnce().parent().parent().parent().parent().click();
+                        if (id("com.tencent.mm:id/qm").text(context_DX).findOnce() != null) {
+                            id("com.tencent.mm:id/qm").text(context_DX).findOnce().parent().parent().parent().parent().click();
                             toastLog("已尝试点击设定的“联系对象”")
                             sleep(2000);
-                            if (className("android.widget.FrameLayout").descContains(DX).findOnce() != null) {
+                            if (className("android.widget.FrameLayout").descContains(context_DX).findOnce() != null) {
                                 if (id("com.tencent.mm:id/ami").findOnce() != null) {
-                                    id("com.tencent.mm:id/ami").findOnce().setText(XX);
+                                    id("com.tencent.mm:id/ami").findOnce().setText(context_XX);
                                     sleep(1000);
                                     if (id("com.tencent.mm:id/amp").findOnce() != null) {
                                         id("com.tencent.mm:id/amp").findOnce().click();
@@ -1644,11 +1644,11 @@ function RunJs() {
                     toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
                     if (className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce() != null) {
-                        className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce().setText(DX);
+                        className("android.widget.EditText").id("com.tencent.mm:id/m7").findOnce().setText(context_DX);
                         toastLog("已设置搜索文字")
                         sleep(2000);
-                        if (id("com.tencent.mm:id/s7").text(DX).findOnce() != null) {
-                            id("com.tencent.mm:id/s7").text(DX).findOnce().parent().parent().parent().parent().click();
+                        if (id("com.tencent.mm:id/s7").text(context_DX).findOnce() != null) {
+                            id("com.tencent.mm:id/s7").text(context_DX).findOnce().parent().parent().parent().parent().click();
                             toastLog("已尝试点击设定的“联系对象”")
                             sleep(2000);
                             if (id("com.tencent.mm:id/aqz").findOnce() != null) {
@@ -1659,7 +1659,7 @@ function RunJs() {
                                 log("非公众号对象");
                             }
                             if (id("com.tencent.mm:id/aqe").findOnce() != null) {
-                                id("com.tencent.mm:id/aqe").findOnce().setText(XX);
+                                id("com.tencent.mm:id/aqe").findOnce().setText(context_XX);
                                 sleep(1000);
                                 if (id("com.tencent.mm:id/aql").findOnce() != null) {
                                     id("com.tencent.mm:id/aql").findOnce().click();
@@ -1701,11 +1701,11 @@ function RunJs() {
                     toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
                     if (className("android.widget.EditText").id("com.tencent.mm:id/bem").findOnce() != null) {
-                        className("android.widget.EditText").id("com.tencent.mm:id/bem").findOnce().setText(DX);
+                        className("android.widget.EditText").id("com.tencent.mm:id/bem").findOnce().setText(context_DX);
                         toastLog("已设置搜索文字")
                         sleep(2000);
-                        if (id("com.tencent.mm:id/g2t").text(DX).findOnce() != null) {
-                            id("com.tencent.mm:id/g2t").text(DX).findOnce().parent().parent().parent().parent().click();
+                        if (id("com.tencent.mm:id/g2t").text(context_DX).findOnce() != null) {
+                            id("com.tencent.mm:id/g2t").text(context_DX).findOnce().parent().parent().parent().parent().click();
                             toastLog("已尝试点击设定的“联系对象”")
                             sleep(2000);
                             if (id("com.tencent.mm:id/ake").findOnce() != null) {
@@ -1715,7 +1715,7 @@ function RunJs() {
                             } else {
                                 log("非公众号对象");
                             } //发送
-                            SendTAF(XX);
+                            SendTAF(context_XX);
                         } else {
                             var WrongDX = 0;
                             WrongDX++;
@@ -1738,11 +1738,11 @@ function RunJs() {
                     toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
                     if (className("android.widget.EditText").id("com.tencent.mm:id/bet").findOnce() != null) {
-                        className("android.widget.EditText").id("com.tencent.mm:id/bet").findOnce().setText(DX);
+                        className("android.widget.EditText").id("com.tencent.mm:id/bet").findOnce().setText(context_DX);
                         toastLog("已设置搜索文字")
                         sleep(2000);
-                        if (id("com.tencent.mm:id/g38").text(DX).findOnce() != null) {
-                            id("com.tencent.mm:id/g38").text(DX).findOnce().parent().parent().parent().parent().click();
+                        if (id("com.tencent.mm:id/g38").text(context_DX).findOnce() != null) {
+                            id("com.tencent.mm:id/g38").text(context_DX).findOnce().parent().parent().parent().parent().click();
                             toastLog("已尝试点击设定的“联系对象”")
                             sleep(2000);
                             if (id("com.tencent.mm:id/akj").findOnce() != null) {
@@ -1752,7 +1752,7 @@ function RunJs() {
                             } else {
                                 log("非公众号对象");
                             } //发送
-                            SendTAF(XX);
+                            SendTAF(context_XX);
                         } else {
                             var WrongDX = 0;
                             WrongDX++;
@@ -1771,13 +1771,14 @@ function RunJs() {
                     log("7.0.13")
                     className("android.widget.RelativeLayout").id("com.tencent.mm:id/dka").findOnce().click();
                     toastLog("已尝试点击“搜索”按钮");
+                    activity.getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     sleep(2000);
                     if (className("android.widget.EditText").id("com.tencent.mm:id/bfl").findOnce() != null) {
-                        className("android.widget.EditText").id("com.tencent.mm:id/bfl").findOnce().setText(DX);
+                        className("android.widget.EditText").id("com.tencent.mm:id/bfl").findOnce().setText(context_DX);
                         toastLog("已设置搜索文字")
                         sleep(2000);
-                        if (id("com.tencent.mm:id/g8b").text(DX).findOnce() != null) {
-                            id("com.tencent.mm:id/g8b").text(DX).findOnce().parent().parent().parent().parent().click();
+                        if (id("com.tencent.mm:id/g8b").text(context_DX).findOnce() != null) {
+                            id("com.tencent.mm:id/g8b").text(context_DX).findOnce().parent().parent().parent().parent().click();
                             toastLog("已尝试点击设定的“联系对象”")
                             sleep(2000);
                             if (id("com.tencent.mm:id/aku").findOnce() != null) {
@@ -1787,7 +1788,7 @@ function RunJs() {
                             } else {
                                 log("非公众号对象");
                             } //发送
-                            SendTAF(XX);
+                            SendTAF(context_XX);
                         } else {
                             var WrongDX = 0;
                             WrongDX++;
@@ -1808,11 +1809,11 @@ function RunJs() {
                     toastLog("已尝试点击“搜索”按钮");
                     sleep(2000);
                     if (className("android.widget.EditText").id("com.tencent.mm:id/bfm").findOnce() != null) {
-                        className("android.widget.EditText").id("com.tencent.mm:id/bfm").findOnce().setText(DX);
+                        className("android.widget.EditText").id("com.tencent.mm:id/bfm").findOnce().setText(context_DX);
                         toastLog("已设置搜索文字")
                         sleep(2000);
-                        if (id("com.tencent.mm:id/g8f").text(DX).findOnce() != null) {
-                            id("com.tencent.mm:id/g8f").text(DX).findOnce().parent().parent().parent().parent().click();
+                        if (id("com.tencent.mm:id/g8f").text(context_DX).findOnce() != null) {
+                            id("com.tencent.mm:id/g8f").text(context_DX).findOnce().parent().parent().parent().parent().click();
                             toastLog("已尝试点击设定的“联系对象”")
                             sleep(2000);
                             if (id("com.tencent.mm:id/akv").findOnce() != null) {
@@ -1822,7 +1823,7 @@ function RunJs() {
                             } else {
                                 log("非公众号对象");
                             } //发送
-                            SendTAF(XX);
+                            SendTAF(context_XX);
                         } else {
                             var WrongDX = 0;
                             WrongDX++;
