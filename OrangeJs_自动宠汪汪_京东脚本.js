@@ -302,19 +302,26 @@ toastLog("等待无障碍权限开启……\n您必须手动授予本软件无�
 auto.waitFor();
 toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
 if (files.exists("/storage/emulated/0/OrangeJs/自动宠汪汪/吐司or日志.txt") == true) {
-    let z = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/吐司or日志.txt");
-    if (z == "吐司") {
-        var T = 0;
-    } else if (z == "日志") {
-        var T = 1;
-    } else {
-        toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
-        try {
-            files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/吐司or日志.txt");
-        } catch (e) {
-            toastLog("删除“吐司or日志”文件失败！");
+    try {
+        let z = files.read("/storage/emulated/0/OrangeJs/自动宠汪汪/吐司or日志.txt");
+        if (z == "吐司") {
+            var T = 0;
+        } else if (z == "日志") {
+            var T = 1;
+        } else {
+            toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
+            try {
+                files.remove("/storage/emulated/0/OrangeJs/自动宠汪汪/吐司or日志.txt");
+            } catch (e) {
+                toastLog("删除“吐司or日志”文件失败！");
+            }
+            var T = 1;
         }
-        var T = 1;
+    } catch (e) {
+        if (T == null) {
+            log("未授予存储权限或存储权限错误，默认开启悬浮日志");
+            var T = 1;
+        }
     }
 } else {
     try {
