@@ -41,7 +41,7 @@ function dialogs_js() {
         toastLog(options_[i]);
         exit();
     } else if (i == 1) {
-        toastLog("请稍候，正在检测权限...")
+        toastLog("请稍候，正在检测权限...");
         context_Manualstate = 0;
         toastLog(options_[i]);
         device.keepScreenDim();
@@ -65,7 +65,7 @@ function dialogs_js() {
         sleep(2000);
         wait_Time_over();
     } else if (i == 2) {
-        toastLog("请稍候，正在检测权限...")
+        toastLog("请稍候，正在检测权限...");
         context_Manualstate = 0;
         toastLog(options_[i]);
         device.keepScreenDim();
@@ -1043,12 +1043,18 @@ function DoTask() {
                                                 sleep(3000);
                                             } else if (className("android.view.View").text("1个营养液").findOnce() != null || className("android.view.View").textContains("个营养液").findOnce() != null) {
                                                 var z = 0;
-                                                if (className("android.view.View").text("1个营养液").findOnce() != null) {
+                                                if (className("android.view.View").text("1个营养液").findOnce() != null&&className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount()==3) {
                                                     var zat = className("android.view.View").text("1个营养液").findOnce();
                                                     var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(2).child(1);
-                                                } else {
+                                                } else if(className("android.view.View").textContains("个营养液").findOnce()!=null&&className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount()==3){
                                                     var zat = className("android.view.View").textContains("个营养液").findOnce();
                                                     var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(2).child(1);
+                                                }else if (className("android.view.View").text("1个营养液").findOnce() != null&&className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount()==2) {
+                                                    var zat = className("android.view.View").text("1个营养液").findOnce();
+                                                    var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(1).child(1);
+                                                } else if(className("android.view.View").textContains("个营养液").findOnce()!=null&&className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount()==2){
+                                                    var zat = className("android.view.View").textContains("个营养液").findOnce();
+                                                    var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(1).child(1);
                                                 }
                                                 if (za.clickable() == true) {
                                                     za.click();
