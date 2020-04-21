@@ -41,7 +41,7 @@ function dialogs_js() {
         toastLog(options_[i]);
         exit();
     } else if (i == 1) {
-        toastLog("请稍候，正在检测权限...")
+        toastLog("请稍候，正在检测权限...");
         context_Manualstate = 0;
         toastLog(options_[i]);
         device.keepScreenDim();
@@ -65,7 +65,7 @@ function dialogs_js() {
         sleep(2000);
         wait_Time_over();
     } else if (i == 2) {
-        toastLog("请稍候，正在检测权限...")
+        toastLog("请稍候，正在检测权限...");
         context_Manualstate = 0;
         toastLog(options_[i]);
         device.keepScreenDim();
@@ -300,6 +300,7 @@ toastLog("等待无障碍权限开启……\n您必须手动授予本软件无�
 auto.waitFor();
 toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
 if (files.exists("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt") == true) {
+    try{
     let z = files.read("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
     if (z == "吐司") {
         var T = 0;
@@ -313,6 +314,12 @@ if (files.exists("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or
             toastLog("删除“吐司or日志”文件失败！");
         }
         var T = 1;
+    }
+    } catch (e) {
+        if (T == null) {
+            log("未授予存储权限或存储权限错误，默认开启悬浮日志");
+            var T = 1;
+        }
     }
 } else {
     try {
@@ -1043,12 +1050,18 @@ function DoTask() {
                                                 sleep(3000);
                                             } else if (className("android.view.View").text("1个营养液").findOnce() != null || className("android.view.View").textContains("个营养液").findOnce() != null) {
                                                 var z = 0;
-                                                if (className("android.view.View").text("1个营养液").findOnce() != null) {
+                                                if (className("android.view.View").text("1个营养液").findOnce() != null&&className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount()==3) {
                                                     var zat = className("android.view.View").text("1个营养液").findOnce();
                                                     var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(2).child(1);
-                                                } else {
+                                                } else if(className("android.view.View").textContains("个营养液").findOnce()!=null&&className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount()==3){
                                                     var zat = className("android.view.View").textContains("个营养液").findOnce();
                                                     var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(2).child(1);
+                                                }else if (className("android.view.View").text("1个营养液").findOnce() != null&&className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount()==2) {
+                                                    var zat = className("android.view.View").text("1个营养液").findOnce();
+                                                    var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(1).child(1);
+                                                } else if(className("android.view.View").textContains("个营养液").findOnce()!=null&&className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount()==2){
+                                                    var zat = className("android.view.View").textContains("个营养液").findOnce();
+                                                    var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(1).child(1);
                                                 }
                                                 if (za.clickable() == true) {
                                                     za.click();
