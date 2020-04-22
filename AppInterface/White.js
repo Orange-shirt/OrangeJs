@@ -595,6 +595,7 @@ function mainUi() {
         ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
         ui.Back.click(() => {
             clearInterval(JdtX);
+            android.webkit.WebStorage.getInstance().deleteAllData(); //清空WebView的localStorage
             ui.finish();
         });
         var JdtX = setInterval(() => {
