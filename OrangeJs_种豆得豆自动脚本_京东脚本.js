@@ -300,21 +300,21 @@ toastLog("等待无障碍权限开启……\n您必须手动授予本软件无�
 auto.waitFor();
 toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
 if (files.exists("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt") == true) {
-    try{
-    let z = files.read("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
-    if (z == "吐司") {
-        var T = 0;
-    } else if (z == "日志") {
-        var T = 1;
-    } else {
-        toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
-        try {
-            files.remove("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
-        } catch (e) {
-            toastLog("删除“吐司or日志”文件失败！");
+    try {
+        let z = files.read("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
+        if (z == "吐司") {
+            var T = 0;
+        } else if (z == "日志") {
+            var T = 1;
+        } else {
+            toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
+            try {
+                files.remove("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
+            } catch (e) {
+                toastLog("删除“吐司or日志”文件失败！");
+            }
+            var T = 1;
         }
-        var T = 1;
-    }
     } catch (e) {
         if (T == null) {
             log("未授予存储权限或存储权限错误，默认开启悬浮日志");
@@ -735,14 +735,16 @@ function Justback() {
 
 if (T == 1) {
     log("使用“悬浮日志”");
-       function toastLog(message) {
+
+    function toastLog(message) {
         log(message);
         var myDate = new Date();
         ui.run(() => {
-            w.WZ.setText(myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() +"秒："+ message + "\n" + w.WZ.getText());
+            w.WZ.setText(myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒：" + message + "\n" + w.WZ.getText());
             return true;
         });
-    }var w = floaty.rawWindow(
+    }
+    var w = floaty.rawWindow(
         <card bg="#80000000">
             <vertical align="center">
                 <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
@@ -884,7 +886,7 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        if (B != null && B.child(0).child(0).child(0).childCount() == 2&&B.child(0).child(0).child(0).child(1).text() == "x1"|| B != null && B.child(0).child(0).child(0).childCount() == 3 && B.child(0).child(0).child(0).child(2).text() == "x1") { //每日签到任务
+        if (B != null && B.child(0).child(0).child(0).childCount() == 2 && B.child(0).child(0).child(0).child(1).text() == "x1" || B != null && B.child(0).child(0).child(0).childCount() == 3 && B.child(0).child(0).child(0).child(2).text() == "x1") { //每日签到任务
             let a = B.child(0).bounds(); //每日签到按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“每日签到”按钮");
@@ -949,7 +951,7 @@ function DoTask() {
                 openInTask();
                 DoTask();
             }
-        } else if (B != null && B.child(0).child(0).child(0).childCount() == 3 && B.child(0).child(0).child(0).child(2).text() != "x1"||B != null && B.child(0).child(0).child(0).childCount() == 2&& B.child(0).child(0).child(0).child(1).text() != "x1") {
+        } else if (B != null && B.child(0).child(0).child(0).childCount() == 3 && B.child(0).child(0).child(0).child(2).text() != "x1" || B != null && B.child(0).child(0).child(0).childCount() == 2 && B.child(0).child(0).child(0).child(1).text() != "x1") {
             toastLog("今日“每日签到”任务已完成");
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
@@ -977,12 +979,12 @@ function DoTask() {
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
-                if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==3){
-                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
-                }else if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==2){
-                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 3) {
+                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
+                } else if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 2) {
+                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
                 }
-                if (C.child(0).child(0).child(0).childCount()==2&&C.child(0).child(0).child(0).child(1).text() == "x1"||C.child(0).child(0).child(0).childCount()==3&&C.child(0).child(0).child(0).child(2).text() == "x1") { //浏览店铺
+                if (C.child(0).child(0).child(0).childCount() == 2 && C.child(0).child(0).child(0).child(1).text() == "x1" || C.child(0).child(0).child(0).childCount() == 3 && C.child(0).child(0).child(0).child(2).text() == "x1") { //浏览店铺
                     toastLog("当前浏览店铺：" + C.child(0).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(0).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
@@ -1054,16 +1056,16 @@ function DoTask() {
                                                 sleep(3000);
                                             } else if (className("android.view.View").text("1个营养液").findOnce() != null || className("android.view.View").textContains("个营养液").findOnce() != null) {
                                                 var z = 0;
-                                                if (className("android.view.View").text("1个营养液").findOnce() != null&&className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount()==3) {
+                                                if (className("android.view.View").text("1个营养液").findOnce() != null && className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount() == 3) {
                                                     var zat = className("android.view.View").text("1个营养液").findOnce();
                                                     var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(2).child(1);
-                                                } else if(className("android.view.View").textContains("个营养液").findOnce()!=null&&className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount()==3){
+                                                } else if (className("android.view.View").textContains("个营养液").findOnce() != null && className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount() == 3) {
                                                     var zat = className("android.view.View").textContains("个营养液").findOnce();
                                                     var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(2).child(1);
-                                                }else if (className("android.view.View").text("1个营养液").findOnce() != null&&className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount()==2) {
+                                                } else if (className("android.view.View").text("1个营养液").findOnce() != null && className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount() == 2) {
                                                     var zat = className("android.view.View").text("1个营养液").findOnce();
                                                     var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(1).child(1);
-                                                } else if(className("android.view.View").textContains("个营养液").findOnce()!=null&&className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount()==2){
+                                                } else if (className("android.view.View").textContains("个营养液").findOnce() != null && className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount() == 2) {
                                                     var zat = className("android.view.View").textContains("个营养液").findOnce();
                                                     var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(1).child(1);
                                                 }
@@ -1132,12 +1134,12 @@ function DoTask() {
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
-                if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==3){
-                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
-                }else if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==2){
-                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 3) {
+                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
+                } else if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 2) {
+                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
                 }
-                if(C.child(1).child(0).child(0).childCount()==2&&C.child(1).child(0).child(0).child(1).text() == "x1"||C.child(1).child(0).child(0).childCount()==3&&C.child(1).child(0).child(0).child(2).text() == "x1"){ //挑选商品
+                if (C.child(1).child(0).child(0).childCount() == 2 && C.child(1).child(0).child(0).child(1).text() == "x1" || C.child(1).child(0).child(0).childCount() == 3 && C.child(1).child(0).child(0).child(2).text() == "x1") { //挑选商品
                     toastLog("当前挑选商品：" + C.child(1).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(1).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
@@ -1260,12 +1262,12 @@ function DoTask() {
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
-                if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==3){
-                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
-                }else if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==2){
-                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 3) {
+                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
+                } else if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 2) {
+                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
                 }
-                if(C.child(2).child(0).child(0).childCount()==2&&C.child(2).child(0).child(0).child(1).text() == "x1"||C.child(2).child(0).child(0).childCount()==3&&C.child(2).child(0).child(0).child(2).text() == "x1"){//关注频道
+                if (C.child(2).child(0).child(0).childCount() == 2 && C.child(2).child(0).child(0).child(1).text() == "x1" || C.child(2).child(0).child(0).childCount() == 3 && C.child(2).child(0).child(0).child(2).text() == "x1") { //关注频道
                     toastLog("当前关注频道：" + C.child(2).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(2).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
@@ -1401,7 +1403,7 @@ function DoTask() {
         openInTask();
         DoTask();
     }
-    if (B != null && B.child(3).child(0).child(0).childCount() == 2 || B != null && B.child(3).child(0).child(0).childCount() == 3 && B.child(3).child(0).child(0).child(2).text() == "x1") { //逛逛会场任务
+    if (B != null && B.child(3).child(0).child(0).childCount() == 2 && B.child(3).child(0).child(0).child(1).text() == "x1" || B != null && B.child(3).child(0).child(0).childCount() == 3 && B.child(3).child(0).child(0).child(2).text() == "x1") { //逛逛会场任务
         let a = B.child(3).bounds(); //逛逛会场按钮
         click(a.centerX(), a.centerY());
         toastLog("已尝试点击“逛逛会场”按钮");
@@ -1423,7 +1425,7 @@ function DoTask() {
             Justback();
             sleep(2000);
         }
-    } else if (B != null && B.child(3).child(0).child(0).childCount() == 3 && B.child(3).child(0).child(0).child(2).text() != "x1") {
+    } else if (B != null && B.child(3).child(0).child(0).childCount() == 2 && B.child(3).child(0).child(0).child(1).text() != "x1" || B != null && B.child(3).child(0).child(0).childCount() == 3 && B.child(3).child(0).child(0).child(2).text() != "x1") {
         toastLog("今日“逛逛会场”任务已完成");
         sleep(2000);
     } else {
@@ -1442,24 +1444,24 @@ function DoTask() {
         openInTask();
         DoTask();
     }
-    if (B != null && B.child(4).child(0).child(0).childCount() == 2 || B != null && B.child(4).child(0).child(0).childCount() == 3 && B.child(4).child(0).child(0).child(2).text() == "x1") { //更多任务任务
+    if (B.child(4) != null) {
         let a = B.child(4).bounds(); //更多任务按钮
         click(a.centerX(), a.centerY());
         toastLog("已尝试点击“更多任务”按钮");
         sleep(2000);
         try {
-            if(className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount()==3){
-            var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(2);
-            }else if(className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount()==2){
-            var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(1);
+            if (className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount() == 3) {
+                var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(2);
+            } else if (className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount() == 2) {
+                var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(1);
             }
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-            toastLog("错误5!找不到悬浮的更多任务按钮，正在重试中……");
+            toastLog("错误5X!找不到悬浮的更多任务按钮，正在重试中……");
             openInTask();
             DoTask();
         }
-        if (b != null && b.child(0).child(0).child(0).childCount() == 3 && b.child(0).child(0).child(0).child(2).text() == "x1") {
+        if (b != null && b.child(0).child(0).child(0).childCount() == 2 && b.child(0).child(0).child(0).child(1).text() == "x1" || b != null && b.child(0).child(0).child(0).childCount() == 3 && b.child(0).child(0).child(0).child(2).text() == "x1") {
             let c = b.child(0).bounds(); //金融双签
             click(c.centerX(), c.centerY());
             toastLog("已尝试点击“金融双签”按钮");
@@ -1476,14 +1478,16 @@ function DoTask() {
                 Justback();
                 sleep(2000);
             }
+        } else if (b == null) {
+            console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+            toastLog("无法找到“更多任务：金融双签”按钮，重新进入并重试中……");
+            openInTask();
+            DoTask();
         } else {
             toastLog("今日“更多任务：金融双签”已完成");
             sleep(2000);
         }
         toastLog("暂不支持完成“更多任务：评价商品”任务");
-    } else if (B != null && B.child(4).child(0).child(0).childCount() == 3 && B.child(4).child(0).child(0).child(2).text() != "x1") {
-        toastLog("今日“更多任务”任务已完成");
-        sleep(2000);
     } else {
         console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
         toastLog("无法找到“更多任务”按钮，重新进入并重试中……");
