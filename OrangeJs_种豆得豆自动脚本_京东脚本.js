@@ -1132,8 +1132,12 @@ function DoTask() {
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
+                if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==3){
                 var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
-                if (C.child(1).child(0).child(0).child(2).text() == "x1") { //挑选商品
+                }else if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==2){
+                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                }
+                if(C.child(1).child(0).child(0).childCount()==2&&C.child(1).child(0).child(0).child(1).text() == "x1"||C.child(1).child(0).child(0).childCount()==3&&C.child(1).child(0).child(0).child(2).text() == "x1"){ //挑选商品
                     toastLog("当前挑选商品：" + C.child(1).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(1).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
@@ -1256,8 +1260,12 @@ function DoTask() {
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
+                if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==3){
                 var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
-                if (C.child(2).child(0).child(0).child(2).text() == "x1") { //关注频道
+                }else if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==2){
+                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                }
+                if(C.child(2).child(0).child(0).childCount()==2&&C.child(2).child(0).child(0).child(1).text() == "x1"||C.child(2).child(0).child(0).childCount()==3&&C.child(2).child(0).child(0).child(2).text() == "x1"){//关注频道
                     toastLog("当前关注频道：" + C.child(2).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(2).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
