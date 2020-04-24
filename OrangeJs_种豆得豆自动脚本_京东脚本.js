@@ -949,7 +949,7 @@ function DoTask() {
                 openInTask();
                 DoTask();
             }
-        } else if (B != null && B.child(0).child(0).child(0).childCount() == 3 && B.child(0).child(0).child(0).child(2).text() != "x1") {
+        } else if (B != null && B.child(0).child(0).child(0).childCount() == 3 && B.child(0).child(0).child(0).child(2).text() != "x1"||B != null && B.child(0).child(0).child(0).childCount() == 2&& B.child(0).child(0).child(0).child(1).text() != "x1") {
             toastLog("今日“每日签到”任务已完成");
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
