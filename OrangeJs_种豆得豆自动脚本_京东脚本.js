@@ -982,7 +982,7 @@ function DoTask() {
                 }else if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==2){
                 var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
                 }
-                if (C.child(0).child(0).child(0).child(1).text() == "x1"||C.child(0).child(0).child(0).child(2).text() == "x1") { //浏览店铺
+                if (C.child(0).child(0).child(0).childCount()==2&&C.child(0).child(0).child(0).child(1).text() == "x1"||C.child(0).child(0).child(0).childCount()==3&&C.child(0).child(0).child(0).child(2).text() == "x1") { //浏览店铺
                     toastLog("当前浏览店铺：" + C.child(0).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(0).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
