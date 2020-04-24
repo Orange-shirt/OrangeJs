@@ -977,7 +977,11 @@ function DoTask() {
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
+                if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==3){
                 var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
+                }else if(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount()==2){
+                var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                }
                 if (C.child(0).child(0).child(0).child(2).text() == "x1") { //浏览店铺
                     toastLog("当前浏览店铺：" + C.child(0).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(0).child(0).child(0).child(1).text();
