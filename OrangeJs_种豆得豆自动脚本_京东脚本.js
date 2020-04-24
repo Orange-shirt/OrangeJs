@@ -1440,7 +1440,11 @@ function DoTask() {
         toastLog("已尝试点击“更多任务”按钮");
         sleep(2000);
         try {
+            if(className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount()==3){
             var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(2);
+            }else if(className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount()==2){
+            var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(1);
+            }
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toastLog("错误5!找不到悬浮的更多任务按钮，正在重试中……");
