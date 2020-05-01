@@ -745,7 +745,7 @@ function mainUi() {
             engines.execScript(mainUi());
         });
         ui.TESTcode.click(() => {
-            engines.execScript("代码测试台", "\"ui\";TESTCode();\n" + TESTCode.toString());
+           TESTCode();
         });
 
         function TESTCode() {
@@ -789,7 +789,7 @@ function mainUi() {
                 });
             });
             ui.Back.click(() => {
-                ui.finish();
+                AboutApp();
             });
         }
     }
