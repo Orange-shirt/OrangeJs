@@ -1199,8 +1199,13 @@ function DoTask() {
                                 toastLog("已尝试按顺序滑动至第" + i + "个卡片");
                                 sleep(2000);
                             } else {
-                                let d = C.child(0).child(0).child(2).child(0).child(0).child(0).child(4).child(0).child(0).bounds();
-                                click(d.centerX(), d.centerY());
+if (C.child(0).child(0).child(2).child(0).child(0).child(0).childCount() == 5) {
+                                    let d = C.child(0).child(0).child(2).child(0).child(0).child(0).child(4).child(0).child(0).bounds();
+                                    click(d.centerX(), d.centerY());
+                                } else if (C.child(0).child(0).child(2).child(0).child(0).child(0).childCount() == 4) {
+                                    let d = C.child(0).child(0).child(2).child(0).child(0).child(0).child(3).child(0).child(0).bounds();
+                                    click(d.centerX(), d.centerY());
+                                }
                                 toastLog("已尝试点击“选ta并关注”按钮");
                                 if (className("android.view.View").text("关注成功，获得1瓶营养液").findOne(3000) != null) {
                                     toastLog("关注成功，获得1瓶营养液");
