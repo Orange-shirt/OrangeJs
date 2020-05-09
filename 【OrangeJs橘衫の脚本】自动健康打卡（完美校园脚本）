@@ -26,7 +26,7 @@ log("*        神兽保佑,代码无bug");
 dialogs_js();
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.21"); //版本
+    var ScriptVersion = ("Beta1.22"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动健康打卡”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -510,6 +510,7 @@ window.action.setOnTouchListener(function(view, event) {
 });
 
 function onClick() {
+    device.cancelKeepingAwake();
     dialogs.alert("已停止运行脚本！");
     log("用户点击了停止按钮");
     exit();
@@ -545,6 +546,8 @@ if (T == 1) {
 function OpenInTask() {
     window.setPosition(100, 100);
     w.setPosition(0, device.height - 500);
+    device.wakeUp(); //唤醒设备
+    device.keepScreenOn(3600 * 1000); //屏幕常亮
     app.startActivity({
         action: "android.intent.action.VIEW", //此处可为其他值
         packageName: "com.newcapec.mobile.ncp",
@@ -619,8 +622,8 @@ function Daka() {
             className("android.widget.Button").clickable(true).text("提交信息").findOnce().click();
             toastLog("已尝试点击“提交信息”按钮");
             sleep(3000);
-            if (className("android.widget.Button").text("确认提交").findOnce() != null) {
-                className("android.widget.Button").text("确认提交").findOnce().click();
+            if (className("android.widget.Button").text("确认提交").findOnce() != null||text("确认提交").findOnce()!=null) {
+                text("确认提交").findOnce().click();
                 toastLog("已尝试点击“确认提交”按钮");
                 sleep(3000);
                 if (className("android.view.View").text("打卡成功").findOnce() != null) {
@@ -628,6 +631,7 @@ function Daka() {
                     let 时 = myDate.getHours();
                     let 分 = myDate.getMinutes();
                     let 秒 = myDate.getSeconds();
+                    device.cancelKeepingAwake();
                     alert("自动健康打卡\n脚本已运行完成");
                     let re = dialogs.confirm("要在明天" + 时 + ":" + 分 + "自动运行脚本吗？", "点击确定后，脚本会为您设定一个定时任务，只要您保留本软件的后台并保证本软件后台不被清除，脚本将在明天的" + 时 + ":" + 分 + "再次准时运行脚本。\n\n注意！脚本无法自动解锁任何锁屏，但锁屏却会严重影响脚本运行，除非您设置一个无密码锁屏（即灭屏后再次亮屏即是桌面）脚本才可正常运行！");
                     if (re == true) {
@@ -645,6 +649,7 @@ function Daka() {
                             console.info("现在是" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒\n脚本将在" + 时 + "时" + 分 + "分" + 秒 + "秒，准时运行！\n请保持手机处于工作状态，不要锁屏关机等");
                         }
                     } else {
+                        device.cancelKeepingAwake();
                         exit();
                     }
                 } else {
@@ -657,6 +662,7 @@ function Daka() {
                 let 时 = myDate.getHours();
                 let 分 = myDate.getMinutes();
                 let 秒 = myDate.getSeconds();
+                device.cancelKeepingAwake();
                 alert("自动健康打卡\n脚本已运行完成");
                 let re = dialogs.confirm("要在明天" + 时 + ":" + 分 + "自动运行脚本吗？", "点击确定后，脚本会为您设定一个定时任务，只要您保留本软件的后台并保证本软件后台不被清除，脚本将在明天的" + 时 + ":" + 分 + "再次准时运行脚本。\n\n注意！脚本无法自动解锁任何锁屏，但锁屏却会严重影响脚本运行，除非您设置一个无密码锁屏（即灭屏后再次亮屏即是桌面）脚本才可正常运行！");
                 if (re == true) {
@@ -674,6 +680,7 @@ function Daka() {
                         console.info("现在是" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒\n脚本将在" + 时 + "时" + 分 + "分" + 秒 + "秒，准时运行！\n请保持手机处于工作状态，不要锁屏关机等");
                     }
                 } else {
+                    device.cancelKeepingAwake();
                     exit();
                 }
             } else {
