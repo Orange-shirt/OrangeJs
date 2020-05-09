@@ -622,11 +622,55 @@ function Daka() {
             className("android.widget.Button").clickable(true).text("提交信息").findOnce().click();
             toastLog("已尝试点击“提交信息”按钮");
             sleep(3000);
-            if (className("android.widget.Button").text("确认提交").findOnce() != null||text("确认提交").findOnce()!=null) {
-                text("确认提交").findOnce().click();
+            for (var deng = 5; deng > 0; deng--) {
+                if (className("android.widget.Button").text("确认提交").findOnce() != null || text("确认提交").findOnce() != null || className("android.app.Dialog").findOnce() != null && className("android.app.Dialog").findOnce().child(2).child(1).text() == "确认提交") {
+                    var deng = 0;
+                    toastLog("已找到“确认提交”按钮");
+                } else if (className("android.view.View").text("打卡成功").findOnce() != null || text("打卡成功").findOnce() != null) {
+                    var deng = 0;
+                    toastLog("已找到“打卡成功”提示");
+                } else {
+                    toastLog("正在等待“确认提交”按钮加载，剩余" + deng + "秒……");
+                    sleep(1500);
+                }
+            }
+            if (className("android.widget.Button").text("确认提交").findOnce() != null || text("确认提交").findOnce() != null || className("android.app.Dialog").findOnce() != null && className("android.app.Dialog").findOnce().child(2).child(1).text() == "确认提交") {
+                if (className("android.widget.Button").text("确认提交").findOnce() != null) {
+                    let a = className("android.widget.Button").text("确认提交").findOnce();
+                    if (a.clickable() == true) {
+                        a.click();
+                    } else {
+                        let b = a.bounds();
+                        click(b.centerX(), b.centerY());
+                    }
+                } else if (text("确认提交").findOnce() != null) {
+                    let a = text("确认提交").findOnce();
+                    if (a.clickable() == true) {
+                        a.click();
+                    } else {
+                        let b = a.bounds();
+                        click(b.centerX(), b.centerY());
+                    }
+                } else if (className("android.app.Dialog").findOnce() != null && className("android.app.Dialog").findOnce().child(2).child(1).text() == "确认提交") {
+                    let a = className("android.app.Dialog").findOnce().child(2).child(1);
+                    if (a.clickable() == true) {
+                        a.click();
+                    } else {
+                        let b = a.bounds();
+                        click(b.centerX(), b.centerY());
+                    }
+                }
                 toastLog("已尝试点击“确认提交”按钮");
-                sleep(3000);
-                if (className("android.view.View").text("打卡成功").findOnce() != null) {
+                for (var deng = 5; deng > 0; deng--) {
+                    if (className("android.view.View").text("打卡成功").findOnce() != null || text("打卡成功").findOnce() != null) {
+                        var deng = 0;
+                        toastLog("已找到“打卡成功”提示");
+                    } else {
+                        toastLog("正在等待“打卡成功”提示加载，剩余" + deng + "秒……");
+                        sleep(1500);
+                    }
+                }
+                if (className("android.view.View").text("打卡成功").findOnce() != null || text("打卡成功").findOnce() != null) {
                     var myDate = new Date();
                     let 时 = myDate.getHours();
                     let 分 = myDate.getMinutes();
@@ -657,7 +701,7 @@ function Daka() {
                     OpenInTask();
                     Daka();
                 }
-            } else if (className("android.view.View").text("打卡成功").findOnce() != null) {
+            } else if (className("android.view.View").text("打卡成功").findOnce() != null || text("打卡成功").findOnce() != null) {
                 var myDate = new Date();
                 let 时 = myDate.getHours();
                 let 分 = myDate.getMinutes();
