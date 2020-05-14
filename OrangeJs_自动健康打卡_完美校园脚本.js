@@ -84,7 +84,6 @@ function dialogs_js() {
         }, 1000);
         toastLog("悬浮窗权限已开启！");
         context_Manualstate = 0;
-        Set_Back_way();
         DS();
         device.keepScreenDim();
     } else if (i == 4) {
