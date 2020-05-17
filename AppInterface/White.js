@@ -237,30 +237,14 @@ function mainUi() {
                 </vertical>
             </card>
         </linear>
-        <text text="关注疫情" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" margin="28 5 0 0"/>
-        <card h="1" margin="5 5" cardCornerRadius="1dp"
-        cardElevation="0dp" gravity="center_vertical">
-        <View bg="#FF832FFD" h="*" w="*"/>//分割线颜色1
-        <View bg="#FF4395FB" h="*" marginRight="63"/>//分割线颜色2
-        <View bg="#FF32F558" h="*" marginRight="126"/>//分割线颜色3
-        <View bg="#FFFCD830" h="*" marginRight="189"/>//分割线颜色4
-        <View bg="#FFFE8E2D" h="*" marginRight="252"/>//分割线颜色5
-        <View bg="#FFFC3032" h="*" marginRight="315"/>//分割线颜色6
-        </card>
-        <Horizo​​ntalScrollView>
-            <linear orientation="horizontal" align="left" margin="0">
-                //实时疫情
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
-                    <img id="YQ" src="https://x0.ifengimg.com/ucms/2020_04/83F0FE405D7CD5A09187BE43FD34FBB7316556AA_w750_h300.jpg" scaleType="fitXY" bg="?attr/selectableItemBackground" clickable="true"/>
-                </card>
-                
-                //驰援疫情
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
-                    <img id="JK" src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/PicsArt_02-22-05.46.41.jpg" scaleType="fitXY"/>
-                </card>
-            </linear>
-        </Horizo​​ntalScrollView>
-        
+        <vertical gravity="center" margin="0 10 0 0">
+        <View w="50" h="5" bg="#FC3032"/>
+        <View w="50" h="5" bg="#FE8E2D"/>
+        <View w="50" h="5" bg="#FCD830"/>
+        <View w="50" h="5" bg="#32F558"/>
+        <View w="50" h="5" bg="#4395FB"/>
+        <View w="50" h="5" bg="#832FFD"/>
+        </vertical>
         <linear orientation="horizontal" align="center" margin="5 15 5 15" >
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
             <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
@@ -614,67 +598,6 @@ function mainUi() {
         }, 100);
     }
 
-    ui.YQ.click(() => {
-        engines.execScript("疫情动态", "\"ui\";YQ();" + YQ.toString());
-    });
-
-    function YQ() {
-        events.removeAllListeners();
-        ui.statusBarColor("#BDBDBD"); //通知栏颜色
-        ui.layout(
-            <frame w="*" h="*">
-                <vertical align="left">
-                    <linear orientation="horizontal" align="left" margin="0" >
-                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
-                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
-                        <text text="疫情动态" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
-                        <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
-                    </linear>
-                    <progressbar id="progress" style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"layout_gravity="top"/>
-                    <ScrollView>
-                        <webview id="webview"/>
-                    </ScrollView>
-                    
-                </vertical>
-                <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-                margin="16" layout_gravity="bottom|right" tint="#ffffff" />
-            </frame>
-        );
-        ui.webview.loadUrl("https://news.ifeng.com/c/special/7tPlDSzDgVk");
-        ui.Back.click(() => {
-            clearInterval(Jdt);
-            ui.finish();
-            //engines.execScript(mainUi());
-        });
-
-        var Jdt = setInterval(() => {
-            var P = ui.webview.getProgress(); //获取进度
-            var T = ui.webview.getTitle(); //获取网页标题
-            if (P == 100) {
-                ui.run(() => {
-                    ui.progress.setVisibility(8);
-                });
-            } else {
-                ui.run(() => {
-                    ui.progress.setVisibility(0);
-                    ui.progress.progress = P;
-                });
-            };
-        }, 100);
-    }
-
-    ui.JK.click(() => {
-        engines.execScript("向武汉市慈善总会捐款", "JK();\n" + JK.toString());
-    });
-
-    function JK() {
-        var JKs = dialogs.confirm("向武汉市慈善总会捐款\n为武汉加油！", "根据武汉市慈善总会公开的信息，武汉市慈善总会现接受社会捐款且支持支付宝转账\n武汉市慈善总会官方支付宝账户为\nWuhancishan@sina.com\n\n在您点击确定后您将跳转浏览器页面，请在浏览器打开之后若出现“打开支付宝”请点击后将会跳转支付界面，支付时根据武汉市慈善总会官方要求请备注“疫情防控捐款”\n\n在您点击确定后脚本会自动设置剪切板为捐款备注文字（请在捐款时粘贴）并跳转浏览器");
-        if (JKs == true) {
-            setClip("疫情防控捐款");
-            toastLog("请在浏览器中打开");
-            app.openUrl("https://ds.alipay.com/?from=mobilecodec&scheme=alipays%3A%2F%2Fplatformapi%2Fstartapp%3FsaId%3D10000007%26clientVersion%3D3.7.0.0718%26qrcode%3Dhttps%253A%252F%252Fqr.alipay.com%252Fap7zk606x2ul8gb1d4%253F_s%253Dweb-other");
-        }
-    }
 
     function AboutApp() {
         events.removeAllListeners();
