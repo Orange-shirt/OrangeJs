@@ -1415,7 +1415,7 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        if (B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).text() == "x1" || B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() != "android.widget.ImageView") { //逛逛会场任务
+        if (B != null && B.child(3).childCount() == 2 || B.child(3).child(1).child(0).text() == "x1" || B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() != "android.widget.ImageView") { //逛逛会场任务
             let a = B.child(3).bounds(); //逛逛会场按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“逛逛会场”按钮");
@@ -1437,7 +1437,7 @@ function DoTask() {
                 Justback();
                 sleep(2000);
             }
-        } else if (B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() == "android.widget.ImageView") {
+        } else if (B.child(3).childCount()>2||B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() == "android.widget.ImageView") {
             toastLog("今日“逛逛会场”任务已完成");
             sleep(2000);
         } else {
