@@ -69,7 +69,7 @@ function mainUi() {
                 <vertical padding="10 0" h="auto">
                 </vertical>
                 <View bg="{{context_FctextBg}}" h="*" w="*"/>//悬浮窗权限中的卡片颜色
-                <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto"/>
+                <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto" bg="?attr/selectableItemBackground" clickable="true"/>
                 
             </card>
         </card>
@@ -102,54 +102,51 @@ function mainUi() {
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
                                 <View w="*" h="*" bg="#FFAB91"/>
-                                <text id="ScriptTwo" text="自动集福气" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                                <text id="ScriptTwo" text="自动集福气" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                            </card>
+                        </linear>
+                    </vertical>
+                </card>
+                //拼多多脚本
+                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
+                    <View bg="#FF1744" h="*" w="*"/>
+                    <vertical padding="0 0" h="auto">
+                        <linear orientation="horizontal" align="left" margin="0">
+                            <img src="http://image.coolapk.com/apk_logo/2019/1218/11/512E5B9B4E8B4A7-32664-o_1dsbg23j210ns1ee110u7evuevcr-uid-1871800@512x512.png" w="40" h="40" margin="20 20 0 0"/>
+                            <vertical padding="0 0" h="auto">
+                                <text text="拼多多" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐4.90.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            </vertical>
+                        </linear>
+                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#90FF1744"/>
+                                <text id="ScriptTen" text="多多果园自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
                 </card>
                 
-                //京东脚本
-                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#F44336" h="*" w="*"/>
-                    <vertical padding="0 0" h="auto">
-                        <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
-                            <vertical padding="0 0" h="auto">
-                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐8.4.4版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                            </vertical>
-                        </linear>
-                        <Horizo​​ntalScrollView>
-                            <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                                
-                                <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20">
-                                    <View w="*" h="*" bg="#EF9A9A"/>
-                                    <text id="ScriptSix" text="自动宠汪汪" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
-                                </card>
-                            </linear>
-                        </Horizo​​ntalScrollView>
-                    </vertical>
-                </card>
             </linear>
         </Horizo​​ntalScrollView>
         
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0">
-                //快手脚本
+                //微博脚本
                 <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#FF9800" h="*" w="*"/>
+                    <View bg="#FF8F00" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://pp.myapp.com/ma_icon/0/icon_2608_1578902227/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="http://pp.myapp.com/ma_icon/0/icon_9926_1579487446/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="快手" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐6.11.5.12256版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="微博" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐9.9.3版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#FFCC80"/>
-                                <text id="ScriptFive" text="自动选号赚红心" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0"/>
+                                <View w="*" h="*" bg="#90FF8F00"/>
+                                <text id="ScriptNine" text="微博任务自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
@@ -162,50 +159,100 @@ function mainUi() {
                             <img src="http://pp.myapp.com/ma_icon/0/icon_10910_1577346809/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
                                 <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐7.0.4版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="推荐7.0.10版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
                                 <View w="*" h="*" bg="#A5D6A7"/>
-                                <text id="ScriptOne" text="自动看团课" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0"/>
+                                <text id="ScriptOne" text="自动微信发消息" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </linear>
                     </vertical>
                 </card>
             </linear>
         </Horizo​​ntalScrollView>
-        <text text="关注疫情" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28"/>
-        <card h="1" margin="5 5" cardCornerRadius="1dp"
-        cardElevation="0dp" gravity="center_vertical">
-        <View bg="#FF832FFD" h="*" w="*"/>//分割线颜色1
-        <View bg="#FF4395FB" h="*" marginRight="63"/>//分割线颜色2
-        <View bg="#FF32F558" h="*" marginRight="126"/>//分割线颜色3
-        <View bg="#FFFCD830" h="*" marginRight="189"/>//分割线颜色4
-        <View bg="#FFFE8E2D" h="*" marginRight="252"/>//分割线颜色5
-        <View bg="#FFFC3032" h="*" marginRight="315"/>//分割线颜色6
-        </card>
+        
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0">
-                //实时疫情
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
-                    <img id="YQ" src="https://x0.ifengimg.com/ucms/2020_04/83F0FE405D7CD5A09187BE43FD34FBB7316556AA_w750_h300.jpg" scaleType="fitXY"/>
+                //京东脚本
+                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+                    <View bg="#F44336" h="*" w="*"/>
+                    <vertical padding="0 0" h="auto">
+                        <linear orientation="horizontal" align="left" margin="0">
+                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
+                            <vertical padding="0 0" h="auto">
+                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐8.4.6版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            </vertical>
+                        </linear>
+                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                            <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
+                                <View bg="#EF9A9A"/>
+                                <spinner id="sp_Jd1" entries="种豆得豆自动脚本|自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
+                            </card>
+                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
+                        </linear>
+                    </vertical>
                 </card>
-                
-                //驰援疫情
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="5dp" align="left" margin="5 5 5 5">
-                    <img id="JK" src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/PicsArt_01-27-12.26.54.jpg" scaleType="fitXY"/>
+                //完美校园脚本
+                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
+                    <View bg="#F0FD7034" h="*" w="*"/>
+                    <vertical padding="0 0" h="auto">
+                        <linear orientation="horizontal" align="left" margin="0">
+                            <img src="https://android-artworks.25pp.com/fs08/2020/01/22/8/110_30d36bea2b970bda26ac38b5eb3a2935_con_130x130.png" w="40" h="40" margin="20 20 0 0"/>
+                            <vertical padding="0 0" h="auto">
+                                <text text="完美校园" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                                <text text="推荐5.1.2版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            </vertical>
+                        </linear>
+                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#80FD7034"/>
+                                <text id="ScriptTwe" text="自动健康打卡" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                            </card>
+                        </linear>
+                    </vertical>
                 </card>
             </linear>
         </Horizo​​ntalScrollView>
+        <linear orientation="horizontal" align="left" margin="0">
+            //QQ脚本
+            <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
+                <View bg="#F02196F3" h="*" w="*"/>
+                <vertical padding="0 0" h="auto">
+                    <linear orientation="horizontal" align="left" margin="0">
+                        <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="40" h="40" margin="20 20 0 0"/>
+                        <vertical padding="0 0" h="auto">
+                            <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
+                            <text text="推荐8.2.7版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                        </vertical>
+                    </linear>
+                    <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
+                        <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                            <View w="*" h="*" bg="#90CAF9"/>
+                            <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                        </card>
+                    </linear>
+                </vertical>
+            </card>
+        </linear>
         
         <linear orientation="horizontal" align="center" margin="5 15 5 15" >
-            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center"/>
-            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" />
-            <text id="JoinQQGroup" text="加入QQ群" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" />
-            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" />
-            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center"/>
+            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
+            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
+            <text id="JoinQQGroup" text="加入QQ群" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
+            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
+            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
         </linear>
+        <vertical gravity="center" margin="0 0 0 0">
+        <View w="*" h="5" bg="#FC3032"/>
+        <View w="*" h="5" bg="#FE8E2D"/>
+        <View w="*" h="5" bg="#FCD830"/>
+        <View w="*" h="5" bg="#32F558"/>
+        <View w="*" h="5" bg="#4395FB"/>
+        <View w="*" h="5" bg="#832FFD"/>
+        </vertical>
         </vertical>
         </frame>
         </ScrollView>
@@ -236,7 +283,7 @@ function mainUi() {
         engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
     });
     ui.AboutApp.click(() => {
-        engines.execScript(AboutApp());
+        AboutApp();
     });
 
 
@@ -248,7 +295,7 @@ function mainUi() {
             },
             cancelable: false
         }).show();
-        var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E3%80%90OrangeJs%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E7%9C%8B%E5%9B%A2%E8%AF%BE%20%E9%A2%84%E8%A7%88%E7%89%881.0"; //第一个脚本网址
+        var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%BE%AE%E4%BF%A1%E5%8F%91%E6%B6%88%E6%81%AF_%E5%BE%AE%E4%BF%A1%E8%84%9A%E6%9C%AC.js"; //第一个脚本网址
         var res_script = http.get(ScriptOne_Url, {
             headers: {
                 'Accept-Language': 'en-us,en;q=0.5',
@@ -260,16 +307,105 @@ function mainUi() {
             DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
-            engines.execScript("自动看团课", OrangeJs);
+            engines.execScript("自动微信发消息", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
 
-    ui.ScriptSix.click(() => {
-        engines.execScript("自动宠汪汪", "runScriptSix();\n" + runScriptSix.toString());
+    ui.R_JD.click(() => {
+        if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
+            engines.execScript("东东农场自动脚本", "runScriptEight();\n" + runScriptEight.toString());
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
+            engines.execScript("自动宠汪汪", "runScriptSix();\n" + runScriptSix.toString());
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
+            engines.execScript("种豆得豆自动脚本", "runScriptFourt();\n" + runScriptFourt.toString());
+        }
     });
+
+    function runScriptEight() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptEight_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E4%B8%9C%E4%B8%9C%E5%86%9C%E5%9C%BA%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第八个脚本网址
+        var res_script = http.get(ScriptEight_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("东东农场自动脚本", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
+    function runScriptFourt() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptFourt_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E7%A7%8D%E8%B1%86%E5%BE%97%E8%B1%86%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第十四个脚本网址
+        var res_script = http.get(ScriptFourt_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("种豆得豆自动脚本", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
+    ui.ScriptTen.click(() => {
+        engines.execScript("多多果园自动脚本", "runScriptTen();\n" + runScriptTen.toString());
+    });
+
+    function runScriptTen() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptTen_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E5%A4%9A%E5%A4%9A%E6%9E%9C%E5%9B%AD%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E6%8B%BC%E5%A4%9A%E5%A4%9A%E8%84%9A%E6%9C%AC.js"; //第十个脚本网址
+        var res_script = http.get(ScriptTen_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("多多果园自动脚本", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
 
     function runScriptSix() {
         var DownJs = dialogs.build({
@@ -296,11 +432,11 @@ function mainUi() {
             dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
-    ui.ScriptFive.click(() => {
-        engines.execScript("自动集卡收红心", "runScriptFive();\n" + runScriptFive.toString());
+    ui.ScriptNine.click(() => {
+        engines.execScript("微博任务自动脚本", "runScriptNine();\n" + runScriptNine.toString());
     });
 
-    function runScriptFive() {
+    function runScriptNine() {
         var DownJs = dialogs.build({
             title: "正在请求脚本中……",
             progress: {
@@ -308,8 +444,8 @@ function mainUi() {
             },
             cancelable: false
         }).show();
-        var ScriptFive_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E8%87%AA%E5%8A%A8%E9%9B%86%E5%8D%A1%E6%94%B6%E7%BA%A2%E5%BF%83_OrangeJs.js"; //第五个脚本网址
-        var res_script = http.get(ScriptFive_Url, {
+        var ScriptNine_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E5%BE%AE%E5%8D%9A%E4%BB%BB%E5%8A%A1%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E5%BE%AE%E5%8D%9A%E8%84%9A%E6%9C%AC.js"; //第九个脚本网址
+        var res_script = http.get(ScriptNine_Url, {
             headers: {
                 'Accept-Language': 'en-us,en;q=0.5',
                 'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
@@ -319,7 +455,7 @@ function mainUi() {
             DownJs.dismiss();
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
-            engines.execScript("自动集卡收红心", OrangeJs);
+            engines.execScript("微博任务自动脚本", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
@@ -355,12 +491,72 @@ function mainUi() {
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
+    ui.ScriptTwe.click(() => {
+        engines.execScript("自动健康打卡", "runScriptTwe();\n" + runScriptTwe.toString());
+    });
+
+    function runScriptTwe() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptTwe_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1_%E5%AE%8C%E7%BE%8E%E6%A0%A1%E5%9B%AD%E8%84%9A%E6%9C%AC.js"; //第十二个脚本网址
+        var res_script = http.get(ScriptTwe_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动健康打卡", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+
+    ui.ScriptThi.click(() => {
+        engines.execScript("自动动态点赞", "runScriptThi();\n" + runScriptThi.toString());
+    });
+
+    function runScriptThi() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%8A%A8%E6%80%81%E7%82%B9%E8%B5%9E_QQ%E8%84%9A%E6%9C%AC.js"; //第十三个脚本网址
+        var res_script = http.get(ScriptTwo_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动动态点赞", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
 
     ui.TalktoDeveloper.click(() => {
-        engines.execScript(TalkToDeveloper());
+        engines.execScript("问题反馈", "\"ui\";TalkToDeveloper();" + TalkToDeveloper.toString());
     });
 
     function TalkToDeveloper() {
+        ui.statusBarColor("#BDBDBD"); //通知栏颜色
         events.removeAllListeners();
         ui.layout(
             <frame w="*" h="*">
@@ -384,7 +580,8 @@ function mainUi() {
         ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
         ui.Back.click(() => {
             clearInterval(JdtX);
-            engines.execScript(mainUi());
+            android.webkit.WebStorage.getInstance().deleteAllData(); //清空WebView的localStorage
+            ui.finish();
         });
         var JdtX = setInterval(() => {
             var P = ui.webview.getProgress(); //获取进度
@@ -402,65 +599,6 @@ function mainUi() {
         }, 100);
     }
 
-    ui.YQ.click(() => {
-        engines.execScript(YQ());
-    });
-
-    function YQ() {
-        events.removeAllListeners();
-        ui.layout(
-            <frame w="*" h="*">
-                <vertical align="left">
-                    <linear orientation="horizontal" align="left" margin="0" >
-                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
-                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
-                        <text text="疫情动态" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
-                        <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
-                    </linear>
-                    <progressbar id="progress" style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"layout_gravity="top"/>
-                    <ScrollView>
-                        <webview id="webview"/>
-                    </ScrollView>
-                    
-                </vertical>
-                <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-                margin="16" layout_gravity="bottom|right" tint="#ffffff" />
-            </frame>
-        );
-        ui.webview.loadUrl("https://news.ifeng.com/c/special/7tPlDSzDgVk");
-        ui.Back.click(() => {
-            clearInterval(Jdt);
-            engines.execScript(mainUi());
-        });
-
-        var Jdt = setInterval(() => {
-            var P = ui.webview.getProgress(); //获取进度
-            var T = ui.webview.getTitle(); //获取网页标题
-            if (P == 100) {
-                ui.run(() => {
-                    ui.progress.setVisibility(8);
-                });
-            } else {
-                ui.run(() => {
-                    ui.progress.setVisibility(0);
-                    ui.progress.progress = P;
-                });
-            };
-        }, 100);
-    }
-
-    ui.JK.click(() => {
-        engines.execScript("向武汉市慈善总会捐款", "JK();\n" + JK.toString());
-    });
-
-    function JK() {
-        var JKs = dialogs.confirm("向武汉市慈善总会捐款\n为武汉加油！", "根据武汉市慈善总会公开的信息，武汉市慈善总会现接受社会捐款且支持支付宝转账\n武汉市慈善总会官方支付宝账户为\nWuhancishan@sina.com\n\n在您点击确定后您将跳转浏览器页面，请在浏览器打开之后若出现“打开支付宝”请点击后将会跳转支付界面，支付时根据武汉市慈善总会官方要求请备注“疫情防控捐款”\n\n在您点击确定后脚本会自动设置剪切板为捐款备注文字（请在捐款时粘贴）并跳转浏览器");
-        if (JKs == true) {
-            setClip("疫情防控捐款");
-            toastLog("请在浏览器中打开");
-            app.openUrl("https://qr.alipay.com/ap7zk606x2ul8gb1d4");
-        }
-    }
 
     function AboutApp() {
         events.removeAllListeners();
@@ -510,16 +648,16 @@ function mainUi() {
             <View bg="#FF4285F4" h="*" w="*"/>//卡片颜色1
             </card>
             <text id="Ttip"  color="{{context_textColor}}" textSize="15" textStyle="normal" marginTop="5" gravity="center"/>
-            <card  h="5" margin="0 10 0 100" cardCornerRadius="0dp"
+            <card  h="5" margin="0 10 0 10" cardCornerRadius="0dp"
             cardElevation="0dp" gravity="center_vertical">
             <vertical padding="0 0" h="auto">
             </vertical>
             <View bg="#FF9D41F9" h="*" w="*"/>//卡片颜色1
             </card>
-            
+            <button id="TESTcode" text="代码测试台" color="#FFFFFF" bg="#90A4AE" textSize="15" textStyle="normal" margin="5 5 5 200" gravity="center"/>
             </vertical>
             <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-            margin="16" layout_gravity="bottom|right" tint="#ffffff" />
+            margin="0 0 15 120" layout_gravity="bottom|right" tint="#ffffff" />
             </frame>
             </ScrollView>
         );
@@ -530,6 +668,54 @@ function mainUi() {
         ui.Back.click(() => {
             engines.execScript(mainUi());
         });
+        ui.TESTcode.click(() => {
+           TESTCode();
+        });
+
+        function TESTCode() {
+            ui.statusBarColor("#000000"); //通知栏颜色
+            ui.layout(
+                <vertical bg="#000000">
+                    <!-- lines属性用来设置输入框的行数 -->
+                    <text text="请输入要运行的代码" textColor="white" textSize="16sp" marginTop="16"/>
+                    <input id="x" color="#FFFFFF" lines="20"/>
+                    //水平线性布局
+                    <linear orientation="horizontal" align="center" margin="5 0 5 0" weightSum="10">
+                        <button id="ru" layout_weight="5" h="50" bg="#4CAF50" color="#FFFFFF" marginRight="5" text="运行" gravity="center"/>
+                        <button id="qk" layout_weight="5" h="50" bg="#FF5722" color="#FFFFFF" marginLeft="5" text="清空" gravity="center"/>
+                    </linear>
+                    <button id="con" w="*" h="50" bg="#2196F3" color="#FFFFFF" margin="5 5 5 0" text="打开控制台" gravity="center"/>
+                    <text text="* 使用 Auto.js(4.0) 作为脚本引擎" color="#9e9e9e" textSize="10" marginTop="10"gravity="center"/>
+                    <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
+                    margin="10" layout_gravity="bottom|right" tint="#ffffff" />
+                </vertical>
+
+            );
+            ui.ru.on("click", () => {
+                var text = ui.x.getText();
+                if (text != "") {
+                    engines.execScript("测试运行", text);
+                } else {
+                    toastLog("没有输入任何代码");
+                }
+            });
+            ui.qk.on("click", () => {
+                dialogs.confirm("您确定要清空吗？", "此操作将无法撤销").then(value => {
+                    if (value == true) {
+                        ui.x.text("");
+                        toastLog("已清空");
+                    }
+                })
+            });
+            ui.con.on("click", () => {
+                threads.start(function() {
+                    console.show();
+                });
+            });
+            ui.Back.click(() => {
+                AboutApp();
+            });
+        }
     }
 
 
@@ -579,7 +765,7 @@ function mainUi() {
     });
 
 
-    ui.changeColor.click(() => { //更换主题(仅可更换10次)
+    ui.changeColor.click(() => {
         if (context_DayOrNight == 1) {
             context_DayOrNight = 0;
         } else {
@@ -590,13 +776,12 @@ function mainUi() {
 
 
     ui.Privacy_Security.click(() => {
-        engines.execScript(SP());
+        engines.execScript("隐私与安全", "\"ui\";SP();" + SP.toString());
     });
 
 }
 
 function SP() {
-
     events.removeAllListeners();
     ui.statusBarColor("#2196F3"); //通知栏颜色
     //Not pink色是#DFC8C6
@@ -638,7 +823,7 @@ function SP() {
 
     });
     ui.back.click(() => {
-        engines.execScript(mainUi());
+        ui.finish();
     });
     ui.Q1.click(() => { //为什么要收集信息？
         ui.A1.text("");
