@@ -237,14 +237,7 @@ function mainUi() {
                 </vertical>
             </card>
         </linear>
-        <vertical gravity="center" margin="0 10 0 0">
-        <View w="50" h="5" bg="#FC3032"/>
-        <View w="50" h="5" bg="#FE8E2D"/>
-        <View w="50" h="5" bg="#FCD830"/>
-        <View w="50" h="5" bg="#32F558"/>
-        <View w="50" h="5" bg="#4395FB"/>
-        <View w="50" h="5" bg="#832FFD"/>
-        </vertical>
+        
         <linear orientation="horizontal" align="center" margin="5 15 5 15" >
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
             <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
@@ -252,6 +245,14 @@ function mainUi() {
             <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
             <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
         </linear>
+        <vertical gravity="center" margin="0 0 0 0">
+        <View w="*" h="5" bg="#FC3032"/>
+        <View w="*" h="5" bg="#FE8E2D"/>
+        <View w="*" h="5" bg="#FCD830"/>
+        <View w="*" h="5" bg="#32F558"/>
+        <View w="*" h="5" bg="#4395FB"/>
+        <View w="*" h="5" bg="#832FFD"/>
+        </vertical>
         </vertical>
         </frame>
         </ScrollView>
