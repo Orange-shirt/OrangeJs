@@ -1233,7 +1233,7 @@ function RunJs() {
                                 }
                             }
                             while (className("android.widget.ListView").id("com.tencent.mm:id/by6").findOnce() != null) { //7.0.14到顶部
-                                if (id("com.tencent.mm:id/by1").text("没有文件").findOnce() != null) {
+                            if (id("com.tencent.mm:id/by1").text("没有文件").findOnce() != null) {
                                     toastLog("停止！没有文件！");
                                     break;
                                 } else {
@@ -1301,7 +1301,7 @@ function RunJs() {
                                     sleep(2000);
                                     break;
                                 } else {
-                                    className("android.widget.ListView").id("com.tencent.mm:id/by6]").scrollDown();
+                                    className("android.widget.ListView").id("com.tencent.mm:id/by6").scrollDown();
                                     sleep(100);
                                 }
                             }
