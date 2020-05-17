@@ -35,7 +35,7 @@ function getPackageVersion(packageName) {
     }
 }
 var InstalledVersion = getPackageVersion("com.tencent.mm");
-var SupportVersion = ["7.0.13Play版", "7.0.13", "7.0.12Play版", "7.0.12", "7.0.10", "7.0.4"]
+var SupportVersion = ["7.0.14","7.0.13Play版", "7.0.13", "7.0.12Play版", "7.0.12", "7.0.10", "7.0.4"]
 
 var Each = SupportVersion.length;
 var While = 1;
@@ -115,7 +115,7 @@ function RunJs() {
     }
 
     function dialogs_js() {
-        var ScriptVersion = ("Beta1.22"); //版本
+        var ScriptVersion = ("Beta1.23"); //版本
         log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
         var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🛠 修改脚本配置", "🔙 返回方法设置", "💬 吐司/日志切换"]
         var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动微信发消息”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1101,6 +1101,25 @@ function RunJs() {
                                 }
                             }
                         }
+                    }else if (className("android.widget.ImageButton").id("com.tencent.mm:id/aks").findOnce() != null) { //7.0.14
+                        className("android.widget.ImageButton").id("com.tencent.mm:id/aks").findOnce().click();
+                        toastLog("已尝试点击“加号菜单”按钮");
+                        sleep(2000);
+                        if (id("com.tencent.mm:id/pb").text("文件").findOnce() != null) {
+                            id("com.tencent.mm:id/pb").text("文件").findOnce().parent().parent().parent().click();
+                            toastLog("已尝试点击“文件”按钮");
+                            sleep(2000);
+                            if (id("com.tencent.mm:id/by2").findOnce() != null) {
+                                id("com.tencent.mm:id/by2").findOnce().click();
+                                toastLog("已尝试点击“切换存储目录”按钮");
+                                sleep(2000);
+                                if (id("com.tencent.mm:id/cvt").text("手机存储").findOnce() != null) {
+                                    id("com.tencent.mm:id/cvt").text("手机存储").findOnce().parent().click();
+                                    toastLog("已尝试点击“手机存储”按钮");
+                                    sleep(2000);
+                                }
+                            }
+                        }
                     } else if (id("com.tencent.mm:id/ajs").findOnce() != null && id("com.tencent.mm:id/ajs").findOnce().text() != "") { //7.0.12
                         id("com.tencent.mm:id/ajs").findOnce().setText("");
                         toastLog("已尝试清除输入框文字");
@@ -1113,6 +1132,11 @@ function RunJs() {
                         SendTAF(context_XX);
                     } else if (id("com.tencent.mm:id/ak7").findOnce() != null && id("com.tencent.mm:id/ak7").findOnce().text() != "") { //7.0.13&7.0.13play
                         id("com.tencent.mm:id/ak7").findOnce().setText("");
+                        toastLog("已尝试清除输入框文字");
+                        sleep(2000);
+                        SendTAF(context_XX);
+                    }else if (id("com.tencent.mm:id/al_").findOnce() != null && id("com.tencent.mm:id/al_").findOnce().text() != "") { //7.0.14
+                        id("com.tencent.mm:id/al_").findOnce().setText("");
                         toastLog("已尝试清除输入框文字");
                         sleep(2000);
                         SendTAF(context_XX);
@@ -1208,7 +1232,24 @@ function RunJs() {
                                     }
                                 }
                             }
-
+                            while (className("android.widget.ListView").id("com.tencent.mm:id/by6").findOnce() != null) { //7.0.14到顶部
+                                if (id("com.tencent.mm:id/by1").text("没有文件").findOnce() != null) {
+                                    toastLog("停止！没有文件！");
+                                    break;
+                                } else {
+                                    var m = className("android.widget.TextView").id("com.tencent.mm:id/cvt").findOnce().text();
+                                    for (let l = 3; l > 0; l--) {
+                                        className("android.widget.ListView").id("com.tencent.mm:id/by6").scrollUp();
+                                        sleep(100);
+                                    }
+                                    if (className("android.widget.TextView").id("com.tencent.mm:id/cvt").findOnce().text() == m) {
+                                        toastLog("已到达顶部");
+                                        break;
+                                    } else {
+                                        className("android.widget.ListView").id("com.tencent.mm:id/by6").scrollUp();
+                                    }
+                                }
+                            }
                             while (className("android.widget.ListView").id("com.tencent.mm:id/bus").findOnce() != null) { //7.0.12
                                 if (className("android.widget.TextView").id("com.tencent.mm:id/cqq").text(A).findOnce() != null) {
                                     className("android.widget.TextView").id("com.tencent.mm:id/cqq").text(A).findOnce().parent().parent().click();
@@ -1253,11 +1294,21 @@ function RunJs() {
                                     sleep(100);
                                 }
                             }
+                            while (className("android.widget.ListView").id("com.tencent.mm:id/by6").findOnce() != null) { //7.0.14
+                                if (className("android.widget.TextView").id("com.tencent.mm:id/cvt").text(A).findOnce() != null) {
+                                    className("android.widget.TextView").id("com.tencent.mm:id/cvt").text(A).findOnce().parent().parent().click();
+                                    toastLog("已尝试点击：" + A + "（文件夹）");
+                                    sleep(2000);
+                                    break;
+                                } else {
+                                    className("android.widget.ListView").id("com.tencent.mm:id/by6]").scrollDown();
+                                    sleep(100);
+                                }
+                            }
                         } else {
                             var A = str;
                             log(A);
-
-                        }
+                            }
                         var g = null;
                         var n = str.search("/");
                     }
@@ -1335,6 +1386,24 @@ function RunJs() {
                             }
                         }
                     }
+                    while (className("android.widget.ListView").id("com.tencent.mm:id/by6").findOnce() != null) { //7.0.14到顶部
+                                if (id("com.tencent.mm:id/by1").text("没有文件").findOnce() != null) {
+                                    toastLog("停止！没有文件！");
+                                    break;
+                                } else {
+                                    var m = className("android.widget.TextView").id("com.tencent.mm:id/cvt").findOnce().text();
+                                    for (let l = 3; l > 0; l--) {
+                                        className("android.widget.ListView").id("com.tencent.mm:id/by6").scrollUp();
+                                        sleep(100);
+                                    }
+                                    if (className("android.widget.TextView").id("com.tencent.mm:id/cvt").findOnce().text() == m) {
+                                        toastLog("已到达顶部");
+                                        break;
+                                    } else {
+                                        className("android.widget.ListView").id("com.tencent.mm:id/by6").scrollUp();
+                                    }
+                                }
+                            }
                     while (className("android.widget.ListView").id("com.tencent.mm:id/bus").findOnce() != null) { //7.0.12选中文件
                         if (className("android.widget.TextView").id("com.tencent.mm:id/cqq").text(A).findOnce() != null) {
                             className("android.widget.TextView").id("com.tencent.mm:id/cqq").text(A).findOnce().parent().parent().child(2).click();
@@ -1376,6 +1445,17 @@ function RunJs() {
                             break;
                         } else {
                             className("android.widget.ListView").id("com.tencent.mm:id/bw3").scrollDown();
+                            sleep(100);
+                        }
+                    }
+                    while (className("android.widget.ListView").id("com.tencent.mm:id/by6").findOnce() != null) { //7.0.14选中文件
+                        if (className("android.widget.TextView").id("com.tencent.mm:id/cvt").text(A).findOnce() != null) {
+                            className("android.widget.TextView").id("com.tencent.mm:id/cvt").text(A).findOnce().parent().parent().child(2).click();
+                            toastLog("已尝试勾选：" + A + "（文件）");
+                            sleep(2000);
+                            break;
+                        } else {
+                            className("android.widget.ListView").id("com.tencent.mm:id/by6").scrollDown();
                             sleep(100);
                         }
                     }
@@ -1455,6 +1535,25 @@ function RunJs() {
                             log("脚本已运行完成");
                             exit();
                         }
+                    }//7.0.14↓
+                    if (className("android.widget.TextView").id("com.tencent.mm:id/cvt").text(str).findOnce() != null && id("com.tencent.mm:id/ch").findOnce() != null) {
+                        id("com.tencent.mm:id/ch").findOnce().click();
+                        toastLog("已尝试点击发送文件按钮");
+                        sleep(3000);
+                        if (className("android.widget.Button").id("com.tencent.mm:id/doz").text("发送").findOnce() != null) {
+                            className("android.widget.Button").id("com.tencent.mm:id/doz").text("发送").findOnce().click();
+                            toastLog("已尝试点击“确认发送”按钮");
+                            sleep(2000);
+                            if (className("android.widget.ImageView").id("com.tencent.mm:id/dn").desc("返回").findOnce() != null) {
+                                className("android.widget.ImageView").id("com.tencent.mm:id/dn").desc("返回").findOnce().parent().click();
+                                toastLog("已尝试点击返回聊天界面");
+                                sleep(2000);
+                            }
+                            device.cancelKeepingAwake();
+                            dialogs.alert("自动微信发消息：\n脚本已运行完成");
+                            log("脚本已运行完成");
+                            exit();
+                        }
                     }
                 } else {
                     toastLog("您的设备中没有此文件！请检查文件路径：" + str)
@@ -1513,6 +1612,21 @@ function RunJs() {
                         sleep(2000);
                         OpenWXcontent();
                     }
+                }else if (className("android.widget.EditText").id("com.tencent.mm:id/al_").findOnce() != null) { //7.0.14
+                    className("android.widget.EditText").id("com.tencent.mm:id/al_").findOnce().setText(str);
+                    sleep(2000);
+                    if (id("com.tencent.mm:id/anv").findOnce() != null) {
+                        id("com.tencent.mm:id/anv").findOnce().click();
+                        toastLog("已点击“发送”按钮");
+                        device.cancelKeepingAwake();
+                        dialogs.alert("自动微信发消息：\n脚本已运行完成");
+                        log("脚本已运行完成");
+                        exit();
+                    } else {
+                        toastLog("当前界面找不到消息发送按钮，正在重新进入搜寻……");
+                        sleep(2000);
+                        OpenWXcontent();
+                    }
                 } else {
                     toastLog("当前非正确的联系界面，正在重新进入搜寻……");
                     sleep(2000);
@@ -1555,6 +1669,10 @@ function RunJs() {
                     sleep(2000);
                 } else if (id("com.tencent.mm:id/cl9").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.13play
                     id("com.tencent.mm:id/cl9").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
+                    toastLog("已尝试点击“通讯录”按钮");
+                    sleep(2000);
+                } else if (id("com.tencent.mm:id/cns").className("android.widget.TextView").text("通讯录").findOnce() != null) { //7.0.14
+                    id("com.tencent.mm:id/cns").className("android.widget.TextView").text("通讯录").findOnce().parent().parent().click();
                     toastLog("已尝试点击“通讯录”按钮");
                     sleep(2000);
                 } else if (currentPackage() == "com.tencent.mm") {
@@ -1695,7 +1813,7 @@ function RunJs() {
                     }
                 } else if (className("android.view.ViewGroup").id("com.tencent.mm:id/bn").findOnce() != null && id("com.tencent.mm:id/cj6").findOnce() == null &&
                     //附加条件↓（之后所有版本的主页搜索按钮ID查找为null）
-                    id("com.tencent.mm:id/dka").desc("搜索").findOnce() == null && id("com.tencent.mm:id/dkd").desc("搜索").findOnce() == null) { //7.0.12
+                    id("com.tencent.mm:id/dka").desc("搜索").findOnce() == null && id("com.tencent.mm:id/dkd").desc("搜索").findOnce() == null&&id("com.tencent.mm:id/dn7").desc("搜索").findOnce() == null) { //7.0.12
                     log("7.0.12");
                     className("android.view.ViewGroup").id("com.tencent.mm:id/bn").findOnce().child(1).child(0).click();
                     toastLog("已尝试点击“搜索”按钮");
@@ -1732,7 +1850,7 @@ function RunJs() {
                     }
                 } else if (className("android.view.ViewGroup").id("com.tencent.mm:id/bn").findOnce() != null &&
                     //附加条件↓（之后所有版本的主页搜索按钮ID查找为null）
-                    id("com.tencent.mm:id/dka").desc("搜索").findOnce() == null && id("com.tencent.mm:id/dkd").desc("搜索").findOnce() == null) { //7.0.12Play C41
+                    id("com.tencent.mm:id/dka").desc("搜索").findOnce() == null && id("com.tencent.mm:id/dkd").desc("搜索").findOnce() == null&&id("com.tencent.mm:id/dn7").desc("搜索").findOnce() == null) { //7.0.12Play C41
                     log("7.0.12 play")
                     className("android.view.ViewGroup").id("com.tencent.mm:id/bn").findOnce().child(1).child(0).click();
                     toastLog("已尝试点击“搜索”按钮");
@@ -1817,6 +1935,41 @@ function RunJs() {
                             sleep(2000);
                             if (id("com.tencent.mm:id/akv").findOnce() != null) {
                                 id("com.tencent.mm:id/akv").findOnce().click();
+                                toastLog("已尝试点击“公众号输入按钮”");
+                                sleep(2000);
+                            } else {
+                                log("非公众号对象");
+                            } //发送
+                            SendTAF(context_XX);
+                        } else {
+                            var WrongDX = 0;
+                            WrongDX++;
+                            toastLog("当前界面未找到设定的联系名称，正在重新进入搜寻……");
+                            if (WrongDX >= 3) {
+                                dialogs.alert("无法找到配置的联系名称，请确认您输入的联系名称是否正确", "在输入联系名称时请确保完全正确，您可重新运行脚本并在脚本配置中修改联系名称配置");
+                                exit();
+                            }
+                            OpenWXcontent();
+                        }
+                    } else {
+                        toastLog("当前界面未找到搜索框，正在重新进入搜寻……");
+                        OpenWXcontent();
+                    }
+                }else if (className("android.widget.RelativeLayout").id("com.tencent.mm:id/dn7").clickable(true).desc("搜索").findOnce() != null) { //7.0.14
+                    log("7.0.14");
+                    className("android.widget.RelativeLayout").id("com.tencent.mm:id/dn7").findOnce().click();
+                    toastLog("已尝试点击“搜索”按钮");
+                    sleep(2000);
+                    if (className("android.widget.EditText").id("com.tencent.mm:id/bhn").findOnce() != null) {
+                        className("android.widget.EditText").id("com.tencent.mm:id/bhn").findOnce().setText(context_DX);
+                        toastLog("已设置搜索文字")
+                        sleep(2000);
+                        if (id("com.tencent.mm:id/gbv").text(context_DX).findOnce() != null) {
+                            id("com.tencent.mm:id/gbv").text(context_DX).findOnce().parent().parent().parent().parent().click();
+                            toastLog("已尝试点击设定的“联系对象”")
+                            sleep(2000);
+                            if (id("com.tencent.mm:id/aly").findOnce() != null) {
+                                id("com.tencent.mm:id/aly").findOnce().click();
                                 toastLog("已尝试点击“公众号输入按钮”");
                                 sleep(2000);
                             } else {
