@@ -1543,6 +1543,12 @@ function DoTask() {
                 let c = D.child(1).bounds(); //评价商品
                 click(c.centerX(), c.centerY());
                 toastLog("已尝试点击“更多任务：评价商品”按钮");
+                if (className("android.widget.TextView").text("去评价").findOne(3000) != null) {
+                    let a = className("android.widget.TextView").text("去评价").findOnce().bounds();
+                    click(a.centerX(), a.centerY());
+                    toastLog("已尝试点击蒙版“去评价”按钮");
+                    sleep(2000);
+                }
                 sleep(3000);
                 for (let i = 1; i > 0; i--) {
                     if (id("com.jd.lib.evaluatecenter:id/abm").className("android.widget.TextView").clickable(true).text("评价").findOnce() != null) {
