@@ -1262,7 +1262,8 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        if (B != null && B.child(1).childCount() == 2 || B.child(1).child(0).childCount() == 2 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() != "android.widget.ImageView") { //关注任务    let a = B.child(1).bounds(); //关注任务按钮
+        if (B != null && B.child(1).childCount() == 2 || B.child(1).child(0).childCount() == 2 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() != "android.widget.ImageView") { //关注任务    
+            let a = B.child(1).bounds(); //关注任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
