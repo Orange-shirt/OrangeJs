@@ -982,7 +982,7 @@ function DoTask() {
             DoTask();
         }
         //浏览店铺
-        if (B != null && B.child(1).childCount() == 2||B.child(1).child(0).childCount()==2||B.child(1).child(0).childCount()>=2&&B.child(1).child(0).child(1).childCount()>=1&&B.child(1).child(0).child(1).child(0).className()!="android.widget.ImageView") { //关注任务
+        if (B != null && B.child(1).childCount() == 2 || B.child(1).child(0).childCount() == 2 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() != "android.widget.ImageView") { //关注任务
             let a = B.child(1).bounds(); //关注任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“关注任务”按钮");
@@ -1123,7 +1123,7 @@ function DoTask() {
                 sleep(3000);
             }
 
-        } else if (B != null && B.child(1).childCount() ==3||B.child(1).child(0).childCount()>=2&&B.child(1).child(0).child(1).childCount()>=1&&B.child(1).child(0).child(1).child(0).className()=="android.widget.ImageView") {
+        } else if (B != null && B.child(1).childCount() == 3 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() == "android.widget.ImageView") {
             toastLog("今日“关注任务：浏览店铺”任务已完成");
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
@@ -1142,7 +1142,7 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        if (B != null && B.child(1).childCount() == 2||B.child(1).child(0).childCount()==2||B.child(1).child(0).childCount()>=2&&B.child(1).child(0).child(1).childCount()>=1&&B.child(1).child(0).child(1).child(0).className()!="android.widget.ImageView") { //关注任务
+        if (B != null && B.child(1).childCount() == 2 || B.child(1).child(0).childCount() == 2 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() != "android.widget.ImageView") { //关注任务
             let a = B.child(1).bounds(); //关注任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“关注任务”按钮");
@@ -1243,7 +1243,7 @@ function DoTask() {
                 toastLog("已尝试点击关闭“关注任务”按钮");
                 sleep(3000);
             }
-        } else if (B != null && B.child(1).childCount() ==3||B.child(1).child(0).childCount()>=2&&B.child(1).child(0).child(1).childCount()>=1&&B.child(1).child(0).child(1).child(0).className()=="android.widget.ImageView") {
+        } else if (B != null && B.child(1).childCount() == 3 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() == "android.widget.ImageView") {
             toastLog("今日“关注任务：挑选商品”任务已完成");
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
@@ -1262,7 +1262,8 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        if (B != null && B.child(1).childCount() == 2||B.child(1).child(0).childCount()==2||B.child(1).child(0).childCount()>=2&&B.child(1).child(0).child(1).childCount()>=1&&B.child(1).child(0).child(1).child(0).className()!="android.widget.ImageView") { //关注任务    let a = B.child(1).bounds(); //关注任务按钮
+        if (B != null && B.child(1).childCount() == 2 || B.child(1).child(0).childCount() == 2 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() != "android.widget.ImageView") { //关注任务    
+            let a = B.child(1).bounds(); //关注任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
@@ -1396,7 +1397,7 @@ function DoTask() {
                 toastLog("已尝试点击关闭“关注任务”按钮");
                 sleep(3000);
             }
-        } else if (B != null && B.child(1).childCount() ==3||B.child(1).child(0).childCount()>=2&&B.child(1).child(0).child(1).childCount()>=1&&B.child(1).child(0).child(1).child(0).className()=="android.widget.ImageView") {
+        } else if (B != null && B.child(1).childCount() == 3 || B.child(1).child(0).childCount() >= 2 && B.child(1).child(0).child(1).childCount() >= 1 && B.child(1).child(0).child(1).child(0).className() == "android.widget.ImageView") {
             toastLog("今日“关注任务：关注频道”任务已完成");
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
@@ -1415,7 +1416,7 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        if (B != null && B.child(3).childCount() == 2 ||B.child(3).childCount() >2&&B.child(3).child(1).child(0).text() == "x1" || B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() != "android.widget.ImageView") { //逛逛会场任务
+        if (B != null && B.child(3).childCount() == 2 || B.child(3).childCount() > 2 && B.child(3).child(1).child(0).text() == "x1" || B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() != "android.widget.ImageView") { //逛逛会场任务
             let a = B.child(3).bounds(); //逛逛会场按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“逛逛会场”按钮");
@@ -1437,7 +1438,7 @@ function DoTask() {
                 Justback();
                 sleep(2000);
             }
-        } else if (B.child(3).childCount()>2||B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() == "android.widget.ImageView") {
+        } else if (B.child(3).childCount() > 2 || B != null && B.child(3).child(1).childCount() == 1 && B.child(3).child(1).child(0).className() == "android.widget.ImageView") {
             toastLog("今日“逛逛会场”任务已完成");
             sleep(2000);
         } else {
@@ -1456,7 +1457,7 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        log("更多任务控件："+B.child(B.childCount()-1),"\n更多任务按钮子控件数："+B.child(B.childCount()-1).childCount(),"\n更多任务子控件："+B.child(B.childCount()-1).children()+"\n任务按钮数量："+B.childCount());
+        log("更多任务控件：" + B.child(B.childCount() - 1), "\n更多任务按钮子控件数：" + B.child(B.childCount() - 1).childCount(), "\n更多任务子控件：" + B.child(B.childCount() - 1).children() + "\n任务按钮数量：" + B.childCount());
         //更多任务：金融双签
         if (B.child(4) != null && B.child(4).childCount() == 2 || B.child(4) != null && B.child(4).childCount() > 2 && B.child(4).child(1).child(0).className() != "android.widget.ImageView") {
             let a = B.child(4).bounds(); //更多任务按钮
@@ -1499,8 +1500,8 @@ function DoTask() {
             } else {
                 toastLog("“更多任务：金融双签”已完成");
                 let a = B.child(4).bounds(); //更多任务按钮
-            click(a.centerX(), a.centerY());
-            toastLog("已尝试点击关闭“更多任务”按钮");
+                click(a.centerX(), a.centerY());
+                toastLog("已尝试点击关闭“更多任务”按钮");
                 sleep(2000);
             }
         } else if (B.child(4) != null && B.child(4).childCount() > 2 && B.child(4).child(1).child(0).className() == "android.widget.ImageView") {
@@ -1568,9 +1569,9 @@ function DoTask() {
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         toastLog("当前已无任何可评价商品");
-                        }
+                    }
                 }
                 toastLog("“更多任务：评价商品”任务已完成，尝试返回种豆得豆界面");
                 if (desc("返回").clickable(true).findOnce() != null) {
@@ -1590,7 +1591,7 @@ function DoTask() {
             openInTask();
             DoTask();
         }
-        if (B.child(4) != null && B.child(4).childCount() ==2||B.child(4) != null && B.child(4).childCount() >2&& B.child(4).child(1).child(0).className() != "android.widget.ImageView") {
+        if (B.child(4) != null && B.child(4).childCount() == 2 || B.child(4) != null && B.child(4).childCount() > 2 && B.child(4).child(1).child(0).className() != "android.widget.ImageView") {
             let a = B.child(4).bounds(); //更多任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击关闭“更多任务”按钮");
