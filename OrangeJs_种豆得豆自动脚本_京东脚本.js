@@ -1456,6 +1456,7 @@ function DoTask() {
             openInTask();
             DoTask();
         }
+        log("更多任务控件："+B.child(B.childCount()-1),"\n更多任务按钮子控件数："+B.child(B.childCount()-1).childCount(),"\n更多任务子控件："+B.child(B.childCount()-1).children()+"\n任务按钮数量："+B.childCount());
         if (B.child(4) != null && B.child(4).childCount() == 2 || B.child(4) != null && B.child(4).childCount() > 2 && B.child(4).child(1).child(0).className() != "android.widget.ImageView") {
             let a = B.child(4).bounds(); //更多任务按钮
             click(a.centerX(), a.centerY());
