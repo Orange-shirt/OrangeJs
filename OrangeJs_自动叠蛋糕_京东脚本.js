@@ -949,7 +949,9 @@ function DoTask() {
             }
             if (a >= B.childCount()) {
                 toastLog("当前所有任务已完成");
-                let a = className("android.view.View").scrollable(true).depth(Bd).findOnce().child(1).child(0);
+                var B = className("android.view.View").text("做任务领金币").findOne().parent().parent().parent().parent().child(4).child(0).child(0).child(0).child(1).child(1).child(0);
+                
+                //let a = className("android.view.View").scrollable(true).depth(Bd).findOnce().child(1).child(0);
                 if (a.clickable() == true) {
                     a.click();
                     toastLog("已尝试盲点“关闭蒙版”按钮");
