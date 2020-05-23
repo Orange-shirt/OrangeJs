@@ -991,7 +991,7 @@ function DoTask() {
                 }
                 log(B.child(a).child(1).child(0).child(0).text(), B.child(a).child(1).child(0).clickable());
                 var RwButtonText = B.child(a).child(1).child(0).child(0).text();
-                if (RwTitle.search("邀请好友助力") < 0 && RwTitle.search("所在战队成员") < 0 && RwTitle.search("AR") < 0 && now != xz) {
+                if (RwTitle.search("邀请好友助力") < 0 && RwTitle.search("所在战队成员") < 0 && now != xz) {
                     if (B.child(a).child(1).child(0).clickable() == true) {
                         B.child(a).child(1).child(0).click();
                         toastLog("已尝试盲点" + B.child(a).child(1).child(0).child(0).text() + "按钮");
@@ -1110,6 +1110,16 @@ function DoTask() {
                                     sleep(3000);
                                 }
                                 break;
+                            } else if (currentActivity() == "com.jd.lib.matrixar.ArFaceActivity" && className("android.webkit.WebView").text("AR叠蛋糕").findOnce() != null &&
+                                className("android.webkit.WebView").text("AR叠蛋糕").findOnce().childCount() > 0 && className("android.webkit.WebView").text("AR叠蛋糕").findOnce().child(0).childCount() > 4 &&
+                                className("android.webkit.WebView").text("AR叠蛋糕").findOnce().child(0).child(4).childCount() > 1 && className("android.webkit.WebView").text("AR叠蛋糕").findOnce().child(0).child(4).child(2).id() == "pop-start-btn") {
+                                className("android.webkit.WebView").text("AR叠蛋糕").findOnce().child(0).child(4).child(2).click();
+                                toastLog("已尝试点击“开始AR游戏”按钮");
+                                sleep(2000);
+                                for (let deng = 20; deng > 0; deng--) {
+                                    toastLog("正在完成“AR游戏”任务，剩余" + deng + "秒……");
+                                    sleep(1200);
+                                }
                             } else if (textContains("恭喜完成").findOnce() != null) {
                                 toastLog(textContains("恭喜完成").findOnce().text());
                                 break;
