@@ -939,7 +939,7 @@ function DoTask() {
         var a = 0;
         while (true) {
             try {
-                var B = className("android.view.View").text("做任务领金币").findOne().parent().parent().parent().parent().child(4).child(0).child(0).child(0).child(4).child(0).child(0);
+                var B = className("android.view.View").text("做任务领金币").findOnce().parent().parent().parent().parent().child(4).child(0).child(0).child(0).child(4).child(0).child(0);
                 log("B控件为：" + B);
             } catch (e) {
                 console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
