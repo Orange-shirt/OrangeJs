@@ -25,6 +25,10 @@ function setNightMode() {
     context_Logo = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" //白色Logo
 }
 mainUi();
+if (getStorageData("ScriptIntroduce", "Zdddg") == undefined) {
+    engines.execScript("“自动叠蛋糕”展示", "\"ui\";ZdddgShow();" + ZdddgShow.toString());
+}
+
 
 function mainUi() {
     if (context_DayOrNight == 1) {
@@ -189,7 +193,7 @@ function mainUi() {
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
                             <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
                                 <View bg="#EF9A9A"/>
-                                <spinner id="sp_Jd1" entries="种豆得豆自动脚本|自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
+                                <spinner id="sp_Jd1" entries="自动叠蛋糕|种豆得豆自动脚本|自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
                             </card>
                             <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
                         </linear>
@@ -246,12 +250,12 @@ function mainUi() {
             <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
         </linear>
         <vertical gravity="center" margin="0 0 0 0">
-        <View w="*" h="5" bg="#FC3032"/>
-        <View w="*" h="5" bg="#FE8E2D"/>
-        <View w="*" h="5" bg="#FCD830"/>
-        <View w="*" h="5" bg="#32F558"/>
-        <View w="*" h="5" bg="#4395FB"/>
-        <View w="*" h="5" bg="#832FFD"/>
+            <View w="*" h="5" bg="#FC3032"/>
+            <View w="*" h="5" bg="#FE8E2D"/>
+            <View w="*" h="5" bg="#FCD830"/>
+            <View w="*" h="5" bg="#32F558"/>
+            <View w="*" h="5" bg="#4395FB"/>
+            <View w="*" h="5" bg="#832FFD"/>
         </vertical>
         </vertical>
         </frame>
@@ -315,12 +319,14 @@ function mainUi() {
     }
 
     ui.R_JD.click(() => {
-        if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
+        if (ui.sp_Jd1.getSelectedItemPosition() == 3) {
             engines.execScript("东东农场自动脚本", "runScriptEight();\n" + runScriptEight.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
             engines.execScript("自动宠汪汪", "runScriptSix();\n" + runScriptSix.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
             engines.execScript("种豆得豆自动脚本", "runScriptFourt();\n" + runScriptFourt.toString());
+        }else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
+            engines.execScript("自动叠蛋糕", "runScriptFifvt();\n" + runScriptFifvt.toString());
         }
     });
 
@@ -370,6 +376,32 @@ function mainUi() {
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("种豆得豆自动脚本", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
+    
+    function runScriptFifvt() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptFifvt_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%8F%A0%E8%9B%8B%E7%B3%95_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第十五个脚本网址
+        var res_script = http.get(ScriptFifvt_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动叠蛋糕", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
@@ -669,7 +701,7 @@ function mainUi() {
             engines.execScript(mainUi());
         });
         ui.TESTcode.click(() => {
-           TESTCode();
+            TESTCode();
         });
 
         function TESTCode() {
@@ -834,4 +866,102 @@ function SP() {
             "");
     });
 
+}
+//保存本地数据
+function setStorageData(name, key, value) {
+    const storage = storages.create(name);
+    storage.put(key, value);
+};
+
+//读取本地数据
+function getStorageData(name, key) {
+    const storage = storages.create(name);
+    if (storage.contains(key)) {
+        return storage.get(key, "");
+    };
+    //默认返回undefined
+};
+
+//删除本地数据
+function delStorageData(name, key) {
+    const storage = storages.create(name);
+    if (storage.contains(key)) {
+        storage.remove(key);
+    };
+};
+
+function ZdddgShow() {
+    function setStorageData(name, key, value) {
+        const storage = storages.create(name);
+        storage.put(key, value);
+    };
+
+    ui.layout(
+        <scroll bg="#FFFFFF">
+            <frame id="main" background="#FFFFFF">//全局背景颜色
+                <vertical align="center" margin="0">
+                    <linear orientation="horizontal" gravity="center" margin="0 30 0 0">
+                        <linear w="30" h="30">
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png"/>
+                        </linear>
+                        <linear w="80" h="28" margin="5 0 0 0">
+                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png"/>
+                        </linear>
+                    </linear>
+                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_05-22-08.02.08.jpg" layout_gravity="center" w="420" h="300"/>
+                    <text id="title" textSize="25" textStyle="bold" textColor="#000000" layout_gravity="center" gravity="left" margin="40 5"/>
+                    <text id="a" textSize="10" textColor="#000000" textStyle="italic" layout_gravity="center" gravity="left" margin="42 5"/>
+                    <text id="ScriptIntroduce" textSize="13" textColor="#000000" layout_gravity="center" gravity="left" margin="42 5"/>
+                    <text id="OpenSource" autoLink="web" color="#000000" textSize="13" layout_gravity="center" textStyle="normal" gravity="left"margin="42 5"/>
+                    <card h="42" cardCornerRadius="5dp" cardElevation="0dp" layout_gravity="center" margin="35"cardBackgroundColor="#03A9F4">
+                        <text id="IKnowIt" text="我知道了" textStyle="bold" textColor="#FFFFFF" gravity="center" textSize="12sp" foreground="?attr/selectableItemBackground" clickable="true"/>
+                    </card>
+                </vertical>
+            </frame>
+        </scroll>
+    );
+    importPackage(android.text);
+    importPackage(android.text.style);
+
+    function highlightText(text, start, length, color) {
+        if (!(typeof(text) == 'object' && text.getClass().getName() == 'android.text.SpannableStringBuilder')) {
+            text = new SpannableStringBuilder(text);
+        }
+        text.setSpan(new ForegroundColorSpan(colors.parseColor(color)), start, start + length, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        return text;
+    }
+
+    function highlightView(view, start, length, color) {
+        view.setText(highlightText(view.text(), start, length, color));
+    }
+
+    function markSearch(view, keywords, color) {
+        let textStr = view.text();
+        let text = textStr;
+        let i = -1;
+        while (i < textStr.length - 1) {
+            i = textStr.indexOf(keywords, i + 1);
+            if (i >= 0) {
+                text = highlightText(text, i, keywords.length, color);
+            } else {
+                break;
+            }
+        }
+        view.setText(text);
+        return text;
+    }
+    ui.IKnowIt.click(() => {
+        setStorageData("ScriptIntroduce", "Zdddg", "true");
+        ui.finish();
+    });
+    ui.title.setText("新脚本！\n“自动叠蛋糕”来啦～");
+    markSearch(ui.title, "新脚本！", "#FE1743");
+    ui.a.setText("Orange Js（橘衫の脚本）现Github Star数已突破100大关！\n感谢各位用户支持，现在本项目迎来第15个脚本“自动叠蛋糕”，欢迎体验");
+    ui.ScriptIntroduce.setText("“自动叠蛋糕”脚本介绍：\n• 支持安卓7及以上系统全分辨率的设备无需ROOT权限运行！\n" +
+        "• 支持自动打开京东app并跳转活动页面完成各项任务并支持识别当前任务数量，任务标题，任务完成状态，蛋糕层数，金币数等多项任务数据\n" +
+        "• 支持自动叠蛋糕及各项任务，并支持识别错误界面自动跳转，防误触，定时/计时运行等功能\n" +
+        "• 支持显示一目了然的“悬浮日志”与“吐司（Toast）”切换，脚本的各项操作尽在掌握\n" +
+        "• 本脚本依然开源，您可自行在项目页中查看脚本代码以了解更多脚本信息");
+    markSearch(ui.ScriptIntroduce, "无需ROOT", "#FE1743");
+    ui.OpenSource.text("项目页：\nGithub：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
 }
