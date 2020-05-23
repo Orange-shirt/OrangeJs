@@ -942,23 +942,41 @@ function DoTask() {
                 var B = className("android.view.View").text("做任务领金币").findOnce().parent().parent().parent().parent().child(4).child(0).child(0).child(0).child(4).child(0).child(0);
                 log("B控件为：" + B);
             } catch (e) {
-                console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-                toastLog("当前未处于活动界面，正在重新进入活动：" + e);
-                openInTask();
-                DoTask();
+                try {
+                    var B = className("android.view.View").text("任务每日0点刷新，记得每天都来看看哦~").findOnce().parent().child(4).child(0).child(0);
+                } catch (e) {
+                    console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+                    toastLog("当前未处于活动界面，正在重新进入活动：" + e);
+                    openInTask();
+                    DoTask();
+                }
             }
             if (a >= B.childCount()) {
                 toastLog("当前所有任务已完成");
-                let a = className("android.view.View").text("做任务领金币").findOne().parent().parent().parent().parent().child(4).child(0).child(0).child(0).child(1).child(0);
-                if (a.clickable() == true) {
-                    a.click();
-                    toastLog("已尝试盲点“关闭蒙版”按钮");
-                    sleep(2000);
-                } else {
-                    let b = a.bounds();
-                    click(b.centerX(), b.centerY());
-                    toastLog("已尝试点击“关闭蒙版”按钮");
-                    sleep(2000);
+                try {
+                    let a = className("android.view.View").text("做任务领金币").findOne().parent().parent().parent().parent().child(4).child(0).child(0).child(0).child(1).child(0);
+                    if (a.clickable() == true) {
+                        a.click();
+                        toastLog("已尝试盲点“关闭蒙版”按钮");
+                        sleep(2000);
+                    } else {
+                        let b = a.bounds();
+                        click(b.centerX(), b.centerY());
+                        toastLog("已尝试点击“关闭蒙版”按钮");
+                        sleep(2000);
+                    }
+                } catch (e) {
+                    let a = className("android.view.View").text("任务每日0点刷新，记得每天都来看看哦~").findOnce().parent().child(1).child(0);
+                    if (a.clickable() == true) {
+                        a.click();
+                        toastLog("已尝试盲点“关闭蒙版”按钮");
+                        sleep(2000);
+                    } else {
+                        let b = a.bounds();
+                        click(b.centerX(), b.centerY());
+                        toastLog("已尝试点击“关闭蒙版”按钮");
+                        sleep(2000);
+                    }
                 }
                 break;
             } else {
@@ -1159,10 +1177,12 @@ function DoTask() {
 
         function CakeUp() {
             while (true) {
-                if (className("android.view.View").text("当前蛋糕：").findOnce() != null && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().childCount() > 4 && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).id() == "goldElfin" && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).child(0).child(1).text() == "点我得金币") {
-                    className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).click();
-                    toastLog("已尝试盲点“点我得金币”按钮");
-                    sleep(2000);
+                for (let i = 10; i > 0; i--) {
+                    if (className("android.view.View").text("当前蛋糕：").findOnce() != null && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().childCount() > 4 && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).id() == "goldElfin" && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).child(0).child(1).text() == "点我得金币") {
+                        className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).click();
+                        toastLog("已尝试盲点“点我得金币”按钮");
+                        sleep(500);
+                    }
                 }
                 if (className("android.view.View").text("继续叠蛋糕 分红包").findOnce() != null) {
                     if (className("android.view.View").text("继续叠蛋糕 分红包").findOnce().clickable() == true) {
