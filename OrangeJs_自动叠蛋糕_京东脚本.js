@@ -1120,6 +1120,7 @@ function DoTask() {
                                     toastLog("正在完成“AR游戏”任务，剩余" + deng + "秒……");
                                     sleep(1200);
                                 }
+                                break;
                             } else if (textContains("恭喜完成").findOnce() != null) {
                                 toastLog(textContains("恭喜完成").findOnce().text());
                                 break;
