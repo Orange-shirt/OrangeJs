@@ -940,6 +940,7 @@ function DoTask() {
         while (true) {
             try {
                 var B = className("android.view.View").text("做任务领金币").findOne().parent().parent().parent().parent().child(4).child(0).child(0).child(0).child(4).child(0).child(0);
+                log("B控件为：" + B);
             } catch (e) {
                 console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
                 toastLog("当前未处于活动界面，正在重新进入活动：" + e);
@@ -1112,7 +1113,7 @@ function DoTask() {
                         } else if (currentActivity() == "com.jd.lib.jshop.jshop.JshopMainShopActivity" && id("com.jd.lib.jshop:id/fd").findOnce() != null && id("com.jd.lib.jshop:id/fd").findOnce().clickable() == true) {
                             id("com.jd.lib.jshop:id/fd").findOnce().click();
                             toastLog("已尝试盲点“返回”按钮");
-                           // sleep(2000);
+                            // sleep(2000);
                         } else if (className("android.view.ViewGroup").desc("返回按钮").findOnce() != null) {
                             let c = className("android.view.ViewGroup").desc("返回按钮").findOnce();
                             if (c.clickable() == true) {
@@ -1129,6 +1130,11 @@ function DoTask() {
                             Justback();
                             sleep(1000);
                         }
+                    } else {
+                        console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+                        toastLog("B当前未处于活动界面或任务蒙版未能成功打开，正在重新尝试");
+                        openInTask();
+                        DoTask();
                     }
                     if (text("忍痛离开").findOne(3000) != null) {
                         let v = text("忍痛离开").findOnce();
