@@ -84,4 +84,15 @@
 
 **在最新版京东已测试通过，可能支持多个京东版本具体请自行测试本脚本未对京东版本进行限制**
 
+## 【脚本】[自动叠蛋糕（京东脚本）](https://github.com/Orange-shirt/OrangeJs/blob/master/%E3%80%90Orange%20Js%20%E6%A9%98%E8%A1%AB%E3%81%AE%E8%84%9A%E6%9C%AC%E3%80%91%E8%87%AA%E5%8A%A8%E5%8F%A0%E8%9B%8B%E7%B3%95%EF%BC%88%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC%EF%BC%89)
+![image](http://code.aliyun.com/orange_shirt/OrangeJs/raw/master/Script_author.png)
+
+**• 支持安卓7及以上系统全分辨率的设备无需ROOT权限运行！**
+
+**• 支持自动打开京东app并跳转活动页面完成各项任务并支持识别当前任务数量，任务标题，任务完成状态，蛋糕层数，金币数等多项任务数据**
+
+**• 支持自动叠蛋糕及各项任务，并支持识别错误界面自动跳转，防误触，定时/计时运行等功能**
+
+**• 支持显示一目了然的“悬浮日志”与“吐司（Toast）”切换，脚本的各项操作尽在掌握**
+
 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
