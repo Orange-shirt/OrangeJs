@@ -686,7 +686,8 @@ window.action.setOnTouchListener(function(view, event) {
     }
     return true;
 });
-window.setPosition(800,100);
+window.setPosition(800, 100);
+
 function onClick() {
     dialogs.alert("已停止运行脚本！");
     log("用户点击了停止按钮");
@@ -1107,26 +1108,39 @@ function DoTask() {
                         if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
                             className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
                             toastLog("已尝试盲点“返回”按钮");
-                            sleep(2000);
+                            //sleep(2000);
                         } else if (currentActivity() == "com.jd.lib.jshop.jshop.JshopMainShopActivity" && id("com.jd.lib.jshop:id/fd").findOnce() != null && id("com.jd.lib.jshop:id/fd").findOnce().clickable() == true) {
                             id("com.jd.lib.jshop:id/fd").findOnce().click();
                             toastLog("已尝试盲点“返回”按钮");
-                            sleep(2000);
+                           // sleep(2000);
                         } else if (className("android.view.ViewGroup").desc("返回按钮").findOnce() != null) {
                             let c = className("android.view.ViewGroup").desc("返回按钮").findOnce();
                             if (c.clickable() == true) {
                                 c.click();
                                 toastLog("已尝试盲点“返回”按钮");
-                                sleep(2000);
+                                //sleep(2000);
                             } else {
                                 let b = c.bounds();
                                 click(b.centerX(), b.centerY());
                                 toastLog("已尝试点击“返回”按钮");
-                                sleep(2000);
+                                //sleep(2000);
                             }
                         } else {
                             Justback();
                             sleep(1000);
+                        }
+                    }
+                    if (text("忍痛离开").findOne(3000) != null) {
+                        let v = text("忍痛离开").findOnce();
+                        if (v.clickable() == true) {
+                            v.click();
+                            toastLog("已尝试盲点“忍痛离开”按钮");
+                            sleep(2000);
+                        } else {
+                            let vb = v.bounds();
+                            click(cb.centerX(), cb.centerY());
+                            toastLog("已尝试点击“忍痛离开”按钮");
+                            sleep(2000);
                         }
                     }
                 } else {
