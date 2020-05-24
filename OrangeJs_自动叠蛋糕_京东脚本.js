@@ -35,9 +35,9 @@ if (contextPASS == 0) {
     context_Manualstate = 0;
     Set_Back_way();
 }
-
+var WaitForDelete = [];
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动叠蛋糕”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1092,6 +1092,10 @@ function DoTask() {
                                             break;
                                         }
                                         let c = className("android.view.View").text("当前页点击加购以下" + xz + "个商品").findOnce().parent().parent().child(1).child(loop);
+                                        if (c.child(c.childCount() - 2).childCount() > 1 && c.child(c.childCount() - 2).child(0).text() != "" && c.child(c.childCount() - 2).child(0).text() != null) {
+                                            WaitForDelete.push(c.child(c.childCount() - 2).child(0).text());
+                                            toastLog("已将当前商品添加至待删除列表。当前商品：" + c.child(c.childCount() - 2).child(0).text());
+                                        }
                                         if (c.child(c.childCount() - 1).clickable() == true) {
                                             c.child(c.childCount() - 1).click();
                                             toastLog("已尝试盲点加购第" + loop + "个商品");
@@ -1188,13 +1192,19 @@ function DoTask() {
 
         function CakeUp() {
             while (true) {
-                for (let i = 10; i > 0; i--) {
-                    if (className("android.view.View").text("当前蛋糕：").findOnce() != null && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().childCount() > 4 && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).id() == "goldElfin" && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).child(0).child(1).text() == "点我得金币") {
+                try {
+                    var done = 0;
+                    while (className("android.view.View").text("当前蛋糕：").findOnce() != null && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().childCount() > 4 && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).id() == "goldElfin" && className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).child(0).child(1).text() == "点我得金币") {
                         className("android.view.View").text("当前蛋糕：").findOnce().parent().parent().parent().child(4).click();
-                        toastLog("已尝试盲点“点我得金币”按钮");
-                        sleep(500);
+                        if (done >= 50) {
+                            break;
+                        } else {
+                            toastLog("已尝试盲点“点我得金币”按钮*" + done);
+                            done++;
+                            sleep(100);
+                        }
                     }
-                }
+                } catch (e) {}
                 if (className("android.view.View").text("继续叠蛋糕 分红包").findOnce() != null) {
                     if (className("android.view.View").text("继续叠蛋糕 分红包").findOnce().clickable() == true) {
                         className("android.view.View").text("继续叠蛋糕 分红包").findOnce().click();
@@ -1242,6 +1252,119 @@ function DoTask() {
             }
         }
         CakeUp();
+        if (WaitForDelete.length > 0) {
+            toastLog("【开始删除加购商品】正在跳转“购物车”界面，删除任务加购的商品");
+            while (true) {
+                if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").descContains("购物车").findOnce() != null) {
+                    className("android.view.View").descContains("购物车").findOnce().click();
+                    toastLog("已尝试点击京东主页“购物车”按钮");
+                    sleep(3000);
+                    if (className("android.widget.TextView").textContains("全部(").findOnce() != null) {
+                        let a = className("android.widget.TextView").textContains("全部(").findOnce();
+                        if (a.clickable() == true) {
+                            a.click();
+                            toastLog("已尝试点击“全部”按钮");
+                            sleep(3000);
+                        } else {
+                            let b = a.bounds();
+                            click(b.centerX(), b.centerY());
+                            toastLog("已尝试点击“全部”按钮");
+                            sleep(3000);
+                        }
+                    }
+                    break;
+                } else if (currentPackage() != "com.jingdong.app.mall") {
+                    app.startActivity({
+                        action: "android.intent.action.VIEW", //此处可为其他值
+                        packageName: "com.jingdong.app.mall",
+                        className: "com.jingdong.app.mall.main.MainActivity"
+                        //此处可以加入其他内容，如data、extras
+                    });
+                    toastLog("当前未处于京东APP中，正在重新打开京东……");
+                    console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+                    sleep(2000);
+                } else {
+                    if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
+                        className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
+                        toastLog("已尝试点击“返回”按钮");
+                    } else if (currentActivity() == "com.jd.lib.jshop.jshop.JshopMainShopActivity" && id("com.jd.lib.jshop:id/fd").findOnce() != null && id("com.jd.lib.jshop:id/fd").findOnce().clickable() == true) {
+                        id("com.jd.lib.jshop:id/fd").findOnce().click();
+                        toastLog("已尝试盲点“返回”按钮");
+                        sleep(2000);
+                    } else {
+                        Justback();
+                    }
+                    sleep(2000);
+                }
+            }
+
+            Array.prototype.remove  =   function(val)  {
+                var  index  =  this.indexOf(val);
+                if  (index  >  -1)  {
+                    this.splice(index,  1);
+                }
+            };
+
+
+            if (className("android.widget.ImageView").desc("返回顶部").findOnce() != null) {
+                let a = className("android.widget.ImageView").desc("返回顶部").findOnce();
+                if (a.clickable() == true) {
+                    a.click();
+                    toastLog("已尝试盲点“返回顶部”按钮");
+                    sleep(2000);
+                } else {
+                    let b = a.bounds();
+                    click(b.centerX(), b.centerY());
+                    toastLog("已尝试点击“返回顶部”按钮");
+                    sleep(2000);
+                }
+            }
+            while (true) {
+                if (WaitForDelete.length == 0) {
+                    toastLog("已删除全部已加购的商品");
+                    break;
+                } else if (text("购物车是空的").findOnce() != null) {
+                    toastLog("购物车是空的");
+                    break;
+                } else if (className("android.widget.TextView").text("没有更多了~").findOnce() != null) {
+                    toastLog("没有更多了~但还有" + WaitForDelete.length + "个商品没有被删除，它们分别是：\n" + WaitForDelete);
+                    break;
+                } else if (className("android.support.v7.widget.RecyclerView").findOnce() != null) {
+                    for (let i = 0; i < WaitForDelete.length; i++) {
+                        if (desc(WaitForDelete[i]).longClickable(true).findOnce() != null) {
+                            toastLog("已找到要删除的商品：" + WaitForDelete[i]);
+                            desc(WaitForDelete[i]).longClickable(true).findOnce().longClick();
+                            sleep(1000);
+                            if (desc(WaitForDelete[i]).longClickable(true).findOnce() != null &&
+                                desc(WaitForDelete[i]).longClickable(true).findOnce().child(0).childCount() == 4 &&
+                                desc(WaitForDelete[i]).longClickable(true).findOnce().child(0).child(3).desc() == "删除") {
+                                if (desc(WaitForDelete[i]).longClickable(true).findOnce().child(0).child(3).clickable() == true) {
+                                    desc(WaitForDelete[i]).longClickable(true).findOnce().child(0).child(3).click();
+                                    toastLog("已尝试盲点删除商品：" + WaitForDelete[i]);
+                                    WaitForDelete.remove(WaitForDelete[i]);
+                                    sleep(2000);
+                                } else {
+                                    let bs = desc(WaitForDelete[i]).longClickable(true).findOnce().child(0).child(3).bounds();
+                                    click(bs.centerX(), bs.centerY());
+                                    toastLog("已尝试点击删除商品：" + WaitForDelete[i]);
+                                    WaitForDelete.remove(WaitForDelete[i]);
+                                    sleep(2000);
+                                }
+                            }
+                        }
+                    }
+                    className("android.support.v7.widget.RecyclerView").findOnce().scrollForward();
+                    toastLog("已尝试上滑购物车商品列表查找加购的商品");
+                    sleep(2000);
+                } else {
+                    toastLog("当前未处于购物车界面，正在重新尝试运行");
+                    console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+                    openInTask();
+                    DoTask();
+                    break;
+                }
+            }
+        }
         dialogs.alert("自动叠蛋糕：\n脚本已运行完成");
         exit();
     } else {
