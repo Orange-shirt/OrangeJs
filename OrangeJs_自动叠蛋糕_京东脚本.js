@@ -1344,12 +1344,16 @@ function DoTask() {
                     sleep(2000);
                 }
             }
+            var OVER = 0;
             while (true) {
                 if (WaitForDelete.length == 0) {
                     toastLog("已删除全部已加购的商品");
                     break;
                 } else if (text("购物车是空的").findOnce() != null) {
                     toastLog("购物车是空的");
+                    break;
+                } else if (OVER > 20) {
+                    toastLog("滑动失败已超20次，结束");
                     break;
                 } else if (className("android.widget.TextView").text("没有更多了~").findOnce() != null) {
                     toastLog("没有更多了~但还有" + WaitForDelete.length + "个商品没有被删除，它们分别是：\n" + WaitForDelete);
@@ -1378,7 +1382,10 @@ function DoTask() {
                             }
                         }
                     }
-                    className("android.support.v7.widget.RecyclerView").findOnce().scrollForward();
+                    let s = className("android.support.v7.widget.RecyclerView").findOnce().scrollForward();
+                    if (s == false) {
+                        OVER++;
+                    }
                     toastLog("已尝试上滑购物车商品列表查找加购的商品");
                     sleep(2000);
                 } else {
