@@ -36,6 +36,7 @@ if (contextPASS == 0) {
     Set_Back_way();
 }
 var WaitForDelete = [];
+
 function dialogs_js() {
     var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
@@ -887,9 +888,21 @@ function DoTask() {
             toastLog("已尝试点击“做任务领金币”按钮");
             sleep(2000);
         }
-        var A = a.parent().child(4).child(1).parent().parent().parent().parent().child(4);
-        var Bd = A.child(0).child(0).child(0).depth();
-        log(Bd);
+        try {
+            var A = a.parent().child(4).child(1).parent().parent().parent().parent().child(4);
+            var Bd = A.child(0).child(0).child(0).depth();
+            log(Bd);
+        } catch (e) {
+            try {
+                let a = className("android.view.View").text("做任务领金币").findOnce();
+                var A = a.parent().parent().parent().parent().child(4);
+                var Bd = A.child(0).child(0).child(0).depth();
+                log(Bd);
+            } catch (e) {
+                var A = null;
+            }
+        }
+
     } else if (className("android.view.View").text("做任务领金币").findOnce() != null) { //防止树状控件不一致
         let a = className("android.view.View").text("做任务领金币").findOnce();
         if (a.parent().clickable() == true) {
@@ -922,13 +935,25 @@ function DoTask() {
     }
 
     if (makesureHDTC() == true) {
-        if (A.child(0).child(0).child(0).child(3).child(2).child(0).text() != "已签到") {
+        if (A != null && A.child(0).child(0).child(0).child(3).child(2).child(0).text() != "已签到") {
             if (A.child(0).child(0).child(0).child(3).child(2).clickable() == true) {
                 A.child(0).child(0).child(0).child(3).child(2).click();
                 toastLog("已尝试盲点“签到”按钮");
                 sleep(2000);
             } else {
                 let b = A.child(0).child(0).child(0).child(3).child(2).bounds();
+                click(b.centerX(), b.centerY());
+                toastLog("已尝试点击“签到”按钮");
+                sleep(2000);
+            }
+        } else if (text("签到").findOnce() != null) {
+            let a = text("签到").findOnce();
+            if (a.clickable() == true) {
+                a.click();
+                toastLog("已尝试盲点“签到”按钮");
+                sleep(2000);
+            } else {
+                let b = a.bounds();
                 click(b.centerX(), b.centerY());
                 toastLog("已尝试点击“签到”按钮");
                 sleep(2000);
