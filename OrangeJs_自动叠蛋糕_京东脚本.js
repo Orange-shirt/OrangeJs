@@ -1016,7 +1016,7 @@ function DoTask() {
                 }
                 log(B.child(a).child(1).child(0).child(0).text(), B.child(a).child(1).child(0).clickable());
                 var RwButtonText = B.child(a).child(1).child(0).child(0).text();
-                if (RwTitle.search("邀请好友助力") < 0 && RwTitle.search("所在战队成员") < 0 && now != xz) {
+                if (RwTitle.search("AR") < 0 &&RwTitle.search("邀请好友助力") < 0 && RwTitle.search("所在战队成员") < 0 && now != xz) {
                     if (B.child(a).child(1).child(0).clickable() == true) {
                         B.child(a).child(1).child(0).click();
                         toastLog("已尝试盲点" + B.child(a).child(1).child(0).child(0).text() + "按钮");
