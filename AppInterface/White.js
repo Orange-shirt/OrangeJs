@@ -1,1074 +1,989 @@
-"ui";
-context_DayOrNight = 1;
-context_widthofTen = device.width / 10;
-
-function setDayMode() {
-    context_framebg = "#FAFAFA" //全局背景
-    context_sBarColor = "#BDBDBD"; //通知栏颜色
-    context_textColor = "#000000" //文字颜色
-    context_textBg = "#FAFAFA" //文字背景
-    context_QxtextBg = "#FAFAFA" //权限设置中的背景
-    context_FctextBg = "#FAFAFA" //悬浮窗权限中的背景
-    context_SunMoon = "@drawable/ic_wb_sunny_black_48dp"; //☀️
-    context_Logo = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" //黑色logo
+log("*   ╉ The Animal Protecting ╊");
+log("*　　┏┓　　　┏┓+ +");
+log("*　┏┛┻━━━┛┻┓ + +");
+log("*　┃　　　　　　　┃");
+log("*　┃　　　━　　　┃ ++ + + +");
+log("*　████━████ 　+");
+log("*　┃　　　　　　　┃ +");
+log("*　┃　　　┻　　　┃")
+log("*　┃　　　　　　　┃ + +");
+log("*　┗━┓　　　┏━┛");
+log("*　　　┃　　　┃");
+log("*　　　┃　　　┃ + + + +");
+log("*　　　┃　　　┃　　　　");
+log("*　　　┃　　　┃ + 　");
+log("*　　　┃　　　┃")
+log("*　　　┃　　　┃　　+");
+log("*　　　┃　　　┗━━━┓ + +")
+log("*　　　┃　　　　　　　┣┓+ + + ");
+log("*　　　┃　　　　　　　┏┛+ +");
+log("*　　　┗┓┓┏━┳┓┏┛ + ");
+log("*　　　　┃┫┫　┃┫┫");
+log("*　　　　┗┻┛　┗┻┛+ + ");
+log("*    Code is far away from bug!");
+log("*        神兽保佑,代码无bug");
+try {
+    if (contextPASS != undefined) {
+        log("[⏰]定时任务启动脚本");
+    }
+} catch (e) {
+    contextPASS = 0;
 }
-importClass(android.animation.ObjectAnimator);
-
-function setNightMode() {
-    context_framebg = "#000000"; //全局背景
-    context_sBarColor = "#000000"; //通知栏颜色
-    context_textColor = "#FFFFFF" //文字颜色
-    context_textBg = "#000000" //文字背景
-    context_QxtextBg = "#903F3F3F" //权限设置中的背景
-    context_FctextBg = "#646464" //悬浮窗的背景
-    context_SunMoon = "@drawable/ic_brightness_2_black_48dp" //🌙
-    context_Logo = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" //白色Logo
+if (contextPASS == 0) {
+    dialogs_js();
+} else {
+    context_Manualstate = 0;
+    Set_Back_way();
 }
-mainUi();
-if (getStorageData("ScriptIntroduce", "Zdddg") == undefined) {
-    engines.execScript("“自动叠蛋糕”展示", "\"ui\";ZdddgShow();" + ZdddgShow.toString());
-} else if (getStorageData("ScriptIntroduce", "MiaoBiPlus") == undefined) {
-    engines.execScript("“喵币++”展示", "\"ui\";MiaoBiPlusShow();" + MiaoBiPlusShow.toString());
-}
+var WaitForDelete = [];
 
-
-function mainUi() {
-    if (context_DayOrNight == 1) {
-        setDayMode();
-    } else {
-        setNightMode();
-    }
-    ui.statusBarColor(context_sBarColor); //通知栏颜色
-    //Not pink色是#DFC8C6
-    ui.layout(
-        <ScrollView>
-            <frame id="main" background="{{context_framebg}}">//全局背景颜色
-                <vertical align="center" paddingTop="5" margin="0">
-                    <img src="{{context_Logo}}" h="40" margin="0 0 0 10"/>//黑色logo
-                    <text id="text" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28"/>
-                    //水平线性布局
-                    <linear orientation="horizontal" align="center" margin="5">
-                        <card layout_weight="50" h="50" marginRight="2" cardCornerRadius="25dp"
-                        cardElevation="0dp" gravity="center_vertical">
-                        <vertical padding="10 0" h="auto">
-                        </vertical>
-                        <View bg="#FFEA3324" h="*" w="*"/>//卡片颜色1
-                        <View bg="#FF4395FB" h="*" w="0"/>//卡片颜色2
-                        <card layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
-                        cardElevation="0dp" align="center" >
-                        <vertical padding="10 0" h="auto">
-                        </vertical>
-                        <View bg="{{context_QxtextBg}}" h="*" w="*"/>
-                        <Switch id="autoService" text="无障碍服务" textColor="{{context_textColor}}" gravity="center" textStyle="bold" bg="{{context_QxtextBg}}" checked="{{auto.service != null}}" padding="5 5 5 5" textSize="15sp"/>
-                    </card>
-                </card>
-                
-                <card layout_weight="50" h="50" marginLeft="2" cardCornerRadius="25dp"
-                cardElevation="0dp" gravity="center">
-                <vertical padding="10 0" h="auto">
-                </vertical>
-                <View id="TEST" bg="#FF007CF3" h="*" w="*"/>//卡片颜色1
-                <View bg="#FF4395FB" h="*" w="0"/>//卡片颜色2
-                
-                <card layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
-                cardElevation="0dp" align="center">
-                <vertical padding="10 0" h="auto">
-                </vertical>
-                <View bg="{{context_FctextBg}}" h="*" w="*"/>//悬浮窗权限中的卡片颜色
-                <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto" bg="?attr/selectableItemBackground" clickable="true"/>
-                
-            </card>
-        </card>
-        </linear>
-        <card h="1" margin="5 5" cardCornerRadius="1dp"
-        cardElevation="0dp" gravity="center_vertical">
-        <View bg="#FF832FFD" h="*" w="*"/>//分割线颜色1
-        <View bg="#FF4395FB" h="*" marginRight="63"/>//分割线颜色2
-        <View bg="#FF32F558" h="*" marginRight="126"/>//分割线颜色3
-        <View bg="#FFFCD830" h="*" marginRight="189"/>//分割线颜色4
-        <View bg="#FFFE8E2D" h="*" marginRight="252"/>//分割线颜色5
-        <View bg="#FFFC3032" h="*" marginRight="315"/>//分割线颜色6
-        </card>
-        <text id="NowScript" text="可运行脚本" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28">
-        </text>
-        <Horizo​​ntalScrollView>
-            <linear orientation="horizontal" align="left" margin="0 5 0 0">
-                //淘宝脚本
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#FF5722" h="*" w="*"/>
-                    <vertical padding="0 0" h="auto">
-                        <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_5080_1577343737/256" w="40" h="40" margin="20 20 0 0"/>
-                            <vertical padding="0 0" h="auto">
-                                <text text="手机淘宝" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐9.4.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                            </vertical>
-                        </linear>
-                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
-                                <View bg="#FFAB91"/>
-                                <spinner id="sp_TB1" entries="喵币++|自动集福气" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
-                            </card>
-                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_TB" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
-                        </linear>
-                    </vertical>
-                </card>
-                //拼多多脚本
-                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                    <View bg="#FF1744" h="*" w="*"/>
-                    <vertical padding="0 0" h="auto">
-                        <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://image.coolapk.com/apk_logo/2019/1218/11/512E5B9B4E8B4A7-32664-o_1dsbg23j210ns1ee110u7evuevcr-uid-1871800@512x512.png" w="40" h="40" margin="20 20 0 0"/>
-                            <vertical padding="0 0" h="auto">
-                                <text text="拼多多" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐4.90.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                            </vertical>
-                        </linear>
-                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#90FF1744"/>
-                                <text id="ScriptTen" text="多多果园自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
-                            </card>
-                        </linear>
-                    </vertical>
-                </card>
-                
-            </linear>
-        </Horizo​​ntalScrollView>
-        
-        <Horizo​​ntalScrollView>
-            <linear orientation="horizontal" align="left" margin="0">
-                //微博脚本
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#FF8F00" h="*" w="*"/>
-                    <vertical padding="0 0" h="auto">
-                        <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://pp.myapp.com/ma_icon/0/icon_9926_1579487446/256" w="40" h="40" margin="20 20 0 0"/>
-                            <vertical padding="0 0" h="auto">
-                                <text text="微博" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐9.9.3版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                            </vertical>
-                        </linear>
-                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#90FF8F00"/>
-                                <text id="ScriptNine" text="微博任务自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
-                            </card>
-                        </linear>
-                    </vertical>
-                </card>
-                //微信脚本
-                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                    <View bg="#4CAF50" h="*" w="*"/>
-                    <vertical padding="0 0" h="auto">
-                        <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://pp.myapp.com/ma_icon/0/icon_10910_1577346809/256" w="40" h="40" margin="20 20 0 0"/>
-                            <vertical padding="0 0" h="auto">
-                                <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐7.0.10版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                            </vertical>
-                        </linear>
-                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#A5D6A7"/>
-                                <text id="ScriptOne" text="自动微信发消息" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
-                            </card>
-                        </linear>
-                    </vertical>
-                </card>
-            </linear>
-        </Horizo​​ntalScrollView>
-        
-        <Horizo​​ntalScrollView>
-            <linear orientation="horizontal" align="left" margin="0">
-                //京东脚本
-                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#F44336" h="*" w="*"/>
-                    <vertical padding="0 0" h="auto">
-                        <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
-                            <vertical padding="0 0" h="auto">
-                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐8.4.6版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                            </vertical>
-                        </linear>
-                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
-                                <View bg="#EF9A9A"/>
-                                <spinner id="sp_Jd1" entries="自动叠蛋糕|种豆得豆自动脚本|自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
-                            </card>
-                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
-                        </linear>
-                    </vertical>
-                </card>
-                //完美校园脚本
-                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                    <View bg="#F0FD7034" h="*" w="*"/>
-                    <vertical padding="0 0" h="auto">
-                        <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://android-artworks.25pp.com/fs08/2020/01/22/8/110_30d36bea2b970bda26ac38b5eb3a2935_con_130x130.png" w="40" h="40" margin="20 20 0 0"/>
-                            <vertical padding="0 0" h="auto">
-                                <text text="完美校园" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐5.1.2版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                            </vertical>
-                        </linear>
-                        <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#80FD7034"/>
-                                <text id="ScriptTwe" text="自动健康打卡" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
-                            </card>
-                        </linear>
-                    </vertical>
-                </card>
-            </linear>
-        </Horizo​​ntalScrollView>
-        <linear orientation="horizontal" align="left" margin="0">
-            //QQ脚本
-            <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                <View bg="#F02196F3" h="*" w="*"/>
-                <vertical padding="0 0" h="auto">
-                    <linear orientation="horizontal" align="left" margin="0">
-                        <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="40" h="40" margin="20 20 0 0"/>
-                        <vertical padding="0 0" h="auto">
-                            <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                            <text text="推荐8.2.7版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
-                        </vertical>
-                    </linear>
-                    <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                        <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                            <View w="*" h="*" bg="#90CAF9"/>
-                            <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
-                        </card>
-                    </linear>
-                </vertical>
-            </card>
-        </linear>
-        
-        <linear orientation="horizontal" align="center" margin="5 15 5 15" >
-            <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
-            <text id="Privacy_Security" text="隐私与安全" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
-            <text id="JoinQQGroup" text="加入QQ群" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
-            <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
-            <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
-        </linear>
-        <vertical gravity="center" margin="0 0 0 0">
-            <View w="*" h="5" bg="#FC3032"/>
-            <View w="*" h="5" bg="#FE8E2D"/>
-            <View w="*" h="5" bg="#FCD830"/>
-            <View w="*" h="5" bg="#32F558"/>
-            <View w="*" h="5" bg="#4395FB"/>
-            <View w="*" h="5" bg="#832FFD"/>
-        </vertical>
-        </vertical>
-        </frame>
-        </ScrollView>
-    );
-
-    ui.autoService.on("check", function(checked) {
-        /* // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
-         if (auto.service == null) {
-             app.startActivity({
-                 action: "android.settings.ACCESSIBILITY_SETTINGS"
-             });
-         }*/
-
-        if (!checked && auto.service != null) {
-            auto.service.disableSelf();
-        } else if (auto.service == null) {
-            if (checked) {
-                engines.execScript("Auto", "auto.waitFor();\ntoastLog('无障碍权限已开启！')");
-            }
-        }
-    });
-    // 当用户回到本界面时，resume事件会被触发
-    ui.main.on("resume", function() {
-        // 此时根据无障碍服务的开启情况，同步开关的状态
-        ui.autoService.checked = auto.service != null;
-    });
-    ui.ScriptOne.click(() => {
-        engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
-    });
-    ui.AboutApp.click(() => {
-        AboutApp();
-    });
-
-
-    function runScriptOne() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptOne_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%BE%AE%E4%BF%A1%E5%8F%91%E6%B6%88%E6%81%AF_%E5%BE%AE%E4%BF%A1%E8%84%9A%E6%9C%AC.js"; //第一个脚本网址
-        var res_script = http.get(ScriptOne_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动微信发消息", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-    ui.R_TB.click(() => {
-        if (ui.sp_TB1.getSelectedItemPosition() == 1) {
-            engines.execScript("自动集福气", "runScriptTwo();\n" + runScriptTwo.toString());
-        } else if (ui.sp_TB1.getSelectedItemPosition() == 0) {
-            engines.execScript("喵币++", "runScriptSixt();\n" + runScriptSixt.toString());
-        }
-    });
-    ui.R_JD.click(() => {
-        if (ui.sp_Jd1.getSelectedItemPosition() == 3) {
-            engines.execScript("东东农场自动脚本", "runScriptEight();\n" + runScriptEight.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
-            engines.execScript("自动宠汪汪", "runScriptSix();\n" + runScriptSix.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
-            engines.execScript("种豆得豆自动脚本", "runScriptFourt();\n" + runScriptFourt.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
-            engines.execScript("自动叠蛋糕", "runScriptFifvt();\n" + runScriptFifvt.toString());
-        }
-    });
-
-    function runScriptEight() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptEight_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E4%B8%9C%E4%B8%9C%E5%86%9C%E5%9C%BA%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第八个脚本网址
-        var res_script = http.get(ScriptEight_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("东东农场自动脚本", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-    function runScriptFourt() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptFourt_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E7%A7%8D%E8%B1%86%E5%BE%97%E8%B1%86%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第十四个脚本网址
-        var res_script = http.get(ScriptFourt_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("种豆得豆自动脚本", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-    function runScriptFifvt() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptFifvt_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%8F%A0%E8%9B%8B%E7%B3%95_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第十五个脚本网址
-        var res_script = http.get(ScriptFifvt_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动叠蛋糕", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-    function runScriptSixt() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptSixt_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E5%96%B5%E5%B8%81++_%E6%B7%98%E5%AE%9D%E8%84%9A%E6%9C%AC.js"; //第十六个脚本网址
-        var res_script = http.get(ScriptSixt_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("喵币++", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-    ui.ScriptTen.click(() => {
-        engines.execScript("多多果园自动脚本", "runScriptTen();\n" + runScriptTen.toString());
-    });
-
-    function runScriptTen() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptTen_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E5%A4%9A%E5%A4%9A%E6%9E%9C%E5%9B%AD%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E6%8B%BC%E5%A4%9A%E5%A4%9A%E8%84%9A%E6%9C%AC.js"; //第十个脚本网址
-        var res_script = http.get(ScriptTen_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("多多果园自动脚本", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-
-    function runScriptSix() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptSix_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%AE%A0%E6%B1%AA%E6%B1%AA_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js"; //第六个脚本网址
-        var res_script = http.get(ScriptSix_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动宠汪汪", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-    ui.ScriptNine.click(() => {
-        engines.execScript("微博任务自动脚本", "runScriptNine();\n" + runScriptNine.toString());
-    });
-
-    function runScriptNine() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptNine_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E5%BE%AE%E5%8D%9A%E4%BB%BB%E5%8A%A1%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E5%BE%AE%E5%8D%9A%E8%84%9A%E6%9C%AC.js"; //第九个脚本网址
-        var res_script = http.get(ScriptNine_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("微博任务自动脚本", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-
-    function runScriptTwo() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94"; //第二个脚本网址
-        var res_script = http.get(ScriptTwo_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动集福气", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-    ui.ScriptTwe.click(() => {
-        engines.execScript("自动健康打卡", "runScriptTwe();\n" + runScriptTwe.toString());
-    });
-
-    function runScriptTwe() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptTwe_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1_%E5%AE%8C%E7%BE%8E%E6%A0%A1%E5%9B%AD%E8%84%9A%E6%9C%AC.js"; //第十二个脚本网址
-        var res_script = http.get(ScriptTwe_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动健康打卡", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-    ui.ScriptThi.click(() => {
-        engines.execScript("自动动态点赞", "runScriptThi();\n" + runScriptThi.toString());
-    });
-
-    function runScriptThi() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptTwo_Url = "https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_%E8%87%AA%E5%8A%A8%E5%8A%A8%E6%80%81%E7%82%B9%E8%B5%9E_QQ%E8%84%9A%E6%9C%AC.js"; //第十三个脚本网址
-        var res_script = http.get(ScriptTwo_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动动态点赞", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-    ui.TalktoDeveloper.click(() => {
-        engines.execScript("问题反馈", "\"ui\";TalkToDeveloper();" + TalkToDeveloper.toString());
-    });
-
-    function TalkToDeveloper() {
-        ui.statusBarColor("#BDBDBD"); //通知栏颜色
-        events.removeAllListeners();
-        ui.layout(
-            <frame w="*" h="*">
-                <vertical align="left">
-                    <linear orientation="horizontal" align="left" margin="0" >
-                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50" padding="8 0 0 0"/>//应用logo
-                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png" marginLeft="10" w="105"h="50"/>//黑色logo
-                        <text text="问题反馈" textStyle="bold" textSize="20sp" textColor="#000000" padding="10 8 0 0"/>
-                        <View bg="#FFFFFF" h="*" w="*"/>//打底卡片颜色1
-                    </linear>
-                    <progressbar id="progressX" style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"layout_gravity="top"/>
-                    <ScrollView>
-                        <webview id="webview"/>
-                    </ScrollView>
-                    
-                </vertical>
-                <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-                margin="16" layout_gravity="bottom|right" tint="#ffffff" />
-            </frame>
+function dialogs_js() {
+    var ScriptVersion = ("Beta1.0"); //版本
+    log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
+    var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式", "💬 吐司/日志切换"]
+    var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“喵币++”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
+    if (i < 0) {
+        toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
+        dialogs_js();
+    } else if (i == 0) {
+        toastLog(options_[i]);
+        context_Manualstate = 0;
+        Set_Back_way();
+    } else if (i == 3) {
+        toastLog(options_[i]);
+        exit();
+    } else if (i == 1) {
+        toastLog("请稍候，正在检测权限...");
+        context_Manualstate = 0;
+        toastLog(options_[i]);
+        device.keepScreenDim();
+        toastLog("检测权限设置……");
+        context_Manualstate = 0;
+        toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
+        auto.waitFor();
+        toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+        sleep(2000);
+        toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
+        sleep(2000);
+        var test_rawWindow = floaty.rawWindow(
+            <frame gravity="center" bg="#00000000"/>
         );
-        ui.webview.loadUrl("https://wj.qq.com/s2/5238744/d982");
-        ui.Back.click(() => {
-            clearInterval(JdtX);
-            android.webkit.WebStorage.getInstance().deleteAllData(); //清空WebView的localStorage
-            ui.finish();
-        });
-        var JdtX = setInterval(() => {
-            var P = ui.webview.getProgress(); //获取进度
-            var T = ui.webview.getTitle(); //获取网页标题
-            if (P == 100) {
-                ui.run(() => {
-                    ui.progressX.setVisibility(8);
-                });
+        test_rawWindow.setSize(-1, -1);
+        test_rawWindow.setTouchable(false);
+        setTimeout(() => {
+            test_rawWindow.close();
+        }, 1000);
+        toastLog("悬浮窗权限已开启！");
+        sleep(2000);
+        wait_Time_over();
+    } else if (i == 2) {
+        toastLog("请稍候，正在检测权限...");
+        context_Manualstate = 0;
+        toastLog(options_[i]);
+        device.keepScreenDim();
+        toastLog("检测权限设置……");
+        context_Manualstate = 0;
+        toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
+        auto.waitFor();
+        toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+        sleep(2000);
+        toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
+        sleep(2000);
+        var test_rawWindow = floaty.rawWindow(
+            <frame gravity="center" bg="#00000000"/>
+        );
+        test_rawWindow.setSize(-1, -1);
+        test_rawWindow.setTouchable(false);
+        setTimeout(() => {
+            test_rawWindow.close();
+        }, 1000);
+        toastLog("悬浮窗权限已开启！");
+        context_Manualstate = 0;
+        Set_Back_way();
+        DS();
+        device.keepScreenDim();
+    } else if (i == 4) {
+        toastLog(options_[i]);
+        try {
+            if (files.exists("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt") == true && files.read("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt") > 2 && files.exists("/storage/emulated/0/OrangeJs/喵币++/滑动返回速度.txt") == false) {
+                files.remove("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt");
+                log("当前返回方法设置为滑动返回但未设置滑动返回速度");
+            }
+            if (files.exists("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt") == true) {
+                files.rename("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt", "X返回方法设置.txt");
+                Set_Back_way();
             } else {
-                ui.run(() => {
-                    ui.progressX.setVisibility(0);
-                    ui.progressX.progress = P;
-                });
-            };
-        }, 100);
-    }
-
-
-    function AboutApp() {
-        events.removeAllListeners();
-        ui.layout(
-            <ScrollView>
-                <frame w="*" h="*" background="{{context_framebg}}">
-                    <vertical align="center">
-                        <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" marginTop="50" w="auto"h="50" gravity="center"/>//应用logo
-                        <img src="{{context_Logo}}" w="auto"h="50" gravity="center"/>//黑色logo
-                        <card  h="5" marginTop="10" cardCornerRadius="0dp"
-                        cardElevation="0dp" gravity="center_vertical">
-                        <vertical padding="0 0" h="auto">
-                        </vertical>
-                        <View bg="#FFEA3324" h="*" w="*"/>//卡片颜色1
-                    </card>
-                    <text text="软件及脚本开发者" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/authorName.png" layout_gravity="center" w="150" h="30" />//作者名
-                    <card  h="5" marginTop="10" cardCornerRadius="0dp"
-                    cardElevation="0dp" gravity="center_vertical">
-                    <vertical padding="0 0" h="auto">
-                    </vertical>
-                    <View bg="#FFFF711F" h="*" w="*"/>//卡片颜色1
-                </card>
-                <text text="软件版本" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
-                <text id="AppVision" color="{{context_textColor}}" textSize="20" textStyle="normal" gravity="center"/>
-                <card  h="5" marginTop="10" cardCornerRadius="0dp"
-                cardElevation="0dp" gravity="center_vertical">
-                <vertical padding="0 0" h="auto">
-                </vertical>
-                <View bg="#FFFABB06" h="*" w="*"/>//卡片颜色1
-            </card>
-            <text text="设备信息" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
-            <text id="DeviceInformation" color="{{context_textColor}}" textSize="15" textStyle="normal" gravity="center"/>
-            
-            <card  h="5" marginTop="10" cardCornerRadius="0dp"
-            cardElevation="0dp" gravity="center_vertical">
-            <vertical padding="0 0" h="auto">
-            </vertical>
-            <View bg="#FF34A853" h="*" w="*"/>//卡片颜色1
-            </card>
-            <text text="项目开源地址" color="{{context_textColor}}" textSize="10" textStyle="normal" marginLeft="5"/>
-            <text id="OpenSource" autoLink="web" color="{{context_textColor}}" textSize="15" textStyle="normal" gravity="center"/>
-            <card  h="5" marginTop="10" cardCornerRadius="0dp"
-            cardElevation="0dp" gravity="center_vertical">
-            <vertical padding="0 0" h="auto">
-            </vertical>
-            <View bg="#FF4285F4" h="*" w="*"/>//卡片颜色1
-            </card>
-            <text id="Ttip"  color="{{context_textColor}}" textSize="15" textStyle="normal" marginTop="5" gravity="center"/>
-            <card  h="5" margin="0 10 0 10" cardCornerRadius="0dp"
-            cardElevation="0dp" gravity="center_vertical">
-            <vertical padding="0 0" h="auto">
-            </vertical>
-            <View bg="#FF9D41F9" h="*" w="*"/>//卡片颜色1
-            </card>
-            <button id="TESTcode" text="代码测试台" color="#FFFFFF" bg="#90A4AE" textSize="15" textStyle="normal" margin="5 5 5 200" gravity="center"/>
-            </vertical>
-            <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-            margin="0 0 15 120" layout_gravity="bottom|right" tint="#ffffff" />
-            </frame>
-            </ScrollView>
-        );
-        ui.AppVision.text(app.versionName + "(" + app.versionCode + ")");
-        ui.OpenSource.text("Github：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
-        ui.DeviceInformation.text("设备品牌/型号：" + device.brand + "(" + device.model + ")\n" + "安卓版本：" + device.release + device.baseOS + "\n修订版本号：" + device.buildId + "\n设备分辨率：" + device.height + "*" + device.width);
-        ui.Ttip.text("此软件/脚本均为兴趣制作，仅供学习参考交流使用\n请勿将本软件/脚本用于任何商业用途");
-        ui.Back.click(() => {
-            engines.execScript(mainUi());
-        });
-        ui.TESTcode.click(() => {
-            TESTCode();
-        });
-
-        function TESTCode() {
-            ui.statusBarColor("#000000"); //通知栏颜色
-            ui.layout(
-                <vertical bg="#000000">
-                    <!-- lines属性用来设置输入框的行数 -->
-                    <text text="请输入要运行的代码" textColor="white" textSize="16sp" marginTop="16"/>
-                    <input id="x" color="#FFFFFF" lines="20"/>
-                    //水平线性布局
-                    <linear orientation="horizontal" align="center" margin="5 0 5 0" weightSum="10">
-                        <button id="ru" layout_weight="5" h="50" bg="#4CAF50" color="#FFFFFF" marginRight="5" text="运行" gravity="center"/>
-                        <button id="qk" layout_weight="5" h="50" bg="#FF5722" color="#FFFFFF" marginLeft="5" text="清空" gravity="center"/>
-                    </linear>
-                    <button id="con" w="*" h="50" bg="#2196F3" color="#FFFFFF" margin="5 5 5 0" text="打开控制台" gravity="center"/>
-                    <text text="* 使用 Auto.js(4.0) 作为脚本引擎" color="#9e9e9e" textSize="10" marginTop="10"gravity="center"/>
-                    <fab id="Back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-                    margin="10" layout_gravity="bottom|right" tint="#ffffff" />
-                </vertical>
-
-            );
-            ui.ru.on("click", () => {
-                var text = ui.x.getText();
-                if (text != "") {
-                    engines.execScript("测试运行", text);
-                } else {
-                    toastLog("没有输入任何代码");
+                dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
+                dialogs_js();
+            }
+        } catch (e) {
+            dialogs.alert("未授予本软件“存储权限”", "软件内的设置存储都需要“存储权限”才能正常保存设置，您需要自行授予本软件“存储权限”才能正常使用设置保存功能");
+            dialogs_js();
+        }
+    } else if (i == 5) {
+        toastLog(options_[i]);
+        context_Manualstate = 1;
+        Set_Back_way() //设置手动模式
+    } else if (i == 6) {
+        toastLog(options_[i]);
+        context_Manualstate = 0;
+        if (files.exists("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt") == true) {
+            var z = files.read("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt");
+            if (z != "吐司" && z != "日志") {
+                alert("“吐司or日志”文件错误，已尝试删除错误文件");
+                try {
+                    files.remove("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt");
+                } catch (e) {
+                    toastLog("删除“吐司or日志”文件失败！");
                 }
-            });
-            ui.qk.on("click", () => {
-                dialogs.confirm("您确定要清空吗？", "此操作将无法撤销").then(value => {
-                    if (value == true) {
-                        ui.x.text("");
-                        toastLog("已清空");
+                var Z = "";
+            } else {
+                var Z = "当前脚本使用：" + z + "\n";
+            }
+        } else {
+            var Z = "";
+        }
+        let da = dialogs.select(Z + "请选择一个选项", "使用吐司（Toast）", "使用脚本悬浮日志")
+        if (da == 0) {
+            toastLog("您选择了：使用吐司");
+            try {
+                var T = 0;
+                files.createWithDirs("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt");
+                files.write("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt", "吐司");
+            } catch (e) {
+                log("未授予存储权限或存储权限错误，当前设置为吐司");
+                var T = 0;
+            }
+        } else if (da == 1) {
+            toastLog("您选择了：使用悬浮日志");
+            try {
+                var T = 1;
+                files.createWithDirs("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt");
+                files.write("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt", "日志");
+            } catch (e) {
+                log("未授予存储权限或存储权限错误，开启悬浮日志");
+                var T = 1;
+            }
+        }
+        dialogs_js();
+    }
+}
+
+
+
+function Set_Back_way() {
+    try {
+        if (files.exists("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt") == true) {
+            context_i_back = files.read("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt");
+            log("返回方法：" + context_i_back);
+            if (context_i_back > 2) {
+                try {
+                    context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/喵币++/滑动返回速度.txt")
+                    log("滑动返回速度：" + context_gestures_speed)
+                } catch (e) {
+                    log("上次未完成滑动返回速度设置");
+                    files.remove("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt");
+                    Set_Back_way();
+                }
+            }
+        } else {
+            //💟🕎⛎设定返回方法及滑动速度的代码
+            var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+            var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
+            if (i_back >= 0) {
+                toastLog("您选择的是" + options_hq[i_back]);
+                sleep(2000);
+                var options_select = options_hq[i_back];
+                context_i_back = i_back;
+                files.createWithDirs("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt");
+                files.write("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt", context_i_back);
+            } else {
+                toastLog("没有选择返回方法！");
+                device.cancelKeepingAwake();
+            }
+            if (i_back > 2) {
+                var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
+                var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
+                if (iix < 0) {
+                    toastLog("没有选择滑动速度");
+                    Set_Back_way();
+                } else {
+                    if (iix == 0) {
+                        context_gestures_speed = 200;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
                     }
-                })
-            });
-            ui.con.on("click", () => {
-                threads.start(function() {
-                    console.show();
-                });
-            });
-            ui.Back.click(() => {
-                AboutApp();
-            });
+                    if (iix == 1) {
+                        context_gestures_speed = 500;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 2) {
+                        context_gestures_speed = 800;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 3) {
+                        context_gestures_speed = 1000;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 4) {
+                        context_gestures_speed = 1500;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    if (iix == 5) {
+                        context_gestures_speed = 2000;
+                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                        sleep(2000);
+                    }
+                    files.createWithDirs("/storage/emulated/0/OrangeJs/喵币++/滑动返回速度.txt");
+                    files.write("/storage/emulated/0/OrangeJs/喵币++/滑动返回速度.txt", context_gestures_speed);
+                }
+            }
+            if (files.exists("/storage/emulated/0/OrangeJs/喵币++/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/喵币++/X返回方法设置.txt") == true) {
+                log("删除");
+                files.remove("/storage/emulated/0/OrangeJs/喵币++/X返回方法设置.txt");
+                dialogs_js();
+            } else if (files.exists("/storage/emulated/0/OrangeJs/喵币++/X返回方法设置.txt") == true) {
+                log("重命名");
+                files.rename("/storage/emulated/0/OrangeJs/喵币++/X返回方法设置.txt", "返回方法设置.txt");
+                dialogs_js();
+            }
+        }
+    } catch (e) {
+        log("未授予“存储权限”");
+        var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
+        var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
+        if (i_back >= 0) {
+            toastLog("您选择的是" + options_hq[i_back]);
+            sleep(2000);
+            var options_select = options_hq[i_back];
+            context_i_back = i_back;
+        } else {
+            toastLog("没有选择返回方法！");
+            device.cancelKeepingAwake();
+        }
+        if (i_back > 2) {
+            var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
+            var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
+            if (iix < 0) {
+                toastLog("没有选择滑动速度");
+                Set_Back_way();
+            } else {
+                if (iix == 0) {
+                    context_gestures_speed = 200;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 1) {
+                    context_gestures_speed = 500;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 2) {
+                    context_gestures_speed = 800;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 3) {
+                    context_gestures_speed = 1000;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 4) {
+                    context_gestures_speed = 1500;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+                if (iix == 5) {
+                    context_gestures_speed = 2000;
+                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
+                    sleep(2000);
+                }
+            }
         }
     }
+}
 
+sleep(1000);
+toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
+auto.waitFor();
+toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+if (files.exists("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt") == true) {
+    try {
+        let z = files.read("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt");
+        if (z == "吐司") {
+            var T = 0;
+        } else if (z == "日志") {
+            var T = 1;
+        } else {
+            toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
+            try {
+                files.remove("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt");
+            } catch (e) {
+                toastLog("删除“吐司or日志”文件失败！");
+            }
+            var T = 1;
+        }
+    } catch (e) {
+        if (T == null) {
+            log("未授予存储权限或存储权限错误，默认开启悬浮日志");
+            var T = 1;
+        }
+    }
+} else {
+    try {
+        files.createWithDirs("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt");
+        files.write("/storage/emulated/0/OrangeJs/喵币++/吐司or日志.txt", "日志");
+        var T = 1;
+        log("默认使用日志，如需更改请在主菜单进行");
+    } catch (e) {
+        log("未授予存储权限或存储权限错误，默认开启悬浮日志");
+        var T = 1;
+    }
+}
 
-    ui.JoinQQGroup.click(() => {
-        engines.execScript("加入QQ群", "JoinQQGroup();\n" + JoinQQGroup.toString());
-    });
+function wait_Time_over() {
+    var i_wait = dialogs.singleChoice("🕗 定时运行\n\n(＾∇＾)ﾉ♪\n请选择一个选项\n计时结束会自动运行", ["1分钟后运行", "5分钟后运行", "10分钟后运行", "30分钟后运行", "一小时后运行", "两小时后运行", "三小时后运行", "五小时后运行", "八小时后运行"], 2);
+    if (i_wait < 0) {
+        toast("您取消了选择");
+        device.cancelKeepingAwake();
+        dialogs_js();
+    }
+    if (i_wait >= 0) {
+        context_i_wait = i_wait;
+    }
+    if (i_wait == 0) {
+        var choice_confirm = dialogs.confirm("您选择了1分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 1) {
+        var choice_confirm = dialogs.confirm("您选择了5分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 2) {
+        var choice_confirm = dialogs.confirm("您选择了10分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 3) {
+        var choice_confirm = dialogs.confirm("您选择了30分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 4) {
+        var choice_confirm = dialogs.confirm("您选择了一小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 5) {
+        var choice_confirm = dialogs.confirm("您选择了两小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 6) {
+        var choice_confirm = dialogs.confirm("您选择了三小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 7) {
+        var choice_confirm = dialogs.confirm("您选择了五小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+    if (i_wait == 8) {
+        var choice_confirm = dialogs.confirm("您选择了八小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
+        if (choice_confirm == false) {
+            toastLog("取消了定时运行确认");
+            wait_Time_over();
+        } else {
+            Set_Back_way();
+            waiting_time();
+        }
+    }
+}
 
-    function JoinQQGroup() {
-        var options = ["使用QQ加群", "使用TIM加群"]
-        var i = dialogs.select("请选择", options);
+function waiting_time() {
+    //计时运行脚本
+    if (context_i_wait == 0) {
+        var Seconds = 60;
+        for (Seconds == 60; Seconds > 0; Seconds--) {
+            console.warn("【定时运行】计时中……\n" + Seconds + "秒后开始运行");
+            sleep(1000);
+        }
+    }
+    if (context_i_wait == 1) {
+        var Minutes = 4;
+        for (Minutes == 4; Minutes >= 0; Minutes--) {
+            if (Minutes >= 0) {
+                var Seconds = 60;
+                for (Seconds == 60; Seconds > 0; Seconds--) {
+                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                    sleep(1000);
+                }
+            }
+        }
+    }
+    if (context_i_wait == 2) {
+        var Minutes = 9;
+        for (Minutes == 9; Minutes >= 0; Minutes--) {
+            if (Minutes >= 0) {
+                var Seconds = 60;
+                for (Seconds == 60; Seconds > 0; Seconds--) {
+                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                    sleep(1000);
+                }
+            }
+        }
+    }
+    if (context_i_wait == 3) {
+        var Minutes = 29;
+        for (Minutes == 29; Minutes >= 0; Minutes--) {
+            if (Minutes >= 0) {
+                var Seconds = 60;
+                for (Seconds == 60; Seconds > 0; Seconds--) {
+                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                    sleep(1000);
+                }
+            }
+        }
+    }
+    if (context_i_wait == 4) {
+        var Minutes = 59;
+        for (Minutes == 59; Minutes >= 0; Minutes--) {
+            if (Minutes >= 0) {
+                var Seconds = 60;
+                for (Seconds == 60; Seconds > 0; Seconds--) {
+                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                    sleep(1000);
+                }
+            }
+        }
+    }
+    if (context_i_wait == 5) {
+        var Hours = 1;
+        for (Hours == 1; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 6) {
+        var Hours = 2;
+        for (Hours == 2; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 7) {
+        var Hours = 4;
+        for (Hours == 4; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+    if (context_i_wait == 8) {
+        var Hours = 7;
+        for (Hours == 7; Hours >= 0; Hours--) {
+            var Minutes = 59;
+            for (Minutes == 59; Minutes >= 0; Minutes--) {
+                if (Minutes >= 0) {
+                    var Seconds = 60;
+                    for (Seconds == 60; Seconds > 0; Seconds--) {
+                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
+                        sleep(1000);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function DS() {
+    var While = 1;
+    while (While == 1) {
+        var 时 = dialogs.rawInput("🔵定时→定分→定秒→确认\n\n请输入0-23的小时数\n到此时间脚本会自动运行");
+        if (时 == null) {
+            //没有输入
+            toastLog("没有输入！返回主菜单");
+            var While = 0;
+            dialogs_js();
+        } else if (时 == "") {
+            //没有输入
+            toastLog("没有输入！返回主菜单");
+            var While = 0;
+            dialogs_js();
+        } else if (时 >= 0) {
+            if (时 < 24) {
+                var While = 2;
+                while (While == 2) {
+                    var 分 = dialogs.rawInput("✔️定时🔵定分→定秒→确认\n\n请输入0-59的分钟数\n\n" + 时 + "时" + "❓分❓秒");
+                    if (分 == null) {
+                        toastLog("没有输入！返回上级");
+                        var While = 1;
+                    } else if (分 == null) {
+                        toastLog("没有输入！返回上级");
+                        var While = 1;
+                    } else if (分 >= 0) {
+                        if (分 < 60) {
+                            var While = 3;
+                            while (While == 3) {
+                                var 秒 = dialogs.rawInput("✔️定时✔️定分🔵定秒→确认\n\n请输入0-59的秒数\n\n" + 时 + "时" + 分 + "分❓秒");
+                                if (秒 == null) {
+                                    toastLog("没有输入！返回上级");
+                                    var While = 2;
+                                } else if (秒 == null) {
+                                    toastLog("没有输入！返回上级");
+                                    var While = 2;
+                                } else if (秒 >= 0) {
+                                    if (秒 < 60) {
+                                        var QR = dialogs.confirm("脚本将在\n⏰" + 时 + "时" + 分 + "分" + 秒 + "秒\n准时运行！", "如需更改请点击取消\n点击确定定时，定时状态可以在日志中查看");
+                                        if (QR == false) {
+                                            //返回主菜单
+                                            var While = 1;
+                                        } else {
+                                            var While = 0;
+                                            //仅定时运行一次
+                                            while (true) {
+                                                var myDate = new Date();
+                                                if (myDate.getHours() == 时 && myDate.getMinutes() == 分 && myDate.getSeconds() == 秒) {
+                                                    console.warn("时间到！开始运行脚本！" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒");
+                                                    device.wakeUpIfNeeded();
+                                                    break;
+                                                }
+                                                sleep(1000);
+                                                console.info("现在是" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒\n脚本将在" + 时 + "时" + 分 + "分" + 秒 + "秒，准时运行！\n请保持手机处于工作状态，不要锁屏关机等");
+                                            }
+                                        }
+                                    } else {
+                                        toastLog("输入错误！秒必须小于等于60");
+                                    }
+                                } else {
+                                    toastLog("输入错误！秒必须大于等于0");
+                                }
+                            }
+                        } else {
+                            toastLog("输入错误！分钟必须小于60");
+                        }
+                    } else {
+                        toastLog("输入错误！分钟必须大于等于0");
+                    }
+                }
+            } else {
+                toastLog("输入错误！时间必须小于24");
+            }
+        } else {
+            toastLog("输入错误！时间必须大于等于0");
+        }
+    }
+}
+
+//下面是悬浮窗
+var window = floaty.window(
+    <frame>
+        <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336"/>
+    </frame>
+);
+setInterval(() => {}, 1000);
+var execution = null;
+//记录按键被按下时的触摸坐标
+var x = 0,
+    y = 0;
+//记录按键被按下时的悬浮窗位置
+var windowX, windowY;
+//记录按键被按下的时间以便判断长按等动作
+var downTime;
+window.action.setOnTouchListener(function(view, event) {
+    switch (event.getAction()) {
+        case event.ACTION_DOWN:
+            x = event.getRawX();
+            y = event.getRawY();
+            windowX = window.getX();
+            windowY = window.getY();
+            downTime = new Date().getTime();
+            return true;
+        case event.ACTION_MOVE:
+            //移动手指时调整悬浮窗位置
+            window.setPosition(windowX + (event.getRawX() - x),
+                windowY + (event.getRawY() - y));
+            //如果按下的时间超过1.5秒判断为长按，退出脚本
+            if (new Date().getTime() - downTime > 1500) {
+                toast("长按可以移动位置哦～");
+            }
+            return true;
+        case event.ACTION_UP:
+            //手指弹起时如果偏移很小则判断为点击
+            if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
+                onClick();
+            }
+            return true;
+    }
+    return true;
+});
+
+function onClick() {
+    dialogs.alert("已停止运行脚本！");
+    log("用户点击了停止按钮");
+    exit();
+}
+
+function Justback() {
+    //💝💝💝💝💝使用用户设定的返回方法
+    if (context_i_back == 0) {
+        sleep(1000);
+        toastLog("使用普通的返回");
+        back();
+        sleep(2000);
+    }
+    if (context_i_back == 1) {
+        sleep(1000);
+        toastLog("使用ROOT返回\n请确保已给ROOT权限！");
+        Back();
+        sleep(2000);
+    }
+    if (context_i_back == 2) {
+        openInTask();
+    }
+    if (context_i_back == 3) {
+        sleep(1000);
+        toastLog("从屏幕中间向从左向内滑动来返回");
+        gestures([context_gestures_speed, [0, height / 2],
+            [500, height / 2]
+        ]);
+        sleep(2000);
+    }
+    if (context_i_back == 5) {
+        sleep(1000);
+        toastLog("从屏幕左侧下方向上滑动来返回");
+        gestures([context_gestures_speed, [width / 2 - 300, height - 1],
+            [width / 2 - 300, height - 500]
+        ]);
+        sleep(2000);
+    }
+    if (context_i_back == 4) {
+        sleep(1000);
+        toastLog("从屏幕中间向从右向内滑动来返回");
+        gestures([context_gestures_speed, [width - 1, height / 2],
+            [width - 500, height / 2]
+        ]);
+        sleep(2000);
+    }
+    if (context_i_back == 6) {
+        sleep(1000);
+        toastLog("从屏幕左侧下面向上面滑动来返回");
+        gestures([context_gestures_speed, [width / 2 + 300, height - 1],
+            [width / 2 + 300, height - 500]
+        ]);
+        sleep(2000);
+    }
+}
+
+if (T == 1) {
+    log("使用“悬浮日志”");
+
+    function toastLog(message) {
+        log(message);
+        var myDate = new Date();
+        ui.run(() => {
+            w.WZ.setText(myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒：" + message + "\n" + w.WZ.getText());
+            return true;
+        });
+    }
+    var w = floaty.rawWindow(
+        <card bg="#80000000">
+            <vertical align="center">
+                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
+                <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
+                <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
+            </vertical>
+        </card>
+    );
+    w.setSize(device.width, 500);
+    w.setTouchable(false);
+    w.setPosition(0, device.height - 500);
+} else if (T == 0) {
+    log("使用脚本自带“吐司”");
+}
+
+function openInTask() {
+    while (true) {
+        if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("我的淘宝").findOnce() != null && className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().childCount() > 4 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).childCount() > 0 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).childCount() > 0 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() > 0 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() - 1).childCount() > 2 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() - 1).child(2).text() == "瓜分10亿") {
+            let a = className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() - 1).child(0);
+            if (a.clickable() == true) {
+                a.click();
+                toastLog("已尝试盲点“瓜分10亿”按钮");
+                sleep(2000);
+            } else {
+                let b = a.bounds();
+                click(b.centerX(), b.centerY());
+                toastLog("已尝试点击“瓜分10亿”按钮");
+                sleep(2000);
+            }
+            break;
+        } else if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("我的淘宝").findOnce() != null) {
+            className("android.widget.FrameLayout").desc("我的淘宝").findOnce().click();
+            toastLog("已尝试点击淘宝主页“我的淘宝”按钮");
+            sleep(2000);
+            break;
+        } else if (currentPackage() != "com.taobao.taobao") {
+            toastLog("当前未处于淘宝APP中，正在重新打开淘宝……");
+            console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+            app.startActivity({
+                action: "android.intent.action.MAIN",
+                packageName: "com.taobao.taobao",
+                className: "com.taobao.tao.welcome.Welcome",
+                category: ["android.intent.category.LAUNCHER"],
+                flags: ["activity_new_task"]
+            });
+            sleep(2000);
+        } else {
+            if (className("android.widget.Button").text("返回").clickable(true).findOnce() != null) {
+                className("android.widget.Button").text("返回").clickable(true).findOnce().click();
+                toastLog("已尝试盲点“返回”按钮");
+            } else if (className("android.widget.ImageView").clickable(true).desc("返回上一页").findOnce() != null) {
+                className("android.widget.ImageView").clickable(true).desc("返回上一页").findOnce().click();
+                toastLog("已尝试盲点“返回上一页面”按钮");
+            } else if (className("android.widget.ImageButton").desc("转到上一层级").clickable(true).findOnce() != null) {
+                className("android.widget.ImageButton").desc("转到上一层级").clickable(true).findOnce().click();
+                toastLog("已盲点“转到上一层级”按钮");
+            } else {
+                Justback();
+            }
+            sleep(2000);
+        }
+    }
+    for (var d = 10; d > 0; d--) {
+        if (className("android.widget.Button").text("做任务，领喵币").findOnce() != null) {
+            toastLog("已成功处于“618列车”活动界面");
+            break;
+        } else if (currentActivity() == "com.taobao.browser.BrowserActivity") {
+            toastLog("正在等待“全民618列车”活动界面加载，剩余" + d + "秒……");
+            sleep(2000);
+        } else {
+            var d = 0;
+            toastLog("当前未处于“全民618列车”活动加载界面，正在重试……");
+            openInTask();
+            break;
+        }
+    }
+}
+
+function click_CancelUpdateButton() {
+    if (className("android.widget.TextView").text("提示").findOnce() != null &&
+        className("android.widget.TextView").text("提示").findOnce().parent().child(className("android.widget.TextView").text("提示").findOnce().parent().childCount() - 1).className() == "android.widget.LinearLayout" &&
+        className("android.widget.TextView").text("提示").findOnce().parent().child(className("android.widget.TextView").text("提示").findOnce().parent().childCount() - 1).childCount() > 0 &&
+        className("android.widget.TextView").text("提示").findOnce().parent().child(className("android.widget.TextView").text("提示").findOnce().parent().childCount() - 1).child(0).childCount() > 0 &&
+        className("android.widget.TextView").text("提示").findOnce().parent().child(className("android.widget.TextView").text("提示").findOnce().parent().childCount() - 1).child(0).child(0).text() == "取消") {
+        let a = className("android.widget.TextView").text("提示").findOnce().parent().child(className("android.widget.TextView").text("提示").findOnce().parent().childCount() - 1).child(0).child(0);
+        if (a.clickable() == true) {
+            a.click();
+            toastLog("已尝试盲点“取消升级”按钮");
+        } else {
+            let b = a.bounds();
+            click(b.centerX(), b.centerY());
+            toastLog("已尝试点击“取消升级”按钮");
+        }
+        sleep(2000);
+    }
+}
+
+function DoTask() {
+    click_CancelUpdateButton();
+    if (className("android.widget.Button").text("收下祝福").findOnce() != null) {
+        className("android.widget.Button").text("收下祝福").findOnce().click();
+        toastLog("已尝试点击“收下祝福”按钮");
+        sleep(2000);
+    }
+    if (className("android.widget.Button").text("做任务，领喵币").findOnce() != null) {
+        className("android.widget.Button").text("做任务，领喵币").findOnce().click();
+        toastLog("已尝试点击“做任务，领喵币”按钮");
+        sleep(2000);
+    }
+    if (className("android.widget.Button").text("做任务，领喵币").findOnce() != null && className("android.widget.Button").text("做任务，领喵币").findOnce().parent().parent().parent().parent().child(6).id() == "6871969950") {
+        var i = 0;
+        while (true) {
+            click_CancelUpdateButton();
+            try {
+                var A = className("android.widget.Button").text("做任务，领喵币").findOnce().parent().parent().parent().parent().child(6).child(0).child(0);
+                var Close = A.child(A.childCount() - 1);
+                var List = A.child(0).child(A.child(0).childCount() - 1);
+                if (A.child(0).child(A.child(0).childCount() - 2).text() == "签到") {
+                    A.child(0).child(A.child(0).childCount() - 2).click();
+                    toastLog("已尝试点击“签到”按钮");
+                    sleep(2000);
+                }
+            } catch (e) {
+                toastLog("当前未处于淘宝618列车活动界面，正在重新打开");
+                console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+                openInTask();
+                DoTask();
+            }
+            if (i >= List.childCount()) {
+                break;
+            } else {
+                let RwTitle = List.child(i).child(0).text();
+                let Button = List.child(i).child(1);
+                now = RwTitle.substring(RwTitle.indexOf("(") + 1, RwTitle.indexOf("/") + 0);
+                xz = RwTitle.substring(RwTitle.indexOf("/") + 1, RwTitle.indexOf(")") + 0);
+                log(RwTitle, Button.text(), Button.clickable(), "当前：" + now, "上限：" + xz);
+                if (RwTitle.search("邀请好友") < 0 && RwTitle.search("天猫农场") < 0 && RwTitle.search("红包省钱卡") < 0 && now != xz) {
+                    if (Button.clickable() == true) {
+                        Button.click();
+                        toastLog("已尝试盲点“" + Button.text() + "”按钮");
+                    } else {
+                        let a = Button.bounds();
+                        click(a.centerX(), a.centerY());
+                        toastLog("已尝试点击“" + Button.text() + "”按钮");
+                    }
+                    sleep(3000);
+                    if (className("android.widget.Button").text("做任务，领喵币").findOnce() == null) {
+                        for (let deng = 15; deng > 0; deng--) {
+                            if (text("网络竟然崩溃了").findOnce() != null && className("android.widget.Button").text("刷新").clickable(true).findOnce() != null) {
+                                className("android.widget.Button").text("刷新").clickable(true).findOnce().click();
+                                toastLog("网络竟然崩溃了，已尝试点击“刷新”按钮");
+                                sleep(3000);
+                            }
+                            if (className("android.view.View").desc(" 任务已完成").findOnce() != null || className("android.view.View").desc(" 任务完成").findOnce() != null || className("android.view.View").text("任务已完成").findOnce() != null) {
+                                toastLog("任务已完成");
+                                break;
+                            } else {
+                                toastLog("正在完成“" + Button.text() + "（" + now + "/" + xz + "）”任务，剩余" + deng + "秒……");
+                                sleep(2000);
+                            }
+                        }
+                        if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
+                            className("android.widget.ImageView").desc("返回").findOnce().click();
+                            toastLog("已尝试盲点“返回”按钮");
+                            sleep(2000);
+                        } else {
+                            Justback();
+                            sleep(2000);
+                        }
+                    }
+                } else {
+                    if (now == xz) {
+                        toastLog("【任务已完成】" + RwTitle);
+                    } else {
+                        toastLog("【已跳过】" + RwTitle);
+                    }
+                    i++;
+                }
+            }
+        }
+        alert("喵币++：\n脚本已运行完成");
+        exit();
+    }
+}
+firstD();
+
+function firstD() {
+    if (context_Manualstate == 1) {
+        toastLog("已手动模式运行脚本");
+        var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
+        var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开淘宝APP至活动页”\n\n请选择脚本等待您打开淘宝的时间", options);
         if (i >= 0) {
             toast("您选择的是" + options[i]);
-        } else {
+        } else if (i < 0) {
             toastLog("您取消了选择");
-            exit();
+            dialogs_js();
+            firstD();
         }
-        if (i == 1) {
-            app.startActivity({
-                action: "android.intent.action.VIEW",
-                packageName: "com.tencent.tim",
-                className: "com.tencent.mobileqq.activity.JumpActivity",
-                data: app.parseUri("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3Dv5ohaWahdOfqDmyX7L_a196dl3K-SX5_"),
-                flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
-            });
-        } else if (i == 0) {
-            app.startActivity({
-                action: "android.intent.action.VIEW",
-                packageName: "com.tencent.mobileqq",
-                className: "com.tencent.mobileqq.activity.JumpActivity",
-                data: app.parseUri("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3Dv5ohaWahdOfqDmyX7L_a196dl3K-SX5_"),
-                flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
-            });
+        if (i == 0) {
+            //等待20秒
+            var deng = 20;
+        } else if (i == 1) {
+            //等待30秒
+            var deng = 30;
+        } else if (i == 2) {
+            //等待50秒
+            var deng = 50;
+        } else if (i == 3) {
+            //等待60秒
+            var deng = 60;
+        } else if (i == 4) {
+            //等待10秒
+            var deng = 10;
         }
-    }
-
-
-    ui.text.text("权限设置");
-
-    ui.xfc_text.text("停止全部脚本");
-
-    ui.Privacy_Security.click(() => {
-
-    });
-
-    ui.xfc_text.click(() => {
-        engines.stopAllAndToast();
-    });
-
-
-    ui.changeColor.click(() => {
-        if (context_DayOrNight == 1) {
-            context_DayOrNight = 0;
-        } else {
-            context_DayOrNight = 1;
+        for (deng = deng; deng > 0; deng--) {
+            toastLog("请打开淘宝至618列车的主界面\n剩余" + deng + "秒后运行脚本...");
+            sleep(1111);
         }
-        engines.execScript(events.removeAllListeners(), mainUi());
-    });
-
-
-    ui.Privacy_Security.click(() => {
-        engines.execScript("隐私与安全", "\"ui\";SP();" + SP.toString());
-    });
-
-}
-
-function SP() {
-    events.removeAllListeners();
-    ui.statusBarColor("#2196F3"); //通知栏颜色
-    //Not pink色是#DFC8C6
-    ui.layout(
-        <frame background="#2196F3">//全局背景颜色
-            <vertical align="left" paddingTop="5" margin="20 5 20 0">
-                <linear orientation="horizontal" align="left" margin="0" paddingTop="0">
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png" w="40"h="50"/>//应用logo
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" marginLeft="10" w="105"h="50"/>//黑色logo
-                </linear>
-                <ScrollView>
-                    <linear orientation="vertical" align="left" margin="0" paddingTop="0">
-                        <text text="隐私与安全（完善中……）" textSize="20" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text text="文档日期:2020年1月4日" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans"/>
-                        <text id="Privacy" color="#F5F5F5" textStyle="bold" typeface="sans">
-                        </text>
-                        <text id="Q0" text="软件需要什么权限？" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text id="A0" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#FFFFFF"/>
-                        <text id="Q1" text="为什么要收集信息？" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text id="A1" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#FFFFFF"/>
-                        <text id="Q2" text="本软件会收集哪些信息？" textSize="15" color="#FFFFFF" textStyle="bold" typeface="sans" paddingTop="5"/>
-                        <text id="A2" text="（↑请点击上方问题查看答案）" textSize="15" typeface="sans" color="#FFFFFF"/>
-                        
-                    </linear>
-                </ScrollView>
-            </vertical>
-            <fab id="back" w="auto" h="auto" src="@drawable/ic_arrow_back_black_48dp"
-            margin="16" layout_gravity="bottom|right" tint="#ffffff" />
-        </frame>
-    );
-
-    ui.Privacy.text("隐私安全事关重大！" +
-        "\n因此，在开发本软件、脚本以及各项功能时，我都在考虑该如何合理收集信息以及保持信息安全");
-    ui.Q0.click(() => { //软件需要什么权限?
-        ui.A0.text("软件的正常运行需要“存储空间”权限！因为本软件/脚本内的设置项目都是以文件方式保存在您手机中的。" +
-            "\n\n脚本的运行需要“无障碍权限”来执行各种自动操作，例如:点击，滑动，获取文字等。" +
-            "\n\n“悬浮窗权限”是为了显示“停止运行脚本”等需要此权限才能使用的悬浮控件" +
-            "\n\n“联网权限”是本软件最重要的权限，软件的所有源码存储在网络，您必须联网获取后才能正常运行。这样的设计是为了方便更新以及提升体验，因此您无需操作即可同步最新代码");
-
-    });
-    ui.back.click(() => {
-        ui.finish();
-    });
-    ui.Q1.click(() => { //为什么要收集信息？
-        ui.A1.text("");
-    });
-    ui.Q2.click(() => { //本软件会收集哪些信息?
-        ui.A2.text("本软件将收集的信息分为两类，分别为“个人信息（可辨识您身份的信息，如：姓名、性别、电话、QQ、IP地址等）" +
-            "”与“非个人信息（除个人信息之外的信息，例如：手机品牌、型号、分辨率、系统版本等）”，但无论是哪种信息本软件都是在必要前提下再进行收集并保存在您的设备中的，收集的所有信息都绝对不会在未经您允许的情况下传播给任何人" +
-            "");
-    });
-
-}
-//保存本地数据
-function setStorageData(name, key, value) {
-    const storage = storages.create(name);
-    storage.put(key, value);
-};
-
-//读取本地数据
-function getStorageData(name, key) {
-    const storage = storages.create(name);
-    if (storage.contains(key)) {
-        return storage.get(key, "");
-    };
-    //默认返回undefined
-};
-
-//删除本地数据
-function delStorageData(name, key) {
-    const storage = storages.create(name);
-    if (storage.contains(key)) {
-        storage.remove(key);
-    };
-};
-
-function ZdddgShow() {
-    function setStorageData(name, key, value) {
-        const storage = storages.create(name);
-        storage.put(key, value);
-    };
-
-    ui.layout(
-        <scroll bg="#FFFFFF">
-            <frame id="main" background="#FFFFFF">//全局背景颜色
-                <vertical align="center" margin="0">
-                    <linear orientation="horizontal" gravity="center" margin="0 30 0 0">
-                        <linear w="30" h="30">
-                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png"/>
-                        </linear>
-                        <linear w="80" h="28" margin="5 0 0 0">
-                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png"/>
-                        </linear>
-                    </linear>
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_05-22-08.02.08.jpg" layout_gravity="center" w="420" h="300"/>
-                    <text id="title" textSize="25" textStyle="bold" textColor="#000000" layout_gravity="center" gravity="left" margin="40 5"/>
-                    <text id="a" textSize="10" textColor="#000000" textStyle="italic" layout_gravity="center" gravity="left" margin="42 5"/>
-                    <text id="ScriptIntroduce" textSize="13" textColor="#000000" layout_gravity="center" gravity="left" margin="42 5"/>
-                    <text id="OpenSource" autoLink="web" color="#000000" textSize="13" layout_gravity="center" textStyle="normal" gravity="left"margin="42 5"/>
-                    <card h="42" cardCornerRadius="5dp" cardElevation="0dp" layout_gravity="center" margin="35"cardBackgroundColor="#03A9F4">
-                        <text id="IKnowIt" text="我知道了" textStyle="bold" textColor="#FFFFFF" gravity="center" textSize="12sp" foreground="?attr/selectableItemBackground" clickable="true"/>
-                    </card>
-                </vertical>
-            </frame>
-        </scroll>
-    );
-    importPackage(android.text);
-    importPackage(android.text.style);
-
-    function highlightText(text, start, length, color) {
-        if (!(typeof(text) == 'object' && text.getClass().getName() == 'android.text.SpannableStringBuilder')) {
-            text = new SpannableStringBuilder(text);
-        }
-        text.setSpan(new ForegroundColorSpan(colors.parseColor(color)), start, start + length, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        return text;
+        DoTask();
+    } else {
+        openInTask();
+        DoTask();
     }
-
-    function highlightView(view, start, length, color) {
-        view.setText(highlightText(view.text(), start, length, color));
-    }
-
-    function markSearch(view, keywords, color) {
-        let textStr = view.text();
-        let text = textStr;
-        let i = -1;
-        while (i < textStr.length - 1) {
-            i = textStr.indexOf(keywords, i + 1);
-            if (i >= 0) {
-                text = highlightText(text, i, keywords.length, color);
-            } else {
-                break;
-            }
-        }
-        view.setText(text);
-        return text;
-    }
-    ui.IKnowIt.click(() => {
-        setStorageData("ScriptIntroduce", "Zdddg", "true");
-        ui.finish();
-    });
-    ui.title.setText("新脚本！\n“自动叠蛋糕”来啦～");
-    markSearch(ui.title, "新脚本！", "#FE1743");
-    ui.a.setText("Orange Js（橘衫の脚本）现Github Star数已突破100大关！\n感谢各位用户支持，现在本项目迎来第15个脚本“自动叠蛋糕”，欢迎体验");
-    ui.ScriptIntroduce.setText("“自动叠蛋糕”脚本介绍：\n• 支持安卓7及以上系统全分辨率的设备无需ROOT权限运行！\n" +
-        "• 支持自动打开京东app并跳转活动页面完成各项任务并支持识别当前任务数量，任务标题，任务完成状态，蛋糕层数，金币数等多项任务数据\n" +
-        "• 支持自动叠蛋糕及各项任务，并支持识别错误界面自动跳转，防误触，定时/计时运行等功能\n" +
-        "• 支持显示一目了然的“悬浮日志”与“吐司（Toast）”切换，脚本的各项操作尽在掌握\n" +
-        "• 本脚本依然开源，您可自行在项目页中查看脚本代码以了解更多脚本信息");
-    markSearch(ui.ScriptIntroduce, "无需ROOT", "#FE1743");
-    ui.OpenSource.text("项目页：\nGithub：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
-}
-
-function MiaoBiPlusShow() {
-    function setStorageData(name, key, value) {
-        const storage = storages.create(name);
-        storage.put(key, value);
-    };
-
-    ui.layout(
-        <scroll bg="#FFFFFF">
-            <frame id="main" background="#FFFFFF">//全局背景颜色
-                <vertical align="center" margin="0">
-                    <linear orientation="horizontal" gravity="center" margin="0 30 0 0">
-                        <linear w="30" h="30">
-                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-Logo.png"/>
-                        </linear>
-                        <linear w="80" h="28" margin="5 0 0 0">
-                            <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs_logo.png"/>
-                        </linear>
-                    </linear>
-                    <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/%E5%9B%BE%E7%89%87%E7%9B%B4%E9%93%BE/PicsArt_05-30-02.07.11.jpg" layout_gravity="center" w="480" h="300"/>
-                    <text id="title" textSize="25" textStyle="bold" textColor="#000000" layout_gravity="center" gravity="left" margin="40 5"/>
-                    <text id="a" textSize="10" textColor="#000000" textStyle="italic" layout_gravity="center" gravity="left" margin="42 5"/>
-                    <text id="ScriptIntroduce" textSize="13" textColor="#000000" layout_gravity="center" gravity="left" margin="42 5"/>
-                    <text id="OpenSource" autoLink="web" color="#000000" textSize="13" layout_gravity="center" textStyle="normal" gravity="left"margin="42 5"/>
-                    <card h="42" cardCornerRadius="5dp" cardElevation="0dp" layout_gravity="center" margin="35"cardBackgroundColor="#03A9F4">
-                        <text id="IKnowIt" text="我知道了" textStyle="bold" textColor="#FFFFFF" gravity="center" textSize="12sp" foreground="?attr/selectableItemBackground" clickable="true"/>
-                    </card>
-                </vertical>
-            </frame>
-        </scroll>
-    );
-    importPackage(android.text);
-    importPackage(android.text.style);
-
-    function highlightText(text, start, length, color) {
-        if (!(typeof(text) == 'object' && text.getClass().getName() == 'android.text.SpannableStringBuilder')) {
-            text = new SpannableStringBuilder(text);
-        }
-        text.setSpan(new ForegroundColorSpan(colors.parseColor(color)), start, start + length, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        return text;
-    }
-
-    function highlightView(view, start, length, color) {
-        view.setText(highlightText(view.text(), start, length, color));
-    }
-
-    function markSearch(view, keywords, color) {
-        let textStr = view.text();
-        let text = textStr;
-        let i = -1;
-        while (i < textStr.length - 1) {
-            i = textStr.indexOf(keywords, i + 1);
-            if (i >= 0) {
-                text = highlightText(text, i, keywords.length, color);
-            } else {
-                break;
-            }
-        }
-        view.setText(text);
-        return text;
-    }
-    ui.IKnowIt.click(() => {
-        setStorageData("ScriptIntroduce", "MiaoBiPlus", "true");
-        ui.finish();
-    });
-    ui.title.setText("新脚本！\n“喵币++”来啦～");
-    markSearch(ui.title, "新脚本！", "#FE1743");
-    ui.a.setText("Orange Js（橘衫の脚本）第16个脚本“喵币++”来啦～，欢迎体验");
-    ui.ScriptIntroduce.setText("“喵币++”脚本介绍：\n• 支持安卓7及以上系统全分辨率的设备无需ROOT权限运行！\n" +
-        "• 支持自动打开淘宝app并跳转活动页面完成各项任务并支持识别当前任务数量，任务标题，任务完成状态\n" +
-        "• 支持识别错误界面自动跳转，防误触，定时/计时运行等功能\n" +
-        "• 支持显示一目了然的“悬浮日志”与“吐司（Toast）”切换，脚本的各项操作尽在掌握\n" +
-        "• 本脚本依然开源，您可自行在项目页中查看脚本代码以了解更多脚本信息");
-    markSearch(ui.ScriptIntroduce, "无需ROOT", "#FE1743");
-    ui.OpenSource.text("项目页：\nGithub：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
 }
