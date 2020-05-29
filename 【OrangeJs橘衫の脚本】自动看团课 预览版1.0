@@ -1,0 +1,702 @@
+requestScreenCapture(); //请求截屏权限
+//⚠️注意！这个函数↑只能在脚本开始使用，在其他应用界面可能会一闪而过
+context_width = device.width;
+toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
+auto.waitFor();
+toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
+context_DXX = ("“青年大学习”第七季第八期来啦！"); //定义“大学习”标题
+context_TKScript_Vesion = ("预览版preview1.0")
+//下面是悬浮窗
+var window = floaty.window(
+    <frame>
+        <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336"/>
+    </frame>
+);
+
+setInterval(() => {}, 1000);
+var execution = null;
+//记录按键被按下时的触摸坐标
+var x = 0,
+    y = 0;
+//记录按键被按下时的悬浮窗位置
+var windowX, windowY;
+//记录按键被按下的时间以便判断长按等动作
+var downTime;
+window.action.setOnTouchListener(function(view, event) {
+    switch (event.getAction()) {
+        case event.ACTION_DOWN:
+            x = event.getRawX();
+            y = event.getRawY();
+            windowX = window.getX();
+            windowY = window.getY();
+            downTime = new Date().getTime();
+            return true;
+        case event.ACTION_MOVE:
+            //移动手指时调整悬浮窗位置
+            window.setPosition(windowX + (event.getRawX() - x),
+                windowY + (event.getRawY() - y));
+            //如果按下的时间超过1.5秒判断为长按，提示可以移动悬浮窗位置
+            if (new Date().getTime() - downTime > 1500) {
+                toast("长按可以移动位置哦～");
+            }
+            return true;
+        case event.ACTION_UP:
+            //手指弹起时如果偏移很小则判断为点击
+            if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
+                onClick();
+            }
+            return true;
+    }
+    return true;
+});
+
+function onClick() {
+    dialogs.alert("已停止运行脚本！");
+    log("用户点击了停止按钮");
+    engines.stopAllAndToast();
+}
+
+//在运行时就检测是否有设置文件，没有若则进行设置
+var Script_Settings = files.exists("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt");
+log("设置文件" + Script_Settings);
+if (Script_Settings == false) {
+    GZHname();
+    context_GZH = context_Setting_gzh;
+    files.ensureDir("/storage/emulated/0/OrangeJs/团课脚本设置/"); //确保文件夹
+    files.create("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt"); //创建设置文件
+    files.write("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt", context_Setting_gzh + "\n" + context_school + "\n" + context_Twolevelcollege + "\n" + context_Class + "\n" + context_Name); //写入设置
+    Open_In();
+    mainJs();
+} else {
+    var h = open("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt"); //打开设置文件
+    var x = h.readlines();
+    context_Setting_gzh = x[0]; //公众号
+    context_GZH = context_Setting_gzh;
+    context_school = x[1]; //学校名称
+    context_Twolevelcollege = x[2]; //二级学院名称
+    context_Class = x[3]; //班级名称
+    context_Name = x[4]; //姓名
+    Confirm_information();
+    Open_In();
+    mainJs();
+}
+
+function GZHname() {
+    var GZH_Name = ["三秦青年", "青年湖南"];
+    var Setting_gzh = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请选择公众号\n1⃣ — 2 — 3 — 4 — 5", GZH_Name);
+    //将选择的公众号转换为文本
+    if (Setting_gzh >= 0) {
+        context_Setting_gzh = GZH_Name[Setting_gzh];
+        if (context_Setting_gzh == "三秦青年") {
+            context_kuaijieAN = ("青年大学习");
+        } else {
+            context_kuaijieAN = ("null");
+        }
+
+    } else if (Setting_gzh < 0) {
+        toastLog("没有选择！停止运行脚本！");
+        exit();
+    }
+    schoolname();
+}
+
+function schoolname() {
+
+    context_school = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n     —— 自动看团课 ——\n   （" + context_TKScript_Vesion + "）\n─────────────\n请输入学校全称\n1✔️- 2⃣ — 3 — 4 — 5");
+    while (context_school == "") {
+        toastLog("没有输入！请输入学校名称");
+        schoolname();
+    }
+    if (context_school == null) {
+        toastLog("没有输入!返回上一级");
+        GZHname();
+    } else {
+        toastLog("您输入的学校名称:\n" + context_school);
+        TwolevelcollegeName();
+    }
+}
+
+function TwolevelcollegeName() {
+    context_Twolevelcollege = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请输入二级学校名称\n1✔️-2✔️- 3⃣ — 4 — 5");
+    while (context_Twolevelcollege == "") {
+        toastLog("没有输入二级学院名称\n请重新输入");
+        TwolevelcollegeName();
+    }
+    if (context_Twolevelcollege == null) {
+        toastLog("没有输入二级学院名称\n返回上一级");
+        schoolname();
+    } else {
+        toastLog("您输入的二级学院名称为:\n" + context_Twolevelcollege);
+        ClassName();
+    }
+}
+
+function ClassName() {
+    context_Class = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请输入班级\n1✔️-2✔️-3✔️- 4⃣ — 5");
+    while (context_Class == "") {
+        toastLog("没有输入班级名称\n请重新输入");
+        ClassName();
+    }
+    if (context_Class == null) {
+        toastLog("没有输入班级名称\n返回上一级");
+        TwolevelcollegeName();
+    } else {
+        toastLog("您输入的班级名称为:\n" + context_Class);
+        MyName();
+    }
+}
+
+function MyName() {
+    context_Name = dialogs.prompt("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n─────────────\n请输入姓名\n1✔️-2✔️-3✔️-4✔️- 5⃣");
+    while (context_Name == "") {
+        toastLog("没有输入姓名！\n请输入姓名");
+        MyName();
+    }
+    if (context_Name == null) {
+        toastLog("没有输入姓名！\n返回上一级");
+        ClassName();
+    } else {
+        toastLog("您输入的姓名为:\n" + context_Name);
+        Confirm_information();
+    }
+}
+
+function Confirm_information() {
+    var confirm = dialogs.confirm("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n       —— 自动看团课 ——\n     （" + context_TKScript_Vesion + "）\n\n请确认您输入的信息\n─────────────\n团课公众号:" + context_Setting_gzh + "\n学校名称:" + context_school + "\n二级学院名称:" + context_Twolevelcollege + "\n班级名称:" + context_Class + "\n您的姓名:" + context_Name);
+    if (confirm) {
+        if (context_Setting_gzh == "三秦青年") {
+            context_kuaijieAN = ("青年大学习");
+        } else {
+            context_kuaijieAN = ("null");
+        }
+        toastLog("已确认信息无误！\n开始运行脚本...");
+        files.ensureDir("/storage/emulated/0/OrangeJs/团课脚本设置/"); //确保文件夹
+        files.create("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt"); //创建设置文件
+        files.write("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt", context_Setting_gzh + "\n" + context_school + "\n" + context_Twolevelcollege + "\n" + context_Class + "\n" + context_Name); //写入设置
+        var h = open("/storage/emulated/0/OrangeJs/团课脚本设置/设置.txt"); //打开设置文件
+        var x = h.readlines();
+        context_Setting_gzh = x[0]; //公众号
+        context_GZH = context_Setting_gzh;
+        context_school = x[1]; //学校名称
+        context_Twolevelcollege = x[2]; //二级学院名称
+        context_Class = x[3]; //班级名称
+        context_Name = x[4]; //姓名
+    } else {
+        toastLog("取消了信息确认\n重新填写信息");
+        GZHname();
+    }
+}
+
+function Open_In() {
+
+    currentPackage();
+    currentActivity();
+
+    app.startActivity({
+        action: "android.intent.action.MAIN",
+        packageName: "com.tencent.mm",
+        className: "com.tencent.mm.ui.LauncherUI",
+        category: ["android.intent.category.LAUNCHER"],
+        flags: ["activity_new_task"]
+    });
+    var deng_time = 1;
+    while (currentPackage() != "com.tencent.mm") {
+        toastLog("检测到当前并未处于微信中\n等待微信打开……*" + deng_time);
+        deng_time++;
+        sleep(1000);
+    }
+    toastLog("已处于“微信”中");
+    var deng_activity = 1;
+    while (currentActivity() != "com.tencent.mm.ui.LauncherUI") {
+        toastLog("检测到当前非微信主界面\n请手动打开微信主界面……*" + deng_activity);
+        deng_activity++;
+        sleep(1000);
+    }
+    toastLog("已处于“微信主界面”\n继续运行脚本……");
+    //点击通讯录按钮
+    if (id("d9a").exists) {
+        var Dian_TXL = id("d9a").find();
+        var TXL_ = Dian_TXL[1].bounds();
+        click(TXL_.centerX(), TXL_.centerY());
+        sleep(1000);
+    }
+    //点击“加号”按钮
+    if (descContains("更多功能按钮").exists) {
+        var Dian_more = descContains("更多功能按钮").findOne().bounds();
+        click(Dian_more.centerX(), Dian_more.centerY());
+        sleep(1000);
+    }
+    //点击“添加朋友”按钮
+    if (text("添加朋友").exists) {
+        var Dian_AddFriends = text("添加朋友").findOne().bounds();
+        click(Dian_AddFriends.centerX(), Dian_AddFriends.centerY());
+        sleep(1000);
+    }
+    //点击搜索框并输入公众号名称
+    id("l3").waitFor();
+    if (id("l3").exists()) {
+        var Dian_kuang = id("l3").findOne().bounds();
+        click(Dian_kuang.centerX(), Dian_kuang.centerY());
+        sleep(1000);
+        var SetText = setText(context_GZH); //输入公众号文字
+        var Time_false = 1;
+        while (SetText == false) {
+            var SetText = setText(context_GZH); //输入公众号文字
+            toastLog("设置文字失败，重试*" + Time_false);
+            sleep(1000);
+        }
+    }
+    //点击搜索
+    if (textContains("搜索:").exists) {
+        var Dian_sousuo = textContains("搜索:").findOne().bounds();
+        click(Dian_sousuo.centerX(), Dian_sousuo.centerY());
+        sleep(1000);
+    }
+    //点击搜一搜
+    var Dian_souGzh = ("搜一搜  " + context_GZH);
+    text(Dian_souGzh).waitFor();
+    if (text(Dian_souGzh).exists) {
+        var Dian_Dian_souGzh = text(Dian_souGzh).findOne().bounds();
+        click(Dian_Dian_souGzh.centerX(), Dian_Dian_souGzh.centerY());
+        sleep(1000);
+    }
+    context_textGzh = (context_GZH + " - 公众号 更多 ");
+    textContains(context_textGzh).waitFor();
+    //搜索内容出现后点击公众号
+    if (text(context_textGzh).exists) {
+        var Dian_textGzh = text(context_textGzh).findOne().bounds();
+        click(Dian_textGzh.centerX(), Dian_textGzh.centerY());
+        sleep(1000);
+    }
+
+    if (context_kuaijieAN == "青年大学习") {
+        qndxx_exists();
+    } else if (context_kuaijieAN == "null") {
+        className("android.view.View").text(context_Setting_gzh).waitFor();
+        var wait_View = className("android.view.View").text(context_Setting_gzh).findOne();
+        var View_bounds = wait_View.bounds(); //第十三个View控件需要为公众号名称
+        click(View_bounds.centerX(), View_bounds.centerY());
+        sleep(2000);
+        if (text("进入公众号").exists) {
+            var a = text("进入公众号").findOne().bounds();
+            click(a.centerX(), a.centerY())
+            sleep(3000);
+        } else if (text("关注公众号").exists()) {
+            var a = text("关注公众号").findOne().bounds();
+            click(a.centerX(), a.centerY())
+            sleep(3000);
+        }
+        id("ko").waitFor();
+        var ko_text = id("ko").className("android.widget.TextView").findOne();
+        var ko_textF = ko_text.text();
+        if (ko_textF == "青年湖南") {
+            var DXX = id("an0").className("android.widget.TextView").find();
+            var DXXid = DXX[1]; //第二个按钮为“大学习”
+            var DXXbounds = DXXid.bounds();
+            click(DXXbounds.centerX(), DXXbounds.centerY());
+            text("签到学习").waitFor();
+            if (text("签到学习").exists()) {
+                var t = text("签到学习").findOne().bounds();
+                click(t.centerX(), t.centerY());
+                dengdaiWebkit();
+                if (text("开始我的学习").exists()) {
+                    var StartXue = text("开始我的学习").findOne().bounds();
+                    click(StartXue.centerX(), StartXue.centerY());
+                } else if (text("省属高校").exists()) {
+                    var SsGx = text("省属高校").findOne().bounds();
+                    click(SsGx.centerX(), SsGx.centerY());
+                    sleep(3000);
+                    var M = className("android.widget.Spinner").find();
+                    var Spinner_school = M[0].bounds();
+                    click(Spinner_school.centerX(), Spinner_school.centerY());
+                    sleep(1000);
+                    if (text(context_school).exists()) {
+                        textContains(context_school).findOne().click();
+                        sleep(1000);
+                    } else {
+                        context_loop = 1;
+                        while (context_loop == 1) {
+                            var G = className("android.widget.ListView").findOne().bounds();
+                            swipe(G.centerX(), G.centerY(), G.centerX(), G.centerY() - 200, 500);
+                            if (text(context_school).exists()) {
+                                textContains(context_school).findOne().click();
+                                context_loop = 0;
+                                sleep(1000);
+                            }
+                        }
+                    }
+                    var Spinner_TwoSchool = M[1].bounds();
+                    click(Spinner_TwoSchool.centerX(), Spinner_TwoSchool.centerY());
+                    sleep(1000);
+                    if (text(context_Twolevelcollege).exists()) {
+                        textContains(context_Twolevelcollege).findOne().click();
+                        sleep(1000);
+                    } else {
+                        context_loop = 1;
+                        while (context_loop == 1) {
+                            var G = className("android.widget.ListView").findOne().bounds();
+                            swipe(G.centerX(), G.centerY(), G.centerX(), G.centerY() - 200, 500);
+                            if (text(context_Twolevelcollege).exists()) {
+                                textContains(context_Twolevelcollege).findOne().click();
+                                context_loop = 0;
+                                sleep(1000);
+                            }
+                        }
+                    }
+                    var Spinner_class = M[2].bounds();
+                    click(Spinner_class.centerX(), Spinner_class.centerY());
+                    sleep(1000);
+                    if (text(context_Class).exists()) {
+                        textContains(context_Class).findOne().click();
+                        sleep(1000);
+                    } else {
+                        context_loop = 1;
+                        while (context_loop == 1) {
+                            var G = className("android.widget.ListView").findOne().bounds();
+                            swipe(G.centerX(), G.centerY(), G.centerX(), G.centerY() - 200, 500);
+                            if (text(context_Class).exists()) {
+                                textContains(context_Class).findOne().click();
+                                context_loop = 0;
+                                sleep(1000);
+                            }
+                        }
+                    }
+                    //隐藏悬浮窗
+                    window.action.setX(-1000);
+                    window.action.setY(-1000);
+                    //截屏
+                    files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+                    //若已存在旧截图就删除
+                    var JT = files.exists("/storage/emulated/0/OrangeJs/团课截图/团课开始截图1.png");
+                    if (JT == true) {
+                        files.remove("/storage/emulated/0/OrangeJs/团课截图/团课开始截图1.png");
+                    }
+                    images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图1.png");
+                    //恢复悬浮窗
+                    window.action.setX(0);
+                    window.action.setY(0);
+                    toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
+                    text("下一步").findOne().click();
+                    sleep(2000);
+                    setText(context_Name);
+                    //隐藏悬浮窗
+                    window.action.setX(-1000);
+                    window.action.setY(-1000);
+                    //截屏
+                    files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+                    //若已存在旧截图就删除
+                    var JT = files.exists("/storage/emulated/0/OrangeJs/团课截图/团课开始截图2.png");
+                    if (JT == true) {
+                        files.remove("/storage/emulated/0/OrangeJs/团课截图/团课开始截图2.png");
+                    }
+                    images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图2.png");
+                    toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
+                    //恢复悬浮窗
+                    window.action.setX(0);
+                    window.action.setY(0);
+                    sleep(1000);
+                    text("提交").findOne().click();
+                    text("开始我的学习").waitFor();
+                    //隐藏悬浮窗
+                    window.action.setX(-1000);
+                    window.action.setY(-1000);
+                    //截屏
+                    files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+                    //若已存在旧截图就删除
+                    var JT = files.exists("/storage/emulated/0/OrangeJs/团课截图/团课开始截图3.png");
+                    if (JT == true) {
+                        files.remove("/storage/emulated/0/OrangeJs/团课截图/团课开始截图3.png");
+                    }
+                    images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图3.png");
+                    toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
+                    //恢复悬浮窗
+                    window.action.setX(0);
+                    window.action.setY(0);
+                    if (text("开始我的学习").exists()) {
+                        textContains("开始我的学习").findOne().click();
+                        sleep(1000);
+                    }
+                } //青年湖南“省属高校”判断首次进入并填写信息
+            }
+        } //公众号为“青年湖南”的点击
+    } //没有快捷入口的点击
+
+    //qndxx_exists()为青年大学习按钮存在且点击后有文章通过阅读原文跳转或直接跳转
+    function qndxx_exists() {
+        text("青年大学习").waitFor();
+        //点击“青年大学习”
+        if (text("青年大学习").exists()) {
+            text("青年大学习").findOne().click();
+            sleep(3000);
+            dengdaiWebkit();
+        }
+    }
+
+    function dengdaiWebkit() {
+        sleep(3000);
+        var One_WebView = className("android.webkit.WebView").find();
+        var Two_WebView = One_WebView[1].text();
+        //如果点击非大学习标题则进行等待
+        if (Two_WebView != context_DXX) {
+            var deng_XuexiJM = 10;
+            for (deng_XuexiJM == 10; deng_XuexiJM > 0; deng_XuexiJM--) {
+                sleep(2000);
+                toastLog("正在等待页面加载……\n剩余" + deng_XuexiJM + "秒……");
+                //如果没有微信授权则进行微信授权
+                if (className("android.widget.Button").text("允许").exists()) {
+                    var a_yx = className("android.widget.Button").text("允许").findOne();
+                    var o_yx = a_yx.bounds();
+                    click(o_yx.centerX(), o_yx.centerY());
+                }
+            }
+        }
+    }
+    toastLog("打开“大学习界面”执行完毕\n执行学习任务……");
+}
+
+function mainJs() {
+    var deng_XuexiJM = 10;
+    for (deng_XuexiJM == 10; deng_XuexiJM > 0; deng_XuexiJM--) {
+        sleep(2000);
+        toastLog("正在等待“青年大学习”界面加载……\n剩余" + deng_XuexiJM + "秒……");
+        //如果没有微信授权则进行微信授权
+        if (className("android.widget.Button").text("允许").exists()) {
+            var a_yx = className("android.widget.Button").text("允许").findOne();
+            var o_yx = a_yx.bounds();
+            click(o_yx.centerX(), o_yx.centerY());
+        }
+    }
+
+    //如果是首次进入会有信息选择界面，下面则填入信息
+    var One_WebView = className("android.webkit.WebView").find();
+    var Two_WebView = One_WebView[1].text();
+    if (Two_WebView == "陕西省青年大学习") {
+        //判断“各高校”是否存在，如果存在则填入信息
+        if (textContains("陕西省青年大学习").exists) {
+            sleep(3000);
+            if (text("各高校").exists) {
+                var Dian_GGX = text("各高校").findOne().bounds();
+                click(Dian_GGX.centerX(), Dian_GGX.centerY());
+                sleep(3000);
+                if (className("android.widget.EditText").exists()) {
+                    var Q = className("android.widget.EditText").findOne().bounds();
+                    click(Q.centerX(), Q.centerY());
+                    sleep(2000);
+                    if (textContains(context_school).exists) {
+                        toastLog("点击“" + context_school + "”")
+                        textContains(context_school).findOne().click();
+                        sleep(2000);
+                        var uc = className("android.widget.EditText").find();
+                        if (uc.length == 2) {
+                            var EditText_1 = uc[1].bounds();
+                            click(EditText_1.centerX(), EditText_1.centerY());
+                            sleep(2000);
+                            if (textContains(context_Twolevelcollege).exists) {
+                                toastLog("点击“" + context_Twolevelcollege + "”")
+                                textContains(context_Twolevelcollege).findOne().click();
+                                sleep(2000);
+                                //设置班级
+                                setText([2], context_Class);
+                                sleep(1000);
+                                //设置姓名
+                                setText([3], context_Name);
+                                sleep(2000);
+                                //隐藏悬浮窗
+                                window.action.setX(-1000);
+                                window.action.setY(-1000);
+                                //截屏
+                                files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+                                //若已存在旧截图就删除
+                                var JT = files.exists("/storage/emulated/0/OrangeJs/团课截图/团课开始截图.png");
+                                if (JT == true) {
+                                    files.remove("/storage/emulated/0/OrangeJs/团课截图/团课开始截图.png");
+                                }
+                                images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课开始截图.png");
+                                toastLog("已成功为个人信息界面截图\n截图已保存在“/0/OrangeJs/团课截图/”文件夹");
+                                //恢复悬浮窗
+                                window.action.setX(0);
+                                window.action.setY(0);
+                                sleep(3000);
+                                if (text("确定").exists()) {
+                                    text("确定").findOne().click();
+                                    var deng_XuexiJM = 10;
+                                    for (deng_XuexiJM == 10; deng_XuexiJM > 0; deng_XuexiJM--) {
+                                        sleep(2000);
+                                        toastLog("正在等待“青年大学习”界面加载……\n剩余" + deng_XuexiJM + "秒……");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } //首次进入填入信息完成
+    var One_WebView = className("android.webkit.WebView").find();
+    var Two_WebView = One_WebView[1].text();
+    if (Two_WebView == context_DXX) {
+        var One = className("android.view.View").find();
+        var Two = One[5].bounds(); //点击“确定”
+        click(Two.centerX(), Two.centerY());
+        if (textContains("正在登录中").exists) {
+            sleep(3000);
+            click(Two.centerX(), Two.centerY());
+        }
+        sleep(1000);
+        if (textContains("正在登录中").exists) {
+            sleep(3000);
+            click(Two.centerX(), Two.centerY());
+        }
+        sleep(1000);
+        if (textContains("正在登录中").exists) {
+            sleep(3000);
+            click(Two.centerX(), Two.centerY());
+        }
+        var jishi = 130;
+        while (jishi > 0) {
+            toastLog(jishi + "秒后为您自动答第一题");
+            jishi--;
+            sleep(1000);
+        }
+        var One = className("android.view.View").find();
+        var Two = One[11].bounds(); //选择第一题“D选项”;
+        click(Two.centerX(), Two.centerY());
+        sleep(2000);
+        var three = One[12].bounds(); //“确定”按钮
+        click(three.centerX(), three.centerY());
+
+        var jishi = 40;
+        while (jishi > 0) {
+            toastLog(jishi + "秒后为您自动答第二题");
+            jishi--;
+            sleep(1000);
+        }
+        var One = className("android.view.View").find();
+        var Two = One[10].bounds(); //选择第二题“C选项”;
+        click(Two.centerX(), Two.centerY());
+        sleep(2000);
+        var three = One[12].bounds(); //“确定”按钮
+        click(three.centerX(), three.centerY());
+        var jishi = 60;
+        while (jishi > 0) {
+            toastLog(jishi + "秒后为您自动答第三题");
+            jishi--;
+            sleep(1000);
+        }
+        var One = className("android.view.View").find();
+        var Two = One[9].bounds();
+        var three = One[13].bounds();
+        var four = One[10].bounds();
+        if (context_width == 1080) {
+            swipe(Two.centerX(), Two.centerY(), Two.centerX() + 250, 530, 500);
+            swipe(three.centerX(), three.centerY(), three.centerX() - 485, 650, 500);
+            swipe(four.centerX(), four.centerY(), four.centerX() + 230, 650, 500);
+        }
+        var five = One[14].bounds();
+        click(five.centerX(), five.centerY());
+
+        var jishi = 45;
+        while (jishi > 0) {
+            toastLog(jishi + "秒后为您截图");
+            jishi--;
+            sleep(1000);
+        }
+        sleep(2000);
+        //隐藏悬浮窗
+        window.action.setX(-1000);
+        window.action.setY(-1000);
+        files.ensureDir("/storage/emulated/0/OrangeJs/团课截图/");
+        images.captureScreen("/storage/emulated/0/OrangeJs/团课截图/团课完成界面截图.png");
+        toastLog("已截图，截图保存在“/OrangeJs/团课截图”文件夹下");
+        //恢复悬浮窗
+        window.action.setX(0);
+        window.action.setY(0);
+        //大学习观看任务完成！
+
+        //课后习题
+        sleep(3000);
+        var One = className("android.view.View").find();
+        var Two = One[68].bounds(); //选择“课后习题””;
+        click(Two.centerX(), Two.centerY());
+        sleep(2000);
+        var timu = 1;
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第一题
+        var One = className("android.view.View").find();
+        var A = One[6].bounds(); //点A选项
+        //课后习题第6个View是确定，7A，8B，9C，10D
+        click(A.centerX(), A.centerY()); //第一题选A
+        sleep(1000);
+        var D = One[9].bounds(); //以及D选项
+        click(D.centerX(), D.centerY());
+        sleep(1000);
+        var OK = One[5].bounds(); //点确定
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第二题
+        var B = One[7].bounds();
+        click(B.centerX(), B.centerY()); //选B
+        sleep(1000);
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第三题
+        var C = One[8].bounds();
+        click(B.centerX(), B.centerY()); //选B
+        sleep(1000);
+        click(C.centerX(), C.centerY()); //选C
+        sleep(1000);
+        click(D.centerX(), D.centerY()); //选D
+        sleep(1000);
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第四题
+        click(A.centerX(), A.centerY()); //选A
+        sleep(1000);
+        click(B.centerX(), B.centerY()); //选B
+        sleep(1000);
+        click(D.centerX(), D.centerY()); //选D
+        sleep(1000);
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第五题
+        click(C.centerX(), C.centerY()); //选C
+        sleep(1000);
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第六题
+        click(B.centerX(), B.centerY()); //选B
+        sleep(1000);
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第七题
+        click(D.centerX(), D.centerY()); //选D
+        sleep(1000);
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+        toastLog("正在作答课后习题第" + timu + "题")
+        timu++;
+        //第八题
+        click(A.centerX(), A.centerY()); //选A
+        sleep(1000);
+        click(D.centerX(), D.centerY()); //选D
+        sleep(1000);
+        click(OK.centerX(), OK.centerY());
+        sleep(2500);
+    } //如果Webkit标题为大学习的标题，则运行学习代码
+}
+
+dialogs.alert("脚本已运行完成", "脚本作者 酷安@橘衫下邂逅的时光");
+exit();
