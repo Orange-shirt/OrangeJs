@@ -1118,9 +1118,9 @@ function DoTask() {
                                             break;
                                         }
                                         let c = className("android.view.View").text("当前页点击加购以下" + xz + "个商品").findOnce().parent().parent().child(1).child(loop);
-                                        if (c.child(c.childCount() - 2).childCount() > 1 && c.child(c.childCount() - 2).child(0).text() != "" && c.child(c.childCount() - 2).child(0).text() != null) {
-                                            WaitForDelete.push(c.child(c.childCount() - 2).child(0).text());
-                                            toastLog("已将当前商品添加至待删除列表。当前商品：" + c.child(c.childCount() - 2).child(0).text());
+                                        if (c.child(c.childCount() - 3).childCount() > 1 && c.child(c.childCount() - 3).child(0).text() != "" && c.child(c.childCount() - 3).child(0).text() != null) {
+                                            WaitForDelete.push(c.child(c.childCount() - 3).child(0).text());
+                                            toastLog("已将当前商品添加至待删除列表。当前商品：" + c.child(c.childCount() - 3).child(0).text());
                                         }
                                         if (c.child(c.childCount() - 1).clickable() == true) {
                                             c.child(c.childCount() - 1).click();
