@@ -802,10 +802,11 @@ function openInTask() {
             toastLog("当前未处于淘宝APP中，正在重新打开淘宝……");
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             app.startActivity({
-                action: "android.intent.action.VIEW", //此处可为其他值
+                action: "android.intent.action.MAIN",
                 packageName: "com.taobao.taobao",
-                className: "com.taobao.ju.android.ui.main.TabMainActivity"
-                //此处可以加入其他内容，如data、extras
+                className: "com.taobao.tao.welcome.Welcome",
+                category: ["android.intent.category.LAUNCHER"],
+                flags: ["activity_new_task"]
             });
             sleep(2000);
         } else {
