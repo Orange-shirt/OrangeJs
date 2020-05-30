@@ -36,6 +36,8 @@ if (contextPASS == 0) {
     Set_Back_way();
 }
 var WaitForDelete = [];
+var height = device.height;
+var width = device.width;
 
 function dialogs_js() {
     var ScriptVersion = ("Beta1.0"); //版本
@@ -899,7 +901,7 @@ function DoTask() {
                 now = RwTitle.substring(RwTitle.indexOf("(") + 1, RwTitle.indexOf("/") + 0);
                 xz = RwTitle.substring(RwTitle.indexOf("/") + 1, RwTitle.indexOf(")") + 0);
                 log(RwTitle, Button.text(), Button.clickable(), "当前：" + now, "上限：" + xz);
-                if (RwTitle.search("邀请好友") < 0 && RwTitle.search("天猫农场") < 0 && RwTitle.search("红包省钱卡") < 0 && now != xz) {
+                if (RwTitle.search("邀请好友") < 0 && RwTitle.search("天猫农场") < 0 && RwTitle.search("淘宝人") < 0 && RwTitle.search("红包省钱卡") < 0 && now != xz) {
                     if (Button.clickable() == true) {
                         Button.click();
                         toastLog("已尝试盲点“" + Button.text() + "”按钮");
