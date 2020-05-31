@@ -874,85 +874,86 @@ function DoTask() {
         toastLog("已尝试点击“做任务，领喵币”按钮");
         sleep(2000);
     }
-    if (className("android.widget.Button").text("做任务，领喵币").findOnce() != null && className("android.widget.Button").text("做任务，领喵币").findOnce().parent().parent().parent().parent().child(6).id() == "6871969950") {
-        var i = 0;
-        while (true) {
-            click_CancelUpdateButton();
-            try {
-                var A = className("android.widget.Button").text("做任务，领喵币").findOnce().parent().parent().parent().parent().child(6).child(0).child(0);
-                var Close = A.child(A.childCount() - 1);
-                var List = A.child(0).child(A.child(0).childCount() - 1);
-                if (A.child(0).child(A.child(0).childCount() - 2).text() == "签到") {
-                    A.child(0).child(A.child(0).childCount() - 2).click();
-                    toastLog("已尝试点击“签到”按钮");
-                    sleep(2000);
-                }
-            } catch (e) {
-                toastLog("当前未处于淘宝618列车活动界面，正在重新打开");
-                console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-                openInTask();
-                DoTask();
+    var i = 0;
+    while (true) {
+        click_CancelUpdateButton();
+        try {
+            var A = className("android.widget.Button").text("做任务，领喵币").findOnce().parent().parent().parent().parent().child(6).child(0).child(0);
+            var Close = A.child(A.childCount() - 1);
+            var List = A.child(0).child(A.child(0).childCount() - 1);
+            if (A.child(0).child(A.child(0).childCount() - 2).text() == "签到") {
+                A.child(0).child(A.child(0).childCount() - 2).click();
+                toastLog("已尝试点击“签到”按钮");
+                sleep(2000);
             }
-            if (i >= List.childCount()) {
-                break;
-            } else {
-                let RwTitle = List.child(i).child(0).text();
-                let Button = List.child(i).child(1);
-                now = RwTitle.substring(RwTitle.indexOf("(") + 1, RwTitle.indexOf("/") + 0);
-                xz = RwTitle.substring(RwTitle.indexOf("/") + 1, RwTitle.indexOf(")") + 0);
-                log(RwTitle, Button.text(), Button.clickable(), "当前：" + now, "上限：" + xz);
-                if (RwTitle.search("邀请好友") < 0 && RwTitle.search("天猫农场") < 0&& RwTitle.search("续费88VIP") < 0 && RwTitle.search("淘宝人") < 0 && RwTitle.search("红包省钱卡") < 0 && now != xz) {
-                    if (Button.clickable() == true) {
-                        Button.click();
-                        toastLog("已尝试盲点“" + Button.text() + "”按钮");
-                    } else {
-                        let a = Button.bounds();
-                        click(a.centerX(), a.centerY());
-                        toastLog("已尝试点击“" + Button.text() + "”按钮");
-                    }
-                    sleep(3000);
-                    if (className("android.widget.Button").text("做任务，领喵币").findOnce() == null) {
-                        for (let deng = 15; deng > 0; deng--) {
-                            if (text("网络竟然崩溃了").findOnce() != null && className("android.widget.Button").text("刷新").clickable(true).findOnce() != null) {
-                                className("android.widget.Button").text("刷新").clickable(true).findOnce().click();
-                                toastLog("网络竟然崩溃了，已尝试点击“刷新”按钮");
-                                sleep(3000);
-                            }
-                            if (className("android.view.View").desc(" 任务已完成").findOnce() != null || className("android.view.View").desc(" 任务完成").findOnce() != null || className("android.view.View").text("任务已完成").findOnce() != null) {
-                                toastLog("任务已完成");
-                                break;
-                            } else {
-                                toastLog("正在完成“" + Button.text() + "（" + now + "/" + xz + "）”任务，剩余" + deng + "秒……");
-                                sleep(2000);
-                            }
-                        }
-                        if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
-                            className("android.widget.ImageView").desc("返回").findOnce().click();
-                            toastLog("已尝试盲点“返回”按钮");
-                            sleep(2000);
-                        } else {
-                            Justback();
-                            sleep(2000);
-                        }
-                    }
-                } else {
-                    if (now == xz) {
-                        toastLog("【任务已完成】" + RwTitle);
-                    } else {
-                        toastLog("【已跳过】" + RwTitle);
-                    }
-                    i++;
+        } catch (e) {
+            try {
+                var A = className("android.widget.Button").text("关闭").findOnce().parent();
+            } catch (e) {
+                try {
+                    var A = className("android.view.View").text("TB1Y2tIHND1gK0jSZFsXXbldVXa-680-120.png_").findOnce().parent();
+                } catch (e) {
+                    toastLog("当前未处于淘宝618列车活动界面，正在重新打开");
+                    console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+                    openInTask();
+                    DoTask();
                 }
             }
         }
-        alert("喵币++：\n脚本已运行完成");
-        exit();
-    } else {
-        toastLog("B当前未处于淘宝618列车活动界面，正在重新打开");
-        console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-        openInTask();
-        DoTask();
+        if (i >= List.childCount()) {
+            break;
+        } else {
+            let RwTitle = List.child(i).child(0).text();
+            let Button = List.child(i).child(1);
+            now = RwTitle.substring(RwTitle.indexOf("(") + 1, RwTitle.indexOf("/") + 0);
+            xz = RwTitle.substring(RwTitle.indexOf("/") + 1, RwTitle.indexOf(")") + 0);
+            log(RwTitle, Button.text(), Button.clickable(), "当前：" + now, "上限：" + xz);
+            if (RwTitle.search("邀请好友") < 0 && RwTitle.search("天猫农场") < 0 && RwTitle.search("续费88VIP") < 0 && RwTitle.search("淘宝人") < 0 && RwTitle.search("红包省钱卡") < 0 && now != xz) {
+                if (Button.clickable() == true) {
+                    Button.click();
+                    toastLog("已尝试盲点“" + Button.text() + "”按钮");
+                } else {
+                    let a = Button.bounds();
+                    click(a.centerX(), a.centerY());
+                    toastLog("已尝试点击“" + Button.text() + "”按钮");
+                }
+                sleep(3000);
+                if (className("android.widget.Button").text("做任务，领喵币").findOnce() == null) {
+                    for (let deng = 15; deng > 0; deng--) {
+                        if (text("网络竟然崩溃了").findOnce() != null && className("android.widget.Button").text("刷新").clickable(true).findOnce() != null) {
+                            className("android.widget.Button").text("刷新").clickable(true).findOnce().click();
+                            toastLog("网络竟然崩溃了，已尝试点击“刷新”按钮");
+                            sleep(3000);
+                        }
+                        if (className("android.view.View").desc(" 任务已完成").findOnce() != null || className("android.view.View").desc(" 任务完成").findOnce() != null || className("android.view.View").text("任务已完成").findOnce() != null) {
+                            toastLog("任务已完成");
+                            break;
+                        } else {
+                            toastLog("正在完成“" + Button.text() + "（" + now + "/" + xz + "）”任务，剩余" + deng + "秒……");
+                            sleep(2000);
+                        }
+                    }
+                    if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
+                        className("android.widget.ImageView").desc("返回").findOnce().click();
+                        toastLog("已尝试盲点“返回”按钮");
+                        sleep(2000);
+                    } else {
+                        Justback();
+                        sleep(2000);
+                    }
+                }
+            } else {
+                if (now == xz) {
+                    toastLog("【任务已完成】" + RwTitle);
+                } else {
+                    toastLog("【已跳过】" + RwTitle);
+                }
+                i++;
+            }
+        }
     }
+    alert("喵币++：\n脚本已运行完成");
+    exit();
 }
 firstD();
 
