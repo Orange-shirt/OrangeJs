@@ -1017,7 +1017,7 @@ function DoTask() {
                 }
                 log(B.child(a).child(1).child(0).child(0).text(), B.child(a).child(1).child(0).clickable());
                 var RwButtonText = B.child(a).child(1).child(0).child(0).text();
-                if (RwTitle.search("AR") < 0 &&RwTitle.search("邀请好友助力") < 0&&RwTitle.search("邀人助力") < 0 && RwTitle.search("所在战队成员") < 0 && now != xz) {
+                if (RwTitle.search("AR") < 0 && RwTitle.search("邀请好友助力") < 0 && RwTitle.search("邀人助力") < 0 && RwTitle.search("所在战队成员") < 0 && now != xz) {
                     if (B.child(a).child(1).child(0).clickable() == true) {
                         B.child(a).child(1).child(0).click();
                         toastLog("已尝试盲点" + B.child(a).child(1).child(0).child(0).text() + "按钮");
@@ -1112,6 +1112,10 @@ function DoTask() {
                                 break;
                             } else if (className("android.view.View").text("当前页点击加购以下" + xz + "个商品").findOnce() != null) {
                                 for (let loop = 0; loop < 5; loop++) {
+                                    if (loop > 3) {
+                                        toastLog("已尝试上滑加购商品页面");
+                                        swipe(device.width / 2, device.height / 2, device.width / 2, 0, 500);
+                                    }
                                     try {
                                         if (className("android.view.View").text("当前页点击加购以下" + xz + "个商品").findOnce().parent().child(0).text() == "已完成") {
                                             toastLog("已完成一次“加购商品”任务");
