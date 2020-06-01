@@ -818,7 +818,6 @@ function openInTask() {
             className("android.widget.FrameLayout").desc("我的淘宝").findOnce().click();
             toastLog("已尝试点击淘宝主页“我的淘宝”按钮");
             sleep(2000);
-            break;
         } else if (currentPackage() != "com.taobao.taobao") {
             toastLog("当前未处于淘宝APP中，正在重新打开淘宝……");
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
