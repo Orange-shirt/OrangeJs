@@ -795,6 +795,25 @@ function openInTask() {
                 sleep(2000);
             }
             break;
+        }else if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("我的淘宝").findOnce() != null && className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().childCount() > 4 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).childCount() > 0 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).childCount() > 0 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() > 0 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() - 1).childCount() > 2 &&
+            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() - 1).child(2).text() == "瓜分10亿") {
+            let a = className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() - 1).child(0);
+            if (a.clickable() == true) {
+                a.click();
+                toastLog("已尝试盲点“瓜分10亿”按钮");
+                sleep(2000);
+            } else {
+                let b = a.bounds();
+                click(b.centerX(), b.centerY());
+                toastLog("已尝试点击“瓜分10亿”按钮");
+                sleep(2000);
+            }
+            break;
         } else if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("我的淘宝").findOnce() != null) {
             className("android.widget.FrameLayout").desc("我的淘宝").findOnce().click();
             toastLog("已尝试点击淘宝主页“我的淘宝”按钮");
