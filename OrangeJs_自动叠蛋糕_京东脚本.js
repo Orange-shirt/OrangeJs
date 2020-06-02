@@ -1032,6 +1032,10 @@ function DoTask() {
                         for (let deng = 10; deng > 0; deng--) {
                             if (className("android.view.View").text("浏览以下" + xz + "个商品").findOnce() != null) {
                                 for (let loop = 0; loop < 5; loop++) {
+                                    if (loop > 3) {
+                                        toastLog("已尝试上滑浏览商品页面");
+                                        swipe(device.width / 2, device.height / 2, device.width / 2, 0, 500);
+                                    }
                                     try {
                                         if (className("android.view.View").text("浏览以下" + xz + "个商品").findOnce().parent().child(0).text() == "已完成") {
                                             toastLog("已完成一次“浏览商品”任务");
@@ -1076,6 +1080,10 @@ function DoTask() {
                                 className("android.webkit.WebView").text("　").findOnce().child(0).child(0).child(0).child(1).childCount() > 0 && className("android.webkit.WebView").text("　").findOnce().child(0).child(0).child(0).child(1).child(0).childCount() > 0 &&
                                 className("android.webkit.WebView").text("　").findOnce().child(0).child(0).child(0).child(1).child(0).child(0).text() == "浏览以下" + xz + "个商品") {
                                 for (let loop = 0; loop < 5; loop++) {
+                                    if (loop > 3) {
+                                        toastLog("已尝试上滑浏览商品页面");
+                                        swipe(device.width / 2, device.height / 2, device.width / 2, 0, 500);
+                                    }
                                     try {
                                         let c = className("android.webkit.WebView").text("　").findOnce().child(0).child(0).child(0).child(1).child(1).child(loop);
                                         if (c.clickable() == true) {
