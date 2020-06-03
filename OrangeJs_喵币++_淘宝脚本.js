@@ -943,7 +943,7 @@ function DoTask() {
                             toastLog("网络竟然崩溃了，已尝试点击“刷新”按钮");
                             sleep(3000);
                         }
-                        if (className("android.view.View").desc(" 任务已完成").findOnce() != null || className("android.view.View").desc(" 任务完成").findOnce() != null || className("android.view.View").text("任务已完成").findOnce() != null) {
+                        if (className("android.view.View").desc(" 任务已完成").findOnce() != null || className("android.view.View").desc(" 任务完成").findOnce() != null || className("android.view.View").text("任务已完成").findOnce() != null||className("android.view.View").textContains("任务已完成").findOnce()!=nullclassName("android.view.View").textContains("任务完成").findOnce()!=null) {
                             toastLog("任务已完成");
                             break;
                         } else {
