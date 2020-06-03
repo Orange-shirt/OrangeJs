@@ -40,7 +40,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“喵币++”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -775,88 +775,120 @@ if (T == 1) {
 }
 
 function openInTask() {
-    while (true) {
-        if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("我的淘宝").findOnce() != null && className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().childCount() > 4 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).childCount() > 0 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).childCount() > 0 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() > 0 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() - 1).childCount() > 2 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() - 1).child(2).text() == "瓜分10亿") {
-            let a = className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(4).child(0).child(0).childCount() - 1).child(0);
-            if (a.clickable() == true) {
-                a.click();
-                toastLog("已尝试盲点“瓜分10亿”按钮");
-                sleep(2000);
-            } else {
-                let b = a.bounds();
-                click(b.centerX(), b.centerY());
-                toastLog("已尝试点击“瓜分10亿”按钮");
-                sleep(2000);
-            }
-            break;
-        }else if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("我的淘宝").findOnce() != null && className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().childCount() > 4 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).childCount() > 0 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).childCount() > 0 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() > 0 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() - 1).childCount() > 2 &&
-            className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() - 1).child(2).text() == "瓜分10亿") {
-            let a = className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).child(className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(5).child(0).child(0).childCount() - 1).child(0);
-            if (a.clickable() == true) {
-                a.click();
-                toastLog("已尝试盲点“瓜分10亿”按钮");
-                sleep(2000);
-            } else {
-                let b = a.bounds();
-                click(b.centerX(), b.centerY());
-                toastLog("已尝试点击“瓜分10亿”按钮");
-                sleep(2000);
-            }
-            break;
-        } else if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("我的淘宝").findOnce() != null) {
-            className("android.widget.FrameLayout").desc("我的淘宝").findOnce().click();
-            toastLog("已尝试点击淘宝主页“我的淘宝”按钮");
-            sleep(2000);
-        } else if (currentPackage() != "com.taobao.taobao") {
-            toastLog("当前未处于淘宝APP中，正在重新打开淘宝……");
-            console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-            app.startActivity({
-                action: "android.intent.action.MAIN",
-                packageName: "com.taobao.taobao",
-                className: "com.taobao.tao.welcome.Welcome",
-                category: ["android.intent.category.LAUNCHER"],
-                flags: ["activity_new_task"]
-            });
-            sleep(2000);
-        } else {
-            if (className("android.widget.Button").text("返回").clickable(true).findOnce() != null) {
-                className("android.widget.Button").text("返回").clickable(true).findOnce().click();
-                toastLog("已尝试盲点“返回”按钮");
-            } else if (className("android.widget.ImageView").clickable(true).desc("返回上一页").findOnce() != null) {
-                className("android.widget.ImageView").clickable(true).desc("返回上一页").findOnce().click();
-                toastLog("已尝试盲点“返回上一页面”按钮");
-            } else if (className("android.widget.ImageButton").desc("转到上一层级").clickable(true).findOnce() != null) {
-                className("android.widget.ImageButton").desc("转到上一层级").clickable(true).findOnce().click();
-                toastLog("已盲点“转到上一层级”按钮");
-            } else {
-                Justback();
-            }
-            sleep(2000);
-        }
-    }
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        packageName: "com.taobao.taobao",
+        className: "com.taobao.browser.BrowserActivity",
+        data: app.parseUri("https://pages.tmall.com/wow/z/hdwk/n-hdwk-solution/2020618-single?spm=a211oj.14651605.1135447480.d_primarybtn_1&disableNav=YES&disableProgress=YES&hd_from=mallres"),
+        flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
+    });
+    toastLog("已尝试启动淘宝内置浏览器跳转至“活动页”");
     for (var d = 10; d > 0; d--) {
         if (className("android.widget.Button").text("做任务，领喵币").findOnce() != null) {
             toastLog("已成功处于“618列车”活动界面");
             break;
-        } else if (currentActivity() == "com.taobao.browser.BrowserActivity") {
+        } else {
             toastLog("正在等待“全民618列车”活动界面加载，剩余" + d + "秒……");
             sleep(2000);
-        } else {
-            var d = 0;
-            toastLog("当前未处于“全民618列车”活动加载界面，正在重试……");
-            openInTask();
-            break;
+        }
+    }
+    if (className("android.widget.Button").text("做任务，领喵币").findOnce() == null) {
+        let i = 0;
+        while (true) {
+            if (currentActivity() == "com.taobao.search.searchdoor.SearchDoorActivity" && className("android.widget.EditText").findOnce() != null && className("android.widget.Button").desc("搜索").findOnce() != null) {
+                toastLog("当前已处于“淘宝搜索界面”");
+                let s = className("android.widget.EditText").findOnce().setText("618列车");
+                toastLog("已尝试设置淘宝搜索框搜索关键词为：“618列车”");
+                sleep(1000);
+                if (s == false) {
+                    toastLog("设置“搜索关键词”失败，尝试全局设置");
+                    setText("618列车");
+                }
+                let a = className("android.widget.Button").desc("搜索").findOnce();
+                if (a.clickable() == true) {
+                    a.click();
+                    toastLog("已尝试点击“搜索”按钮");
+                } else {
+                    let b = a.bounds();
+                    click(b.centerX(), b.centerY());
+                    toastLog("已尝试点击“搜索”按钮");
+                }
+                sleep(2000);
+                break;
+            } else if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("首页").findOnce() != null && className("android.view.View").desc("搜索").clickable(true).findOnce() != null) {
+                className("android.view.View").desc("搜索").clickable(true).findOnce().click();
+                toastLog("已尝试盲点淘宝主页“搜索框”");
+                sleep(2000);
+            } else if (currentActivity() == "com.taobao.tao.TBMainActivity" && className("android.widget.FrameLayout").desc("首页").findOnce() != null) {
+                className("android.widget.FrameLayout").desc("首页").findOnce().click();
+                toastLog("已尝试点击淘宝主页“首页”按钮");
+                sleep(2000);
+            } else if (currentPackage() != "com.taobao.taobao") {
+                toastLog("当前未处于淘宝APP中，正在重新打开淘宝……");
+                console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+                app.startActivity({
+                    action: "android.intent.action.MAIN",
+                    packageName: "com.taobao.taobao",
+                    className: "com.taobao.tao.welcome.Welcome",
+                    category: ["android.intent.category.LAUNCHER"],
+                    flags: ["activity_new_task"]
+                });
+                sleep(2000);
+                if (i > 3 && currentPackage() != "com.taobao.taobao") {
+                    try {
+                        app.startActivity({
+                            action: "android.intent.action.VIEW", //此处可为其他值
+                            packageName: "com.taobao.taobao",
+                            className: "com.taobao.tao.TBMainActivity"
+                            //此处可以加入其他内容，如data、extras
+                        });
+                        toastLog("已再次尝试跳转“淘宝主页”界面");
+                        sleep(2000);
+                    } catch (e) {
+                        log("使用隐式Intent启动淘宝搜索界面失败！");
+                    }
+                }
+                if (i > 5) {
+                    app.startActivity({
+                        action: "android.intent.action.VIEW",
+                        packageName: "com.taobao.taobao",
+                        className: "com.taobao.browser.BrowserActivity",
+                        data: app.parseUri("https://pages.tmall.com/wow/z/hdwk/n-hdwk-solution/2020618-single?spm=a211oj.14651605.1135447480.d_primarybtn_1&disableNav=YES&disableProgress=YES&hd_from=mallres"),
+                        flags: ["grant_read_uri_permission", "grant_write_uri_permission"],
+                    });
+                    sleep(3000);
+                    break;
+                }
+                i++;
+            } else {
+                if (className("android.widget.Button").text("返回").clickable(true).findOnce() != null) {
+                    className("android.widget.Button").text("返回").clickable(true).findOnce().click();
+                    toastLog("已尝试盲点“返回”按钮");
+                } else if (className("android.widget.ImageView").clickable(true).desc("返回上一页").findOnce() != null) {
+                    className("android.widget.ImageView").clickable(true).desc("返回上一页").findOnce().click();
+                    toastLog("已尝试盲点“返回上一页面”按钮");
+                } else if (className("android.widget.ImageButton").desc("转到上一层级").clickable(true).findOnce() != null) {
+                    className("android.widget.ImageButton").desc("转到上一层级").clickable(true).findOnce().click();
+                    toastLog("已盲点“转到上一层级”按钮");
+                } else {
+                    Justback();
+                }
+                sleep(2000);
+            }
+        }
+        for (var d = 10; d > 0; d--) {
+            if (className("android.widget.Button").text("做任务，领喵币").findOnce() != null) {
+                toastLog("已成功处于“618列车”活动界面");
+                break;
+            } else if (currentActivity() == "com.taobao.browser.BrowserActivity") {
+                toastLog("正在等待“全民618列车”活动界面加载，剩余" + d + "秒……");
+                sleep(2000);
+            } else {
+                var d = 0;
+                toastLog("当前未处于“全民618列车”活动加载界面，正在重试……");
+                openInTask();
+                break;
+            }
         }
     }
 }
@@ -926,7 +958,7 @@ function DoTask() {
             now = RwTitle.substring(RwTitle.indexOf("(") + 1, RwTitle.indexOf("/") + 0);
             xz = RwTitle.substring(RwTitle.indexOf("/") + 1, RwTitle.indexOf(")") + 0);
             log(RwTitle, Button.text(), Button.clickable(), "当前：" + now, "上限：" + xz);
-            if (RwTitle.search("邀请好友") < 0 &&RwTitle.search("开通省钱卡") < 0 && RwTitle.search("天猫农场") < 0 && RwTitle.search("续费88VIP") < 0 && RwTitle.search("淘宝人") < 0 && RwTitle.search("红包省钱卡") < 0 && now != xz) {
+            if (RwTitle.search("邀请好友") < 0 && RwTitle.search("开通省钱卡") < 0 && RwTitle.search("天猫农场") < 0 && RwTitle.search("续费88VIP") < 0 && RwTitle.search("淘宝人") < 0 && RwTitle.search("红包省钱卡") < 0 && now != xz) {
                 if (Button.clickable() == true) {
                     Button.click();
                     toastLog("已尝试盲点“" + Button.text() + "”按钮");
@@ -943,7 +975,7 @@ function DoTask() {
                             toastLog("网络竟然崩溃了，已尝试点击“刷新”按钮");
                             sleep(3000);
                         }
-                        if (className("android.view.View").desc(" 任务已完成").findOnce() != null || className("android.view.View").desc(" 任务完成").findOnce() != null || className("android.view.View").text("任务已完成").findOnce() != null||className("android.view.View").textContains("任务已完成").findOnce()!=null&&className("android.view.View").textContains("任务完成").findOnce()!=null) {
+                        if (className("android.view.View").desc(" 任务已完成").findOnce() != null || className("android.view.View").desc(" 任务完成").findOnce() != null || className("android.view.View").text("任务已完成").findOnce() != null || className("android.view.View").textContains("任务已完成").findOnce() != null && className("android.view.View").textContains("任务完成").findOnce() != null) {
                             toastLog("任务已完成");
                             break;
                         } else {
