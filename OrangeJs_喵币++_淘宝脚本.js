@@ -761,7 +761,7 @@ if (T == 1) {
     var w = floaty.rawWindow(
         <card bg="#80000000">
             <vertical align="center">
-                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
+                <img src="{{getStorageData('APPbasic', 'URLprefix')}}/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
                 <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
                 <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
             </vertical>
