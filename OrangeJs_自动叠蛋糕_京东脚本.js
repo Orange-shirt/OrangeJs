@@ -760,7 +760,7 @@ if (T == 1) {
     var w = floaty.rawWindow(
         <card bg="#80000000">
             <vertical align="center">
-                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
+                <img src="{{getStorageData('APPbasic', 'URLprefix')}}/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
                 <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
                 <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
             </vertical>
@@ -777,15 +777,15 @@ if (T == 1) {
 function openInTask() {
     var i = 0;
     while (true) {
-        if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("全民叠蛋糕").className("android.widget.TextView").findOnce() != null && text("疯抢10亿红包").className("android.widget.TextView").findOnce() != null) {
-            if (text("全民叠蛋糕").className("android.widget.TextView").findOnce().parent().clickable() == true) {
-                text("全民叠蛋糕").className("android.widget.TextView").findOnce().parent().click();
-                toastLog("已尝试盲点“全民叠蛋糕”入口按钮");
+        if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("领现金红包").className("android.widget.TextView").findOnce() != null && text("叠蛋糕分10亿").className("android.widget.TextView").findOnce() != null) {
+            if (text("领现金红包").className("android.widget.TextView").findOnce().parent().clickable() == true) {
+                text("领现金红包").className("android.widget.TextView").findOnce().parent().click();
+                toastLog("已尝试盲点“领现金红包”入口按钮");
                 sleep(3000);
             } else {
-                let a = text("全民叠蛋糕").className("android.widget.TextView").findOnce().parent().bounds();
+                let a = text("领现金红包").className("android.widget.TextView").findOnce().parent().bounds();
                 click(a.centerX(), a.centerY());
-                toastLog("已尝试点击“全民叠蛋糕”入口按钮");
+                toastLog("已尝试点击“领现金红包”入口按钮");
                 sleep(3000);
             }
             break;
