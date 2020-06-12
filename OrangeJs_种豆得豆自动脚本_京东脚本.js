@@ -1453,6 +1453,7 @@ function DoTask() {
                     }
                 }
                 if (MakeSureInHD() == false) {
+                    toastLog("尝试返回“任务列表”界面");
                     if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
                         className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
                     } else {
