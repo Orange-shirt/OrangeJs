@@ -894,6 +894,7 @@ function DoTask() {
 
     var ax = 0;
     var DoNotDoPJRW = null;
+    var DoNotDoGGHC = null;
     while (true) {
         if (className("android.widget.TextView").text("全部任务").findOnce() != null && className("android.widget.TextView").text("全部任务").findOnce().parent().child(className("android.widget.TextView").text("全部任务").findOnce().parent().childCount() - 1).className() == "android.widget.ScrollView") {
             var A = className("android.widget.TextView").text("全部任务").findOnce().parent().child(className("android.widget.TextView").text("全部任务").findOnce().parent().childCount() - 1);
@@ -981,7 +982,7 @@ function DoTask() {
                 swipe(B.bounds().centerX(), B.bounds().centerY(), B.bounds().centerX(), B.bounds().centerY() + 500, 500);
                 toastLog("已尝试下滑当前任务页，滑动前按钮“" + Button.text() + "”中心点Y坐标为：" + Button.bounds().centerY());
                 sleep(1000);
-            } else if (now != xz && RwTitle != "逛逛会场" && RwTitle != "评价商品" && RwTitle != "好友助力" || now != xz && RwTitle == "逛逛会场" && now == 0 || now != xz && RwTitle == "评价商品" && DoNotDoPJRW == null) {
+            } else if (now != xz && RwTitle != "逛逛会场" && RwTitle != "评价商品" && RwTitle != "好友助力" || now != xz && RwTitle == "逛逛会场" && DoNotDoGGHC == null || now != xz && RwTitle == "评价商品" && DoNotDoPJRW == null) {
                 if (Button.clickable() == true) {
                     Button.click();
                     toastLog("已尝试盲点“" + Button.text() + "”按钮");
@@ -1451,6 +1452,9 @@ function DoTask() {
                         toastLog("正在等待任务界面加载，剩余" + JustWait + "秒……");
                         sleep(1000);
                     }
+                }
+                if (RwTitle == "逛逛会场") {
+                    var DoNotDoGGHC = 1;
                 }
                 if (MakeSureInHD() == false) {
                     toastLog("尝试返回“任务列表”界面");
