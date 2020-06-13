@@ -813,12 +813,9 @@ function openInTask() {
     for (var d = 10; d > 0; d--) {
         if (MakeSureInHD() == true) {
             break
-        } else if (currentActivity() == "com.jingdong.app.mall.WebActivity" || currentActivity() == "com.jingdong.common.jdreactFramework.activities.JDReactNativeCommonActivity") {
+        } else {
             toastLog("正在等待“种豆得豆”活动界面加载，剩余" + d + "秒……");
             sleep(2000);
-        } else {
-            toastLog("当前未处于“种豆得豆”活动加载界面，正在重试……");
-            break;
         }
     }
     if (MakeSureInHD() == false) {
@@ -982,7 +979,7 @@ function DoTask() {
                 swipe(B.bounds().centerX(), B.bounds().centerY(), B.bounds().centerX(), B.bounds().centerY() + 500, 500);
                 toastLog("已尝试下滑当前任务页，滑动前按钮“" + Button.text() + "”中心点Y坐标为：" + Button.bounds().centerY());
                 sleep(1000);
-            } else if (now != xz && RwTitle != "逛逛会场" && RwTitle != "评价商品" && RwTitle != "好友助力" || now != xz && RwTitle == "逛逛会场" && DoNotDoGGHC == null &&now==0|| now != xz && RwTitle == "评价商品" && DoNotDoPJRW == null) {
+            } else if (now != xz && RwTitle != "逛逛会场" && RwTitle != "评价商品" && RwTitle != "好友助力" || now != xz && RwTitle == "逛逛会场" && DoNotDoGGHC == null && now == 0 || now != xz && RwTitle == "评价商品" && DoNotDoPJRW == null) {
                 if (Button.clickable() == true) {
                     Button.click();
                     toastLog("已尝试盲点“" + Button.text() + "”按钮");
