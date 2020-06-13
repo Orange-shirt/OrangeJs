@@ -982,7 +982,7 @@ function DoTask() {
                 swipe(B.bounds().centerX(), B.bounds().centerY(), B.bounds().centerX(), B.bounds().centerY() + 500, 500);
                 toastLog("已尝试下滑当前任务页，滑动前按钮“" + Button.text() + "”中心点Y坐标为：" + Button.bounds().centerY());
                 sleep(1000);
-            } else if (now != xz && RwTitle != "逛逛会场" && RwTitle != "评价商品" && RwTitle != "好友助力" || now != xz && RwTitle == "逛逛会场" && DoNotDoGGHC == null || now != xz && RwTitle == "评价商品" && DoNotDoPJRW == null) {
+            } else if (now != xz && RwTitle != "逛逛会场" && RwTitle != "评价商品" && RwTitle != "好友助力" || now != xz && RwTitle == "逛逛会场" && DoNotDoGGHC == null &&now==0|| now != xz && RwTitle == "评价商品" && DoNotDoPJRW == null) {
                 if (Button.clickable() == true) {
                     Button.click();
                     toastLog("已尝试盲点“" + Button.text() + "”按钮");
