@@ -777,7 +777,7 @@ if (T == 1) {
 function openInTask() {
     var i = 0;
     while (true) {
-        if (className("android.view.View").desc("我的").findOnce() != null && text("领现金红包").className("android.widget.TextView").findOnce() != null && text("叠蛋糕分10亿").className("android.widget.TextView").findOnce() != null) {
+        if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("领现金红包").className("android.widget.TextView").findOnce() != null && text("叠蛋糕分10亿").className("android.widget.TextView").findOnce() != null) {
             if (text("领现金红包").className("android.widget.TextView").findOnce().parent().clickable() == true) {
                 text("领现金红包").className("android.widget.TextView").findOnce().parent().click();
                 toastLog("已尝试盲点“领现金红包”入口按钮");
@@ -789,7 +789,7 @@ function openInTask() {
                 sleep(3000);
             }
             break;
-        } else if (className("android.view.View").desc("我的").findOnce() != null) {
+        } else if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null) {
             className("android.view.View").desc("我的").findOnce().click();
             toastLog("已尝试点击京东主页“我的”按钮");
             sleep(2000);
@@ -1212,7 +1212,7 @@ function DoTask() {
                             sleep(2000);
                         } else {
                             let vb = v.bounds();
-                            click(cb.centerX(), cb.centerY());
+                            click(vb.centerX(), vb.centerY());
                             toastLog("已尝试点击“忍痛离开”按钮");
                             sleep(2000);
                         }
