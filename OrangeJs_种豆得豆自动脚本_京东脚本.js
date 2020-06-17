@@ -714,7 +714,7 @@ function Justback() {
     }
     if (context_i_back == 3) {
         sleep(1000);
-        toastLog("从屏幕中间向从左向内滑动来返回");
+        toastLog("从屏幕中间从左向内滑动来返回");
         gestures([context_gestures_speed, [0, height / 2],
             [500, height / 2]
         ]);
