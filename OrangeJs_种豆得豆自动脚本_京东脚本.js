@@ -36,6 +36,8 @@ if (contextPASS == 0) {
     Set_Back_way();
 }
 
+var height=device.height;
+var weight=device.width;
 function dialogs_js() {
     var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
