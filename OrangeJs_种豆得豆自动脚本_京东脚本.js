@@ -773,7 +773,6 @@ if (T == 1) {
     log("使用脚本自带“吐司”");
 }
 
-
 function openInTask() {
     while (true) {
         if (className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null && text("瓜分亿万京豆").className("android.widget.TextView").findOnce() != null) {
@@ -824,7 +823,6 @@ function openInTask() {
         openInTask();
     }
 }
-
 function MakeSureInHD() {
     if (className("android.widget.TextView").text("收取营养液").findOnce() != null) {
         return true;
@@ -868,7 +866,7 @@ function DoTask() {
         }
     }
 
-    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友"];
+    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友","低价包邮"];
     for (let a = 0; a < ShouQu.length; a++) {
         while (className("android.widget.TextView").text(ShouQu[a]).findOnce() != null && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).childCount() > 2 && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2).className() == "android.widget.TextView") {
             let b = className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2);
@@ -1217,7 +1215,7 @@ function DoTask() {
                                 }
                             }
                         }
-                    } else if (currentActivity() == "com.jingdong.common.jdreactFramework.activities.JDReactNativeCommonActivity" && className("android.widget.TextView").text("领京豆").findOnce() != null) {
+                    } else if (currentActivity() == "com.jingdong.common.jdreactFramework.activities.JDReactNativeCommonActivity" && className("android.widget.TextView").text("签到领京豆").findOnce() != null) {
                         if (className("android.widget.TextView").text("签到领京豆").findOnce() != null) {
                             let a = className("android.widget.TextView").text("签到领京豆").findOnce().bounds();
                             click(a.centerX(), a.centerY());
@@ -1239,6 +1237,17 @@ function DoTask() {
                                     toastLog("今日签到成功奖励：" + className("android.widget.TextView").text("今日签到成功奖励").findOnce().parent().parent().parent().child(1).child(0).child(0).child(2).text() + "个京豆");
                                     sleep(2000);
                                     break;
+                                } else if (className("android.widget.TextView").text("签到成功，").findOnce() != null) {
+                                    try {
+                                        let a = className("android.widget.TextView").text("签到成功，").findOnce();
+                                        let b = a.parent().child(a.drawingOrder()).text();
+                                        let c = a.parent().child(a.drawingOrder() + 3).text();
+                                        toastLog(a.text() + b + "京豆x" + c);
+                                        sleep(2000);
+                                        break;
+                                    } catch (e) {
+                                        log(e);
+                                    }
                                 } else {
                                     toastLog("正在等待“签到成功”界面加载，剩余" + dengw + "秒……");
                                     sleep(1000);
