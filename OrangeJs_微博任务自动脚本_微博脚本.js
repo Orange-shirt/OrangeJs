@@ -1462,6 +1462,10 @@ function DoTask() {
             toastLog("已处于微博主页");
             sleep(2000);
             break;
+        } else if (className("android.widget.FrameLayout").desc("我").findOnce() != null && className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce() == null) {
+            toastLog("已处于微博主页");
+            sleep(2000);
+            break;
         } else if (className("android.view.ViewGroup").desc("我").findOnce() != null && className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce() == null) {
             className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce().click();
             toastLog("已尝试点击关闭“微博故事”按钮");
@@ -1474,20 +1478,8 @@ function DoTask() {
                 category: ["android.intent.category.LAUNCHER"],
                 flags: ["activity_new_task"]
             });
-            var deng = 5;
-            for (deng == 5; deng > 0; deng--) {
-                if (id("titleSave").findOnce() == null) {
-                    toastLog("正在等待微博APP启动至主页，当前剩余" + deng + "秒……");
-                    sleep(2000);
-                    if (className("android.view.View").desc("首页").findOnce() != null) {
-                        className("android.view.View").desc("首页").findOnce().click();
-                        toastLog("已尝试点击“首页”按钮");
-                    }
-                } else {
-                    toastLog("已到达主页");
-                    var deng = 0;
-                }
-            }
+            toastLog("正在等待微博APP启动至主页……");
+            sleep(2000);
         } else {
             if (className("android.widget.ImageView").clickable(true).desc("返回").findOnce() != null) {
                 className("android.widget.ImageView").clickable(true).desc("返回").findOnce().click();
@@ -1507,8 +1499,12 @@ function DoTask() {
             }
         }
     }
-    if (className("android.view.ViewGroup").desc("我").findOnce() != null) {
-        className("android.view.ViewGroup").desc("我").findOnce().click();
+    if (className("android.view.ViewGroup").desc("我").findOnce() != null || className("android.widget.FrameLayout").desc("我").findOne() != null) {
+        if (className("android.view.ViewGroup").desc("我").findOnce() != null) {
+            className("android.view.ViewGroup").desc("我").findOnce().click();
+        } else if (className("android.widget.FrameLayout").desc("我").findOne() != null) {
+            className("android.widget.FrameLayout").desc("我").findOnce().click();
+        }
         toastLog("已尝试点击主页“我”按钮");
         while (text("加载中").findOnce() != null) {
             toastLog("正在等待“我的微博”加载……");
