@@ -132,7 +132,14 @@ function RunJs() {
                 var Pz = PZ.readlines();
                 PZ.close();
                 context_DX = Pz[0];
-                context_XX = Pz[1];
+                context_XX = null;
+            for (let i = 1; i < Pz.length; i++) {
+                if (context_XX == null) {
+                    context_XX = Pz[i];
+                } else {
+                    context_XX = context_XX + "\n" + Pz[i];
+                }
+            }
             }
             Set_Back_way();
         } else if (i == 3) {
@@ -146,7 +153,14 @@ function RunJs() {
                 var Pz = PZ.readlines();
                 PZ.close();
                 context_DX = Pz[0];
-                context_XX = Pz[1];
+                context_XX = null;
+            for (let i = 1; i < Pz.length; i++) {
+                if (context_XX == null) {
+                    context_XX = Pz[i];
+                } else {
+                    context_XX = context_XX + "\n" + Pz[i];
+                }
+            }
                 var PZxg = dialogs.confirm("您当前的运行信息配置如下", "联系人备注/群聊名称/公众号名称：\n" + context_DX + "\n\n将发送的消息内容：" + context_XX + "\n\n您确定要修改吗？");
                 if (PZxg == true) {
                     InformationSettings();
@@ -222,7 +236,14 @@ function RunJs() {
                     var Pz = PZ.readlines();
                     PZ.close();
                     context_DX = Pz[0];
-                    context_XX = Pz[1];
+                    context_XX = null;
+            for (let i = 1; i < Pz.length; i++) {
+                if (context_XX == null) {
+                    context_XX = Pz[i];
+                } else {
+                    context_XX = context_XX + "\n" + Pz[i];
+                }
+            }
                 }
                 device.keepScreenDim();
                 toastLog("检测权限设置……");
@@ -259,7 +280,14 @@ function RunJs() {
                     var Pz = PZ.readlines();
                     PZ.close();
                     context_DX = Pz[0];
-                    context_XX = Pz[1];
+                    context_XX = null;
+            for (let i = 1; i < Pz.length; i++) {
+                if (context_XX == null) {
+                    context_XX = Pz[i];
+                } else {
+                    context_XX = context_XX + "\n" + Pz[i];
+                }
+            }
                 }
                 context_Manualstate = 0;
                 toastLog(options_[i]);
