@@ -36,8 +36,9 @@ if (contextPASS == 0) {
     Set_Back_way();
 }
 
-var height=device.height;
-var weight=device.width;
+var height = device.height;
+var weight = device.width;
+
 function dialogs_js() {
     var ScriptVersion = ("Beta1.2"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
@@ -823,6 +824,7 @@ function openInTask() {
         openInTask();
     }
 }
+
 function MakeSureInHD() {
     if (className("android.widget.TextView").text("收取营养液").findOnce() != null) {
         return true;
@@ -864,9 +866,33 @@ function DoTask() {
             click(b.centerX(), b.centerY());
             sleep(3000);
         }
+    } else if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce() != null &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).childCount() > 0 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).childCount() > 0 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).childCount() > 7 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).child(7).childCount() > 0 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).child(7).child(0).childCount() > 0 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).child(7).child(0).child(0).childCount() > 1 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).child(7).child(0).child(0).child(1).className() == "android.widget.ImageView" &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).child(7).child(0).child(0).child(0).childCount() > 0 &&
+        className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).child(7).child(0).child(0).child(0).child(0).className() == "android.widget.ImageView") {
+        let a = className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce().child(0).child(0).child(0).child(0).child(7).child(0).child(0).child(1).bounds();
+        click(a.centerX(), a.centerY());
+        toastLog("已尝试点击“收取提醒小手”");
+        sleep(3000);
+        if (className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce() != null && className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().childCount() == 4 &&
+            className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(0).className() == "android.widget.TextView" && className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(1).className() == "android.widget.TextView" && className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(2).className() == "android.widget.TextView" && className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(3).className() == "android.widget.TextView") {
+            toastLog(className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(0).text() + className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(1).text() + className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(2).text() + className("android.widget.TextView").text("上轮您的豆豆成长值为").findOnce().parent().child(3).text())
+        }
+        if (className("android.widget.TextView").text("收下京豆").findOnce() != null) {
+            let b = className("android.widget.TextView").text("收下京豆").findOnce().bounds();
+            click(b.centerX(), b.centerY());
+            sleep(3000);
+        }
     }
 
-    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友","低价包邮","高考加油"];
+    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友", "低价包邮", "高考加油"];
     for (let a = 0; a < ShouQu.length; a++) {
         while (className("android.widget.TextView").text(ShouQu[a]).findOnce() != null && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).childCount() > 2 && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2).className() == "android.widget.TextView") {
             let b = className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2);
