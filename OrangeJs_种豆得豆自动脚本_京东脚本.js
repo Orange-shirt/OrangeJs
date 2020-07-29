@@ -1359,7 +1359,7 @@ function DoTask() {
                                     break;
                                 }
                                 toastLog("当前为第" + Now + "个卡片，卡片总数为" + ALL);
-                                if (over >= limit) {
+                                if (over >=limit) {
                                     toastLog("“选ta并关注”获得营养液已达每日上限" + limit + "，返回继续进行下一任务");
                                     if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
                                         className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
@@ -1369,7 +1369,7 @@ function DoTask() {
                                     sleep(3000);
                                     var JustWait = 0;
                                     break;
-                                } else if (i >= ALL) {
+                                } else if (i > ALL) {
                                     toastLog("已找完全部" + ALL + "个店铺，在浏览" + i + "个店铺后共找到" + over + "瓶营养液，但未达到今日" + limit + "个上限")
                                     if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
                                         className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
