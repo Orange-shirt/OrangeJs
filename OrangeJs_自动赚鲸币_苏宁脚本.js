@@ -989,7 +989,12 @@ function DoTask() {
                         }
                         i++;
                     } else {
-                        var RwTitle = B.child(i - 2).text();
+                        try {
+                            var RwTitle = B.child(i - 2).text();
+                        } catch (e) {
+                            toastLog("任务名识别出错，当前按钮：" + B.child(i).text() + i+"\n全部控件：");
+                            console.info(B.children());
+                        }
                         var RwButton = B.child(i);
                         if (RwTitle.search("/") >= 0 && RwTitle.search("崗") < 0 && RwTitle.search("籤") < 0 && RwTitle.search("骺") < 0) {
                             let ARw = RwTitle.replace("/", "崗");
