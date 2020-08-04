@@ -246,17 +246,17 @@ function mainUi() {
         </frame>
         </ScrollView>
     );
-ui.autoService.on("check", function(checked) {
-    // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
-    if(checked && auto.service == null) {
-        app.startActivity({
-            action: "android.settings.ACCESSIBILITY_SETTINGS"
-        });
-    }
-    if(!checked && auto.service != null){
-        auto.service.disableSelf();
-    }
-});
+    ui.autoService.on("check", function(checked) {
+        // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+        if (checked && auto.service == null) {
+            app.startActivity({
+                action: "android.settings.ACCESSIBILITY_SETTINGS"
+            });
+        }
+        if (!checked && auto.service != null) {
+            auto.service.disableSelf();
+        }
+    });
     ui.ScriptOne.click(() => {
         engines.execScript("自动微信发消息", "runScriptOne();\n" + runScriptOne.toString());
     });
@@ -276,7 +276,7 @@ ui.autoService.on("check", function(checked) {
             },
             cancelable: false
         }).show();
-        var ScriptSevt_Url = getStorageData('APPbasic', 'URLprefix') + "";
+        var ScriptSevt_Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E8%B5%9A%E9%B2%B8%E5%B8%81_%E8%8B%8F%E5%AE%81%E8%84%9A%E6%9C%AC.js";
         var res_script = http.get(ScriptSevt_Url, {
             headers: {
                 'Accept-Language': 'en-us,en;q=0.5',
@@ -640,7 +640,7 @@ ui.autoService.on("check", function(checked) {
             </ScrollView>
         );
         ui.AppVision.text(app.versionName + "(" + app.versionCode + ")");
-        ui.OpenSource.text("Github：https://github.com/Orange-shirt/OrangeJs" + "\n阿里云Code：\nhttps://code.aliyun.com/orange_shirt/OrangeJs");
+        ui.OpenSource.text("Github：https://github.com/Orange-shirt/OrangeJs" + "\nGitee：https://gitee.com/Orange_shirt/OrangeJs\nCoding：https://orange-shirt.coding.net/p/OrangeJs/git");
         ui.DeviceInformation.text("设备品牌/型号：" + device.brand + "(" + device.model + ")\n" + "安卓版本：" + device.release + device.baseOS + "\n修订版本号：" + device.buildId + "\n设备分辨率：" + device.height + "*" + device.width);
         ui.Ttip.text("此软件/脚本均为兴趣制作，仅供学习参考交流使用\n请勿将本软件/脚本用于任何商业用途");
         ui.Back.click(() => {
