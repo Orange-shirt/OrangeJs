@@ -24,6 +24,11 @@ function setNightMode() {
     context_SunMoon = "@drawable/ic_brightness_2_black_48dp" //🌙
     context_Logo = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs-logoWhite.png" //白色Logo
 }
+ui.emitter.on("resume", function() {
+    try {
+        ui.autoService.checked = auto.service != null;
+    } catch (e) {}
+});
 mainUi();
 
 function mainUi() {
@@ -64,12 +69,12 @@ function mainUi() {
                 <View id="TEST" bg="#FF007CF3" h="*" w="*"/>//卡片颜色1
                 <View bg="#FF4395FB" h="*" w="0"/>//卡片颜色2
                 
-                <card layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
-                cardElevation="0dp" align="center">
+                <card id="xfc_text" layout_weight="50" h="40" margin="5 0 5 0" cardCornerRadius="20dp"
+                cardElevation="0dp" align="center" foreground="?attr/selectableItemBackground" clickable="true">
                 <vertical padding="10 0" h="auto">
                 </vertical>
                 <View bg="{{context_FctextBg}}" h="*" w="*"/>//悬浮窗权限中的卡片颜色
-                <text id="xfc_text" textStyle="bold" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto" bg="?attr/selectableItemBackground" clickable="true"/>
+                <text textStyle="bold" text="停止全部脚本" color="{{context_textColor}}" bg="{{context_FctextBg}}" gravity="center" size="15" h="auto"/>
                 
             </card>
         </card>
@@ -87,23 +92,21 @@ function mainUi() {
         </text>
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0 5 0 0">
-                //淘宝脚本
+                //苏宁脚本
                 <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
                     <View bg="#FF5722" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_5080_1577343737/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="http://static.yingyonghui.com/icon/128/6682484.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="手机淘宝" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐9.4.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="苏宁易购" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
-                                <View bg="#FFAB91"/>
-                                <spinner id="sp_TB1" entries="喵币++|自动集福气" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#90FF5722"/>
+                                <text id="ScriptSevt" text="自动赚鲸币" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
-                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_TB" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
                         </linear>
                     </vertical>
                 </card>
@@ -114,8 +117,7 @@ function mainUi() {
                         <linear orientation="horizontal" align="left" margin="0">
                             <img src="http://image.coolapk.com/apk_logo/2019/1218/11/512E5B9B4E8B4A7-32664-o_1dsbg23j210ns1ee110u7evuevcr-uid-1871800@512x512.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="拼多多" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐4.90.0版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="拼多多" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
@@ -139,8 +141,7 @@ function mainUi() {
                         <linear orientation="horizontal" align="left" margin="0">
                             <img src="http://pp.myapp.com/ma_icon/0/icon_9926_1579487446/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="微博" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐9.9.3版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="微博" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
@@ -158,8 +159,7 @@ function mainUi() {
                         <linear orientation="horizontal" align="left" margin="0">
                             <img src="http://pp.myapp.com/ma_icon/0/icon_10910_1577346809/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐7.0.10版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="微信" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
@@ -182,8 +182,7 @@ function mainUi() {
                         <linear orientation="horizontal" align="left" margin="0">
                             <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐8.4.6版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
@@ -202,8 +201,7 @@ function mainUi() {
                         <linear orientation="horizontal" align="left" margin="0">
                             <img src="https://android-artworks.25pp.com/fs08/2020/01/22/8/110_30d36bea2b970bda26ac38b5eb3a2935_con_130x130.png" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="完美校园" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                                <text text="推荐5.1.2版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                                <text text="完美校园" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
@@ -224,8 +222,7 @@ function mainUi() {
                     <linear orientation="horizontal" align="left" margin="0">
                         <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="40" h="40" margin="20 20 0 0"/>
                         <vertical padding="0 0" h="auto">
-                            <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 20 0 0"/>
-                            <text text="推荐8.2.7版本" typeface="monospace"  color="#FFFFFF"  gravity="center" size="5" margin="10 0 0 0"/>
+                            <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                         </vertical>
                     </linear>
                     <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
@@ -245,47 +242,58 @@ function mainUi() {
             <text id="TalktoDeveloper" text="反馈问题" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
             <text id="AboutApp" text="关于软件" color="#BDBDBD"  bg="{{context_textBg}}" textSize="13sp" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
         </linear>
-        <vertical gravity="center" margin="0 0 0 0">
-            <View w="*" h="5" bg="#FC3032"/>
-            <View w="*" h="5" bg="#FE8E2D"/>
-            <View w="*" h="5" bg="#FCD830"/>
-            <View w="*" h="5" bg="#32F558"/>
-            <View w="*" h="5" bg="#4395FB"/>
-            <View w="*" h="5" bg="#832FFD"/>
-        </vertical>
         </vertical>
         </frame>
         </ScrollView>
     );
-
-    ui.autoService.on("check", function(checked) {
-        /* // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
-         if (auto.service == null) {
-             app.startActivity({
-                 action: "android.settings.ACCESSIBILITY_SETTINGS"
-             });
-         }*/
-
-        if (!checked && auto.service != null) {
-            auto.service.disableSelf();
-        } else if (auto.service == null) {
-            if (checked) {
-                engines.execScript("Auto", "auto.waitFor();\ntoastLog('无障碍权限已开启！')");
-            }
-        }
-    });
-    // 当用户回到本界面时，resume事件会被触发
-    ui.main.on("resume", function() {
-        // 此时根据无障碍服务的开启情况，同步开关的状态
-        ui.autoService.checked = auto.service != null;
-    });
+ui.autoService.on("check", function(checked) {
+    // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+    if(checked && auto.service == null) {
+        app.startActivity({
+            action: "android.settings.ACCESSIBILITY_SETTINGS"
+        });
+    }
+    if(!checked && auto.service != null){
+        auto.service.disableSelf();
+    }
+});
     ui.ScriptOne.click(() => {
-        engines.execScript("自动看团课", "runScriptOne();\n" + runScriptOne.toString());
+        engines.execScript("自动微信发消息", "runScriptOne();\n" + runScriptOne.toString());
     });
     ui.AboutApp.click(() => {
         AboutApp();
     });
 
+    ui.ScriptSevt.click(() => {
+        engines.execScript("自动赚鲸币", "runScriptSevt();\n" + runScriptSevt.toString());
+    });
+
+    function runScriptSevt() {
+        var DownJs = dialogs.build({
+            title: "正在请求脚本中……",
+            progress: {
+                max: -1
+            },
+            cancelable: false
+        }).show();
+        var ScriptSevt_Url = getStorageData('APPbasic', 'URLprefix') + "";
+        var res_script = http.get(ScriptSevt_Url, {
+            headers: {
+                'Accept-Language': 'en-us,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
+            }
+        });
+
+        if (res_script.statusCode == 200) {
+            DownJs.dismiss();
+            toastLog("脚本获取成功");
+            var OrangeJs = res_script.body.string();
+            engines.execScript("自动赚鲸币", OrangeJs);
+        } else {
+            DownJs.dismiss();
+            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
+        }
+    }
 
     function runScriptOne() {
         var DownJs = dialogs.build({
@@ -313,13 +321,6 @@ function mainUi() {
             dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
         }
     }
-    ui.R_TB.click(() => {
-        if (ui.sp_TB1.getSelectedItemPosition() == 1) {
-            engines.execScript("自动集福气", "runScriptTwo();\n" + runScriptTwo.toString());
-        } else if (ui.sp_TB1.getSelectedItemPosition() == 0) {
-            engines.execScript("喵币++", "runScriptSixt();\n" + runScriptSixt.toString());
-        }
-    });
     ui.R_JD.click(() => {
         if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
             engines.execScript("东东农场自动脚本", "runScriptEight();\n" + runScriptEight.toString());
@@ -376,33 +377,6 @@ function mainUi() {
             toastLog("脚本获取成功");
             var OrangeJs = res_script.body.string();
             engines.execScript("种豆得豆自动脚本", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
-
-
-    function runScriptSixt() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptSixt_Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E5%96%B5%E5%B8%81++_%E6%B7%98%E5%AE%9D%E8%84%9A%E6%9C%AC.js"; //第十六个脚本网址
-        var res_script = http.get(ScriptSixt_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("喵币++", OrangeJs);
         } else {
             DownJs.dismiss();
             dialogs.alert("脚本获取失败！", "这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
@@ -495,32 +469,6 @@ function mainUi() {
         }
     }
 
-
-    function runScriptTwo() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptTwo_Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E9%9B%86%E7%A6%8F%E6%B0%94"; //第二个脚本网址
-        var res_script = http.get(ScriptTwo_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动集福气", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
     ui.ScriptTwe.click(() => {
         engines.execScript("自动健康打卡", "runScriptTwe();\n" + runScriptTwe.toString());
     });
@@ -783,8 +731,6 @@ function mainUi() {
 
 
     ui.text.text("权限设置");
-
-    ui.xfc_text.text("停止全部脚本");
 
     ui.Privacy_Security.click(() => {
 
