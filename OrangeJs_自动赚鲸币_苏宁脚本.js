@@ -988,11 +988,14 @@ function DoTask() {
                             toastLog("今天已经签到过啦～");
                         }
                         i++;
+                    } else if (B.child(i).text() == "明日再来") {
+                        toastLog("今天已经签到过啦～");
+                        i++;
                     } else {
                         try {
                             var RwTitle = B.child(i - 2).text();
                         } catch (e) {
-                            toastLog("任务名识别出错，当前按钮：" + B.child(i).text() + i+"\n全部控件：");
+                            toastLog("任务名识别出错，当前按钮：" + B.child(i).text() + i + "\n全部控件：");
                             console.info(B.children());
                         }
                         var RwButton = B.child(i);
@@ -1035,336 +1038,336 @@ function DoTask() {
                                                     className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 2 &&
                                                     className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).childCount() > 2 &&
                                                     className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(2).childCount() > 0) {
-                                                    for(let iiii=2;iiii<className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).childCount();iiii++){
-                                                        var done=false;
+                                                    for (let iiii = 2; iiii < className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).childCount(); iiii++) {
+                                                        var done = false;
                                                         for (let iii = 0; iii < className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(iiii).childCount(); iii++) {
                                                             if (className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(iiii).child(iii).text().search("00") >= 0) {
                                                                 className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(iiii).child(iii).click();
                                                                 toastLog("已尝试盲点活动页第" + iii + "个店铺");
                                                                 sleep(3000);
-                                                                var done=true;
+                                                                var done = true;
                                                                 break;
                                                             }
                                                         }
-                                                        if(done==true){
+                                                        if (done == true) {
                                                             break;
-                                                            }
                                                         }
-                                                    } else {
-                                                        toastLog(RwTitle + "任务控件出错，正在重新尝试（控件错误或控件不符合要求，若多次出现此问题请联系开发者）");
-                                                        openInTask();
-                                                        DoTask();
-                                                        break;
                                                     }
                                                 } else {
-                                                    toastLog("任务按钮未能成功点击，正在重试[出错任务：" + RwTitle + "出错按钮：" + RwButton.text() + "]");
+                                                    toastLog(RwTitle + "任务控件出错，正在重新尝试（控件错误或控件不符合要求，若多次出现此问题请联系开发者）");
                                                     openInTask();
                                                     DoTask();
                                                     break;
                                                 }
-                                            } else if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0) {
-                                                for (let dengss = 10; dengss > 0; dengss--) {
-                                                    if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0) {
-                                                        toastLog("已识别到应用内任务计时器，剩余" + id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text());
-                                                        sleep(1000);
-                                                    } else if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                                        id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") < 0) {
-                                                        toastLog("应用内任务计时器已结束，尝试返回任务蒙版界面");
-                                                        sleep(1000);
-                                                        break;
-                                                    } else {
-                                                        toastLog("识别到应用内计时器加等时间，剩余" + dengss + "秒……");
-                                                        sleep(1000);
-                                                    }
-                                                }
+                                            } else {
+                                                toastLog("任务按钮未能成功点击，正在重试[出错任务：" + RwTitle + "出错按钮：" + RwButton.text() + "]");
+                                                openInTask();
+                                                DoTask();
                                                 break;
-                                            } else if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                                id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text() == "返回领取") {
-                                                toastLog("已识别到“返回领取”按钮，结束等待计时");
-                                                sleep(1000);
-                                                break;
-                                            } else if (RwTitle.search("逛会场") >= 0 &&
-                                                UcWebview != null &&
-                                                UcWebview.childCount() > 0 &&
-                                                UcWebview.child(0).childCount() > 0 &&
-                                                UcWebview.child(0).child(0).childCount() > 0 &&
-                                                UcWebview.child(0).child(0).child(0).childCount() > 0 &&
-                                                UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
-                                                UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0) {
-                                                for (let dengs = 10; dengs > 0; dengs--) {
-                                                    if (className("com.uc.webview.export.WebView").findOnce() != null) {
-                                                        var UcWebview = className("com.uc.webview.export.WebView").findOnce();
-                                                    } else {
-                                                        toastLog("特定控件消失，尝试返回任务蒙版界面");
-                                                        sleep(1000);
-                                                        break;
-                                                    }
-                                                    if (RwTitle.search("逛会场") >= 0 &&
-                                                        UcWebview != null &&
-                                                        UcWebview.childCount() > 0 &&
-                                                        UcWebview.child(0).childCount() > 0 &&
-                                                        UcWebview.child(0).child(0).childCount() > 0 &&
-                                                        UcWebview.child(0).child(0).child(0).childCount() > 0 &&
-                                                        UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
-                                                        UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0) {
-                                                        toastLog("已识别到应用内任务计时器，剩余" + UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text());
-                                                        sleep(1000);
-                                                    } else {
-                                                        toastLog("应用任务计时已结束，尝试返回任务蒙版界面");
-                                                        sleep(1000);
-                                                        break;
-                                                    }
-                                                }
-                                                break;
-                                            } else if (className("com.uc.webview.export.WebView").findOnce() != null &&
-                                                className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
-                                                className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
-                                                className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
-                                                className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-                                                className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") >= 0) {
-                                                for (let dengs = 10; dengs > 0; dengs--) {
-                                                    if (className("com.uc.webview.export.WebView").findOnce() != null &&
-                                                        className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") >= 0 ||
-                                                        className("com.uc.webview.export.WebView").findOnce() != null &&
-                                                        className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") >= 0) {
-                                                        toastLog("已识别到应用内任务计时器，剩余" + className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text());
-                                                        sleep(1000);
-                                                    } else if (className("com.uc.webview.export.WebView").findOnce() != null &&
-                                                        className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") < 0 ||
-                                                        className("com.uc.webview.export.WebView").findOnce() != null &&
-                                                        className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                        className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") < 0) {
-                                                        toastLog("应用内任务计时器已结束，尝试返回任务蒙版界面");
-                                                        sleep(1000);
-                                                        break;
-                                                    } else {
-                                                        toastLog("识别到应用内计时器加等时间，剩余" + dengs + "秒……");
-                                                        sleep(1000);
-                                                    }
-                                                }
-                                                break;
-                                            } else if (desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce() != null && RwTitle.search("关注店铺") >= 0) {
-                                                desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce().click();
-                                                toastLog("已尝试盲点“关注（店铺）”按钮");
-                                                sleep(2000);
-                                                if (desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce() != null) {
-                                                    desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce().click();
-                                                    toastLog("已尝试盲点“已关注（店铺）”按钮");
-                                                    sleep(3000);
-                                                }
-                                                if (text("取消关注").clickable(true).findOnce() != null) {
-                                                    text("取消关注").clickable(true).findOnce().click();
-                                                    toastLog("已尝试盲点“取消关注”按钮");
-                                                    sleep(3000);
-                                                }
-                                                break;
-                                            } else if (className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce() != null &&
-                                                className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().childCount() > 1 &&
-                                                className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).childCount() > 0 &&
-                                                className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text().search("观看直播领奖励") >= 0 &&
-                                                id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null) {
-                                                let LiveRwTitle = className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text();
-                                                toastLog("已处于直播列表界面，当前：" + LiveRwTitle);
-                                                let ARw = LiveRwTitle.replace("/", "崗");
-                                                BRw = ARw.replace("(", "籤");
-                                                CRw = BRw.replace(")", "骺");
-                                                nanNowThis = CRw.match(/籤(\S*)崗/)[1];
-                                                nanLimitThis = CRw.match(/崗(\S*)骺/)[1];
-                                                NowNumThis = Number(nanNowThis);
-                                                LimitNumThis = Number(nanLimitThis);
-                                                if (NowNumThis != LimitNumThis) {
-                                                    for (let f = 0; f < id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().childCount(); f++) {
-                                                        id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().scrollForward();
-                                                        toastLog("已尝试上滑直播列表");
-                                                        sleep(2000);
-                                                        if (id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).clickable() == true &&
-                                                            id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).childCount() > 1 &&
-                                                            id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(0).className() == "android.widget.RelativeLayout" &&
-                                                            id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).className() == "android.widget.LinearLayout") {
-                                                            id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).click();
-                                                            toastLog("已尝试盲点直播：" + id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).child(0).text());
-                                                            sleep(3000);
-                                                            for (let denglive = 10; denglive > 0; denglive--) {
-                                                                if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
-                                                                    className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
-                                                                    className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
-                                                                    className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
-                                                                    className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0) {
-                                                                    for (let dengslive = 10; dengslive > 0; dengslive--) {
-                                                                        if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0) {
-                                                                            toastLog("识别到应用内计时器，计时器剩余" + className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text());
-                                                                            sleep(1000);
-                                                                        } else if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
-                                                                            className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") < 0) {
-                                                                            toastLog("应用内计时器结束，尝试返回上一级");
-                                                                            break;
-                                                                        } else {
-                                                                            toastLog("识别到应用内计时器，加时等待剩余" + dengslive + "秒……");
-                                                                            sleep(1000);
-                                                                        }
-                                                                    }
-                                                                    break;
-                                                                } else {
-                                                                    toastLog("正在观看直播，剩余等待" + denglive + "秒……");
-                                                                    sleep(1000);
-                                                                }
-                                                            }
-                                                            Justback();
-                                                            sleep(1000);
-                                                            break
-                                                        }
-                                                    }
+                                            }
+                                        } else if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0) {
+                                            for (let dengss = 10; dengss > 0; dengss--) {
+                                                if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0) {
+                                                    toastLog("已识别到应用内任务计时器，剩余" + id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text());
+                                                    sleep(1000);
+                                                } else if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") < 0) {
+                                                    toastLog("应用内任务计时器已结束，尝试返回任务蒙版界面");
+                                                    sleep(1000);
+                                                    break;
                                                 } else {
-                                                    toastLog(LiveRwTitle + "，尝试返回任务蒙版界面");
+                                                    toastLog("识别到应用内计时器加等时间，剩余" + dengss + "秒……");
+                                                    sleep(1000);
+                                                }
+                                            }
+                                            break;
+                                        } else if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text() == "返回领取") {
+                                            toastLog("已识别到“返回领取”按钮，结束等待计时");
+                                            sleep(1000);
+                                            break;
+                                        } else if (RwTitle.search("逛会场") >= 0 &&
+                                            UcWebview != null &&
+                                            UcWebview.childCount() > 0 &&
+                                            UcWebview.child(0).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).child(0).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0) {
+                                            for (let dengs = 10; dengs > 0; dengs--) {
+                                                if (className("com.uc.webview.export.WebView").findOnce() != null) {
+                                                    var UcWebview = className("com.uc.webview.export.WebView").findOnce();
+                                                } else {
+                                                    toastLog("特定控件消失，尝试返回任务蒙版界面");
+                                                    sleep(1000);
                                                     break;
                                                 }
-                                            } else {
-                                                toastLog("正在进行“" + RwTitle + "”任务，剩余" + deng + "秒……");
-                                                sleep(1000);
+                                                if (RwTitle.search("逛会场") >= 0 &&
+                                                    UcWebview != null &&
+                                                    UcWebview.childCount() > 0 &&
+                                                    UcWebview.child(0).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).child(0).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0) {
+                                                    toastLog("已识别到应用内任务计时器，剩余" + UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text());
+                                                    sleep(1000);
+                                                } else {
+                                                    toastLog("应用任务计时已结束，尝试返回任务蒙版界面");
+                                                    sleep(1000);
+                                                    break;
+                                                }
                                             }
-                                        } catch (e) {
-                                            toastLog(e);
+                                            break;
+                                        } else if (className("com.uc.webview.export.WebView").findOnce() != null &&
+                                            className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") >= 0) {
+                                            for (let dengs = 10; dengs > 0; dengs--) {
+                                                if (className("com.uc.webview.export.WebView").findOnce() != null &&
+                                                    className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") >= 0 ||
+                                                    className("com.uc.webview.export.WebView").findOnce() != null &&
+                                                    className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") >= 0) {
+                                                    toastLog("已识别到应用内任务计时器，剩余" + className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text());
+                                                    sleep(1000);
+                                                } else if (className("com.uc.webview.export.WebView").findOnce() != null &&
+                                                    className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") < 0 ||
+                                                    className("com.uc.webview.export.WebView").findOnce() != null &&
+                                                    className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") < 0) {
+                                                    toastLog("应用内任务计时器已结束，尝试返回任务蒙版界面");
+                                                    sleep(1000);
+                                                    break;
+                                                } else {
+                                                    toastLog("识别到应用内计时器加等时间，剩余" + dengs + "秒……");
+                                                    sleep(1000);
+                                                }
+                                            }
+                                            break;
+                                        } else if (desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce() != null && RwTitle.search("关注店铺") >= 0) {
+                                            desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce().click();
+                                            toastLog("已尝试盲点“关注（店铺）”按钮");
+                                            sleep(2000);
+                                            if (desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce() != null) {
+                                                desc("关注").className("android.widget.ImageView").id("com.suning.mobile.ebuy:id/iv_shop_home_collection").clickable(true).findOnce().click();
+                                                toastLog("已尝试盲点“已关注（店铺）”按钮");
+                                                sleep(3000);
+                                            }
+                                            if (text("取消关注").clickable(true).findOnce() != null) {
+                                                text("取消关注").clickable(true).findOnce().click();
+                                                toastLog("已尝试盲点“取消关注”按钮");
+                                                sleep(3000);
+                                            }
+                                            break;
+                                        } else if (className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce() != null &&
+                                            className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().childCount() > 1 &&
+                                            className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).childCount() > 0 &&
+                                            className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text().search("观看直播领奖励") >= 0 &&
+                                            id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null) {
+                                            let LiveRwTitle = className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text();
+                                            toastLog("已处于直播列表界面，当前：" + LiveRwTitle);
+                                            let ARw = LiveRwTitle.replace("/", "崗");
+                                            BRw = ARw.replace("(", "籤");
+                                            CRw = BRw.replace(")", "骺");
+                                            nanNowThis = CRw.match(/籤(\S*)崗/)[1];
+                                            nanLimitThis = CRw.match(/崗(\S*)骺/)[1];
+                                            NowNumThis = Number(nanNowThis);
+                                            LimitNumThis = Number(nanLimitThis);
+                                            if (NowNumThis != LimitNumThis) {
+                                                for (let f = 0; f < id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().childCount(); f++) {
+                                                    id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().scrollForward();
+                                                    toastLog("已尝试上滑直播列表");
+                                                    sleep(2000);
+                                                    if (id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).clickable() == true &&
+                                                        id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).childCount() > 1 &&
+                                                        id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(0).className() == "android.widget.RelativeLayout" &&
+                                                        id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).className() == "android.widget.LinearLayout") {
+                                                        id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).click();
+                                                        toastLog("已尝试盲点直播：" + id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).child(0).text());
+                                                        sleep(3000);
+                                                        for (let denglive = 10; denglive > 0; denglive--) {
+                                                            if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0) {
+                                                                for (let dengslive = 10; dengslive > 0; dengslive--) {
+                                                                    if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0) {
+                                                                        toastLog("识别到应用内计时器，计时器剩余" + className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text());
+                                                                        sleep(1000);
+                                                                    } else if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") < 0) {
+                                                                        toastLog("应用内计时器结束，尝试返回上一级");
+                                                                        break;
+                                                                    } else {
+                                                                        toastLog("识别到应用内计时器，加时等待剩余" + dengslive + "秒……");
+                                                                        sleep(1000);
+                                                                    }
+                                                                }
+                                                                break;
+                                                            } else {
+                                                                toastLog("正在观看直播，剩余等待" + denglive + "秒……");
+                                                                sleep(1000);
+                                                            }
+                                                        }
+                                                        Justback();
+                                                        sleep(1000);
+                                                        break
+                                                    }
+                                                }
+                                            } else {
+                                                toastLog(LiveRwTitle + "，尝试返回任务蒙版界面");
+                                                break;
+                                            }
+                                        } else {
+                                            toastLog("正在进行“" + RwTitle + "”任务，剩余" + deng + "秒……");
                                             sleep(1000);
                                         }
+                                    } catch (e) {
+                                        toastLog(e);
+                                        sleep(1000);
                                     }
-                                    if (className("android.webkit.WebView").text("天天发现鲸").findOnce() == null) {
-                                        if (id("com.suning.mobile.ebuy:id/btn_back").className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
-                                            id("com.suning.mobile.ebuy:id/btn_back").className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
-                                            toastLog("已尝试盲点“返回”按钮");
-                                            sleep(3000);
-                                        } else {
-                                            Justback();
-                                            sleep(1000);
-                                        }
-                                    }
-                                    if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-                                        className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-                                        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-                                        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 4 &&
-                                        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).childCount() == 0 &&
-                                        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).childCount() > 0) {
-                                        var A = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0);
-                                        if (A.child(A.childCount() - 3).clickable() == true) {
-                                            A.child(A.childCount() - 3).click();
-                                            toastLog("已尝试盲点“赚鲸币”按钮");
-                                        } else {
-                                            let a = A.child(A.childCount() - 3).bounds();
-                                            click(a.centerX(), a.centerY());
-                                            toastLog("已尝试点击“赚鲸币”按钮");
-                                        }
+                                }
+                                if (className("android.webkit.WebView").text("天天发现鲸").findOnce() == null) {
+                                    if (id("com.suning.mobile.ebuy:id/btn_back").className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
+                                        id("com.suning.mobile.ebuy:id/btn_back").className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
+                                        toastLog("已尝试盲点“返回”按钮");
                                         sleep(3000);
-                                    }
-                                } else {
-                                    if (B.child(i).text() == "去邀请" || RwTitle.search("口令送喜") >= 0 || RwTitle.search("逛狮狮连萌") >= 0) {
-                                        toastLog("【已跳过】“" + RwTitle + RwButton.text() + "”任务");
                                     } else {
-                                        toastLog("【已完成任务】：" + RwTitle);
+                                        Justback();
+                                        sleep(1000);
                                     }
-                                    i++;
+                                }
+                                if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
+                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
+                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
+                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 4 &&
+                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).childCount() == 0 &&
+                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).childCount() > 0) {
+                                    var A = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0);
+                                    if (A.child(A.childCount() - 3).clickable() == true) {
+                                        A.child(A.childCount() - 3).click();
+                                        toastLog("已尝试盲点“赚鲸币”按钮");
+                                    } else {
+                                        let a = A.child(A.childCount() - 3).bounds();
+                                        click(a.centerX(), a.centerY());
+                                        toastLog("已尝试点击“赚鲸币”按钮");
+                                    }
+                                    sleep(3000);
                                 }
                             } else {
-                                console.warn("❎任务名识别错误！", "由于此问题比较严重导致脚本无法继续运行，请将此对话框截图后反馈给开发者解决\n出错任务名：" + B.child(i - 2).text() + "\n当前按钮标题：" + B.child(i).text());
-                                alert("❎任务名识别错误！", "由于此问题比较严重导致脚本无法继续运行，请将此对话框截图后反馈给开发者解决\n出错任务名：" + B.child(i - 2).text() + "\n当前按钮标题：" + B.child(i).text());
-                                exit();
+                                if (B.child(i).text() == "去邀请" || RwTitle.search("口令送喜") >= 0 || RwTitle.search("逛狮狮连萌") >= 0) {
+                                    toastLog("【已跳过】“" + RwTitle + RwButton.text() + "”任务");
+                                } else {
+                                    toastLog("【已完成任务】：" + RwTitle);
+                                }
+                                i++;
                             }
+                        } else {
+                            console.warn("❎任务名识别错误！", "由于此问题比较严重导致脚本无法继续运行，请将此对话框截图后反馈给开发者解决\n出错任务名：" + B.child(i - 2).text() + "\n当前按钮标题：" + B.child(i).text());
+                            alert("❎任务名识别错误！", "由于此问题比较严重导致脚本无法继续运行，请将此对话框截图后反馈给开发者解决\n出错任务名：" + B.child(i - 2).text() + "\n当前按钮标题：" + B.child(i).text());
+                            exit();
                         }
-                    } else {
-                        i++;
                     }
+                } else {
+                    i++;
                 }
             }
-            dialogs.alert("“自动赚鲸币”：\n脚本已运行完成");
-            exit();
-        } else {
-            console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-            toastLog("当前未处于活动界面，正在重新尝试中……");
-            openInTask();
-            DoTask();
         }
+        dialogs.alert("“自动赚鲸币”：\n脚本已运行完成");
+        exit();
+    } else {
+        console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+        toastLog("当前未处于活动界面，正在重新尝试中……");
+        openInTask();
+        DoTask();
     }
-    firstD();
+}
+firstD();
 
-    function firstD() {
-        if (context_Manualstate == 1) {
-            toastLog("已手动模式运行脚本");
-            var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
-            var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开苏宁易购APP至活动页”\n\n请选择脚本等待您打开苏宁易购的时间", options);
-            if (i >= 0) {
-                toast("您选择的是" + options[i]);
-            } else if (i < 0) {
-                toastLog("您取消了选择");
-                dialogs_js();
-                firstD();
-            }
-            if (i == 0) {
-                //等待20秒
-                var deng = 20;
-            } else if (i == 1) {
-                //等待30秒
-                var deng = 30;
-            } else if (i == 2) {
-                //等待50秒
-                var deng = 50;
-            } else if (i == 3) {
-                //等待60秒
-                var deng = 60;
-            } else if (i == 4) {
-                //等待10秒
-                var deng = 10;
-            }
-            for (deng = deng; deng > 0; deng--) {
-                toastLog("请打开苏宁易购至“天天发现鲸”活动的主界面\n剩余" + deng + "秒后运行脚本...");
-                sleep(1111);
-            }
-            DoTask();
-        } else {
-            openInTask();
-            DoTask();
+function firstD() {
+    if (context_Manualstate == 1) {
+        toastLog("已手动模式运行脚本");
+        var options = ["等待20秒", "等待30秒", "等待50秒", "等待60秒", "等待10秒"]
+        var i = dialogs.select("🔧以“手动模式”运行脚本\n\n接下来您需要在提示出现后自行打开苏宁易购APP至活动页”\n\n请选择脚本等待您打开苏宁易购的时间", options);
+        if (i >= 0) {
+            toast("您选择的是" + options[i]);
+        } else if (i < 0) {
+            toastLog("您取消了选择");
+            dialogs_js();
+            firstD();
         }
+        if (i == 0) {
+            //等待20秒
+            var deng = 20;
+        } else if (i == 1) {
+            //等待30秒
+            var deng = 30;
+        } else if (i == 2) {
+            //等待50秒
+            var deng = 50;
+        } else if (i == 3) {
+            //等待60秒
+            var deng = 60;
+        } else if (i == 4) {
+            //等待10秒
+            var deng = 10;
+        }
+        for (deng = deng; deng > 0; deng--) {
+            toastLog("请打开苏宁易购至“天天发现鲸”活动的主界面\n剩余" + deng + "秒后运行脚本...");
+            sleep(1111);
+        }
+        DoTask();
+    } else {
+        openInTask();
+        DoTask();
     }
+}
