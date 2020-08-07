@@ -40,7 +40,7 @@ var height = device.height;
 var weight = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.0"); //版本
+    var ScriptVersion = ("Beta1.1"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动赚鲸币”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -774,6 +774,21 @@ if (T == 1) {
     log("使用脚本自带“吐司”");
 }
 
+function FindWebView() {
+    if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null) {
+        return className("android.webkit.WebView").text("天天发现鲸").findOnce();
+    } else if (className("android.webkit.WebView").desc("天天发现鲸").findOnce() != null) {
+        return className("android.webkit.WebView").desc("天天发现鲸").findOnce();
+    } else {
+        return null;
+    }
+}
+try {
+    device.keepScreenDim();
+} catch (e) {
+    toastLog("开启屏幕半常亮失败！：" + e);
+}
+
 function openInTask() {
     while (true) {
         if (id("com.suning.mobile.ebuy:id/btn_click_1").className("android.view.View").clickable(true).findOnce() != null) {
@@ -785,6 +800,11 @@ function openInTask() {
             id("com.suning.mobile.ebuy:id/btn_click_2").className("android.view.View").clickable(true).findOnce().click();
             toastLog("已尝试盲点“悬浮确认2”按钮");
             sleep(2000);
+        }
+        if (id("com.suning.mobile.ebuy:id/sign_cancel_img").clickable(true).findOnce() != null) {
+            id("com.suning.mobile.ebuy:id/sign_cancel_img").clickable(true).findOnce().click();
+            toastLog("已尝试盲点“关闭悬浮蒙版”按钮");
+            sleep(3000);
         }
         if (id("com.suning.mobile.ebuy:id/home_img_drag_view").desc("悬浮广告").findOnce() != null) {
             let a = id("com.suning.mobile.ebuy:id/home_img_drag_view").desc("悬浮广告").findOnce().bounds();
@@ -822,13 +842,23 @@ function openInTask() {
         }
     }
     for (let d = 10; d > 0; d--) {
-        if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(0).id() == "fishPic") {
+        if (FindWebView() != null &&
+            FindWebView().childCount() > 0 &&
+            FindWebView().child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).child(0).id() == "fishPic") {
+            toastLog("已成功打开至活动界面，停止等待计时");
+            sleep(2000);
+            break;
+        } else if (FindWebView() != null &&
+            FindWebView().childCount() > 0 &&
+            FindWebView().child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).child(0).id() == "fishPic") {
             toastLog("已成功打开至活动界面，停止等待计时");
             sleep(2000);
             break;
@@ -840,41 +870,62 @@ function openInTask() {
 }
 
 function DoTask() {
-    if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 0 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).childCount() > 1 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).childCount() > 1 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).child(1).text() == "送你一个红包") {
-        let a = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).childCount() - 1).bounds();
+    if (FindWebView() != null &&
+        FindWebView().childCount() > 0 &&
+        FindWebView().child(0).childCount() > 0 &&
+        FindWebView().child(0).child(0).childCount() > 0 &&
+        FindWebView().child(0).child(0).child(0).childCount() > 0 &&
+        FindWebView().child(0).child(0).child(0).child(0).childCount() > 1 &&
+        FindWebView().child(0).child(0).child(0).child(0).child(1).childCount() > 1 &&
+        FindWebView().child(0).child(0).child(0).child(0).child(1).child(1).text() == "送你一个红包" ||
+        FindWebView() != null &&
+        FindWebView().childCount() > 0 &&
+        FindWebView().child(0).childCount() > 0 &&
+        FindWebView().child(0).child(0).childCount() > 0 &&
+        FindWebView().child(0).child(0).child(0).childCount() > 0 &&
+        FindWebView().child(0).child(0).child(0).child(0).childCount() > 1 &&
+        FindWebView().child(0).child(0).child(0).child(0).child(1).childCount() > 1 &&
+        FindWebView().child(0).child(0).child(0).child(0).child(1).child(1).desc() == "送你一个红包"
+    ) {
+        let a = FindWebView().child(0).child(0).child(0).child(0).child(1).child(FindWebView().child(0).child(0).child(0).child(0).child(1).childCount() - 1).bounds();
         click(a.centerX(), a.centerY());
-        toastLog("已尝试点击收下" + className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).child(2).text() + "的红包");
+        toastLog("已尝试点击收下" + FindWebView().child(0).child(0).child(0).child(0).child(1).child(2).text() + FindWebView().child(0).child(0).child(0).child(0).child(1).child(2).desc() + "的红包");
         sleep(2000);
     }
     let ClickText = ["点击收鲸币，再升1级开红包!", "升级获得的奖励都在这里哦，赶快去领取吧!"];
     for (let i = 0; i < ClickText.length; i++) {
-        if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).childCount() > 1 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).childCount() > 0 &&
-            className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).child(0).text() == ClickText[i]) {
-            let a = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).child(0).child(1).child(0).bounds();
+        if (FindWebView() != null &&
+            FindWebView().childCount() > 0 &&
+            FindWebView().child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).childCount() > 1 &&
+            FindWebView().child(0).child(0).child(0).child(0).child(1).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).child(1).child(0).text() == ClickText[i]) {
+            let a = FindWebView().child(0).child(0).child(0).child(0).child(1).child(0).bounds();
+            click(a.centerX(), a.centerY());
+            toastLog("已尝试点击“" + ClickText[i] + "”");
+            sleep(3000);
+        } else if (FindWebView() != null &&
+            FindWebView().childCount() > 0 &&
+            FindWebView().child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).childCount() > 1 &&
+            FindWebView().child(0).child(0).child(0).child(0).child(1).childCount() > 0 &&
+            FindWebView().child(0).child(0).child(0).child(0).child(1).child(0).desc() == ClickText[i]) {
+            let a = FindWebView().child(0).child(0).child(0).child(0).child(1).child(0).bounds();
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“" + ClickText[i] + "”");
             sleep(3000);
         }
     }
 
-    if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-        className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 0) {
-        var A = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0);
+    if (FindWebView() != null &&
+        FindWebView().childCount() > 0 &&
+        FindWebView().child(0).childCount() > 0 &&
+        FindWebView().child(0).child(0).childCount() > 0) {
+        var A = FindWebView().child(0).child(0).child(0);
         for (let i = 0; i < A.childCount() - 1; i++) {
             if (A.child(i).childCount() > 1 &&
                 A.child(i).child(1).childCount() > 1 &&
@@ -886,10 +937,27 @@ function DoTask() {
                 A.child(i).child(1).childCount() > 1 &&
                 A.child(i).child(1).child(1).childCount() > 1 &&
                 A.child(i).child(1).child(1).child(1).text() != "" &&
-                A.child(i).child(1).child(1).child(1).text().search("0/") >= 0) {
+                A.child(i).child(1).child(1).child(1).text().search("0/") >= 0
+            ) {
                 let a = A.child(i).child(1).child(1).child(1).bounds();
                 click(a.centerX(), a.top - 50);
-                toastLog("已尝试点击“收取鲸币（" + A.child(i).child(1).child(1).child(1).text() + "）”");
+                toastLog("已尝试点击“收取鲸币（" + A.child(i).child(1).child(1).child(1).text() + A.child(i).child(1).child(1).child(1).desc() + "）”");
+                sleep(3000);
+                break;
+            } else if (A.child(i).childCount() > 1 &&
+                A.child(i).child(1).childCount() > 0 &&
+                A.child(i).child(1).child(0).childCount() > 1 &&
+                A.child(i).child(1).child(0).child(1).desc() != "" &&
+                A.child(i).child(1).child(0).child(1).desc().search("/") > 0 &&
+                A.child(i).child(1).child(0).child(1).desc().search("00") > 0 ||
+                A.child(i).childCount() > 1 &&
+                A.child(i).child(1).childCount() > 0 &&
+                A.child(i).child(1).child(0).childCount() > 1 &&
+                A.child(i).child(1).child(0).child(1).desc() != "" &&
+                A.child(i).child(1).child(0).child(1).desc().search("0/") >= 0) {
+                let a = A.child(i).child(1).child(0).child(1).bounds();
+                click(a.centerX(), a.top - 50);
+                toastLog("已尝试点击“收取鲸币（" + A.child(i).child(1).child(0).child(1).text() + A.child(i).child(1).child(0).child(1).desc() + "）”");
                 sleep(3000);
                 break;
             }
@@ -906,39 +974,60 @@ function DoTask() {
 
         var i = 0;
         while (true) {
-            if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 4 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).childCount() > 2 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).child(1).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).child(1).child(0).text() == "task-banner" &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).child(2).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).child(2).child(0).childCount() > 10) {
-                var B = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).child(2).child(0);
-            } else if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).child(0).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).child(0).child(0).childCount() > 2 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).child(0).child(0).child(1).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).child(0).child(0).child(1).child(0).text() == "task-banner" &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).child(0).child(0).child(2).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).child(0).child(0).child(2).child(0).childCount() > 10) {
-                var B = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() - 1).child(0).child(0).child(2).child(0);
-            } else if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 4 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).childCount() > 2 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).child(1).childCount() > 0 &&
-                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).child(0).child(0).child(1).child(0).text() == "task-banner") {
+            if (FindWebView() != null &&
+                FindWebView().childCount() > 0 &&
+                FindWebView().child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).childCount() > 4 &&
+                FindWebView().child(0).child(0).child(4).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(4).child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).childCount() > 2 &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).child(1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).child(1).child(0).text() == "task-banner" &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).child(2).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).child(2).child(0).childCount() > 10) {
+                var B = FindWebView().child(0).child(0).child(4).child(0).child(0).child(2).child(0);
+            } else if (FindWebView() != null &&
+                FindWebView().childCount() > 0 &&
+                FindWebView().child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).child(0).child(0).childCount() > 2 &&
+                FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).child(0).child(0).child(1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).child(0).child(0).child(1).child(0).text() == "task-banner" &&
+                FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).child(0).child(0).child(2).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).child(0).child(0).child(2).child(0).childCount() > 10) {
+                var B = FindWebView().child(0).child(0).child(FindWebView().child(0).child(0).childCount() - 1).child(0).child(0).child(2).child(0);
+            } else if (FindWebView() != null &&
+                FindWebView().childCount() > 0 &&
+                FindWebView().child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).childCount() > 1 &&
+                FindWebView().child(0).child(0).child(1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(1).child(0).childCount() > 2 &&
+                FindWebView().child(0).child(0).child(1).child(0).child(1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(1).child(0).child(1).child(0).desc() == "task-banner" &&
+                FindWebView().child(0).child(0).child(1).child(0).child(2).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(1).child(0).child(2).child(0).childCount() > 10 ||
+                FindWebView() != null &&
+                FindWebView().childCount() > 0 &&
+                FindWebView().child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).childCount() > 1 &&
+                FindWebView().child(0).child(0).child(1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(1).child(0).childCount() > 2 &&
+                FindWebView().child(0).child(0).child(1).child(0).child(1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(1).child(0).child(1).child(0).text() == "task-banner" &&
+                FindWebView().child(0).child(0).child(1).child(0).child(2).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(1).child(0).child(2).child(0).childCount() > 10) {
+                var B = FindWebView().child(0).child(0).child(1).child(0).child(2).child(0);
+            } else if (FindWebView() != null &&
+                FindWebView().childCount() > 0 &&
+                FindWebView().child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).childCount() > 4 &&
+                FindWebView().child(0).child(0).child(4).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(4).child(0).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).childCount() > 2 &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).child(1).childCount() > 0 &&
+                FindWebView().child(0).child(0).child(4).child(0).child(0).child(1).child(0).text() == "task-banner") {
                 toastLog("已打开任务蒙版但任务未能及时加载，即将重试");
                 openInTask();
                 DoTask();
@@ -966,10 +1055,13 @@ function DoTask() {
                     if (B.child(i).text() == "去邀请" || i > 1 && B.child(i - 2).text().search("口令送喜") >= 0 || i > 1 && B.child(i - 2).text().search("逛狮狮连萌") >= 0) {
                         toastLog("【已跳过】“" + B.child(i - 2).text() + B.child(i).text() + "”任务");
                         i++;
-                    } else if (B.child(i).text() == "立即签到") {
+                    } else if (B.child(i).desc() == "去邀请" || i > 1 && B.child(i - 2).desc().search("口令送喜") >= 0 || i > 1 && B.child(i - 2).desc().search("逛狮狮连萌") >= 0) {
+                        toastLog("【已跳过】“" + B.child(i - 2).desc() + B.child(i).desc() + "”任务");
+                        i++;
+                    } else if (B.child(i).text() == "立即签到" || B.child(i).desc() == "立即签到") {
                         var Done = false;
                         for (let ii = 0; ii < B.child(i + 1).childCount(); ii++) {
-                            if (B.child(i + 1).child(ii).text() == "今日已签") {
+                            if (B.child(i + 1).child(ii).text() == "今日已签" || B.child(i + 1).child(ii).desc() == "今日已签") {
                                 var Done = true;
                                 break
                             }
@@ -988,14 +1080,22 @@ function DoTask() {
                             toastLog("今天已经签到过啦～");
                         }
                         i++;
-                    } else if (B.child(i).text() == "明日再来") {
+                    } else if (B.child(i).text() == "明日再来" || B.child(i).desc() == "明日再来") {
                         toastLog("今天已经签到过啦～");
                         i++;
                     } else {
                         try {
-                            var RwTitle = B.child(i - 2).text();
+                            if (B.child(i - 2).text() != null && B.child(i - 2).text() != "") {
+                                var RwTitle = B.child(i - 2).text();
+                            } else if (B.child(i - 2).desc() != null && B.child(i - 2).desc() != "") {
+                                var RwTitle = B.child(i - 2).desc();
+                            }
                         } catch (e) {
-                            toastLog("任务名识别出错，当前按钮：" + B.child(i).text() + i + "\n全部控件：");
+                            if (B.child(i).text() != null && B.child(i).text() != "") {
+                                toastLog("任务名识别出错，当前按钮：" + B.child(i).text() + i + "\n全部控件：");
+                            } else if (B.child(i).desc() != null && B.child(i).desc() != "") {
+                                toastLog("任务名识别出错，当前按钮：" + B.child(i).desc() + i + "\n全部控件：");
+                            }
                             console.info(B.children());
                         }
                         var RwButton = B.child(i);
@@ -1007,15 +1107,19 @@ function DoTask() {
                             nanLimit = CRw.match(/崗(\S*)骺/)[1];
                             NowNum = Number(nanNow);
                             LimitNum = Number(nanLimit);
-                            if (NowNum != LimitNum && B.child(i).text() != "去邀请" && RwTitle.search("口令送喜") < 0 && RwTitle.search("逛狮狮连萌") < 0) {
-                                toastLog("【待完成】：" + RwTitle + " —— " + B.child(i - 1).text());
+                            if (NowNum != LimitNum && B.child(i).text() != "去邀请" && RwTitle.search("口令送喜") < 0 && RwTitle.search("逛狮狮连萌") < 0 && B.child(i).desc() != "去邀请") {
+                                if (B.child(i - 1).text() != null && B.child(i - 1).text() != "") {
+                                    toastLog("【待完成】：" + RwTitle + " —— " + B.child(i - 1).text());
+                                } else if (B.child(i - 1).desc() != null && B.child(i - 1).desc() != "") {
+                                    toastLog("【待完成】：" + RwTitle + " —— " + B.child(i - 1).desc());
+                                }
                                 if (RwButton.clickable() == true) {
                                     RwButton.click();
-                                    toastLog("已尝试盲点“" + RwButton.text() + "［" + RwTitle + "］”按钮");
+                                    toastLog("已尝试盲点“" + RwButton.text() + RwButton.desc() + "［" + RwTitle + "］”按钮");
                                 } else {
                                     let a = Button.bounds();
                                     click(a.centerX(), a.centerY());
-                                    toastLog("【未适配！！！】已尝试点击“" + RwButton.text() + "［" + RwTitle + "］”按钮");
+                                    toastLog("【未适配！！！】已尝试点击“" + RwButton.text() + RwButton.desc() + "［" + RwTitle + "］”按钮");
                                 }
                                 sleep(3000);
                                 for (let deng = 10; deng > 0; deng--) {
@@ -1031,18 +1135,20 @@ function DoTask() {
                                             toastLog("已尝试盲点“关闭浮窗”按钮");
                                             sleep(2000);
                                         }
-                                        if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null) {
+                                        if (FindWebView() != null) {
                                             if (RwTitle.search("逛店铺") >= 0) {
-                                                if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-                                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-                                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 2 &&
-                                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).childCount() > 2 &&
-                                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(2).childCount() > 0) {
-                                                    for (let iiii = 2; iiii < className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).childCount(); iiii++) {
+                                                if (FindWebView() != null &&
+                                                    FindWebView().childCount() > 0 &&
+                                                    FindWebView().child(0).childCount() > 2 &&
+                                                    FindWebView().child(0).child(2).childCount() > 2 &&
+                                                    FindWebView().child(0).child(2).child(2).childCount() > 0) {
+                                                    for (let iiii = 2; iiii < FindWebView().child(0).child(2).childCount(); iiii++) {
                                                         var done = false;
-                                                        for (let iii = 0; iii < className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(iiii).childCount(); iii++) {
-                                                            if (className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(iiii).child(iii).text().search("00") >= 0) {
-                                                                className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(2).child(iiii).child(iii).click();
+                                                        for (let iii = 0; iii < FindWebView().child(0).child(2).child(iiii).childCount(); iii++) {
+                                                            if (FindWebView().child(0).child(2).child(iiii).child(iii).text().search("00") >= 0 ||
+                                                                FindWebView().child(0).child(2).child(iiii).child(iii).desc().search("00") >= 0
+                                                            ) {
+                                                                FindWebView().child(0).child(2).child(iiii).child(iii).click();
                                                                 toastLog("已尝试盲点活动页第" + iii + "个店铺");
                                                                 sleep(3000);
                                                                 var done = true;
@@ -1060,7 +1166,7 @@ function DoTask() {
                                                     break;
                                                 }
                                             } else {
-                                                toastLog("任务按钮未能成功点击，正在重试[出错任务：" + RwTitle + "出错按钮：" + RwButton.text() + "]");
+                                                toastLog("任务按钮未能成功点击，正在重试[出错任务：" + RwTitle + "出错按钮：" + RwButton.text() + RwButton.desc() + "]");
                                                 openInTask();
                                                 DoTask();
                                                 break;
@@ -1069,20 +1175,35 @@ function DoTask() {
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0) {
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0 ||
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).desc().search("s") >= 0) {
                                             for (let dengss = 10; dengss > 0; dengss--) {
                                                 if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
                                                     id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
                                                     id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
                                                     id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0) {
-                                                    toastLog("已识别到应用内任务计时器，剩余" + id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text());
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0 ||
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).desc().search("s") >= 0) {
+                                                    toastLog("已识别到应用内任务计时器，剩余" + id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text() + id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).desc());
                                                     sleep(1000);
                                                 } else if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
                                                     id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
                                                     id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
                                                     id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") < 0) {
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") < 0 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 2 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                                    id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).desc().search("s") < 0) {
                                                     toastLog("应用内任务计时器已结束，尝试返回任务蒙版界面");
                                                     sleep(1000);
                                                     break;
@@ -1096,7 +1217,12 @@ function DoTask() {
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
-                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text() == "返回领取") {
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text() == "返回领取" ||
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).desc() == "返回领取") {
                                             toastLog("已识别到“返回领取”按钮，结束等待计时");
                                             sleep(1000);
                                             break;
@@ -1107,7 +1233,15 @@ function DoTask() {
                                             UcWebview.child(0).child(0).childCount() > 0 &&
                                             UcWebview.child(0).child(0).child(0).childCount() > 0 &&
                                             UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
-                                            UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0) {
+                                            UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0 ||
+                                            RwTitle.search("逛会场") >= 0 &&
+                                            UcWebview != null &&
+                                            UcWebview.childCount() > 0 &&
+                                            UcWebview.child(0).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).child(0).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
+                                            UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).desc().search("秒") >= 0) {
                                             for (let dengs = 10; dengs > 0; dengs--) {
                                                 if (className("com.uc.webview.export.WebView").findOnce() != null) {
                                                     var UcWebview = className("com.uc.webview.export.WebView").findOnce();
@@ -1123,8 +1257,16 @@ function DoTask() {
                                                     UcWebview.child(0).child(0).childCount() > 0 &&
                                                     UcWebview.child(0).child(0).child(0).childCount() > 0 &&
                                                     UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
-                                                    UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0) {
-                                                    toastLog("已识别到应用内任务计时器，剩余" + UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text());
+                                                    UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text().search("秒") >= 0 ||
+                                                    RwTitle.search("逛会场") >= 0 &&
+                                                    UcWebview != null &&
+                                                    UcWebview.childCount() > 0 &&
+                                                    UcWebview.child(0).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).child(0).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).childCount() > 0 &&
+                                                    UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).desc().search("秒") >= 0) {
+                                                    toastLog("已识别到应用内任务计时器，剩余" + UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).text() + UcWebview.child(0).child(0).child(0).child(0).child(UcWebview.child(0).child(0).child(0).child(0).childCount() - 1).child(0).desc());
                                                     sleep(1000);
                                                 } else {
                                                     toastLog("应用任务计时已结束，尝试返回任务蒙版界面");
@@ -1140,7 +1282,14 @@ function DoTask() {
                                             className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
                                             className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
                                             className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") >= 0) {
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") >= 0 ||
+                                            className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                            className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).desc().search("秒") >= 0) {
                                             for (let dengs = 10; dengs > 0; dengs--) {
                                                 if (className("com.uc.webview.export.WebView").findOnce() != null &&
                                                     className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
@@ -1157,8 +1306,24 @@ function DoTask() {
                                                     className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
                                                     className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
                                                     className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") >= 0) {
-                                                    toastLog("已识别到应用内任务计时器，剩余" + className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text());
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") >= 0 ||
+                                                    className("com.uc.webview.export.WebView").findOnce() != null &&
+                                                    className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).desc().search("秒") >= 0 ||
+                                                    className("com.uc.webview.export.WebView").findOnce() != null &&
+                                                    className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).desc().search("s") >= 0) {
+                                                    toastLog("已识别到应用内任务计时器，剩余" + className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text() + className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).desc());
                                                     sleep(1000);
                                                 } else if (className("com.uc.webview.export.WebView").findOnce() != null &&
                                                     className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
@@ -1167,15 +1332,10 @@ function DoTask() {
                                                     className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
                                                     className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
                                                     className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") < 0 ||
-                                                    className("com.uc.webview.export.WebView").findOnce() != null &&
-                                                    className("com.uc.webview.export.WebView").findOnce().childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
-                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") < 0) {
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("秒") < 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).text().search("s") < 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).desc().search("秒") < 0 &&
+                                                    className("com.uc.webview.export.WebView").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).desc().search("s") < 0) {
                                                     toastLog("应用内任务计时器已结束，尝试返回任务蒙版界面");
                                                     sleep(1000);
                                                     break;
@@ -1198,14 +1358,27 @@ function DoTask() {
                                                 text("取消关注").clickable(true).findOnce().click();
                                                 toastLog("已尝试盲点“取消关注”按钮");
                                                 sleep(3000);
+                                            } else if (desc("取消关注").clickable(true).findOnce() != null) {
+                                                desc("取消关注").clickable(true).findOnce().click();
+                                                toastLog("已尝试盲点“取消关注”按钮");
+                                                sleep(3000);
                                             }
                                             break;
                                         } else if (className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce() != null &&
                                             className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().childCount() > 1 &&
                                             className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).childCount() > 0 &&
                                             className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text().search("观看直播领奖励") >= 0 &&
+                                            id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null ||
+                                            className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce() != null &&
+                                            className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().childCount() > 1 &&
+                                            className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).childCount() > 0 &&
+                                            className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text().search("观看直播领奖励") >= 0 &&
                                             id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce() != null) {
-                                            let LiveRwTitle = className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text();
+                                            if (className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text() != null && className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text() != "") {
+                                                var LiveRwTitle = className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).text();
+                                            } else if (className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).desc() != null && className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).desc() != "") {
+                                                var LiveRwTitle = className("android.widget.RelativeLayout").id("com.suning.mobile.ebuy:id/rl_root").findOnce().child(1).child(0).desc();
+                                            }
                                             toastLog("已处于直播列表界面，当前：" + LiveRwTitle);
                                             let ARw = LiveRwTitle.replace("/", "崗");
                                             BRw = ARw.replace("(", "籤");
@@ -1224,27 +1397,42 @@ function DoTask() {
                                                         id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(0).className() == "android.widget.RelativeLayout" &&
                                                         id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).className() == "android.widget.LinearLayout") {
                                                         id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).click();
-                                                        toastLog("已尝试盲点直播：" + id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).child(0).text());
+                                                        toastLog("已尝试盲点直播：" + id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).child(0).text() + id("com.suning.mobile.ebuy:id/id_recycleview").className("android.support.v7.widget.RecyclerView").scrollable(true).findOnce().child(f).child(1).child(0).desc());
                                                         sleep(3000);
                                                         for (let denglive = 10; denglive > 0; denglive--) {
                                                             if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
                                                                 className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
                                                                 className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
                                                                 className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
-                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0) {
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0 ||
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
+                                                                className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).desc().search("s") >= 0) {
                                                                 for (let dengslive = 10; dengslive > 0; dengslive--) {
                                                                     if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
                                                                         className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
                                                                         className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
                                                                         className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
-                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0) {
-                                                                        toastLog("识别到应用内计时器，计时器剩余" + className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text());
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") >= 0 ||
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).desc().search("s") >= 0) {
+                                                                        toastLog("识别到应用内计时器，计时器剩余" + className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text() + className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).desc());
                                                                         sleep(1000);
                                                                     } else if (className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
                                                                         className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
                                                                         className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
                                                                         className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
-                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") < 0) {
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).text().search("s") < 0 ||
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce() != null &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).childCount() > 0 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).childCount() > 1 &&
+                                                                        className("android.widget.LinearLayout").id("com.suning.mobile.ebuy:id/play_view_pro").findOnce().child(0).child(0).child(1).desc().search("s") < 0) {
                                                                         toastLog("应用内计时器结束，尝试返回上一级");
                                                                         break;
                                                                     } else {
@@ -1276,7 +1464,7 @@ function DoTask() {
                                         sleep(1000);
                                     }
                                 }
-                                if (className("android.webkit.WebView").text("天天发现鲸").findOnce() == null) {
+                                if (FindWebView() == null) {
                                     if (id("com.suning.mobile.ebuy:id/btn_back").className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
                                         id("com.suning.mobile.ebuy:id/btn_back").className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
                                         toastLog("已尝试盲点“返回”按钮");
@@ -1286,13 +1474,13 @@ function DoTask() {
                                         sleep(1000);
                                     }
                                 }
-                                if (className("android.webkit.WebView").text("天天发现鲸").findOnce() != null &&
-                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().childCount() > 0 &&
-                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).childCount() > 0 &&
-                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).childCount() > 4 &&
-                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(4).childCount() == 0 &&
-                                    className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0).childCount() > 0) {
-                                    var A = className("android.webkit.WebView").text("天天发现鲸").findOnce().child(0).child(0).child(0);
+                                if (FindWebView() != null &&
+                                    FindWebView().childCount() > 0 &&
+                                    FindWebView().child(0).childCount() > 0 &&
+                                    FindWebView().child(0).child(0).childCount() > 4 &&
+                                    FindWebView().child(0).child(0).child(4).childCount() == 0 &&
+                                    FindWebView().child(0).child(0).child(0).childCount() > 0) {
+                                    var A = FindWebView().child(0).child(0).child(0);
                                     if (A.child(A.childCount() - 3).clickable() == true) {
                                         A.child(A.childCount() - 3).click();
                                         toastLog("已尝试盲点“赚鲸币”按钮");
@@ -1304,8 +1492,8 @@ function DoTask() {
                                     sleep(3000);
                                 }
                             } else {
-                                if (B.child(i).text() == "去邀请" || RwTitle.search("口令送喜") >= 0 || RwTitle.search("逛狮狮连萌") >= 0) {
-                                    toastLog("【已跳过】“" + RwTitle + RwButton.text() + "”任务");
+                                if (B.child(i).text() == "去邀请" || B.child(i).desc() == "去邀请" || RwTitle.search("口令送喜") >= 0 || RwTitle.search("逛狮狮连萌") >= 0) {
+                                    toastLog("【已跳过】“" + RwTitle + RwButton.text() + RwButton.desc() + "”任务");
                                 } else {
                                     toastLog("【已完成任务】：" + RwTitle);
                                 }
@@ -1323,6 +1511,11 @@ function DoTask() {
             }
         }
         dialogs.alert("“自动赚鲸币”：\n脚本已运行完成");
+        try {
+            device.cancelKeepingAwake();
+        } catch (e) {
+            toastLog("关闭“屏幕半常亮”失败！：" + e);
+        }
         exit();
     } else {
         console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
