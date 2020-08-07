@@ -1175,11 +1175,13 @@ function DoTask() {
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text() != null &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).text().search("s") >= 0 ||
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().childCount() > 0 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).childCount() > 2 &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).childCount() > 1 &&
+                                            id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).desc() != null &&
                                             id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce().child(0).child(2).child(1).desc().search("s") >= 0) {
                                             for (let dengss = 10; dengss > 0; dengss--) {
                                                 if (id("com.suning.mobile.ebuy:id/view_body_native").className("android.widget.RelativeLayout").findOnce() != null &&
@@ -1479,7 +1481,11 @@ function DoTask() {
                                     FindWebView().child(0).childCount() > 0 &&
                                     FindWebView().child(0).child(0).childCount() > 4 &&
                                     FindWebView().child(0).child(0).child(4).childCount() == 0 &&
-                                    FindWebView().child(0).child(0).child(0).childCount() > 0) {
+                                    FindWebView().child(0).child(0).child(0).childCount() > 0 ||
+                                    FindWebView() != null &&
+                                    FindWebView().childCount() > 0 &&
+                                    FindWebView().child(0).childCount() > 0 &&
+                                    FindWebView().child(0).child(0).childCount() == 1) {
                                     var A = FindWebView().child(0).child(0).child(0);
                                     if (A.child(A.childCount() - 3).clickable() == true) {
                                         A.child(A.childCount() - 3).click();
