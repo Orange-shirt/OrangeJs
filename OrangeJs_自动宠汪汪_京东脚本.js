@@ -774,6 +774,7 @@ function AlreadyInHD() {
     }
 }
 context_JDbug = null;
+
 function openInTask() {
     while (true) {
         if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null && text("宠汪汪").className("android.widget.TextView").findOnce() != null && text("游戏与互动").className("android.widget.TextView").findOnce() != null) {
@@ -788,9 +789,37 @@ function openInTask() {
                 sleep(3000);
             }
             break;
-        } else if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").desc("我的").findOnce() != null) {
+        } else if (currentActivity() == "com.jingdong.app.mall.MainFrameActivity" && className("android.view.View").clickable(true).desc("我的").findOnce() != null) {
             className("android.view.View").desc("我的").findOnce().click();
-            toastLog("已尝试点击京东主页“我的”按钮");
+            toastLog("已尝试盲点京东主页“我的”按钮");
+            sleep(2000);
+        } else if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce() != null &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().childCount() > 4 &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).childCount() > 2 &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).desc() != null &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).desc() == "我的") {
+            if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).clickable() == true) {
+                className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).click();
+                toastLog("已尝试盲点京东主页“我的”按钮（层级）");
+            } else {
+                let a = className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).bounds();
+                click(a.centerX(), a.centerY());
+                toastLog("已尝试点击京东主页“我的”按钮（层级）");
+            }
+            sleep(2000);
+        }else if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce() != null &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().childCount() > 4 &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).childCount() > 2 &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).desc() != null &&
+            className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).desc() == "我的") {
+            if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).clickable() == true) {
+                className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).click();
+                toastLog("已尝试盲点京东主页“我的”按钮（层级）");
+            } else {
+                let a = className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).bounds();
+                click(a.centerX(), a.centerY());
+                toastLog("已尝试点击京东主页“我的”按钮（层级）");
+            }
             sleep(2000);
         } else if (currentPackage() != "com.jingdong.app.mall") {
             app.startActivity({

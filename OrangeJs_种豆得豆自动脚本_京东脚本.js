@@ -40,7 +40,7 @@ var height = device.height;
 var weight = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.2"); //版本
+    var ScriptVersion = ("Beta1.21"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“种豆得豆自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -892,7 +892,7 @@ function DoTask() {
         }
     }
 
-    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友", "低价包邮", "高考加油"];
+    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友", "低价包邮", "高考加油", "千万京豆"];
     for (let a = 0; a < ShouQu.length; a++) {
         while (className("android.widget.TextView").text(ShouQu[a]).findOnce() != null && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).childCount() > 2 && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2).className() == "android.widget.TextView") {
             let b = className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2);
@@ -922,6 +922,11 @@ function DoTask() {
         if (className("android.widget.TextView").text("全部任务").findOnce() != null && className("android.widget.TextView").text("全部任务").findOnce().parent().child(className("android.widget.TextView").text("全部任务").findOnce().parent().childCount() - 1).className() == "android.widget.ScrollView") {
             var A = className("android.widget.TextView").text("全部任务").findOnce().parent().child(className("android.widget.TextView").text("全部任务").findOnce().parent().childCount() - 1);
             var B = A.child(0);
+        } else if (className("android.widget.TextView").textContains("当前通过任务获得").findOnce() != null &&
+            className("android.widget.TextView").textContains("当前通过任务获得").findOnce().parent().parent().childCount() > 2 &&
+            className("android.widget.TextView").textContains("当前通过任务获得").findOnce().parent().parent().child(2).className() == "android.widget.ScrollView" &&
+            className("android.widget.TextView").textContains("当前通过任务获得").findOnce().parent().parent().child(2).childCount() == 1) {
+            var B = className("android.widget.TextView").textContains("当前通过任务获得").findOnce().parent().parent().child(2).child(0);
         }
         toastLog("任务列表可滑动区域为：" + B.bounds().top + "," + B.bounds().bottom);
         if (ax >= B.childCount()) {
@@ -1359,7 +1364,7 @@ function DoTask() {
                                     break;
                                 }
                                 toastLog("当前为第" + Now + "个卡片，卡片总数为" + ALL);
-                                if (over >=limit) {
+                                if (over >= limit) {
                                     toastLog("“选ta并关注”获得营养液已达每日上限" + limit + "，返回继续进行下一任务");
                                     if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
                                         className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
