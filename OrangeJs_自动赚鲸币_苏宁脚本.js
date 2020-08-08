@@ -947,12 +947,14 @@ function DoTask() {
             } else if (A.child(i).childCount() > 1 &&
                 A.child(i).child(1).childCount() > 0 &&
                 A.child(i).child(1).child(0).childCount() > 1 &&
+                A.child(i).child(1).child(0).child(1).desc()!=null&&
                 A.child(i).child(1).child(0).child(1).desc() != "" &&
                 A.child(i).child(1).child(0).child(1).desc().search("/") > 0 &&
                 A.child(i).child(1).child(0).child(1).desc().search("00") > 0 ||
                 A.child(i).childCount() > 1 &&
                 A.child(i).child(1).childCount() > 0 &&
                 A.child(i).child(1).child(0).childCount() > 1 &&
+                A.child(i).child(1).child(0).child(1).desc() !=null&&
                 A.child(i).child(1).child(0).child(1).desc() != "" &&
                 A.child(i).child(1).child(0).child(1).desc().search("0/") >= 0) {
                 let a = A.child(i).child(1).child(0).child(1).bounds();
@@ -1055,9 +1057,6 @@ function DoTask() {
                     if (B.child(i).text() == "去邀请" || i > 1 && B.child(i - 2).text().search("口令送喜") >= 0 || i > 1 && B.child(i - 2).text().search("逛狮狮连萌") >= 0) {
                         toastLog("【已跳过】“" + B.child(i - 2).text() + B.child(i).text() + "”任务");
                         i++;
-                    } else if (B.child(i).desc() == "去邀请" || i > 1 && B.child(i - 2).desc().search("口令送喜") >= 0 || i > 1 && B.child(i - 2).desc().search("逛狮狮连萌") >= 0) {
-                        toastLog("【已跳过】“" + B.child(i - 2).desc() + B.child(i).desc() + "”任务");
-                        i++;
                     } else if (B.child(i).text() == "立即签到" || B.child(i).desc() == "立即签到") {
                         var Done = false;
                         for (let ii = 0; ii < B.child(i + 1).childCount(); ii++) {
@@ -1082,6 +1081,9 @@ function DoTask() {
                         i++;
                     } else if (B.child(i).text() == "明日再来" || B.child(i).desc() == "明日再来") {
                         toastLog("今天已经签到过啦～");
+                        i++;
+                    } else if (B.child(i).desc() == "去邀请" || i > 1 &&B.child(i - 2).desc()!=null&& B.child(i - 2).desc().search("口令送喜") >= 0 || i > 1 && B.child(i - 2).desc()!=null&&B.child(i - 2).desc().search("逛狮狮连萌") >= 0) {
+                        toastLog("【已跳过】“" + B.child(i - 2).desc() + B.child(i).desc() + "”任务");
                         i++;
                     } else {
                         try {
