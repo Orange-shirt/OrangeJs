@@ -947,12 +947,14 @@ function DoTask() {
             } else if (A.child(i).childCount() > 1 &&
                 A.child(i).child(1).childCount() > 0 &&
                 A.child(i).child(1).child(0).childCount() > 1 &&
+                A.child(i).child(1).child(0).child(1).desc() !=null&&
                 A.child(i).child(1).child(0).child(1).desc() != "" &&
                 A.child(i).child(1).child(0).child(1).desc().search("/") > 0 &&
                 A.child(i).child(1).child(0).child(1).desc().search("00") > 0 ||
                 A.child(i).childCount() > 1 &&
                 A.child(i).child(1).childCount() > 0 &&
                 A.child(i).child(1).child(0).childCount() > 1 &&
+                A.child(i).child(1).child(0).child(1).desc()!=null&&
                 A.child(i).child(1).child(0).child(1).desc() != "" &&
                 A.child(i).child(1).child(0).child(1).desc().search("0/") >= 0) {
                 let a = A.child(i).child(1).child(0).child(1).bounds();
@@ -1058,7 +1060,7 @@ function DoTask() {
                     } else if (B.child(i).text() == "立即签到" || B.child(i).desc() == "立即签到") {
                         var Done = false;
                         for (let ii = 0; ii < B.child(i + 1).childCount(); ii++) {
-                            if (B.child(i + 1).child(ii).text() == "今日已签" || B.child(i + 1).child(ii).desc() == "今日已签") {
+                            if (B.child(i + 1).child(ii).text() == "今日已签" ||B.child(i + 1).child(ii).desc()!=null&& B.child(i + 1).child(ii).desc() == "今日已签") {
                                 var Done = true;
                                 break
                             }
@@ -1077,7 +1079,7 @@ function DoTask() {
                             toastLog("今天已经签到过啦～");
                         }
                         i++;
-                    } else if (B.child(i).text() == "明日再来" || B.child(i).desc() == "明日再来") {
+                    } else if (B.child(i).text() == "明日再来" ||B.child(i).desc()!=null&& B.child(i).desc() == "明日再来") {
                         toastLog("今天已经签到过啦～");
                         i++;
                     } else if (B.child(i).desc() == "去邀请" || i > 1 && B.child(i - 2).desc() != null && B.child(i - 2).desc().search("口令送喜") >= 0 || i > 1 && B.child(i - 2).desc() != null && B.child(i - 2).desc().search("逛狮狮连萌") >= 0) {
@@ -1122,7 +1124,7 @@ function DoTask() {
                                     toastLog("【未适配！！！】已尝试点击“" + RwButton.text() + RwButton.desc() + "［" + RwTitle + "］”按钮");
                                 }
                                 sleep(3000);
-                                for (let deng = 10; deng > 0; deng--) {
+                                for (let deng = 20; deng > 0; deng--) {
                                     if (className("com.uc.webview.export.WebView").findOnce() != null) {
                                         var UcWebview = className("com.uc.webview.export.WebView").findOnce();
                                     } else {
