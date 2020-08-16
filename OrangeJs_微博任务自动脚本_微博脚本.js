@@ -872,6 +872,25 @@ if (T == 1) {
 var PlWhile = null;
 
 function OpeninHd() {
+    function WhatIsThis() {
+        try {
+            if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+                let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+                for (let i = 0; i < A.childCount(); i++) {
+                    if (A.child(i).desc() != null && A.child(i).desc() == "新手任务") {
+                        return A.child(i).desc();
+                        break;
+                    } else if (A.child(i).desc() != null && A.child(i).desc() == "日常任务") {
+                        return A.child(i).desc();
+                        break;
+                    }
+                }
+            }
+        } catch (e) {
+            log(e);
+        }
+    }
+
     while (true) {
         if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
             className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
@@ -900,14 +919,20 @@ function OpeninHd() {
         } else if (currentActivity() == "com.sina.weibo.browser.WeiboBrowser") {
             sleep(2000);
             for (let a = 10; a > 0; a--) {
-                if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
-            className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
+                if (WhatIsThis() == "新手任务") {
+                    dialogs.alert("暂不支持自动完成“新手任务”", "很抱歉，由于开发者未对“新手任务”进行适配，脚本暂时无法完成“新手任务”，感谢您的使用！")
+                    exit();
+                } else if (WhatIsThis() == "日常任务") {
+                    dialogs.alert("“日常任务”控件排列不一致", "很抱歉，由于开发者未对此排列进行适配，脚本暂时无法完成，感谢您的使用！")
+                    exit();
+                } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
                     break;
                 } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null) {
                     toastLog("正在等待“用户任务中心”加载，剩余" + a + "秒……");
@@ -920,13 +945,13 @@ function OpeninHd() {
                 }
             }
             if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
-            className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
+                className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
+                className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
+                className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
+                className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
+                className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
+                className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
+                className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
                 toastLog("已处于“用户任务中心”任务界面");
                 break;
             } else {
