@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.15"); //版本
+    var ScriptVersion = ("Beta1.16"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“微博任务自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -871,35 +871,39 @@ if (T == 1) {
 }
 var PlWhile = null;
 
-function OpeninHd() {
-    function WhatIsThis() {
-        try {
-            if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
-                let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
-                for (let i = 0; i < A.childCount(); i++) {
-                    if (A.child(i).desc() != null && A.child(i).desc() == "新手任务") {
-                        return A.child(i).desc();
-                        break;
-                    } else if (A.child(i).desc() != null && A.child(i).desc() == "日常任务") {
-                        return A.child(i).desc();
-                        break;
-                    }
+function WhatIsThis() {
+    try {
+        if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+            let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+            for (let i = 0; i < A.childCount(); i++) {
+                if (A.child(i).desc() != null && A.child(i).desc() == "新手任务") {
+                    return A.child(i).desc();
+                    break;
+                } else if (A.child(i).desc() != null && A.child(i).desc() == "日常任务") {
+                    return A.child(i).desc();
+                    break;
                 }
             }
-        } catch (e) {
-            log(e);
         }
+    } catch (e) {
+        log(e);
     }
+}
 
+function OpeninHd() {
     while (true) {
-        if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
+        if (WhatIsThis() == "新手任务") {
+            dialogs.alert("暂不支持自动完成“新手任务”", "很抱歉，由于开发者未对“新手任务”进行适配，脚本暂时无法完成“新手任务”，感谢您的使用！")
+            exit();
+        } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
             className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
             className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务" ||
+            WhatIsThis() == "日常任务") {
             toastLog("已处于“用户任务中心”任务界面");
             break;
         } else if (className("android.widget.FrameLayout").clickable(true).id("com.sina.weibo:id/rlredpacketSave").findOnce() != null) {
@@ -919,20 +923,15 @@ function OpeninHd() {
         } else if (currentActivity() == "com.sina.weibo.browser.WeiboBrowser") {
             sleep(2000);
             for (let a = 10; a > 0; a--) {
-                if (WhatIsThis() == "新手任务") {
-                    dialogs.alert("暂不支持自动完成“新手任务”", "很抱歉，由于开发者未对“新手任务”进行适配，脚本暂时无法完成“新手任务”，感谢您的使用！")
-                    exit();
-                } else if (WhatIsThis() == "日常任务") {
-                    dialogs.alert("“日常任务”控件排列不一致", "很抱歉，由于开发者未对此排列进行适配，脚本暂时无法完成，感谢您的使用！")
-                    exit();
-                } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
+                if (className("android.widget.TextView").text("用户任务中心").findOnce() != null && className("android.widget.TextView").text("日常任务").findOnce() != null ||
                     className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
-                    className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
+                    className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务" ||
+                    WhatIsThis() == "日常任务") {
                     break;
                 } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null) {
                     toastLog("正在等待“用户任务中心”加载，剩余" + a + "秒……");
@@ -951,7 +950,8 @@ function OpeninHd() {
                 className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
                 className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
                 className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
-                className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
+                className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务" ||
+                WhatIsThis() == "日常任务") {
                 toastLog("已处于“用户任务中心”任务界面");
                 break;
             } else {
@@ -1013,100 +1013,131 @@ function OpeninHd() {
 }
 
 function DoTask() {
-    var i = 0;
-    var twice = null;
-    while (true) {
-        if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
-            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
-            var A = className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3);
-        } else {
-            console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-            toastLog("当前未处于“任务中心”界面，正在重新尝试打开");
-            OpeninHd();
-            DoTask();
-            break;
-        }
-        if (i >= A.childCount() && twice == true) {
-            break;
-        } else if (i >= A.childCount()) {
-            var i = 0;
-            var twice = true;
-            toastLog("首次遍历已完成，正在进行二次任务遍历");
-            sleep(2000);
-        } else if (A.childCount() > i &&
-            A.child(i).childCount() > 2 &&
-            A.child(i).child(2).desc() != null &&
-            A.child(i).child(2).desc().search("领取") >= 0 &&
-            A.child(i).child(2).desc().search("积分") >= 0 ||
-            A.childCount() > i &&
-            A.child(i).childCount() > 2 &&
-            A.child(i).child(2).desc() != null &&
-            A.child(i).child(2).desc().search("领") >= 0 &&
-            A.child(i).child(2).desc().search("元") >= 0) {
-            A.child(i).child(2).click();
-            toastLog("已尝试盲点“" + A.child(i).child(2).desc() + "”按钮");
-            sleep(3000);
-        } else if (A.childCount() > i &&
-            A.child(i).childCount() > 2 &&
-            A.child(i).child(2).desc() != null &&
-            A.child(i).child(2).desc() == "关注") {
-            A.child(i).child(2).click();
-            toastLog("已尝试点击“关注”任务按钮");
-            sleep(2000);
-            while (text("加载中").findOnce() != null) {
-                toastLog("正在等待“关注列表”加载……");
-                sleep(2000);
-            }
-            if (id("titleText").findOnce() != null) {
-                if (id("titleText").findOnce().text() == "关注") {
-                    toastLog("已处于“关注列表”");
-                    sleep(3000);
-                    if (id("com.sina.weibo:id/numbertext").findOnce() != null) {
-                        var Gduo = id("com.sina.weibo:id/numbertext").findOnce().bounds();
-                        click(Gduo.centerX(), Gduo.centerY());
-                        toastLog("已尝试点击“更多关注”按钮");
-                        sleep(4000);
-                        if (text("关注").findOnce() != null) {
-                            var GZZ = text("关注").findOnce().bounds();
-                            click(GZZ.centerX(), GZZ.centerY());
-                            toastLog("已尝试点击“关注”按钮");
-                            sleep(3000);
-                            if (text("已关注").findOnce() != null) {
-                                var QXGZ = text("已关注").findOnce().bounds();
-                                click(QXGZ.centerX(), QXGZ.centerY());
-                                toastLog("已尝试点击“已关注”按钮");
-                                sleep(3000);
-                                if (className("android.widget.TextView").text("已关注").findOnce() != null) {
-                                    var Aqg = className("android.widget.TextView").text("已关注").findOnce().bounds();
-                                    click(Aqg.centerX(), Aqg.centerY());
-                                    toastLog("已尝试点击“已关注菜单”按钮");
-                                    sleep(2000);
-                                    if (className("android.widget.TextView").text("取消关注").findOnce() != null) {
-                                        var QG = className("android.widget.TextView").text("取消关注").findOnce().bounds();
-                                        click(QG.centerX(), QG.centerY());
-                                        toastLog("已尝试点击“取消关注”按钮");
-                                        sleep(2000);
-                                        if (className("android.widget.TextView").text("确定").findOnce() != null) {
-                                            className("android.widget.TextView").text("确定").findOnce().click();
-                                            toastLog("已尝试点击“确定取消关注”按钮");
-                                            sleep(2000);
-                                        }
-                                    }
-                                }
-                            }
+    var FindKJ = {
+        lingQu: function() {
+            try {
+                if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+                    let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+                    for (let i = 0; i < A.childCount(); i++) {
+                        if (A.child(i).desc() != null && A.child(i).desc().search("领取") >= 0 && A.child(i).desc().search("积分") >= 0 ||
+                            A.child(i).desc() != null && A.child(i).desc().search("领") >= 0 && A.child(i).search("元") >= 0) {
+                            A.child(i).click();
+                            toastLog("已尝试盲点“" + A.child(i).desc() + "”按钮");
+                            return true;
+                            break;
                         }
-                    } else if (className("android.view.ViewGroup").clickable(true).findOne(8000) != null) {
-                        className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).click()
-                        sleep(2000);
+                    }
+                }
+            } catch (e) {
+                log(e);
+            }
+        },
+        Guanzhu: function() {
+            try {
+                if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+                    let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+                    for (let i = 0; i < A.childCount(); i++) {
+                        if (A.child(i).desc() != null && A.child(i).desc() == "关注") {
+                            A.child(i).click();
+                            return A.child(i).desc();
+                            break;
+                        }
+                    }
+                }
+            } catch (e) {
+                log(e);
+            }
+        },
+        Zhuanfa: function() {
+            try {
+                if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+                    let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+                    for (let i = 0; i < A.childCount(); i++) {
+                        if (A.child(i).desc() != null && A.child(i).desc() == "转发") {
+                            A.child(i).click();
+                            return A.child(i).desc();
+                            break;
+                        }
+                    }
+                }
+            } catch (e) {
+                log(e);
+            }
+        },
+        Pinglun: function() {
+            try {
+                if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+                    let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+                    for (let i = 0; i < A.childCount(); i++) {
+                        if (A.child(i).desc() != null && A.child(i).desc() == "评论") {
+                            A.child(i).click();
+                            return A.child(i).desc();
+                            break;
+                        }
+                    }
+                }
+            } catch (e) {
+                log(e);
+            }
+        },
+        Faweibo: function() {
+            try {
+                if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+                    let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+                    for (let i = 0; i < A.childCount(); i++) {
+                        if (A.child(i).desc() != null && A.child(i).desc() == "发微博") {
+                            A.child(i).click();
+                            return A.child(i).desc();
+                            break;
+                        }
+                    }
+                }
+            } catch (e) {
+                log(e);
+            }
+        },
+        Dianzan: function() {
+            try {
+                if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null) {
+                    let A = className("android.webkit.WebView").desc("用户任务中心").findOnce();
+                    for (let i = 0; i < A.childCount(); i++) {
+                        if (A.child(i).desc() != null && A.child(i).desc() == "点赞") {
+                            A.child(i).click();
+                            return A.child(i).desc();
+                            break;
+                        }
+                    }
+                }
+            } catch (e) {
+                log(e);
+            }
+        }
+    }
+
+    function Guanzhu() {
+        toastLog("已尝试点击“关注”任务按钮");
+        sleep(2000);
+        while (text("加载中").findOnce() != null) {
+            toastLog("正在等待“关注列表”加载……");
+            sleep(2000);
+        }
+        if (id("titleText").findOnce() != null) {
+            if (id("titleText").findOnce().text() == "关注") {
+                toastLog("已处于“关注列表”");
+                sleep(3000);
+                if (id("com.sina.weibo:id/numbertext").findOnce() != null) {
+                    var Gduo = id("com.sina.weibo:id/numbertext").findOnce().bounds();
+                    click(Gduo.centerX(), Gduo.centerY());
+                    toastLog("已尝试点击“更多关注”按钮");
+                    sleep(4000);
+                    if (text("关注").findOnce() != null) {
+                        var GZZ = text("关注").findOnce().bounds();
+                        click(GZZ.centerX(), GZZ.centerY());
                         toastLog("已尝试点击“关注”按钮");
-                        if (className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).child(0).text() == "已关注") {
-                            var A = className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).child(0).bounds();
-                            click(A.centerX(), A.centerY());
+                        sleep(3000);
+                        if (text("已关注").findOnce() != null) {
+                            var QXGZ = text("已关注").findOnce().bounds();
+                            click(QXGZ.centerX(), QXGZ.centerY());
                             toastLog("已尝试点击“已关注”按钮");
                             sleep(3000);
                             if (className("android.widget.TextView").text("已关注").findOnce() != null) {
@@ -1128,192 +1159,236 @@ function DoTask() {
                             }
                         }
                     }
-                } else {
-                    var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
+                } else if (className("android.view.ViewGroup").clickable(true).findOne(8000) != null) {
+                    className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).click()
                     sleep(2000);
-                }
-            } else {
-                toastLog("未找到微博顶栏标题，即将重新进入活动…");
-                sleep(2000);
-            }
-        } else if (A.childCount() > i &&
-            A.child(i).childCount() > 2 &&
-            A.child(i).child(2).desc() != null &&
-            A.child(i).child(2).desc() == "转发") {
-            A.child(i).child(2).click();
-            toastLog("已尝试点击“转发”任务按钮");
-            sleep(1000);
-            while (text("加载中").findOnce() != null) {
-                toastLog("正在等待“转发列表”加载……");
-                sleep(2000);
-            }
-            if (id("titleText").findOnce() != null) {
-                if (id("titleText").findOnce().text() == "热门微博") {
-                    toastLog("已处于“转发列表”");
-                    sleep(2000);
-                    if (id("com.sina.weibo:id/leftButton").findOnce() != null) {
-                        id("com.sina.weibo:id/leftButton").findOnce().click();
-                        toastLog("已尝试点击“左转”按钮");
-                        sleep(2000);
-                        if (id("com.sina.weibo:id/forward_edit").findOnce() != null) {
-                            id("com.sina.weibo:id/forward_edit").findOnce().click();
-                            toastLog("已尝试点击“转发编辑”按钮");
+                    toastLog("已尝试点击“关注”按钮");
+                    if (className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).child(0).text() == "已关注") {
+                        var A = className("android.view.ViewGroup").clickable(true).findOne(8000).child(2).child(0).bounds();
+                        click(A.centerX(), A.centerY());
+                        toastLog("已尝试点击“已关注”按钮");
+                        sleep(3000);
+                        if (className("android.widget.TextView").text("已关注").findOnce() != null) {
+                            var Aqg = className("android.widget.TextView").text("已关注").findOnce().bounds();
+                            click(Aqg.centerX(), Aqg.centerY());
+                            toastLog("已尝试点击“已关注菜单”按钮");
                             sleep(2000);
-                            if (id("com.sina.weibo:id/titleText").findOnce() != null) {
-                                if (id("com.sina.weibo:id/titleText").findOnce().text() == "转发微博") {
-                                    setText("转发微博（Waiting For Delete &" + random(0, 5) + ")");
-                                    sleep(1000);
-                                    var Fs = id("com.sina.weibo:id/titleSave").findOne().bounds();
-                                    click(Fs.centerX(), Fs.centerY());
-                                    toastLog("已尝试点击“发送”按钮");
+                            if (className("android.widget.TextView").text("取消关注").findOnce() != null) {
+                                var QG = className("android.widget.TextView").text("取消关注").findOnce().bounds();
+                                click(QG.centerX(), QG.centerY());
+                                toastLog("已尝试点击“取消关注”按钮");
+                                sleep(2000);
+                                if (className("android.widget.TextView").text("确定").findOnce() != null) {
+                                    className("android.widget.TextView").text("确定").findOnce().click();
+                                    toastLog("已尝试点击“确定取消关注”按钮");
                                     sleep(2000);
                                 }
                             }
                         }
                     }
-                } else {
-                    var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
-                    sleep(2000);
                 }
             } else {
-                toastLog("未找到微博顶栏标题，即将重新进入活动…");
+                var CW = id("titleText").findOnce().text();
+                toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
                 sleep(2000);
             }
-        } else if (A.childCount() > i &&
-            A.child(i).childCount() > 2 &&
-            A.child(i).child(2).desc() != null &&
-            A.child(i).child(2).desc() == "评论") {
-            A.child(i).child(2).click();
-            toastLog("已尝试点击“评论”任务按钮");
-            sleep(1000);
-            while (text("加载中").findOnce() != null) {
-                toastLog("正在等待“评论列表”加载……");
+        } else {
+            toastLog("未找到微博顶栏标题，即将重新进入活动…");
+            sleep(2000);
+        }
+    }
+
+    function Zhuanfa() {
+        toastLog("已尝试点击“转发”任务按钮");
+        sleep(1000);
+        while (text("加载中").findOnce() != null) {
+            toastLog("正在等待“转发列表”加载……");
+            sleep(2000);
+        }
+        if (id("titleText").findOnce() != null) {
+            if (id("titleText").findOnce().text() == "热门微博") {
+                toastLog("已处于“转发列表”");
                 sleep(2000);
-            }
-            if (id("titleText").findOnce() != null) {
-                if (id("titleText").findOnce().text() == "热门微博") {
-                    toastLog("已处于“评论列表”");
+                if (id("com.sina.weibo:id/leftButton").findOnce() != null) {
+                    id("com.sina.weibo:id/leftButton").findOnce().click();
+                    toastLog("已尝试点击“左转”按钮");
                     sleep(2000);
-                    if (id("contentTextView").findOnce() != null) {
-                        var AS = id("contentTextView").findOnce().bounds();
-                        click(AS.centerX(), AS.centerY());
-                        toastLog("已尝试点击“微博正文”");
-                        sleep(3000);
-                        if (id("tvButton").text("评论").findOnce() != null) {
-                            toastLog("已找到微博正文“评论按钮”");
-                            var Pl = id("tvButton").text("评论").findOnce().bounds();
-                            click(Pl.centerX(), Pl.centerY());
-                            toastLog("已尝试点击微博正文“评论按钮”");
+                    if (id("com.sina.weibo:id/forward_edit").findOnce() != null) {
+                        id("com.sina.weibo:id/forward_edit").findOnce().click();
+                        toastLog("已尝试点击“转发编辑”按钮");
+                        sleep(2000);
+                        if (id("com.sina.weibo:id/titleText").findOnce() != null) {
+                            if (id("com.sina.weibo:id/titleText").findOnce().text() == "转发微博") {
+                                setText("转发微博（Waiting For Delete &" + random(0, 5) + ")");
+                                sleep(1000);
+                                var Fs = id("com.sina.weibo:id/titleSave").findOne().bounds();
+                                click(Fs.centerX(), Fs.centerY());
+                                toastLog("已尝试点击“发送”按钮");
+                                sleep(2000);
+                            }
+                        }
+                    }
+                }
+            } else {
+                var CW = id("titleText").findOnce().text();
+                toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
+                sleep(2000);
+            }
+        } else {
+            toastLog("未找到微博顶栏标题，即将重新进入活动…");
+            sleep(2000);
+        }
+    }
+
+    function Pinglun() {
+        toastLog("已尝试点击“评论”任务按钮");
+        sleep(1000);
+        while (text("加载中").findOnce() != null) {
+            toastLog("正在等待“评论列表”加载……");
+            sleep(2000);
+        }
+        if (id("titleText").findOnce() != null) {
+            if (id("titleText").findOnce().text() == "热门微博") {
+                toastLog("已处于“评论列表”");
+                sleep(2000);
+                if (id("contentTextView").findOnce() != null) {
+                    var AS = id("contentTextView").findOnce().bounds();
+                    click(AS.centerX(), AS.centerY());
+                    toastLog("已尝试点击“微博正文”");
+                    sleep(3000);
+                    if (id("tvButton").text("评论").findOnce() != null) {
+                        toastLog("已找到微博正文“评论按钮”");
+                        var Pl = id("tvButton").text("评论").findOnce().bounds();
+                        click(Pl.centerX(), Pl.centerY());
+                        toastLog("已尝试点击微博正文“评论按钮”");
+                        sleep(2000);
+                        if (text("由于对方的设置，你需要先关注他，才能评论。").findOnce() != null) {
+                            if (className("android.widget.TextView").text("加关注").findOnce() != null) {
+                                className("android.widget.TextView").text("加关注").findOnce().click();
+                                toastLog("已尝试加关注此账号");
+                                sleep(2000);
+                                if (id("com.sina.weibo:id/element_editbox").findOnce() != null) {
+                                    toastLog("已找到“评论框”");
+                                    setText("CommentTest");
+                                    sleep(1000);
+                                    id("com.sina.weibo:id/tv_send").findOnce().click();
+                                    toastLog("已尝试点击“发送评论”按钮");
+                                    sleep(2000);
+                                    if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
+                                        var PL = id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce().bounds();
+                                        click(PL.centerX(), PL.centerY());
+                                        toastLog("已尝试点击要删除的任务评论");
+                                        sleep(2000);
+                                        if (className("android.widget.TextView").text("删除").findOnce() != null) {
+                                            className("android.widget.TextView").text("删除").findOnce().click();
+                                            toastLog("已尝试点击删除“任务评论”");
+                                            sleep(2000);
+                                            if (className("android.widget.TextView").text("确定").findOnce() != null) {
+                                                className("android.widget.TextView").text("确定").findOnce().click();
+                                                toastLog("已尝试点击确定删除“任务评论”");
+                                                sleep(2000);
+                                                if (id("detail_activity_header_avatar").findOnce() != null) {
+                                                    id("detail_activity_header_avatar").findOnce().parent().click();
+                                                    toastLog("已尝试点击顶栏账号标题");
+                                                    sleep(2000);
+                                                    if (className("android.widget.TextView").text("已关注").findOnce() != null) {
+                                                        var Aqg = className("android.widget.TextView").text("已关注").findOnce().bounds();
+                                                        click(Aqg.centerX(), Aqg.centerY());
+                                                        toastLog("已尝试点击“已关注菜单”按钮");
+                                                        sleep(3000);
+                                                        if (className("android.widget.TextView").text("取消关注").findOnce() != null) {
+                                                            var QG = className("android.widget.TextView").text("取消关注").findOnce().bounds();
+                                                            click(QG.centerX(), QG.centerY());
+                                                            toastLog("已尝试点击“取消关注”按钮");
+                                                            sleep(2000);
+                                                            if (className("android.widget.TextView").text("确定").findOnce() != null) {
+                                                                className("android.widget.TextView").text("确定").findOnce().click();
+                                                                toastLog("已尝试点击“确定取消关注”按钮");
+                                                                sleep(2000);
+                                                            }
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        } else if (id("com.sina.weibo:id/element_editbox").findOnce() != null) {
+                            toastLog("已找到“评论框”");
+                            setText("CommentTest");
+                            sleep(1000);
+                            id("com.sina.weibo:id/tv_send").findOnce().click();
+                            toastLog("已尝试点击“发送评论”按钮");
                             sleep(2000);
                             if (text("由于对方的设置，你需要先关注他，才能评论。").findOnce() != null) {
                                 if (className("android.widget.TextView").text("加关注").findOnce() != null) {
                                     className("android.widget.TextView").text("加关注").findOnce().click();
                                     toastLog("已尝试加关注此账号");
                                     sleep(2000);
-                                    if (id("com.sina.weibo:id/element_editbox").findOnce() != null) {
-                                        toastLog("已找到“评论框”");
-                                        setText("CommentTest");
-                                        sleep(1000);
-                                        id("com.sina.weibo:id/tv_send").findOnce().click();
-                                        toastLog("已尝试点击“发送评论”按钮");
+                                    if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
+                                        var PL = id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce().bounds();
+                                        click(PL.centerX(), PL.centerY());
+                                        toastLog("已尝试点击要删除的任务评论");
                                         sleep(2000);
-                                        if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
-                                            var PL = id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce().bounds();
-                                            click(PL.centerX(), PL.centerY());
-                                            toastLog("已尝试点击要删除的任务评论");
+                                        if (className("android.widget.TextView").text("删除").findOnce() != null) {
+                                            className("android.widget.TextView").text("删除").findOnce().click();
+                                            toastLog("已尝试点击删除“任务评论”");
                                             sleep(2000);
-                                            if (className("android.widget.TextView").text("删除").findOnce() != null) {
-                                                className("android.widget.TextView").text("删除").findOnce().click();
-                                                toastLog("已尝试点击删除“任务评论”");
+                                            if (className("android.widget.TextView").text("确定").findOnce() != null) {
+                                                className("android.widget.TextView").text("确定").findOnce().click();
+                                                toastLog("已尝试点击确定删除“任务评论”");
                                                 sleep(2000);
-                                                if (className("android.widget.TextView").text("确定").findOnce() != null) {
-                                                    className("android.widget.TextView").text("确定").findOnce().click();
-                                                    toastLog("已尝试点击确定删除“任务评论”");
+                                                if (id("detail_activity_header_avatar").findOnce() != null) {
+                                                    id("detail_activity_header_avatar").findOnce().parent().click();
+                                                    toastLog("已尝试点击顶栏账号标题");
                                                     sleep(2000);
-                                                    if (id("detail_activity_header_avatar").findOnce() != null) {
-                                                        id("detail_activity_header_avatar").findOnce().parent().click();
-                                                        toastLog("已尝试点击顶栏账号标题");
+                                                    if (className("android.widget.TextView").text("已关注").findOnce() != null) {
+                                                        var Aqg = className("android.widget.TextView").text("已关注").findOnce().bounds();
+                                                        click(Aqg.centerX(), Aqg.centerY());
+                                                        toastLog("已尝试点击“已关注菜单”按钮");
                                                         sleep(2000);
-                                                        if (className("android.widget.TextView").text("已关注").findOnce() != null) {
-                                                            var Aqg = className("android.widget.TextView").text("已关注").findOnce().bounds();
-                                                            click(Aqg.centerX(), Aqg.centerY());
-                                                            toastLog("已尝试点击“已关注菜单”按钮");
-                                                            sleep(3000);
-                                                            if (className("android.widget.TextView").text("取消关注").findOnce() != null) {
-                                                                var QG = className("android.widget.TextView").text("取消关注").findOnce().bounds();
-                                                                click(QG.centerX(), QG.centerY());
-                                                                toastLog("已尝试点击“取消关注”按钮");
+                                                        if (className("android.widget.TextView").text("取消关注").findOnce() != null) {
+                                                            var QG = className("android.widget.TextView").text("取消关注").findOnce().bounds();
+                                                            click(QG.centerX(), QG.centerY());
+                                                            toastLog("已尝试点击“取消关注”按钮");
+                                                            sleep(2000);
+                                                            if (className("android.widget.TextView").text("确定").findOnce() != null) {
+                                                                className("android.widget.TextView").text("确定").findOnce().click();
+                                                                toastLog("已尝试点击“确定取消关注”按钮");
                                                                 sleep(2000);
-                                                                if (className("android.widget.TextView").text("确定").findOnce() != null) {
-                                                                    className("android.widget.TextView").text("确定").findOnce().click();
-                                                                    toastLog("已尝试点击“确定取消关注”按钮");
-                                                                    sleep(2000);
-                                                                }
                                                             }
                                                         }
-
                                                     }
+
                                                 }
                                             }
                                         }
                                     }
                                 }
-
-                            } else if (id("com.sina.weibo:id/element_editbox").findOnce() != null) {
-                                toastLog("已找到“评论框”");
-                                setText("CommentTest");
-                                sleep(1000);
-                                id("com.sina.weibo:id/tv_send").findOnce().click();
-                                toastLog("已尝试点击“发送评论”按钮");
+                            } else if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
+                                var PL = id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce().bounds();
+                                click(PL.centerX(), PL.centerY());
+                                toastLog("已尝试点击要删除的任务评论");
                                 sleep(2000);
-                                if (text("由于对方的设置，你需要先关注他，才能评论。").findOnce() != null) {
-                                    if (className("android.widget.TextView").text("加关注").findOnce() != null) {
-                                        className("android.widget.TextView").text("加关注").findOnce().click();
-                                        toastLog("已尝试加关注此账号");
+                                if (className("android.widget.TextView").text("删除").findOnce() != null) {
+                                    className("android.widget.TextView").text("删除").findOnce().click();
+                                    toastLog("已尝试点击删除“任务评论”");
+                                    sleep(2000);
+                                    if (className("android.widget.TextView").text("确定").findOnce() != null) {
+                                        className("android.widget.TextView").text("确定").findOnce().click();
+                                        toastLog("已尝试点击确定删除“任务评论”");
                                         sleep(2000);
-                                        if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
-                                            var PL = id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce().bounds();
-                                            click(PL.centerX(), PL.centerY());
-                                            toastLog("已尝试点击要删除的任务评论");
-                                            sleep(2000);
-                                            if (className("android.widget.TextView").text("删除").findOnce() != null) {
-                                                className("android.widget.TextView").text("删除").findOnce().click();
-                                                toastLog("已尝试点击删除“任务评论”");
-                                                sleep(2000);
-                                                if (className("android.widget.TextView").text("确定").findOnce() != null) {
-                                                    className("android.widget.TextView").text("确定").findOnce().click();
-                                                    toastLog("已尝试点击确定删除“任务评论”");
-                                                    sleep(2000);
-                                                    if (id("detail_activity_header_avatar").findOnce() != null) {
-                                                        id("detail_activity_header_avatar").findOnce().parent().click();
-                                                        toastLog("已尝试点击顶栏账号标题");
-                                                        sleep(2000);
-                                                        if (className("android.widget.TextView").text("已关注").findOnce() != null) {
-                                                            var Aqg = className("android.widget.TextView").text("已关注").findOnce().bounds();
-                                                            click(Aqg.centerX(), Aqg.centerY());
-                                                            toastLog("已尝试点击“已关注菜单”按钮");
-                                                            sleep(2000);
-                                                            if (className("android.widget.TextView").text("取消关注").findOnce() != null) {
-                                                                var QG = className("android.widget.TextView").text("取消关注").findOnce().bounds();
-                                                                click(QG.centerX(), QG.centerY());
-                                                                toastLog("已尝试点击“取消关注”按钮");
-                                                                sleep(2000);
-                                                                if (className("android.widget.TextView").text("确定").findOnce() != null) {
-                                                                    className("android.widget.TextView").text("确定").findOnce().click();
-                                                                    toastLog("已尝试点击“确定取消关注”按钮");
-                                                                    sleep(2000);
-                                                                }
-                                                            }
-                                                        }
-
-                                                    }
-                                                }
-                                            }
-                                        }
+                                        toastLog("已成功完成一次评论任务，正在尝试返回活动界面");
                                     }
-                                } else if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
+                                }
+                            } else {
+                                toastLog("未找到发送的评论，尝试下拉刷新…");
+                                swipe(device.width / 2, device.height / 2, device.width / 2, device.height, 500);
+                                sleep(3000);
+                                if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
                                     var PL = id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce().bounds();
                                     click(PL.centerX(), PL.centerY());
                                     toastLog("已尝试点击要删除的任务评论");
@@ -1329,109 +1404,173 @@ function DoTask() {
                                             toastLog("已成功完成一次评论任务，正在尝试返回活动界面");
                                         }
                                     }
-                                } else {
-                                    toastLog("未找到发送的评论，尝试下拉刷新…");
-                                    swipe(device.width / 2, device.height / 2, device.width / 2, device.height, 500);
-                                    sleep(3000);
-                                    if (id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce() != null) {
-                                        var PL = id("com.sina.weibo:id/tvItemCmtContent").text("CommentTest").findOnce().bounds();
-                                        click(PL.centerX(), PL.centerY());
-                                        toastLog("已尝试点击要删除的任务评论");
-                                        sleep(2000);
-                                        if (className("android.widget.TextView").text("删除").findOnce() != null) {
-                                            className("android.widget.TextView").text("删除").findOnce().click();
-                                            toastLog("已尝试点击删除“任务评论”");
-                                            sleep(2000);
-                                            if (className("android.widget.TextView").text("确定").findOnce() != null) {
-                                                className("android.widget.TextView").text("确定").findOnce().click();
-                                                toastLog("已尝试点击确定删除“任务评论”");
-                                                sleep(2000);
-                                                toastLog("已成功完成一次评论任务，正在尝试返回活动界面");
-                                            }
-                                        }
-                                    }
                                 }
-                            } else {
-                                PlWhile++;
                             }
+                        } else {
+                            PlWhile++;
                         }
                     }
+                }
+            } else {
+                var CW = id("titleText").findOnce().text();
+                toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
+                sleep(2000);
+            }
+        } else {
+            toastLog("未找到微博顶栏标题，即将重新进入活动…");
+            sleep(2000);
+        }
+    }
+
+    function Faweibo() {
+        toastLog("已尝试点击“发微博”任务按钮");
+        sleep(1000);
+        while (text("加载中").findOnce() != null) {
+            toastLog("正在等待“发微博”加载……");
+            sleep(2000);
+        }
+        if (id("titleText").findOnce() != null) {
+            if (id("titleText").findOnce().text() == "发微博") {
+                toastLog("已处于“发微博”页面");
+                sleep(2000);
+                if (Sendtime == null) {
+                    var Sendtime = 1;
                 } else {
-                    var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
+                    Sendtime++;
+                }
+                setText("TestWeibo：" + Sendtime);
+                sleep(1000);
+                if (id("com.sina.weibo:id/titleSave").findOnce() != null) {
+                    var FS = id("com.sina.weibo:id/titleSave").findOnce().bounds();
+                    click(FS.centerX(), FS.centerY());
+                    toastLog("已尝试点击“发送”按钮");
                     sleep(2000);
                 }
             } else {
-                toastLog("未找到微博顶栏标题，即将重新进入活动…");
+                var CW = id("titleText").findOnce().text();
+                toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
                 sleep(2000);
             }
-        } else if (A.childCount() > i &&
+        } else {
+            toastLog("未找到微博顶栏标题，即将重新进入活动…");
+            sleep(2000);
+        }
+    }
+
+    function Dianzan() {
+        sleep(1000);
+        while (text("加载中").findOnce() != null) {
+            toastLog("正在等待“点赞界面”加载……");
+            sleep(2000);
+        }
+        if (id("titleText").findOnce() != null) {
+            if (id("titleText").findOnce().text() == "热门微博") {
+                toastLog("已处于“点赞”页面");
+                sleep(2000);
+                if (id("com.sina.weibo:id/rightButton").findOnce() != null) {
+                    id("com.sina.weibo:id/rightButton").findOnce().click();
+                    toastLog("已尝试点击“点赞按钮”");
+                    sleep(2000);
+                }
+            } else {
+                var CW = id("titleText").findOnce().text();
+                toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
+                sleep(2000);
+            }
+        } else {
+            toastLog("未找到微博顶栏标题，即将重新进入活动…");
+            sleep(2000);
+        }
+    }
+    var i = 0;
+    var twice = null;
+    while (true) {
+        if (className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 3 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
+            var A = className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3);
+            var Rwmodel = "顺序";
+        } else if (WhatIsThis() == "日常任务") {
+            toastLog("以遍历“日常任务”模式运行");
+            var Rwmodel = "遍历日常任务";
+        } else {
+            console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
+            toastLog("当前未处于“任务中心”界面，正在重新尝试打开");
+            OpeninHd();
+            DoTask();
+            break;
+        }
+        if (Rwmodel == "顺序" && i >= A.childCount() && twice == true) {
+            break;
+        } else if (Rwmodel == "顺序" && i >= A.childCount()) {
+            var i = 0;
+            var twice = true;
+            toastLog("首次遍历已完成，正在进行二次任务遍历");
+            sleep(2000);
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 2 &&
+            A.child(i).child(2).desc() != null &&
+            A.child(i).child(2).desc().search("领取") >= 0 &&
+            A.child(i).child(2).desc().search("积分") >= 0 ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 2 &&
+            A.child(i).child(2).desc() != null &&
+            A.child(i).child(2).desc().search("领") >= 0 &&
+            A.child(i).child(2).desc().search("元") >= 0) {
+            A.child(i).child(2).click();
+            toastLog("已尝试盲点“" + A.child(i).child(2).desc() + "”按钮");
+            sleep(3000);
+        } else if (FindKJ.lingQu() != null) {
+            sleep(3000);
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 2 &&
+            A.child(i).child(2).desc() != null &&
+            A.child(i).child(2).desc() == "关注") {
+            A.child(i).child(2).click();
+            Guanzhu();
+        } else if (FindKJ.Guanzhu() == "关注") {
+            Guanzhu();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 2 &&
+            A.child(i).child(2).desc() != null &&
+            A.child(i).child(2).desc() == "转发") {
+            A.child(i).child(2).click();
+            Zhuanfa();
+        } else if (FindKJ.Zhuanfa() == "转发") {
+            Zhuanfa();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 2 &&
+            A.child(i).child(2).desc() != null &&
+            A.child(i).child(2).desc() == "评论") {
+            A.child(i).child(2).click();
+            Pinglun();
+        } else if (FindKJ.Pinglun() == "评论") {
+            Pinglun();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc() == "发微博") {
             A.child(i).child(2).click();
-            toastLog("已尝试点击“发微博”任务按钮");
-            sleep(1000);
-            while (text("加载中").findOnce() != null) {
-                toastLog("正在等待“发微博”加载……");
-                sleep(2000);
-            }
-            if (id("titleText").findOnce() != null) {
-                if (id("titleText").findOnce().text() == "发微博") {
-                    toastLog("已处于“发微博”页面");
-                    sleep(2000);
-                    if (Sendtime == null) {
-                        var Sendtime = 1;
-                    } else {
-                        Sendtime++;
-                    }
-                    setText("TestWeibo：" + Sendtime);
-                    sleep(1000);
-                    if (id("com.sina.weibo:id/titleSave").findOnce() != null) {
-                        var FS = id("com.sina.weibo:id/titleSave").findOnce().bounds();
-                        click(FS.centerX(), FS.centerY());
-                        toastLog("已尝试点击“发送”按钮");
-                        sleep(2000);
-                    }
-                } else {
-                    var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
-                    sleep(2000);
-                }
-            } else {
-                toastLog("未找到微博顶栏标题，即将重新进入活动…");
-                sleep(2000);
-            }
-        } else if (A.childCount() > i &&
+            Faweibo();
+        } else if (FindKJ.Faweibo() == "发微博") {
+            Faweibo();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc() == "点赞") {
             A.child(i).child(2).click();
             toastLog("已尝试点击“点赞”任务按钮");
-            sleep(1000);
-            while (text("加载中").findOnce() != null) {
-                toastLog("正在等待“点赞界面”加载……");
-                sleep(2000);
-            }
-            if (id("titleText").findOnce() != null) {
-                if (id("titleText").findOnce().text() == "热门微博") {
-                    toastLog("已处于“点赞”页面");
-                    sleep(2000);
-                    if (id("com.sina.weibo:id/rightButton").findOnce() != null) {
-                        id("com.sina.weibo:id/rightButton").findOnce().click();
-                        toastLog("已尝试点击“点赞按钮”");
-                        sleep(2000);
-                    }
-                } else {
-                    var CW = id("titleText").findOnce().text();
-                    toastLog("处于错误的界面:" + CW + "，即将重新进入活动…");
-                    sleep(2000);
-                }
-            } else {
-                toastLog("未找到微博顶栏标题，即将重新进入活动…");
-                sleep(2000);
-            }
-        } else {
+            Dianzan();
+        } else if (FindKJ.Dianzan() == "点赞") {
+            Dianzan();
+        } else if (Rwmodel == "遍历日常任务" && WhatIsThis() == "日常任务") {
+            toastLog("遍历日常任务完成，已找不到未完成任务")
+            break;
+        } else if (Rwmodel == "顺序") {
             i++;
         }
         OpeninHd();
@@ -1450,6 +1589,18 @@ function DoTask() {
             className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce().click();
             toastLog("已尝试点击关闭“微博故事”按钮");
             sleep(2000);
+        } else if (className("android.widget.ImageView").clickable(true).desc("返回").findOnce() != null) {
+            className("android.widget.ImageView").clickable(true).desc("返回").findOnce().click();
+            toastLog("已尝试盲点“返回按钮”");
+            sleep(2000);
+        } else if (className("android.widget.TextView").desc("返回").findOnce() != null && className("android.widget.TextView").desc("返回").findOnce().parent().parent().clickable() == true) {
+            className("android.widget.TextView").desc("返回").findOnce().parent().parent().click();
+            toastLog("已尝试盲点父级“返回按钮”");
+            sleep(2000);
+        } else if (id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce() != null) {
+            id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce().click();
+            toastLog("已尝试盲点左关闭按钮，重试中……");
+            sleep(2000);
         } else if (currentPackage() != "com.sina.weibo") {
             app.startActivity({
                 action: "android.intent.action.MAIN",
@@ -1461,22 +1612,8 @@ function DoTask() {
             toastLog("正在等待微博APP启动至主页……");
             sleep(2000);
         } else {
-            if (className("android.widget.ImageView").clickable(true).desc("返回").findOnce() != null) {
-                className("android.widget.ImageView").clickable(true).desc("返回").findOnce().click();
-                toastLog("已尝试盲点“返回按钮”");
-                sleep(2000);
-            } else if (className("android.widget.TextView").desc("返回").findOnce() != null && className("android.widget.TextView").desc("返回").findOnce().parent().parent().clickable() == true) {
-                className("android.widget.TextView").desc("返回").findOnce().parent().parent().click();
-                toastLog("已尝试盲点父级“返回按钮”");
-                sleep(2000);
-            } else if (id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce() != null) {
-                id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce().click();
-                toastLog("已尝试盲点左关闭按钮，重试中……");
-                sleep(2000);
-            } else {
-                Justback();
-                sleep(1000);
-            }
+            Justback();
+            sleep(1000);
         }
     }
     if (className("android.view.ViewGroup").desc("我").findOnce() != null || className("android.widget.FrameLayout").desc("我").findOne() != null) {
