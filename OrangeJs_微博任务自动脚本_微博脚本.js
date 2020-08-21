@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.16"); //版本
+    var ScriptVersion = ("Beta1.17"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“微博任务自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -903,6 +903,13 @@ function OpeninHd() {
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务" ||
+            className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).childCount() > 3 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).child(1).text() == "日常任务" ||
             WhatIsThis() == "日常任务") {
             toastLog("已处于“用户任务中心”任务界面");
             break;
@@ -931,6 +938,13 @@ function OpeninHd() {
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).childCount() > 5 &&
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() != null &&
                     className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务" ||
+                    className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).childCount() > 0 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).childCount() > 3 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).childCount() > 0 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).child(1).text() == "日常任务" ||
                     WhatIsThis() == "日常任务") {
                     break;
                 } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null) {
@@ -1197,6 +1211,7 @@ function DoTask() {
             sleep(2000);
         }
     }
+    var ZhuanfaT = 1;
 
     function Zhuanfa() {
         toastLog("已尝试点击“转发”任务按钮");
@@ -1219,12 +1234,13 @@ function DoTask() {
                         sleep(2000);
                         if (id("com.sina.weibo:id/titleText").findOnce() != null) {
                             if (id("com.sina.weibo:id/titleText").findOnce().text() == "转发微博") {
-                                setText("转发微博（Waiting For Delete &" + random(0, 5) + ")");
+                                setText("转发微博（Waiting For Delete &" + ZhuanfaT + ")");
                                 sleep(1000);
                                 var Fs = id("com.sina.weibo:id/titleSave").findOne().bounds();
                                 click(Fs.centerX(), Fs.centerY());
                                 toastLog("已尝试点击“发送”按钮");
                                 sleep(2000);
+                                ZhuanfaT++;
                             }
                         }
                     }
@@ -1494,6 +1510,15 @@ function DoTask() {
             className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3).child(0).desc() == "日常任务") {
             var A = className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3);
             var Rwmodel = "顺序";
+        } else if (className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).childCount() > 3 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).child(1).text() == "日常任务") {
+            var A = className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3);
+            var Rwmodel = "顺序";
         } else if (WhatIsThis() == "日常任务") {
             toastLog("以遍历“日常任务”模式运行");
             var Rwmodel = "遍历日常任务";
@@ -1516,13 +1541,26 @@ function DoTask() {
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc().search("领取") >= 0 &&
             A.child(i).child(2).desc().search("积分") >= 0 ||
-            Rwmodel == "顺序" && A.childCount() > i &&
+            A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc().search("领") >= 0 &&
             A.child(i).child(2).desc().search("元") >= 0) {
             A.child(i).child(2).click();
             toastLog("已尝试盲点“" + A.child(i).child(2).desc() + "”按钮");
+            sleep(3000);
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text().search("领取") >= 0 &&
+            A.child(i).child(1).text().search("积分") >= 0 ||
+            A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text().search("领") >= 0 &&
+            A.child(i).child(1).text().search("元") >= 0) {
+            A.child(i).child(1).click();
+            toastLog("已尝试盲点“" + A.child(i).child(1).text() + "”按钮");
             sleep(3000);
         } else if (FindKJ.lingQu() != null) {
             sleep(3000);
@@ -1532,6 +1570,12 @@ function DoTask() {
             A.child(i).child(2).desc() == "关注") {
             A.child(i).child(2).click();
             Guanzhu();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text() == "关注") {
+            A.child(i).child(1).click();
+            Guanzhu();
         } else if (FindKJ.Guanzhu() == "关注") {
             Guanzhu();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
@@ -1539,6 +1583,12 @@ function DoTask() {
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc() == "转发") {
             A.child(i).child(2).click();
+            Zhuanfa();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text() == "转发") {
+            A.child(i).child(1).click();
             Zhuanfa();
         } else if (FindKJ.Zhuanfa() == "转发") {
             Zhuanfa();
@@ -1548,6 +1598,12 @@ function DoTask() {
             A.child(i).child(2).desc() == "评论") {
             A.child(i).child(2).click();
             Pinglun();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text() == "评论") {
+            A.child(i).child(1).click();
+            Pinglun();
         } else if (FindKJ.Pinglun() == "评论") {
             Pinglun();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
@@ -1555,6 +1611,12 @@ function DoTask() {
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc() == "发微博") {
             A.child(i).child(2).click();
+            Faweibo();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text() == "发微博") {
+            A.child(i).child(1).click();
             Faweibo();
         } else if (FindKJ.Faweibo() == "发微博") {
             Faweibo();
@@ -1565,11 +1627,15 @@ function DoTask() {
             A.child(i).child(2).click();
             toastLog("已尝试点击“点赞”任务按钮");
             Dianzan();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text() == "点赞") {
+            A.child(i).child(1).click();
+            toastLog("已尝试点击“点赞”任务按钮");
+            Dianzan();
         } else if (FindKJ.Dianzan() == "点赞") {
             Dianzan();
-        } else if (Rwmodel == "遍历日常任务" && WhatIsThis() == "日常任务") {
-            toastLog("遍历日常任务完成，已找不到未完成任务")
-            break;
         } else if (Rwmodel == "顺序") {
             i++;
         }
@@ -1589,18 +1655,6 @@ function DoTask() {
             className("android.widget.ImageView").clickable(true).id("com.sina.weibo:id/story_shoot_auth_exit").findOnce().click();
             toastLog("已尝试点击关闭“微博故事”按钮");
             sleep(2000);
-        } else if (className("android.widget.ImageView").clickable(true).desc("返回").findOnce() != null) {
-            className("android.widget.ImageView").clickable(true).desc("返回").findOnce().click();
-            toastLog("已尝试盲点“返回按钮”");
-            sleep(2000);
-        } else if (className("android.widget.TextView").desc("返回").findOnce() != null && className("android.widget.TextView").desc("返回").findOnce().parent().parent().clickable() == true) {
-            className("android.widget.TextView").desc("返回").findOnce().parent().parent().click();
-            toastLog("已尝试盲点父级“返回按钮”");
-            sleep(2000);
-        } else if (id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce() != null) {
-            id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce().click();
-            toastLog("已尝试盲点左关闭按钮，重试中……");
-            sleep(2000);
         } else if (currentPackage() != "com.sina.weibo") {
             app.startActivity({
                 action: "android.intent.action.MAIN",
@@ -1612,8 +1666,22 @@ function DoTask() {
             toastLog("正在等待微博APP启动至主页……");
             sleep(2000);
         } else {
-            Justback();
-            sleep(1000);
+            if (className("android.widget.ImageView").clickable(true).desc("返回").findOnce() != null) {
+                className("android.widget.ImageView").clickable(true).desc("返回").findOnce().click();
+                toastLog("已尝试盲点“返回按钮”");
+                sleep(2000);
+            } else if (className("android.widget.TextView").desc("返回").findOnce() != null && className("android.widget.TextView").desc("返回").findOnce().parent().parent().clickable() == true) {
+                className("android.widget.TextView").desc("返回").findOnce().parent().parent().click();
+                toastLog("已尝试盲点父级“返回按钮”");
+                sleep(2000);
+            } else if (id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce() != null) {
+                id("com.sina.weibo:id/titleLeft").className("android.widget.TextView").clickable(true).findOnce().click();
+                toastLog("已尝试盲点左关闭按钮，重试中……");
+                sleep(2000);
+            } else {
+                Justback();
+                sleep(1000);
+            }
         }
     }
     if (className("android.view.ViewGroup").desc("我").findOnce() != null || className("android.widget.FrameLayout").desc("我").findOne() != null) {
@@ -1725,6 +1793,9 @@ function DoTask() {
                 } else {
                     var While = 0;
                     toastLog("当前已无任务遗留微博");
+                    dialogs.alert("微博任务自动脚本：\n脚本已运行完成");
+                    log("微博任务自动脚本：脚本已运行完成");
+                    exit();
                 }
             }
         }
@@ -1733,6 +1804,3 @@ function DoTask() {
 
 OpeninHd();
 DoTask();
-dialogs.alert("微博任务自动脚本：\n脚本已运行完成");
-log("微博任务自动脚本：脚本已运行完成");
-exit();
