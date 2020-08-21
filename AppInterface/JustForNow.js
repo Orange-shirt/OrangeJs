@@ -92,21 +92,22 @@ function mainUi() {
         </text>
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0 5 0 0">
-                //苏宁脚本
-                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#FF5722" h="*" w="*"/>
+                //京东脚本
+                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+                    <View bg="#F44336" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="http://static.yingyonghui.com/icon/128/6682484.png" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="苏宁易购" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
+                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                                <View w="*" h="*" bg="#90FF5722"/>
-                                <text id="ScriptSevt" text="自动赚鲸币" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                            <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
+                                <View bg="#EF9A9A"/>
+                                <spinner id="sp_Jd1" entries="种豆得豆自动脚本|自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
                             </card>
+                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
                         </linear>
                     </vertical>
                 </card>
@@ -175,22 +176,21 @@ function mainUi() {
         
         <Horizo​​ntalScrollView>
             <linear orientation="horizontal" align="left" margin="0">
-                //京东脚本
-                <card w="300" h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
-                    <View bg="#F44336" h="*" w="*"/>
+                //QQ脚本
+                <card h="150" w="300" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 5 5 5">
+                    <View bg="#F02196F3" h="*" w="*"/>
                     <vertical padding="0 0" h="auto">
                         <linear orientation="horizontal" align="left" margin="0">
-                            <img src="https://pp.myapp.com/ma_icon/0/icon_7193_1578290782/256" w="40" h="40" margin="20 20 0 0"/>
+                            <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="40" h="40" margin="20 20 0 0"/>
                             <vertical padding="0 0" h="auto">
-                                <text text="京东" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
+                                <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
                             </vertical>
                         </linear>
                         <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                            <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 0 20">
-                                <View bg="#EF9A9A"/>
-                                <spinner id="sp_Jd1" entries="种豆得豆自动脚本|自动宠汪汪|东东农场自动脚本" textColor="#FFFFFF" align="center" marginLeft="10" textSize="20" layout_gravity="center" spinnerMode="dialog"/>
+                            <card w="200" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
+                                <View w="*" h="*" bg="#90CAF9"/>
+                                <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" size="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
-                            <img src="@drawable/ic_play_arrow_black_48dp" id="R_JD" w="*" h="30" tint="#EF9A9A" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true" circle="true"/>
                         </linear>
                     </vertical>
                 </card>
@@ -214,26 +214,6 @@ function mainUi() {
                 </card>
             </linear>
         </Horizo​​ntalScrollView>
-        <linear orientation="horizontal" align="left" margin="0">
-            //QQ脚本
-            <card h="150" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0">
-                <View bg="#F02196F3" h="*" w="*"/>
-                <vertical padding="0 0" h="auto">
-                    <linear orientation="horizontal" align="left" margin="0">
-                        <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="40" h="40" margin="20 20 0 0"/>
-                        <vertical padding="0 0" h="auto">
-                            <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="20" margin="10 25 0 0"/>
-                        </vertical>
-                    </linear>
-                    <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                        <card w="240" h="50" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20" >
-                            <View w="*" h="*" bg="#90CAF9"/>
-                            <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" textSize="20" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
-                        </card>
-                    </linear>
-                </vertical>
-            </card>
-        </linear>
         
         <linear orientation="horizontal" align="center" margin="5 15 5 15" >
             <img src="{{context_SunMoon}}" id="changeColor" w="30" h="30"  tint="{{context_textColor}}" bg="{{context_textBg}}" layout_weight="20" layout_gravity="center" bg="?attr/selectableItemBackground" clickable="true"/>
@@ -263,37 +243,6 @@ function mainUi() {
     ui.AboutApp.click(() => {
         AboutApp();
     });
-
-    ui.ScriptSevt.click(() => {
-        engines.execScript("自动赚鲸币", "runScriptSevt();\n" + runScriptSevt.toString());
-    });
-
-    function runScriptSevt() {
-        var DownJs = dialogs.build({
-            title: "正在请求脚本中……",
-            progress: {
-                max: -1
-            },
-            cancelable: false
-        }).show();
-        var ScriptSevt_Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E8%B5%9A%E9%B2%B8%E5%B8%81_%E8%8B%8F%E5%AE%81%E8%84%9A%E6%9C%AC.js";
-        var res_script = http.get(ScriptSevt_Url, {
-            headers: {
-                'Accept-Language': 'en-us,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_7_0)AppleWebKit/535.11(KHTML,likeGecko)Chrome/17.0.963.56Safari/535.11'
-            }
-        });
-
-        if (res_script.statusCode == 200) {
-            DownJs.dismiss();
-            toastLog("脚本获取成功");
-            var OrangeJs = res_script.body.string();
-            engines.execScript("自动赚鲸币", OrangeJs);
-        } else {
-            DownJs.dismiss();
-            dialogs.alert("脚本获取失败！这可能是您的网络原因造成的，建议您检查网络后再重新运行软件吧\nHTTP状态码:" + res_script.statusMessage);
-        }
-    }
 
     function runScriptOne() {
         var DownJs = dialogs.build({
