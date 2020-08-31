@@ -1328,7 +1328,27 @@ function DoTask() {
                         while (true) {
                             let as = className("android.widget.TextView").text("x6").find();
                             for (var ii = 0; ii < className("android.widget.TextView").text("x6").find().length; ii++) {
-                                if (as.get(ii) != null &&
+                                if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce() != null &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).childCount() > 0 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).childCount() > 0 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).childCount() > 0 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).child(0).childCount() > 4 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).child(0).child(4).childCount() > 2 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).child(0).child(4).child(2).childCount() > 0 &&
+                                    className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/abb").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).child(0).child(4).child(2).child(0).text() == "已完成") {
+                                    toastLog("已成功完成“挑选商品”任务，正在尝试返回");
+                                    if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
+                                        className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
+                                    } else {
+                                        Justback();
+                                    }
+                                    sleep(3000);
+                                    var JustWait = 0;
+                                    var ii = -1;
+                                } else if (as.get(ii) != null &&
                                     as.get(ii).parent().childCount() > 0 &&
                                     as.get(ii).parent().child(as.get(ii).parent().childCount() - 1).childCount() > 0 &&
                                     as.get(ii).parent().child(as.get(ii).parent().childCount() - 1).child(0).text() == "已完成") {
