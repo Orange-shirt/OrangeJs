@@ -807,7 +807,7 @@ function openInTask() {
                 toastLog("已尝试点击京东主页“我的”按钮（层级）");
             }
             sleep(2000);
-        }else if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce() != null &&
+        } else if (className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce() != null &&
             className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().childCount() > 4 &&
             className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).childCount() > 2 &&
             className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/tj").findOnce().child(4).child(2).desc() != null &&
@@ -1380,9 +1380,15 @@ function DoTask() {
             }
             var I = 0;
             while (true) {
-                var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(0).child(0);
-                var E = A.child(A.childCount() - 1).child(1).child(A.child(A.childCount() - 1).child(1).childCount() - 1);
-                E.scrollForward();
+                try {
+                    var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(0).child(0);
+                    var E = A.child(A.childCount() - 1).child(1).child(A.child(A.childCount() - 1).child(1).childCount() - 1);
+                    E.scrollForward();
+                } catch (e) {
+                    toastLog("帮喂控件查找出现错误，正在重新尝试：" + e);
+                    openInTask();
+                    DoTask();
+                }
                 if (I >= E.childCount()) {
                     break;
                 } else {
@@ -1393,12 +1399,12 @@ function DoTask() {
                         let b = bb.toString();
                         click(a.centerX(), a.centerY());
                         toastLog("已尝试点击“帮喂：" + E.child(I).child(2).text() + "”按钮");
-                        sleep(3000);
-                        if (className("android.webkit.WebView").text(b + "的汪汪").findOnce() != null &&
-                            className("android.webkit.WebView").text(b + "的汪汪").findOnce().childCount() > 0 &&
-                            className("android.webkit.WebView").text(b + "的汪汪").findOnce().child(0).childCount() > 0 &&
-                            className("android.webkit.WebView").text(b + "的汪汪").findOnce().child(0).child(0).childCount() > 0) {
-                            var G = className("android.webkit.WebView").text(b + "的汪汪").findOnce().child(0).child(0).child(0);
+                        sleep(5000);
+                        if (className("android.webkit.WebView").findOnce() != null &&
+                            className("android.webkit.WebView").findOnce().childCount() > 0 &&
+                            className("android.webkit.WebView").findOnce().child(0).childCount() > 0 &&
+                            className("android.webkit.WebView").findOnce().child(0).child(0).childCount() > 0) {
+                            var G = className("android.webkit.WebView").findOnce().child(0).child(0).child(0);
                             for (let i = 0; i < G.childCount(); i++) {
                                 if (G.childCount() > i &&
                                     G.child(i).childCount() > 0 &&

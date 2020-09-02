@@ -910,6 +910,31 @@ function OpeninHd() {
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).childCount() > 0 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).childCount() > 1 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).child(1).text() == "日常任务" ||
+            className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).desc() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).desc() == "日常任务" ||
+            className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).text() == "日常任务" ||
+            className("android.webkit.WebView").desc("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).text() == "日常任务" ||
             WhatIsThis() == "日常任务") {
             toastLog("已处于“用户任务中心”任务界面");
             break;
@@ -945,6 +970,23 @@ function OpeninHd() {
                     className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).childCount() > 0 &&
                     className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).childCount() > 1 &&
                     className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).child(3).child(0).child(1).text() == "日常任务" ||
+                    className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).desc() != null &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).desc() == "日常任务" ||
+                    className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).childCount() > 1 &&
+                    className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).text() == "日常任务" ||
                     WhatIsThis() == "日常任务") {
                     break;
                 } else if (className("android.widget.TextView").text("用户任务中心").findOnce() != null) {
@@ -1511,6 +1553,25 @@ function DoTask() {
             var A = className("android.webkit.WebView").desc("用户任务中心").findOnce().child(1).child(0).child(3);
             var Rwmodel = "顺序";
         } else if (className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).desc() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).desc() == "日常任务" ||
+            className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).child(0).child(1).text() == "日常任务") {
+            var A = className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1);
+            var Rwmodel = "顺序";
+        } else if (className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).childCount() > 1 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).childCount() > 0 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).childCount() > 3 &&
@@ -1524,7 +1585,7 @@ function DoTask() {
             var Rwmodel = "遍历日常任务";
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-            toastLog("当前未处于“任务中心”界面，正在重新尝试打开");
+            toastLog("当前未处于“任务中心”界面，正在重新尝试打开ddd");
             OpeninHd();
             DoTask();
             break;
@@ -1551,14 +1612,14 @@ function DoTask() {
             sleep(3000);
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 1 &&
-            A.child(i).child(1).text() != null &&
-            A.child(i).child(1).text().search("领取") >= 0 &&
-            A.child(i).child(1).text().search("积分") >= 0 ||
+            A.child(i).child(1).desc() != null &&
+            A.child(i).child(1).desc().search("领取") >= 0 &&
+            A.child(i).child(1).desc().search("积分") >= 0 ||
             A.childCount() > i &&
             A.child(i).childCount() > 1 &&
-            A.child(i).child(1).text() != null &&
-            A.child(i).child(1).text().search("领") >= 0 &&
-            A.child(i).child(1).text().search("元") >= 0) {
+            A.child(i).child(1).desc() != null &&
+            A.child(i).child(1).desc().search("领") >= 0 &&
+            A.child(i).child(1).desc().search("元") >= 0) {
             A.child(i).child(1).click();
             toastLog("已尝试盲点“" + A.child(i).child(1).text() + "”按钮");
             sleep(3000);
