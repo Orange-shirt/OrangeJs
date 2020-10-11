@@ -1049,6 +1049,7 @@ function DoTask() {
                                                 time++;
                                                 Justback();
                                                 if (className("android.view.View").text("关注已达上限~").findOne(3000) != null) {
+                                                    toastLog("识别到“关注已达上限”");
                                                     sleep(1000);
                                                     break;
                                                 }
