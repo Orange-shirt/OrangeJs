@@ -28,7 +28,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.6"); //版本
+    var ScriptVersion = ("Beta1.61"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“自动宠汪汪”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -855,7 +855,7 @@ function openInTask() {
 function DoTask() {
     if (AlreadyInHD() == true) {
         try {
-            var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(0).child(0);
+            var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(1).child(0);
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toastLog("未处于“宠汪汪”主界面，正在重试中……" + e);
@@ -935,7 +935,7 @@ function DoTask() {
             log("您的宠物正在进食中,请" + EatingOrNot() + "后再喂食");
         }
         let LGLbutton = [];
-        for (let i = A.childCount() - 1; i >= 0; i--) {
+        for (let i = 0; i < A.childCount(); i++) {
             if (A.child(i).childCount() > 3) {
                 for (let ii = A.child(i).childCount() - 1; ii >= 0; ii--) {
                     if (A.child(i).child(ii).childCount() > 0 && A.child(i).child(ii).child(0).childCount() > 0 && A.child(i).child(ii).child(0).child(0).text() == "linggouliang") {
@@ -962,7 +962,7 @@ function DoTask() {
         var WrongTime = 0;
         while (true) {
             try {
-                var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(0).child(0);
+                var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(1).child(0);
                 var a = A.child(A.childCount() - 1).child(1).childCount() - 1;
                 var B = A.child(A.childCount() - 1).child(1).child(a);
             } catch (e) {
@@ -1048,7 +1048,10 @@ function DoTask() {
                                                 }
                                                 time++;
                                                 Justback();
-                                                sleep(2000);
+                                                if (className("android.view.View").text("关注已达上限~").findOne(3000) != null) {
+                                                    sleep(1000);
+                                                    break;
+                                                }
                                             }
                                         } else {
                                             ia++;
@@ -1128,7 +1131,7 @@ function DoTask() {
             }
         }
         try {
-            var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(0).child(0);
+            var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(1).child(0);
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toastLog("未处于“宠汪汪”主界面，正在重试中……" + e);
@@ -1348,7 +1351,7 @@ function DoTask() {
                 toastLog("当前可能非宠物赛跑时间");
             }
             try {
-                var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(0).child(0);
+                var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(1).child(0);
             } catch (e) {
                 console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
                 toastLog("未处于“宠汪汪”主界面，正在重试中……" + e);
@@ -1381,7 +1384,7 @@ function DoTask() {
             var I = 0;
             while (true) {
                 try {
-                    var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(0).child(0);
+                    var A = className("android.webkit.WebView").text("宠汪汪").findOnce().child(0).child(1).child(0);
                     var E = A.child(A.childCount() - 1).child(1).child(A.child(A.childCount() - 1).child(1).childCount() - 1);
                     E.scrollForward();
                 } catch (e) {
@@ -1404,7 +1407,7 @@ function DoTask() {
                             className("android.webkit.WebView").findOnce().childCount() > 0 &&
                             className("android.webkit.WebView").findOnce().child(0).childCount() > 0 &&
                             className("android.webkit.WebView").findOnce().child(0).child(0).childCount() > 0) {
-                            var G = className("android.webkit.WebView").findOnce().child(0).child(0).child(0);
+                            var G = className("android.webkit.WebView").findOnce().child(0).child(1).child(0);
                             for (let i = 0; i < G.childCount(); i++) {
                                 if (G.childCount() > i &&
                                     G.child(i).childCount() > 0 &&
@@ -1418,7 +1421,7 @@ function DoTask() {
                                     break;
                                 }
                             }
-                            var G = className("android.webkit.WebView").text(b + "的汪汪").findOnce().child(0).child(0).child(0);
+                            var G = className("android.webkit.WebView").textContains("的汪汪").findOnce().child(0).child(1).child(0);
                             for (let i = 0; i < G.childCount(); i++) {
                                 if (G.childCount() > i &&
                                     G.child(i).childCount() > 0 &&
@@ -1432,7 +1435,7 @@ function DoTask() {
                                     break;
                                 }
                             }
-                            var G = className("android.webkit.WebView").text(b + "的汪汪").findOnce().child(0).child(0).child(0);
+                            var G = className("android.webkit.WebView").textContains("的汪汪").findOnce().child(0).child(1).child(0);
                             for (let i = 0; i < G.childCount(); i++) {
                                 if (G.childCount() > i &&
                                     G.child(i).childCount() > 1 &&
