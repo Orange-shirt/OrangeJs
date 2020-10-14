@@ -40,7 +40,7 @@ var height = device.height;
 var weight = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.21"); //版本
+    var ScriptVersion = ("Beta1.22"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "🔧 手动打开模式", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“种豆得豆自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -697,12 +697,12 @@ function onClick() {
 }
 
 function Justback() {
-    let Aq=className("android.widget.Button").clickable(true).id("android:id/button2").findOnce();
-    if(Aq!=null){
+    let Aq = className("android.widget.Button").clickable(true).id("android:id/button2").findOnce();
+    if (Aq != null) {
         Aq.click();
         toastLog("已尝试盲点“原生取消”按钮");
         sleep(2000);
-        }
+    }
     //💝💝💝💝💝使用用户设定的返回方法
     if (context_i_back == 0) {
         sleep(1000);
@@ -782,6 +782,26 @@ if (T == 1) {
 
 function openInTask() {
     while (true) {
+        function ClickRk() {
+            let a = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/gm").findOnce();
+            if (a != null && a.childCount() > 0 &&
+                a.child(0).childCount() > 0 &&
+                a.child(0).child(0).childCount() > 3 &&
+                a.child(0).child(0).child(3).childCount() > 0 &&
+                a.child(0).child(0).child(3).child(0).childCount() > 0 &&
+                a.child(0).child(0).child(3).child(0).child(0).className() == "androidx.recyclerview.widget.RecyclerView" &&
+                a.child(0).child(0).child(3).child(0).child(0).childCount() > 5) {
+                for (let ii = 0; ii < a.child(0).child(0).child(3).child(0).childCount(); ii++) {
+                    for (let i = 0; i < a.child(0).child(0).child(3).child(0).child(ii).childCount(); i++) {
+                        if (a.child(0).child(0).child(3).child(0).child(ii).child(i).childCount() > 0 &&
+                            a.child(0).child(0).child(3).child(0).child(ii).child(i).child(0).childCount() > 1 &&
+                            a.child(0).child(0).child(3).child(0).child(ii).child(i).child(0).child(1).text() == "种豆得豆") {
+                            return a.child(0).child(0).child(3).child(0).child(ii).child(i);
+                        }
+                    }
+                }
+            }
+        }
         if (className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null && text("瓜分亿万京豆").className("android.widget.TextView").findOnce() != null) {
             if (text("种豆得豆").className("android.widget.TextView").findOnce().parent().clickable() == true) {
                 text("种豆得豆").className("android.widget.TextView").findOnce().parent().click();
@@ -790,6 +810,19 @@ function openInTask() {
             } else {
                 let a = text("种豆得豆").className("android.widget.TextView").findOnce().parent().bounds();
                 click(a.centerX(), a.centerY());
+                toastLog("已尝试点击“种豆得豆”入口按钮");
+                sleep(3000);
+            }
+            break;
+        } else if (className("android.view.View").desc("我的").findOnce() != null && ClickRk() != undefined) {
+            let a = ClickRk();
+            if (a.clickable() == true) {
+                a.click();
+                toastLog("已尝试盲点“种豆得豆”入口按钮");
+                sleep(3000);
+            } else {
+                let aa = a.bounds();
+                click(aa.centerX(), aa.centerY());
                 toastLog("已尝试点击“种豆得豆”入口按钮");
                 sleep(3000);
             }
@@ -898,7 +931,7 @@ function DoTask() {
         }
     }
 
-    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友", "低价包邮", "高考加油", "千万京豆","种豆专享"];
+    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友", "低价包邮", "高考加油", "千万京豆", "种豆专享"];
     for (let a = 0; a < ShouQu.length; a++) {
         while (className("android.widget.TextView").text(ShouQu[a]).findOnce() != null && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).childCount() > 2 && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2).className() == "android.widget.TextView") {
             let b = className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2);
