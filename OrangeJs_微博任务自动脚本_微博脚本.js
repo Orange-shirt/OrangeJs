@@ -29,7 +29,7 @@ var height = device.height;
 var width = device.width;
 
 function dialogs_js() {
-    var ScriptVersion = ("Beta1.17"); //版本
+    var ScriptVersion = ("Beta1.18"); //版本
     log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
     var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "💬 吐司/日志切换"]
     var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“微博任务自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
@@ -1572,6 +1572,25 @@ function DoTask() {
             var A = className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1);
             var Rwmodel = "顺序";
         } else if (className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2).child(0).child(1).desc() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2).child(0).child(1).desc() == "日常任务" ||
+            className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2).child(0).child(1).text() == "日常任务") {
+            var A = className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(2);
+            var Rwmodel = "顺序";
+        } else if (className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).childCount() > 1 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).childCount() > 0 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(0).child(1).child(0).childCount() > 3 &&
@@ -1597,6 +1616,32 @@ function DoTask() {
             var twice = true;
             toastLog("首次遍历已完成，正在进行二次任务遍历");
             sleep(2000);
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc().search("领取") >= 0 &&
+            A.child(i).child(3).desc().search("积分") >= 0 ||
+            A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc().search("领") >= 0 &&
+            A.child(i).child(3).desc().search("元") >= 0) {
+            A.child(i).child(3).click();
+            toastLog("已尝试盲点“" + A.child(i).child(3).desc() + "”按钮");
+            sleep(3000);
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text().search("领取") >= 0 &&
+            A.child(i).child(3).text().search("积分") >= 0 ||
+            A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text().search("领") >= 0 &&
+            A.child(i).child(3).text().search("元") >= 0) {
+            A.child(i).child(3).click();
+            toastLog("已尝试盲点“" + A.child(i).child(3).text() + "”按钮");
+            sleep(3000);
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
@@ -1626,6 +1671,16 @@ function DoTask() {
         } else if (FindKJ.lingQu() != null) {
             sleep(3000);
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text() == "关注" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc() == "关注") {
+            A.child(i).child(3).click();
+            Guanzhu();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc() == "关注") {
@@ -1639,6 +1694,16 @@ function DoTask() {
             Guanzhu();
         } else if (FindKJ.Guanzhu() == "关注") {
             Guanzhu();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc() == "转发" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text() == "转发") {
+            A.child(i).child(3).click();
+            Zhuanfa();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
@@ -1654,6 +1719,16 @@ function DoTask() {
         } else if (FindKJ.Zhuanfa() == "转发") {
             Zhuanfa();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc() == "评论" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text() == "评论") {
+            A.child(i).child(3).click();
+            Pinglun();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc() == "评论") {
@@ -1668,6 +1743,16 @@ function DoTask() {
         } else if (FindKJ.Pinglun() == "评论") {
             Pinglun();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc() == "发微博" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text() == "发微博") {
+            A.child(i).child(3).click();
+            Faweibo();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
             A.child(i).child(2).desc() == "发微博") {
@@ -1681,6 +1766,17 @@ function DoTask() {
             Faweibo();
         } else if (FindKJ.Faweibo() == "发微博") {
             Faweibo();
+        } else if (Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc() == "点赞" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text() == "点赞") {
+            A.child(i).child(3).click();
+            toastLog("已尝试点击“点赞”任务按钮");
+            Dianzan();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
