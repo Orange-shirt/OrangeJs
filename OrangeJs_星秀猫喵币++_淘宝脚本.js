@@ -297,9 +297,9 @@ function ScriptSettings() {
                 <vertical padding="25 0" bg="{{context_framebg}}">
                                     <img src="@drawable/ic_pets_black_48dp" w="20" h="20" margin="5" tint="{{context_textColor}}"/>
                                     <text id="tips" textColor="{{context_textColor}}" textSize="10sp"/>
-                                    <text text="脚本喂猫次数" textColor="{{context_textColor}}" textStyle="bold"/>
+                                    <text text="脚本撸猫次数" textColor="{{context_textColor}}" textStyle="bold"/>
                                     <input id="times" textColor="{{context_textColor}}" inputType="number" hint="请输入1～100的数字" textColorHint="#9E9E9E"/>
-                                    <text text="脚本喂猫延迟（单位：毫秒 1秒=1000毫秒）" textColor="{{context_textColor}}" textStyle="bold"/>
+                                    <text text="脚本撸猫延迟（单位：毫秒 1秒=1000毫秒）" textColor="{{context_textColor}}" textStyle="bold"/>
                                     <input id="timeyc" textColor="{{context_textColor}}" inputType="number" hint="请输入200～5000的数字" textColorHint="#9E9E9E"/>
                                     <linear orientation="horizontal" align="left" margin="0" paddingTop="0">
                                         <card layout_weight="50" h="40" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="5"cardBackgroundColor="{{context_SettingsCard}}">
@@ -967,7 +967,7 @@ function DoTask() {
             let nowCoin = A.child(3).child(1).child(0).child(1).text().replace("我的喵币,", "");
             toastLog("当前剩余：" + nowCoin + "喵币");
             if (nowCoin < 60000) {
-                toastLog("剩余喵币不足60000，停止喂猫升级");
+                toastLog("剩余喵币不足60000，停止撸猫升级");
                 break;
             }
         }
@@ -976,7 +976,7 @@ function DoTask() {
             A.child(3).child(0).childCount() > 1 &&
             A.child(3).child(0).child(1).childCount() > 0 &&
             A.child(3).child(0).child(1).child(0).childCount() > 0 &&
-            A.child(3).child(0).child(1).child(0).child(0).text().search("喂猫升级") >= 0 ||
+            A.child(3).child(0).child(1).child(0).child(0).text().search("撸猫升级") >= 0 ||
             A.childCount() > 3 &&
             A.child(3).childCount() > 0 &&
             A.child(3).child(0).childCount() > 1 &&
