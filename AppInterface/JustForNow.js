@@ -3,14 +3,14 @@ context_DayOrNight = 1;
 context_widthofTen = device.width / 10;
 
 function setDayMode() {
-    context_framebg = "#FAFAFA" //全局背景
+    context_framebg = "#FFFFFF" //全局背景
     context_sBarColor = "#BDBDBD"; //通知栏颜色
     context_textColor = "#000000" //文字颜色
-    context_textBg = "#FAFAFA" //文字背景
-    context_QxtextBg = "#FAFAFA" //权限设置中的背景
-    context_FctextBg = "#FAFAFA" //悬浮窗权限中的背景
+    context_textBg = "#FFFFFF" //文字背景
+    context_QxtextBg = "#FFFFFF" //权限设置中的背景
+    context_FctextBg = "#FFFFFF" //悬浮窗权限中的背景
     context_SunMoon = "@drawable/ic_wb_sunny_black_48dp"; //☀️
-    context_Logo = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_logo.png" //黑色logo
+    context_Logo = "https://gitee.com/Orange_shirt/OrangeJs/raw/master/OtherRes/%E6%96%B0%E7%89%88%E6%9C%AC%E9%A2%84%E5%91%8A.jpg" //黑色logo
 }
 importClass(android.animation.ObjectAnimator);
 
@@ -43,7 +43,7 @@ function mainUi() {
         <ScrollView>
             <frame id="main" background="{{context_framebg}}">//全局背景颜色
                 <vertical align="center" paddingTop="5" margin="0">
-                    <img src="{{context_Logo}}" h="40" margin="0 0 0 10"/>//黑色logo
+                    <img src="{{context_Logo}}" h="200" margin="0 0 0 10"/>//黑色logo
                     <text id="text" textStyle="bold" color="{{context_textColor}}" gravity="left" size="15" marginLeft="28"/>
                     //水平线性布局
                     <linear orientation="horizontal" align="center" margin="5">

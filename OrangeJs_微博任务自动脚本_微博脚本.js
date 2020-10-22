@@ -1,875 +1,562 @@
-log("*   ╉ The Animal Protecting ╊");
-log("*　　┏┓　　　┏┓+ +");
-log("*　┏┛┻━━━┛┻┓ + +");
-log("*　┃　　　　　　　┃");
-log("*　┃　　　━　　　┃ ++ + + +");
-log("*　████━████ 　+");
-log("*　┃　　　　　　　┃ +");
-log("*　┃　　　┻　　　┃")
-log("*　┃　　　　　　　┃ + +");
-log("*　┗━┓　　　┏━┛");
-log("*　　　┃　　　┃");
-log("*　　　┃　　　┃ + + + +");
-log("*　　　┃　　　┃　　　　");
-log("*　　　┃　　　┃ + 　");
-log("*　　　┃　　　┃")
-log("*　　　┃　　　┃　　+");
-log("*　　　┃　　　┗━━━┓ + +")
-log("*　　　┃　　　　　　　┣┓+ + + ");
-log("*　　　┃　　　　　　　┏┛+ +");
-log("*　　　┗┓┓┏━┳┓┏┛ + ");
-log("*　　　　┃┫┫　┃┫┫");
-log("*　　　　┗┻┛　┗┻┛+ + ");
-log("*    Code is far away from bug!");
-log("*        神兽保佑,代码无bug");
+context_thisScriptName = "微博任务自动脚本";
+context_thisScriptVersion = "（Beta1.19）";
 
+ScriptMENU();
 
-dialogs_js();
-var height = device.height;
-var width = device.width;
+function ScriptMENU() {
+    ui.run(() => {
+        let view = ui.inflate(
+            <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                        <card gravity="center_vertical" cardElevation="0dp" cardBackgroundColor="{{context_framebg}}" margin="0 10">
+                            <img src="{{context_Logo}}" w="100" h="35"/>
+                            <linear gravity="center||right">
+                                <img id="ExitScript" src="@drawable/ic_clear_black_48dp" w="35" h="35" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true"/>
+                            </linear>
+                        </card>
+                        
+                        <text text="{{context_thisScriptName+context_thisScriptVersion}}" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 0 0 0"/>
+                        <linear orientation="horizontal" align="left" margin="0" paddingTop="0">
+                            <card id="StartRunning" layout_weight="50" h="50"cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 5 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                <vertical gravity="center">
+                                    <img src="@drawable/ic_play_arrow_black_48dp" h="30" tint="{{context_textColor}}" marginTop="5"/>
+                                    <text  text="开始运行" textStyle="bold" textColor="{{context_textColor}}" textSize="8sp" gravity="center"  paddingBottom="5"/>
+                                </vertical>
+                            </card>
+                            <card id="WaitForRun" layout_weight="50" h="50" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 0 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                <vertical gravity="center">
+                                    <img src="@drawable/ic_build_black_48dp" h="20" tint="{{context_textColor}}" margin="0 10 0 5"/>
+                                    <text text="手动运行" textStyle="bold" textColor="{{context_textColor}}" gravity="center" textSize="8sp" paddingBottom="5"/>
+                                </vertical>
+                            </card>
+                            <card id="ScriptSetting" layout_weight="50" h="50" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                <vertical gravity="center">
+                                    <img src="@drawable/ic_settings_black_48dp" h="20" tint="{{context_textColor}}" margin="0 10 0 5"/>
+                                    <text text="脚本设置" textStyle="bold" textColor="{{context_textColor}}" gravity="center" textSize="8sp" paddingBottom="5"/>
+                                </vertical>
+                            </card>
+                        </linear>
+                    </vertical>, null, false);
 
-function dialogs_js() {
-    var ScriptVersion = ("Beta1.18"); //版本
-    log("软件脚本已开始运行，如果没有弹出菜单请强行停止再打开本软件！");
-    var options_ = ["▶️ 开始运行脚本", "🕒 计时运行脚本", "⏰ 定时运行脚本", "⏹ 停止运行脚本", "🔙 返回方法设置", "💬 吐司/日志切换"]
-    var i = dialogs.select("*+*+*+* 橘衫の脚本 *+*+*+*\n*+*+*+*  Orange Js *+*+*+*\n\n欢迎使用 (◍•ᴗ•◍)❤" + "\n" + "“微博任务自动脚本”" + ScriptVersion + "\n请选择一个要进行的选项", options_);
-    if (i < 0) {
-        toastLog("没有选择，如需关闭对话框\n  请选择“停止运行脚本”");
-        dialogs_js();
-    } else if (i == 0) {
-        toastLog(options_[i]);
-        context_Manualstate = 0;
-        Set_Back_way();
-    } else if (i == 3) {
-        toastLog(options_[i]);
-        exit();
-    } else if (i == 4) {
-        toastLog(options_[i]);
-        if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true && files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") > 1 && files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt")) {
-            files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
-            log("当前返回方法设置为滑动返回但未设置滑动返回速度");
-        }
-        if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true) {
-            files.rename("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt", "X返回方法设置.txt");
-            Set_Back_way();
-        } else {
-            dialogs.alert("您未保存任何返回方法，请运行脚本后再进行修改");
-            dialogs_js();
-        }
-    } else if (i == 5) {
-        toastLog(options_[i]);
-        context_Manualstate = 0;
-        if (files.exists("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt") == true) {
-            var z = files.read("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
-            if (z != "吐司" && z != "日志") {
-                alert("“吐司or日志”文件错误，已尝试删除错误文件");
-                try {
-                    files.remove("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
-                } catch (e) {
-                    toastLog("删除“吐司or日志”文件失败！");
-                }
-                var Z = "";
+        let DHK = dialogs.build({
+            customView: view,
+            wrapInScrollView: false,
+            autoDismiss: false,
+            cancelable: false
+        }).show();
+
+        view.StartRunning.click(() => {
+            DHK.dismiss();
+            threads.start(function() {
+                StopScriptWindowOn();
+                FloatJournal();
+                openInTask();
+                DoTask();
+            });
+        });
+        view.WaitForRun.click(() => {
+            DHK.dismiss();
+            ShouDong();
+        });
+        view.ScriptSetting.click(() => {
+            if (files.listDir("/sdcard").length != 0) {
+                DHK.dismiss();
+                ScriptSettings();
             } else {
-                var Z = "当前脚本使用：" + z + "\n";
+                let view = ui.inflate(
+                    <vertical bg="{{context_framebg}}" padding="25 0 25 0">
+                                        <img src="@drawable/ic_warning_black_48dp" h="35" tint="{{context_textColor}}" margin="5"/>
+                                        <text text="未授予本软件“存储权限”，无法更改脚本配置" textSize="15" textStyle="bold" textColor="{{context_textColor}}" gravity="center" margin="5"/>
+                                    </vertical>
+                );
+                dialogs.build({
+                    customView: view,
+                    wrapInScrollView: false,
+                    autoDismiss: true
+                }).show();
             }
-        } else {
-            var Z = "";
-        }
-        let da = dialogs.select(Z + "请选择一个选项", "使用吐司（Toast）", "使用脚本悬浮日志")
-        if (da == 0) {
-            toastLog("您选择了：使用吐司");
-            try {
-                var T = 0;
-                files.createWithDirs("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
-                files.write("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt", "吐司");
-            } catch (e) {
-                log("未授予存储权限或存储权限错误，当前设置为吐司");
-                var T = 0;
-            }
-        } else if (da == 1) {
-            toastLog("您选择了：使用悬浮日志");
-            try {
-                var T = 1;
-                files.createWithDirs("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt");
-                files.write("/storage/emulated/0/OrangeJs/自动微信发消息/吐司or日志.txt", "日志");
-            } catch (e) {
-                log("未授予存储权限或存储权限错误，开启悬浮日志");
-                var T = 1;
-            }
-        }
-        dialogs_js();
-    } else if (i == 1) {
-        toastLog("请稍候，正在检测权限...")
-        context_Manualstate = 0;
-        toastLog(options_[i]);
-        device.keepScreenDim();
-        toastLog("检测权限设置……");
-        context_Manualstate = 0;
-        toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
-        auto.waitFor();
-        toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
-        sleep(2000);
-        toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
-        sleep(2000);
-        var test_rawWindow = floaty.rawWindow(
-            <frame gravity="center" bg="#00000000"/>
-        );
-        test_rawWindow.setSize(-1, -1);
-        test_rawWindow.setTouchable(false);
-        setTimeout(() => {
-            test_rawWindow.close();
-        }, 1000);
-        toastLog("悬浮窗权限已开启！");
-        sleep(2000);
-        wait_Time_over();
-    } else if (i == 2) {
-        toastLog("请稍候，正在检测权限...")
-        context_Manualstate = 0;
-        toastLog(options_[i]);
-        device.keepScreenDim();
-        toastLog("检测权限设置……");
-        context_Manualstate = 0;
-        toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
-        auto.waitFor();
-        toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
-        sleep(2000);
-        toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
-        sleep(2000);
-        var test_rawWindow = floaty.rawWindow(
-            <frame gravity="center" bg="#00000000"/>
-        );
-        test_rawWindow.setSize(-1, -1);
-        test_rawWindow.setTouchable(false);
-        setTimeout(() => {
-            test_rawWindow.close();
-        }, 1000);
-        toastLog("悬浮窗权限已开启！");
-        context_Manualstate = 0;
-        Set_Back_way();
-        DS();
-        device.keepScreenDim();
-    }
+        });
+        view.ExitScript.longClick(() => {
+            toast("关闭脚本");
+        });
+
+        view.ExitScript.click(() => {
+            DHK.dismiss();
+            exit();
+        });
+    });
 }
 
-function Set_Back_way() {
-    try {
-        if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true) {
-            context_i_back = files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
-            log("返回方法：" + context_i_back);
-            if (context_i_back > 1) {
-                try {
-                    context_gestures_speed = files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt")
-                    log("滑动返回速度：" + context_gestures_speed)
-                } catch (e) {
-                    log("上次未完成滑动返回速度设置");
-                    files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
-                    Set_Back_way();
+function ShouDong() {
+    ui.run(() => {
+        let view = ui.inflate(
+            <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                        <card gravity="center_vertical" cardElevation="0dp" cardBackgroundColor="{{context_framebg}}" margin="0 10 0 5">
+                            <img src="{{context_Logo}}" w="100" h="35"/>
+                            <linear gravity="center||right">
+                                <img id="ExitScript" src="@drawable/ic_clear_black_48dp" w="35" h="35" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true"/>
+                                <linear gravity="center||right">
+                                    <img id="GoBack" src="@drawable/ic_chevron_left_black_48dp" w="40" h="40" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true"/>
+                                </linear>
+                            </linear>
+                        </card>
+                        <text text="{{context_thisScriptName+context_thisScriptVersion}}" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 0 0 0"/>
+                        <card gravity="center_vertical" cardElevation="0dp" cardBackgroundColor="{{context_framebg}}">
+                            <text text="手动运行" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 0 0 0"/>
+                            <linear gravity="center||right">
+                                <img id="Question" src="@drawable/ic_help_outline_black_48dp" w="20sp" h="20sp" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" marginRight="25"/>
+                            </linear>
+                        </card>
+                        <text text="请选择脚本等待您打开活动页面的时间" textSize="10sp" textColor="{{context_textColor}}" gravity="left" margin="0 0 0 0"/>
+                        
+                        <linear orientation="horizontal" align="left" margin="0" paddingTop="0">
+                            <card id="Waiting10s" layout_weight="50" h="40"cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 5 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                <text text="10s" textStyle="bold" textColor="{{context_textColor}}" textSize="15sp" gravity="center"  paddingBottom="5"/>
+                            </card>
+                            <card id="Waiting20s" layout_weight="50" h="40" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 0 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                <text text="20s" textStyle="bold" textColor="{{context_textColor}}" textSize="15sp" gravity="center"  paddingBottom="5"/>
+                            </card>
+                            <card id="Waiting30s" layout_weight="50" h="40" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="5 5 0 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                <text text="30s" textStyle="bold" textColor="{{context_textColor}}" textSize="15sp" gravity="center"  paddingBottom="5"/>
+                            </card>
+                            <card id="Waiting50s" layout_weight="50" h="40" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                <text text="50s" textStyle="bold" textColor="{{context_textColor}}" textSize="15sp" gravity="center"  paddingBottom="5"/>
+                            </card>
+                        </linear>
+                    </vertical>, null, false);
+
+        let DHK = dialogs.build({
+            customView: view,
+
+            wrapInScrollView: false,
+
+            autoDismiss: false,
+            cancelable: false
+        }).show();
+        view.Question.longClick(() => {
+            toast("帮助");
+        });
+        view.Question.click(() => {
+            let answer = ui.inflate(
+                <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                    <img src="@drawable/ic_help_outline_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                    <text text="要进行“手动运行”，您需要选择一个时间另脚本进入等待状态，并在脚本等待期间自行打开微博APP至活动页，脚本等待时间结束后则会开始运行" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 5"/>
+                                    <text text="所谓“手动运行”，仅需要您自行手动打开至活动页。若您直接点击“开始运行”后，脚本无法为您自动打开至活动页面，则您才需要尝试“手动运行”。" textSize="10sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 5"/>
+                                </vertical>, null, false);
+            dialogs.build({
+                customView: answer,
+
+                wrapInScrollView: false,
+
+                autoDismiss: false
+            }).show();
+        });
+        view.ExitScript.longClick(() => {
+            toast("关闭脚本");
+        });
+        view.GoBack.longClick(() => {
+            toast("返回上一级");
+        });
+        view.GoBack.click(() => {
+            DHK.dismiss();
+            ScriptMENU();
+        });
+        view.ExitScript.click(() => {
+            DHK.dismiss();
+            exit();
+        });
+
+        view.Waiting10s.click(() => {
+            DHK.dismiss();
+            threads.start(function() {
+                StopScriptWindowOn();
+                FloatJournal();
+                for (let deng = 10; deng > 0; deng--) {
+                    toastLog("请打开微博至微博任务的主界面\n剩余" + deng + "秒后运行脚本...");
+                    sleep(1000);
+                }
+                DoTask();
+            });
+        });
+        view.Waiting20s.click(() => {
+            DHK.dismiss();
+            threads.start(function() {
+                StopScriptWindowOn();
+                FloatJournal();
+                for (let deng = 20; deng > 0; deng--) {
+                    toastLog("请打开微博至微博任务的主界面\n剩余" + deng + "秒后运行脚本...");
+                    sleep(1000);
+                }
+                DoTask();
+            });
+        });
+        view.Waiting30s.click(() => {
+            DHK.dismiss();
+            threads.start(function() {
+                StopScriptWindowOn();
+                FloatJournal();
+                for (let deng = 30; deng > 0; deng--) {
+                    toastLog("请打开微博至微博任务的主界面\n剩余" + deng + "秒后运行脚本...");
+                    sleep(1000);
+                }
+                DoTask();
+            });
+        });
+        view.Waiting50s.click(() => {
+            DHK.dismiss();
+            threads.start(function() {
+                StopScriptWindowOn();
+                FloatJournal();
+                for (let deng = 50; deng > 0; deng--) {
+                    toastLog("请打开微博至微博任务的主界面\n剩余" + deng + "秒后运行脚本...");
+                    sleep(1000);
+                }
+                DoTask();
+            });
+        });
+    });
+}
+
+function ScriptSettings() {
+    ui.run(() => {
+        let view = ui.inflate(
+            <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                        <card gravity="center_vertical" cardElevation="0dp" cardBackgroundColor="{{context_framebg}}" margin="0 10 0 5">
+                            <img src="{{context_Logo}}" w="100" h="35"/>
+                            <linear gravity="center||right">
+                                <img id="ExitScript" src="@drawable/ic_clear_black_48dp" w="35" h="35" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true"/>
+                                <linear gravity="center||right">
+                                    <img id="GoBack" src="@drawable/ic_chevron_left_black_48dp" w="40" h="40" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true"/>
+                                </linear>
+                            </linear>
+                        </card>
+                        <text text="{{context_thisScriptName+context_thisScriptVersion}}" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 0 0 0"/>
+                        <text text="脚本设置" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 0 0 0"/>
+                        <card id="UseRootBack" h="40" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 5 5"cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                            <linear orientation="horizontal" gravity="center||left">
+                                <img src="@drawable/ic_wrap_text_black_48dp" w="20" h="20" circle="true" tint="{{context_textColor}}" margin="10 5"/>
+                                <linear orientation="vertical"  gravity="center">
+                                    <text text="使用Root权限进行返回操作" textColor="{{context_textColor}}" textStyle="bold" textSize="12sp"/>
+                                </linear>
+                            </linear>
+                            <linear gravity="center||right" marginRight="10">
+                                <text id="UseRootBackText" textStyle="bold" textSize="12sp"/>
+                            </linear>
+                        </card>
+                        <card id="ToastOrFloatjournal" layout_weight="50" h="40"cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 5 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                            <linear orientation="horizontal" align="left" margin="0" paddingTop="0">
+                                <img src="@drawable/ic_chat_black_48dp" w="20" h="20" tint="{{context_textColor}}" layout_gravity="left||center" margin="10 5"/>
+                                <text text="“吐司（Toast）”/“悬浮日志”切换" textStyle="bold" textColor="{{context_textColor}}" textSize="12sp"layout_gravity="left||center"/>
+                            </linear>
+                        </card>
+                    </vertical>, null, false);
+
+        function Setstate() {
+            if (files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt") == "true") {
+                view.UseRootBackText.setText("已开启");
+                view.UseRootBackText.setTextColor(colors.parseColor("#FF1E56"));
+                RootBack = true;
+            } else if (files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt") == "false") {
+                view.UseRootBackText.setText("已关闭");
+                view.UseRootBackText.setTextColor(colors.parseColor("#17B978"));
+                RootBack = false;
+            }
+        }
+        Setstate();
+        let DHK = dialogs.build({
+            customView: view,
+            wrapInScrollView: false,
+            autoDismiss: false,
+            cancelable: false
+        }).show();
+
+        view.UseRootBack.click(() => {
+            if (RootBack == true) {
+                files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt", "false");
+            } else {
+                files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt", "true");
+            }
+            Setstate();
+        });
+        view.ToastOrFloatjournal.click(() => {
+            let answer = ui.inflate(
+                <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                    <img src="@drawable/ic_chat_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                    <text id="WhatNow" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                    <text text="请选择您要切换的方式" textSize="10sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 5"/>
+                                    <linear orientation="horizontal" align="left" margin="0" paddingTop="0">
+                                        <card id="UseToast" layout_weight="50" h="50"cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 5 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                            <vertical gravity="center">
+                                                <img src="@drawable/ic_speaker_notes_black_48dp" h="20" tint="{{context_textColor}}" margin="0 10 0 5"/>
+                                                <text  text="吐司（Toast）" textStyle="bold" textColor="{{context_textColor}}" textSize="8sp" gravity="center"  paddingBottom="5"/>
+                                            </vertical>
+                                        </card>
+                                        <card id="UseFloatjournal" layout_weight="50" h="50" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="0 5 0 5" cardBackgroundColor="{{context_SettingsCard}}" foreground="?attr/selectableItemBackground" clickable="true">
+                                            <vertical gravity="center">
+                                                <img src="@drawable/ic_assignment_black_48dp" h="20" tint="{{context_textColor}}" margin="0 10 0 5"/>
+                                                <text text="悬浮日志" textStyle="bold" textColor="{{context_textColor}}" gravity="center" textSize="8sp" paddingBottom="5"/>
+                                            </vertical>
+                                        </card>
+                                    </linear>
+                                </vertical>, null, false);
+            if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == true) {
+                if (files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == "日志") {
+                    answer.WhatNow.setText("当前脚本使用：悬浮日志");
+                } else if (files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == "吐司") {
+                    answer.WhatNow.setText("当前脚本使用：吐司（Toast）");
                 }
             }
-        } else {
-            //💟🕎⛎设定返回方法及滑动速度的代码
-            var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
-            var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
-            if (i_back >= 0) {
-                toastLog("您选择的是" + options_hq[i_back]);
-                sleep(2000);
-                var options_select = options_hq[i_back];
-                context_i_back = i_back;
-                files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt");
-                files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt", context_i_back);
-            } else {
-                dialogs_js();
-                toastLog("没有选择返回方法！");
-                device.cancelKeepingAwake();
-            }
-            if (i_back > 1) {
-                var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
-                var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
-                if (iix < 0) {
-                    toastLog("没有选择滑动速度");
-                    Set_Back_way();
+            answer.UseToast.click(() => {
+                files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
+                if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == true) {
+                    try {
+                        files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
+                        files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt", "吐司");
+                        DHKs.dismiss();
+                        let answerT = ui.inflate(
+                            <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                                        <img src="@drawable/ic_check_circle_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                                        <text id="tipR" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                        <text id="Ttips" textSize="10sp" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                    </vertical>, null, false);
+                        answerT.tipR.setText("已成功切换为“吐司（Toast）”\n重新运行脚本即可生效");
+                        dialogs.build({
+                            customView: answerT,
+                            wrapInScrollView: false,
+                            autoDismiss: false
+                        }).show();
+                    } catch (e) {
+                        log(e);
+                        DHKs.dismiss();
+                        let answerT = ui.inflate(
+                            <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                                        <img src="@drawable/ic_warning_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                                        <text text="存储权限异常，切换为“吐司（Toast）”失败！" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                        <text id="Ttips" textSize="10sp" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                    </vertical>, null, false);
+                        answerT.Ttips.setText("由于脚本需要将脚本设置文件保存至您的设备中，因此请您授予本软件“存储权限”以保障软件正常运行\n" + e);
+                        dialogs.build({
+                            customView: answerT,
+                            wrapInScrollView: false,
+                            autoDismiss: false
+                        }).show();
+                    }
                 } else {
-                    if (iix == 0) {
-                        context_gestures_speed = 200;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
+                    let answerT = ui.inflate(
+                        <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                                    <img src="@drawable/ic_warning_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                                    <text text="存储权限异常，切换为“吐司（Toast）”失败！" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                    <text id="Ttips" textSize="10sp" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                </vertical>, null, false);
+                    answerT.Ttips.setText("由于脚本需要将脚本设置文件保存至您的设备中，因此请您授予本软件“存储权限”以保障软件正常运行");
+                    dialogs.build({
+                        customView: answerT,
+                        wrapInScrollView: false,
+                        autoDismiss: false
+                    }).show();
+                }
+            });
+            answer.UseFloatjournal.click(() => {
+                files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
+                if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == true) {
+                    try {
+                        files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
+                        files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt", "日志");
+                        DHKs.dismiss();
+                        let answerT = ui.inflate(
+                            <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                                        <img src="@drawable/ic_check_circle_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                                        <text id="tipR" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                        <text id="Ttips" textSize="10sp" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                    </vertical>, null, false);
+                        answerT.tipR.setText("已成功切换为“悬浮日志”\n重新运行脚本即可生效");
+                        dialogs.build({
+                            customView: answerT,
+                            wrapInScrollView: false,
+                            autoDismiss: false
+                        }).show();
+                    } catch (e) {
+                        log(e);
+                        DHKs.dismiss();
+                        let answerT = ui.inflate(
+                            <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                                        <img src="@drawable/ic_warning_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                                        <text text="存储权限异常，切换为“悬浮日志”失败！" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                        <text id="Ttips" textSize="10sp" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                    </vertical>, null, false);
+                        answerT.Ttips.setText("由于脚本需要将脚本设置文件保存至您的设备中，因此请您授予本软件“存储权限”以保障软件正常运行\n" + e);
+                        dialogs.build({
+                            customView: answerT,
+                            wrapInScrollView: false,
+                            autoDismiss: false
+                        }).show();
                     }
-                    if (iix == 1) {
-                        context_gestures_speed = 500;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 2) {
-                        context_gestures_speed = 800;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 3) {
-                        context_gestures_speed = 1000;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 4) {
-                        context_gestures_speed = 1500;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    if (iix == 5) {
-                        context_gestures_speed = 2000;
-                        toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                        sleep(2000);
-                    }
-                    files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt");
-                    files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/滑动返回速度.txt", context_gestures_speed);
+                } else {
+                    let answerT = ui.inflate(
+                        <vertical bg="{{context_framebg}}" padding="35 0 35 0">
+                                                    <img src="@drawable/ic_warning_black_48dp" w="25" h="25" tint="{{context_textColor}}" foreground="?attr/selectableItemBackground" clickable="true" margin="0 5"/>
+                                                    <text text="存储权限异常，切换为“悬浮日志”失败！" textSize="15sp" textStyle="bold" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                    <text id="Ttips" textSize="10sp" textColor="{{context_textColor}}" gravity="left" margin="0 2"/>
+                                                </vertical>, null, false);
+                    answerT.Ttips.setText("由于脚本需要将脚本设置文件保存至您的设备中，因此请您授予本软件“存储权限”以保障软件正常运行");
+                    dialogs.build({
+                        customView: answerT,
+                        wrapInScrollView: false,
+                        autoDismiss: false
+                    }).show();
                 }
-            }
-            if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/返回方法设置.txt") == true && files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt") == true) {
-                log("删除");
-                files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt");
-                dialogs_js();
-            } else if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt") == true) {
-                log("重命名");
-                files.rename("/storage/emulated/0/OrangeJs/微博任务自动脚本/X返回方法设置.txt", "返回方法设置.txt");
-                dialogs_js();
-            }
-        }
-    } catch (e) {
-        log("未授予“存储权限”");
-        var options_hq = ["🔙 普通的返回\n(使用无障碍权限)", "#⃣ 使用ROOT返回\n(必须授予本软件ROOT权限)", "🔍 通过调用搜索界面进入\n（“曲线救国法” 若其它返回均失效\n    来尝试此方法吧）", "👉👉🏻👉🏼👉🏽👉🏾👉🏿 \n从屏幕中间从左向内滑动\n(全面屏手势返回 例如:小米MIUI)", "              👈🏿👈🏾👈🏽👈🏼👈🏻👈 \n从屏幕中间从右向内滑动\n(全面屏手势返回 例如:华为EMUI)", "👆👆🏻👆🏼👆🏽👆🏾👆🏿 \n从屏幕左侧下方向上滑动\n(全面屏手势返回 例如:锤子Smartisan UI)", "               ☝🏿☝🏾☝🏽☝🏼☝🏻☝️ \n从屏幕右侧下方向上滑动\n(全面屏手势返回)"]
-        var i_back = dialogs.select(" Hi! ( ╹▽╹ )\n请选择一个方法\n用于实现返回操作", options_hq);
-        if (i_back >= 0) {
-            toastLog("您选择的是" + options_hq[i_back]);
-            sleep(2000);
-            var options_select = options_hq[i_back];
-            context_i_back = i_back;
-        } else {
-            toastLog("没有选择返回方法！");
-            device.cancelKeepingAwake();
-        }
-        if (i_back > 2) {
-            var options_hd = ["200毫秒\n(默认，如果太快请选其它)", "500毫秒", "800毫秒", "1秒(1000毫秒)", "1.5秒（1500毫秒）", "2秒（2000毫秒）"]
-            var iix = dialogs.select("Ok! (・∀・) 您选择了:\n" + options_select + "\n请选择滑动速度\n单位:毫秒（1秒=1000毫秒）", options_hd);
-            if (iix < 0) {
-                toastLog("没有选择滑动速度");
-                Set_Back_way();
-            } else {
-                if (iix == 0) {
-                    context_gestures_speed = 200;
-                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                    sleep(2000);
-                }
-                if (iix == 1) {
-                    context_gestures_speed = 500;
-                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                    sleep(2000);
-                }
-                if (iix == 2) {
-                    context_gestures_speed = 800;
-                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                    sleep(2000);
-                }
-                if (iix == 3) {
-                    context_gestures_speed = 1000;
-                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                    sleep(2000);
-                }
-                if (iix == 4) {
-                    context_gestures_speed = 1500;
-                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                    sleep(2000);
-                }
-                if (iix == 5) {
-                    context_gestures_speed = 2000;
-                    toastLog("滑动速度设定为\n" + context_gestures_speed + "毫秒");
-                    sleep(2000);
-                }
-            }
-        }
-    }
-}
-sleep(1000);
-toastLog("等待无障碍权限开启……\n您必须手动授予本软件无障碍权限\n否则本软件将无法工作！");
-auto.waitFor();
-toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
-if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == true) {
-    try {
-        let z = files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
-        if (z == "吐司") {
-            var T = 0;
-        } else if (z == "日志") {
-            var T = 1;
-        } else {
-            toastLog("“吐司or日志”文件错误，已尝试删除并使用默认日志");
-            try {
-                files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
-            } catch (e) {
-                toastLog("删除“吐司or日志”文件失败！");
-            }
-            var T = 1;
-        }
-    } catch (e) {
-        if (T == null) {
-            log("未授予存储权限或存储权限错误，默认开启悬浮日志");
-            var T = 1;
-        }
-    }
-} else {
-    try {
-        files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt");
-        files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt", "日志");
-        var T = 1;
-        log("默认使用日志，如需更改请在主菜单进行");
-    } catch (e) {
-        log("未授予存储权限或存储权限错误，默认开启悬浮日志");
-        var T = 1;
-    }
-}
+            });
+            let DHKs = dialogs.build({
+                customView: answer,
+                wrapInScrollView: false,
+                autoDismiss: false
+            }).show();
+        });
 
-function DS() {
-    var While = 1;
-    while (While == 1) {
-        var 时 = dialogs.rawInput("🔵定时→定分→定秒→确认\n\n请输入0-23的小时数\n到此时间脚本会自动运行");
-        if (时 == null) {
-            //没有输入
-            toastLog("没有输入！返回主菜单");
-            var While = 0;
-            dialogs_js();
-        } else if (时 == "") {
-            //没有输入
-            toastLog("没有输入！返回主菜单");
-            var While = 0;
-            dialogs_js();
-        } else if (时 >= 0) {
-            if (时 < 24) {
-                var While = 2;
-                while (While == 2) {
-                    var 分 = dialogs.rawInput("✔️定时🔵定分→定秒→确认\n\n请输入0-59的分钟数\n\n" + 时 + "时" + "❓分❓秒");
-                    if (分 == null) {
-                        toastLog("没有输入！返回上级");
-                        var While = 1;
-                    } else if (分 == null) {
-                        toastLog("没有输入！返回上级");
-                        var While = 1;
-                    } else if (分 >= 0) {
-                        if (分 < 60) {
-                            var While = 3;
-                            while (While == 3) {
-                                var 秒 = dialogs.rawInput("✔️定时✔️定分🔵定秒→确认\n\n请输入0-59的秒数\n\n" + 时 + "时" + 分 + "分❓秒");
-                                if (秒 == null) {
-                                    toastLog("没有输入！返回上级");
-                                    var While = 2;
-                                } else if (秒 == null) {
-                                    toastLog("没有输入！返回上级");
-                                    var While = 2;
-                                } else if (秒 >= 0) {
-                                    if (秒 < 60) {
-                                        var QR = dialogs.confirm("脚本将在\n⏰" + 时 + "时" + 分 + "分" + 秒 + "秒\n准时运行！", "如需更改请点击取消\n点击确定定时，定时状态可以在日志中查看");
-                                        if (QR == false) {
-                                            //返回主菜单
-                                            var While = 1;
-                                        } else {
-                                            var While = 0;
-                                            //仅定时运行一次
-                                            while (true) {
-                                                var myDate = new Date();
-                                                if (myDate.getHours() == 时 && myDate.getMinutes() == 分 && myDate.getSeconds() == 秒) {
-                                                    console.warn("时间到！开始运行脚本！" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒");
-                                                    device.wakeUpIfNeeded();
-                                                    break;
-                                                }
-                                                sleep(1000);
-                                                console.info("现在是" + myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒\n脚本将在" + 时 + "时" + 分 + "分" + 秒 + "秒，准时运行！\n请保持手机处于工作状态，不要锁屏关机等");
-                                            }
-                                        }
-                                    } else {
-                                        toastLog("输入错误！秒必须小于等于60");
-                                    }
-                                } else {
-                                    toastLog("输入错误！秒必须大于等于0");
-                                }
-                            }
-                        } else {
-                            toastLog("输入错误！分钟必须小于60");
-                        }
-                    } else {
-                        toastLog("输入错误！分钟必须大于等于0");
-                    }
-                }
-            } else {
-                toastLog("输入错误！时间必须小于24");
-            }
-        } else {
-            toastLog("输入错误！时间必须大于等于0");
-        }
-    }
-}
-
-function wait_Time_over() {
-    var i_wait = dialogs.singleChoice("🕗 定时运行\n\n(＾∇＾)ﾉ♪\n请选择一个选项\n计时结束会自动运行", ["1分钟后运行", "5分钟后运行", "10分钟后运行", "30分钟后运行", "一小时后运行", "两小时后运行", "三小时后运行", "四小时后运行", "五小时后运行", "六小时后运行", "七小时后运行", "八小时后运行", "九小时后运行", "十小时后运行"], 2);
-    if (i_wait < 0) {
-        toast("您取消了选择");
-        device.cancelKeepingAwake();
-        dialogs_js();
-    }
-    if (i_wait >= 0) {
-        context_i_wait = i_wait;
-    }
-    if (i_wait == 0) {
-        var choice_confirm = dialogs.confirm("您选择了1分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 1) {
-        var choice_confirm = dialogs.confirm("您选择了5分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 2) {
-        var choice_confirm = dialogs.confirm("您选择了10分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 3) {
-        var choice_confirm = dialogs.confirm("您选择了30分钟后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 4) {
-        var choice_confirm = dialogs.confirm("您选择了一小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 5) {
-        var choice_confirm = dialogs.confirm("您选择了两小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 6) {
-        var choice_confirm = dialogs.confirm("您选择了三小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 7) {
-        var choice_confirm = dialogs.confirm("您选择了四小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 8) {
-        var choice_confirm = dialogs.confirm("您选择了五小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over()
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 9) {
-        var choice_confirm = dialogs.confirm("您选择了六小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 10) {
-        var choice_confirm = dialogs.confirm("您选择了七小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 11) {
-        var choice_confirm = dialogs.confirm("您选择了八小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 12) {
-        var choice_confirm = dialogs.confirm("您选择了九小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-    if (i_wait == 13) {
-        var choice_confirm = dialogs.confirm("您选择了十小时后运行", "点击确定进行一次设定返回操作的方法后，脚本将在您设定的时间结束后开始自动运行\n请不要清理本软件的后台或者锁屏手机等，否则可能会造成定时任务失效");
-        if (choice_confirm == false) {
-            toastLog("取消了定时运行确认");
-            wait_Time_over();
-        } else {
-            Set_Back_way();
-            waiting_time();
-        }
-    }
-}
-
-function waiting_time() {
-    //计时运行脚本
-    if (context_i_wait == 0) {
-        var Seconds = 60;
-        for (Seconds == 60; Seconds > 0; Seconds--) {
-            console.warn("【定时运行】计时中……\n" + Seconds + "秒后开始运行");
-            sleep(1000);
-        }
-    }
-    if (context_i_wait == 1) {
-        var Minutes = 4;
-        for (Minutes == 4; Minutes >= 0; Minutes--) {
-            if (Minutes >= 0) {
-                var Seconds = 60;
-                for (Seconds == 60; Seconds > 0; Seconds--) {
-                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                    sleep(1000);
-                }
-            }
-        }
-    }
-    if (context_i_wait == 2) {
-        var Minutes = 9;
-        for (Minutes == 9; Minutes >= 0; Minutes--) {
-            if (Minutes >= 0) {
-                var Seconds = 60;
-                for (Seconds == 60; Seconds > 0; Seconds--) {
-                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                    sleep(1000);
-                }
-            }
-        }
-    }
-    if (context_i_wait == 3) {
-        var Minutes = 29;
-        for (Minutes == 29; Minutes >= 0; Minutes--) {
-            if (Minutes >= 0) {
-                var Seconds = 60;
-                for (Seconds == 60; Seconds > 0; Seconds--) {
-                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                    sleep(1000);
-                }
-            }
-        }
-    }
-    if (context_i_wait == 4) {
-        var Minutes = 59;
-        for (Minutes == 59; Minutes >= 0; Minutes--) {
-            if (Minutes >= 0) {
-                var Seconds = 60;
-                for (Seconds == 60; Seconds > 0; Seconds--) {
-                    console.warn("【定时运行】计时中……\n" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                    sleep(1000);
-                }
-            }
-        }
-    }
-    if (context_i_wait == 5) {
-        var Hours = 1;
-        for (Hours == 1; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 6) {
-        var Hours = 2;
-        for (Hours == 2; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 7) {
-        var Hours = 3;
-        for (Hours == 3; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 8) {
-        var Hours = 4;
-        for (Hours == 4; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 9) {
-        var Hours = 5;
-        for (Hours == 5; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 10) {
-        var Hours = 6;
-        for (Hours == 6; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 11) {
-        var Hours = 7;
-        for (Hours == 7; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 12) {
-        var Hours = 8;
-        for (Hours == 8; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-    if (context_i_wait == 13) {
-        var Hours = 9;
-        for (Hours == 9; Hours >= 0; Hours--) {
-            var Minutes = 59;
-            for (Minutes == 59; Minutes >= 0; Minutes--) {
-                if (Minutes >= 0) {
-                    var Seconds = 60;
-                    for (Seconds == 60; Seconds > 0; Seconds--) {
-                        console.warn("【定时运行】计时中……\n" + Hours + "小时" + Minutes + "分钟" + Seconds + "秒后开始运行");
-                        sleep(1000);
-                    }
-                }
-            }
-        }
-    }
-}
-
-//下面是悬浮窗
-var window = floaty.window(
-    <frame>
-        <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336"/>
-    </frame>
-);
-setInterval(() => {}, 1000);
-var execution = null;
-//记录按键被按下时的触摸坐标
-var x = 0,
-    y = 0;
-//记录按键被按下时的悬浮窗位置
-var windowX, windowY;
-//记录按键被按下的时间以便判断长按等动作
-var downTime;
-window.action.setOnTouchListener(function(view, event) {
-    switch (event.getAction()) {
-        case event.ACTION_DOWN:
-            x = event.getRawX();
-            y = event.getRawY();
-            windowX = window.getX();
-            windowY = window.getY();
-            downTime = new Date().getTime();
-            return true;
-        case event.ACTION_MOVE:
-            //移动手指时调整悬浮窗位置
-            window.setPosition(windowX + (event.getRawX() - x),
-                windowY + (event.getRawY() - y));
-            //如果按下的时间超过1.5秒判断为长按，退出脚本
-            if (new Date().getTime() - downTime > 1500) {
-                toast("长按可以移动位置哦～");
-            }
-            return true;
-        case event.ACTION_UP:
-            //手指弹起时如果偏移很小则判断为点击
-            if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
-                onClick();
-            }
-            return true;
-    }
-    return true;
-});
-
-function onClick() {
-    dialogs.alert("已停止运行脚本！");
-    log("用户点击了停止按钮");
-    exit();
+        view.ExitScript.longClick(() => {
+            toast("关闭脚本");
+        });
+        view.GoBack.longClick(() => {
+            toast("返回上一级");
+        });
+        view.GoBack.click(() => {
+            DHK.dismiss();
+            ScriptMENU();
+        });
+        view.ExitScript.click(() => {
+            DHK.dismiss();
+            exit();
+        });
+    });
 }
 
 function Justback() {
-    //💝💝💝💝💝使用用户设定的返回方法
-    if (context_i_back == 0) {
-        toastLog("使用普通的返回");
+    if (RootBack != true) {
+        toastLog("尝试使用“无障碍权限”进行返回")
         back();
         sleep(1000);
-    }
-    if (context_i_back == 1) {
-        toastLog("使用ROOT返回，请确保已给ROOT权限！");
+    } else {
+        toastLog("尝试使用“ROOT权限”进行返回")
         Back();
         sleep(1000);
     }
-    if (context_i_back == 2) {
-        OpeninHd();
-    }
-    if (context_i_back == 3) {
-        toastLog("从屏幕中间向从左向内滑动来返回");
-        gestures([context_gestures_speed, [0, height / 2],
-            [500, height / 2]
-        ]);
-        sleep(1000);
-    }
-    if (context_i_back == 5) {
-        toastLog("从屏幕左侧下方向上滑动来返回");
-        gestures([context_gestures_speed, [width / 2 - 300, height - 1],
-            [width / 2 - 300, height - 500]
-        ]);
-        sleep(1000);
-    }
-    if (context_i_back == 4) {
-        toastLog("从屏幕中间向从右向内滑动来返回");
-        gestures([context_gestures_speed, [width - 1, height / 2],
-            [width - 500, height / 2]
-        ]);
-        sleep(1000);
-    }
-    if (context_i_back == 6) {
-        toastLog("从屏幕左侧下面向上面滑动来返回");
-        gestures([context_gestures_speed, [width / 2 + 300, height - 1],
-            [width / 2 + 300, height - 500]
-        ]);
-        sleep(1000);
-    }
 }
-if (T == 1) {
-    log("使用“悬浮日志”");
-
+if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == true && files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/吐司or日志.txt") == "吐司") {
+    var ChangeToastLog = null;
+} else {
+    var ChangeToastLog = true;
+}
+if (ChangeToastLog == true) {
     function toastLog(message) {
         log(message);
         var myDate = new Date();
         ui.run(() => {
-            w.WZ.setText(myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒：" + message + "\n" + w.WZ.getText());
-            return true;
+            context_FloatJournal.WZ.setText(myDate.getHours() + "时" + myDate.getMinutes() + "分" + myDate.getSeconds() + "秒：" + message + "\n" + context_FloatJournal.WZ.getText());
         });
     }
-    var w = floaty.rawWindow(
-        <card bg="#80000000">
-            <vertical align="center">
-                <img src="{{getStorageData('APPbasic', 'URLprefix')}}/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
-                <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
-                <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
-            </vertical>
-        </card>
-    );
-    w.setSize(device.width, 500);
-    w.setTouchable(false);
-    w.setPosition(0, device.height - 500);
-} else if (T == 0) {
-    log("使用脚本自带“吐司”");
 }
-var PlWhile = null;
+if (files.listDir("/sdcard/").length == 0) {
+    toastLog("未授予“存储权限”，使用默认配置");
+    RootBack = false;
+} else {
+    if (files.exists("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt") == true) {
+        if (files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt") == "true") {
+            RootBack = true;
+        } else if (files.read("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt") == "false") {
+            RootBack = false;
+        } else {
+            toastLog("脚本配置文件错误，已尝试删除错误配置文件：(/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt)" + files.remove("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt"));
+            files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt");
+            files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt", "false");
+            RootBack = false;
+        }
+    } else {
+        files.createWithDirs("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt");
+        files.write("/storage/emulated/0/OrangeJs/微博任务自动脚本/Root返回开关.txt", "false");
+        RootBack = false;
+    }
+}
+
+function StopScriptWindowOn() {
+    //下面是悬浮窗
+    var window = floaty.window(
+        <frame>
+            <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336"/>
+        </frame>
+    );
+    //setInterval(() => {}, 1000);
+    var execution = null;
+    //记录按键被按下时的触摸坐标
+    var x = 0,
+        y = 0;
+    //记录按键被按下时的悬浮窗位置
+    var windowX, windowY;
+    //记录按键被按下的时间以便判断长按等动作
+    var downTime;
+    window.action.setOnTouchListener(function(view, event) {
+        switch (event.getAction()) {
+            case event.ACTION_DOWN:
+                x = event.getRawX();
+                y = event.getRawY();
+                windowX = window.getX();
+                windowY = window.getY();
+                downTime = new Date().getTime();
+                return true;
+            case event.ACTION_MOVE:
+                //移动手指时调整悬浮窗位置
+                window.setPosition(windowX + (event.getRawX() - x),
+                    windowY + (event.getRawY() - y));
+                //如果按下的时间超过1.5秒判断为长按，退出脚本
+                if (new Date().getTime() - downTime > 1500) {
+                    toast("长按可以移动位置哦～");
+                }
+                return true;
+            case event.ACTION_UP:
+                //手指弹起时如果偏移很小则判断为点击
+                if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
+                    onClick();
+                }
+                return true;
+        }
+        return true;
+    });
+
+    function onClick() {
+        floaty.closeAll();
+        threads.shutDownAll();
+        let view = ui.inflate(
+            <vertical bg="{{context_framebg}}" padding="25 0 25 0">
+                <img src="@drawable/ic_warning_black_48dp" h="35" tint="{{context_textColor}}" margin="5"/>
+                <text text="微博任务自动脚本：已为您停止运行" textSize="15" textStyle="bold" textColor="{{context_textColor}}" gravity="center" margin="5"/>
+            </vertical>
+        );
+        dialogs.build({
+            customView: view,
+
+            wrapInScrollView: false,
+
+            autoDismiss: true
+        }).show();
+        log("用户点击了停止按钮");
+        exit();
+    }
+}
+
+function FloatJournal() {
+    if (ChangeToastLog == true) {
+        context_FloatJournal = floaty.rawWindow(
+            <card bg="#80000000">
+                <vertical align="center">
+                    <img src="{{getStorageData('APPbasic', 'URLprefix')}}/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
+                    <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
+                    <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
+                </vertical>
+            </card>
+        );
+        context_FloatJournal.setSize(device.width, 500);
+        context_FloatJournal.setTouchable(false);
+        context_FloatJournal.setPosition(0, device.height - 500);
+    }
+}
 
 function WhatIsThis() {
     try {
@@ -890,7 +577,7 @@ function WhatIsThis() {
     }
 }
 
-function OpeninHd() {
+function openInTask() {
     while (true) {
         if (WhatIsThis() == "新手任务") {
             dialogs.alert("暂不支持自动完成“新手任务”", "很抱歉，由于开发者未对“新手任务”进行适配，脚本暂时无法完成“新手任务”，感谢您的使用！")
@@ -1605,7 +1292,7 @@ function DoTask() {
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toastLog("当前未处于“任务中心”界面，正在重新尝试打开ddd");
-            OpeninHd();
+            openInTask();
             DoTask();
             break;
         }
@@ -1796,7 +1483,7 @@ function DoTask() {
         } else if (Rwmodel == "顺序") {
             i++;
         }
-        OpeninHd();
+        openInTask();
     }
     //删除 转发&发送 的任务微博
     while (true) {
@@ -1950,14 +1637,23 @@ function DoTask() {
                 } else {
                     var While = 0;
                     toastLog("当前已无任务遗留微博");
-                    dialogs.alert("微博任务自动脚本：\n脚本已运行完成");
-                    log("微博任务自动脚本：脚本已运行完成");
+                    let view = ui.inflate(
+                        <vertical bg="{{context_framebg}}" padding="25 0 25 0">
+                            <img src="@drawable/ic_check_circle_black_48dp" h="35" tint="{{context_textColor}}" margin="5"/>
+                            <text id="tip" textSize="15" textStyle="bold" textColor="{{context_textColor}}" gravity="center" margin="5"/>
+                        </vertical>
+                    );
+                    view.tip.setText(context_thisScriptName + "：脚本已运行完成");
+                    dialogs.build({
+                        customView: view,
+                        wrapInScrollView: false,
+                        autoDismiss: true
+                    }).show();
+                    floaty.closeAll();
+                    threads.shutDownAll();
                     exit();
                 }
             }
         }
     }
 }
-
-OpeninHd();
-DoTask();
