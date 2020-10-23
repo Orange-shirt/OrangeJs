@@ -585,6 +585,7 @@ function openInTask() {
         function ClickRk() {
             let a = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/gm").findOnce();
             let b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h4").findOnce();
+            let yhA = selector().findOnce();
             if (b != null && b.childCount() > 0 &&
                 b.child(0).childCount() > 0 &&
                 b.child(0).child(0).childCount() > 4 &&
@@ -626,7 +627,16 @@ function openInTask() {
                         }
                     }
                 }
+            } else if (yhA != null && yhA.childCount() > 0 &&
+                yhA.child(0).childCount() > 4 &&
+                yhA.child(0).child(4).childCount() > 0 &&
+                yhA.child(0).child(4).child(0).childCount() > 0 &&
+                yhA.child(0).child(4).child(0).child(0).childCount() > 1 &&
+                yhA.child(0).child(4).child(0).child(0).child(1).childCount() > 0 &&
+                yhA.child(0).child(4).child(0).child(0).child(1).child(0).text() == "种豆得豆") {
+                return yhA.child(0).child(4).child(0).child(0).child(1);
             }
+
         }
         if (className("android.view.View").desc("我的").findOnce() != null && text("种豆得豆").className("android.widget.TextView").findOnce() != null && text("瓜分亿万京豆").className("android.widget.TextView").findOnce() != null) {
             if (text("种豆得豆").className("android.widget.TextView").findOnce().parent().clickable() == true) {
@@ -679,6 +689,7 @@ function openInTask() {
     }
     for (var d = 10; d > 0; d--) {
         if (MakeSureInHD() == true) {
+            sleep(3000);
             break
         } else {
             toastLog("正在等待“种豆得豆”活动界面加载，剩余" + d + "秒……");
@@ -757,7 +768,7 @@ function DoTask() {
         }
     }
 
-    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友", "低价包邮", "高考加油", "千万京豆", "种豆专享"];
+    let ShouQu = ["好友帮收", "逛逛会场", "点击领取", "营养液", "每日签到", "618活动", "浏览店铺", "挑选商品", "金融双签", "疯抢爆品", "收取好友", "低价包邮", "高考加油", "千万京豆", "种豆专享", "健康宝藏"];
     for (let a = 0; a < ShouQu.length; a++) {
         while (className("android.widget.TextView").text(ShouQu[a]).findOnce() != null && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).childCount() > 2 && className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2).className() == "android.widget.TextView") {
             let b = className("android.widget.TextView").text(ShouQu[a]).findOnce().parent().child(0).child(2);
@@ -767,16 +778,62 @@ function DoTask() {
         }
     }
 
-    if (className("android.widget.ScrollView").findOnce() != null && className("android.widget.ScrollView").findOnce().childCount() > 0 && className("android.widget.ScrollView").findOnce().child(0).childCount() > 2) {
+    function findQBRW() {
+        let a = className("android.widget.LinearLayout").id("com.jingdong.app.mall:id/aba").findOnce();
+        if (a != null && a.childCount() > 0 &&
+            a.child(0).childCount() > 0 &&
+            a.child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).child(0).child(0).child(0).childCount() > 0) {
+            for (let i = 0; i < a.child(0).child(0).child(0).child(0).child(0).child(0).childCount(); i++) {
+                if (a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).childCount() > 0 &&
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).child(0).childCount() > 1 &&
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).child(0).child(1).text().search("更多任务") >= 0 ||
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).childCount() > 0 &&
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).child(0).childCount() > 1 &&
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).child(0).child(1).text().search("全部任务") >= 0) {
+                    return a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).child(0);
+                } else if (a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).childCount() > 1 &&
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).child(1).text().search("更多任务") >= 0 ||
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).childCount() > 1 &&
+                    a.child(0).child(0).child(0).child(0).child(0).child(0).child(i).child(1).text().search("全部任务") >= 0) {
+                    return a.child(0).child(0).child(0).child(0).child(0).child(0).child(i);
+                }
+            }
+        }
+        if (a != null &&
+            a.childCount() > 0 &&
+            a.child(0).childCount() > 0 &&
+            a.child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).child(0).child(0).childCount() > 0 &&
+            a.child(0).child(0).child(0).child(0).child(0).child(0).childCount() > 2) {
+            let i = a.child(0).child(0).child(0).child(0).child(0).child(0).childCount();
+            if (a.child(0).child(0).child(0).child(0).child(0).child(0).child(i - 2).childCount() > 1 &&
+                a.child(0).child(0).child(0).child(0).child(0).child(0).child(i - 2).child(1).text().search("更多任务") >= 0) {
+                return a.child(0).child(0).child(0).child(0).child(0).child(0).child(i - 2).child(1);
+            }
+        }
+    }
+    log("r" + findQBRW());
+    if (findQBRW() != undefined) {
+        let a = findQBRW().bounds();
+        click(a.centerX(), a.centerY());
+        toastLog("已尝试点击“全部任务”按钮X");
+        sleep(3000);
+    } else if (className("android.widget.ScrollView").findOnce() != null && className("android.widget.ScrollView").findOnce().childCount() > 0 && className("android.widget.ScrollView").findOnce().child(0).childCount() > 2) {
         let a = className("android.widget.ScrollView").findOnce().child(0).child(className("android.widget.ScrollView").findOnce().child(0).childCount() - 2).bounds();
         click(a.centerX(), a.centerY());
         toastLog("已尝试点击“全部任务”按钮");
-        sleep(2000);
+        sleep(3000);
     } else if (className("android.widget.TextView").text("收取营养液").findOnce() != null && className("android.widget.TextView").text("收取营养液").findOnce().parent().className() == "android.view.ViewGroup" && className("android.widget.TextView").text("收取营养液").findOnce().parent().parent().childCount() > 14) {
         let a = className("android.widget.TextView").text("收取营养液").findOnce().parent().parent().child(13).bounds();
         click(a.centerX(), a.centerY());
         toastLog("已尝试点击“全部任务”按钮");
-        sleep(2000);
+        sleep(3000);
     }
 
 
@@ -1415,4 +1472,4 @@ function DoTask() {
     floaty.closeAll();
     threads.shutDownAll();
     exit();
-}
+};

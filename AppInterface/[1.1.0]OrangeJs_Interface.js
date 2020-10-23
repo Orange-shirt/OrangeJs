@@ -2,7 +2,7 @@
 importClass(android.content.Intent);
 importClass(android.net.Uri);
 importClass(java.io.File);
-context_DayOrNight = 1; 
+context_DayOrNight = 1;
 activity.window.addFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 context_LogomarginTop = "0"
 
@@ -570,8 +570,12 @@ function mainUi() {
                     });
 
                     if (res_script.statusCode == 200) {
-                        view.scriptText.setText("“" + ScriptName + "”" + "请求成功");
-                        contextDownJs.dismiss();
+                        try {
+                            view.scriptText.setText("“" + ScriptName + "”" + "请求成功");
+                            contextDownJs.dismiss();
+                        } catch (e) {
+                            log(e);
+                        }
                         var OrangeJs = res_script.body.string();
                         let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
                         engines.execScript(ScriptName, sharevalue + OrangeJs);
@@ -1337,7 +1341,7 @@ function SignUp() {
             let a = view.password.getText();
             if (md5(a.toString()) == "109e1be70ecf784109576e7a5df1750a") {
                 DHK.dismiss();
-                setStorageData("SignUp", "SignKey",a.toString());
+                setStorageData("SignUp", "SignKey", a.toString());
                 if (getStorageData("DayUi", "LogomarginTop") == undefined) {
                     setStorageData("DayUi", "LogomarginTop", "10");
                     log("浅色主题主界面间距设为了10")
