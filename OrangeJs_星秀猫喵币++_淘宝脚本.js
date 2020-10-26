@@ -1,5 +1,5 @@
 context_thisScriptName = "星秀猫喵币++";
-context_thisScriptVersion = "（Beta1.0）";
+context_thisScriptVersion = "（Beta1.1）";
 
 ScriptMENU();
 
@@ -297,9 +297,9 @@ function ScriptSettings() {
                 <vertical padding="25 0" bg="{{context_framebg}}">
                                     <img src="@drawable/ic_pets_black_48dp" w="20" h="20" margin="5" tint="{{context_textColor}}"/>
                                     <text id="tips" textColor="{{context_textColor}}" textSize="10sp"/>
-                                    <text text="脚本撸猫次数" textColor="{{context_textColor}}" textStyle="bold"/>
+                                    <text text="脚本喂猫次数" textColor="{{context_textColor}}" textStyle="bold"/>
                                     <input id="times" textColor="{{context_textColor}}" inputType="number" hint="请输入1～100的数字" textColorHint="#9E9E9E"/>
-                                    <text text="脚本撸猫延迟（单位：毫秒 1秒=1000毫秒）" textColor="{{context_textColor}}" textStyle="bold"/>
+                                    <text text="脚本喂猫延迟（单位：毫秒 1秒=1000毫秒）" textColor="{{context_textColor}}" textStyle="bold"/>
                                     <input id="timeyc" textColor="{{context_textColor}}" inputType="number" hint="请输入200～5000的数字" textColorHint="#9E9E9E"/>
                                     <linear orientation="horizontal" align="left" margin="0" paddingTop="0">
                                         <card layout_weight="50" h="40" cardCornerRadius="5dp" cardElevation="0dp" gravity="center_vertical" margin="5"cardBackgroundColor="{{context_SettingsCard}}">
@@ -687,7 +687,11 @@ function Justback() {
         sleep(1000);
     } else {
         toastLog("尝试使用“ROOT权限”进行返回")
+        try{
         Back();
+        }catch(e){
+            toastLog("“使用Root权限返回出错：”"+e);
+            }
         sleep(1000);
     }
 }
@@ -773,6 +777,38 @@ function openInTask() {
             }
         } else if (Done != false && shouye != null &&
             shouye.childCount() > 0 &&
+            shouye.child(0).childCount() > 0 &&
+            shouye.child(0).child(0).childCount() > 0 &&
+            shouye.child(0).child(0).child(0).childCount() > 1 &&
+            shouye.child(0).child(0).child(0).child(1).childCount() > 5 &&
+            shouye.child(0).child(0).child(0).child(1).child(5).childCount() > 0 &&
+            shouye.child(0).child(0).child(0).child(1).child(5).child(0).childCount() > 1 &&
+            shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).childCount() > 0) {
+            for (let i = 0; i < shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).childCount(); i++) {
+                if (shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).className() == "android.widget.FrameLayout" &&
+                    shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).desc() != null &&
+                    shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).desc() == "养猫分20亿") {
+                    if (shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).clickable() == "true" && MangDian == true) {
+                        shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).click();
+                        toastLog("已尝试盲点“" + shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).desc() + "”按钮");
+                    } else {
+                        let a = shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).bounds();
+                        click(a.centerX(), a.centerY());
+                        toastLog("已尝试点击“" + shouye.child(0).child(0).child(0).child(1).child(5).child(0).child(1).child(i).desc() + "”按钮");
+                    }
+                    sleep(3000);
+                    Done = true;
+                    break;
+                }
+            }
+            if (Done == true) {
+                break;
+            } else {
+                Done = false;
+                toastLog("在“我的淘宝”页面找不到“养猫分20亿”")
+            }
+        } else if (Done != false && shouye != null &&
+            shouye.childCount() > 0 &&
             shouye.child(0).childCount() > 1 &&
             shouye.child(0).child(1).childCount() > 0 &&
             shouye.child(0).child(1).child(0).childCount() > 2 &&
@@ -788,6 +824,42 @@ function openInTask() {
                 toastLog("已尝试点击“" + shouye.child(0).child(1).child(0).child(2).child(4).desc() + "”按钮");
             }
             sleep(3000);
+            if (Done != false && shouye != null &&
+                shouye.childCount() > 0 &&
+                shouye.child(0).childCount() > 0 &&
+                shouye.child(0).child(0).childCount() > 0 &&
+                shouye.child(0).child(0).child(0).childCount() > 0 &&
+                shouye.child(0).child(0).child(0).child(0).childCount() > 1 &&
+                shouye.child(0).child(0).child(0).child(0).child(1).childCount() > 1 &&
+                shouye.child(0).child(0).child(0).child(0).child(1).child(1).childCount() > 4 &&
+                shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).childCount() > 0 &&
+                shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).childCount() > 0) {
+                for (let i = 0; i < shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).childCount(); i++) {
+                    if (shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).className() == "android.widget.FrameLayout" &&
+                        shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).desc() != null &&
+                        shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).desc() == "养猫分20亿") {
+                        if (shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).clickable() == true && MangDian == true) {
+                            shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).click();
+                            toastLog("已尝试盲点“" + shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).desc() + "”按钮");
+                        } else {
+                            let a = shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).bounds();
+                            click(a.centerX(), a.centerY());
+                            toastLog("已尝试点击“" + shouye.child(0).child(0).child(0).child(0).child(1).child(1).child(4).child(0).child(i).desc() + "”按钮");
+                        }
+                        sleep(3000);
+                        Done = true;
+                        break;
+                    }
+                }
+                if (Done == true) {
+                    break;
+                } else {
+                    Done = false;
+                    toastLog("在“我的淘宝”页面找不到“养猫分20亿”")
+                }
+            } else {
+                Done = false;
+            }
         } else if (Zhushouye != null &&
             Zhushouye.childCount() > 2 &&
             Zhushouye.child(2).childCount() > 0 &&
@@ -804,6 +876,27 @@ function openInTask() {
                 let a = Zhushouye.child(2).child(0).child(0).child(3).child(1).child(3).bounds();
                 click(a.centerX(), a.centerY());
                 toastLog("已尝试点击首页“" + Zhushouye.child(2).child(0).child(0).child(3).child(1).child(3).desc() + "”按钮");
+            }
+            sleep(3000);
+        } else if (shouye != null &&
+            shouye.childCount() > 0 &&
+            shouye.child(0).childCount() > 0 &&
+            shouye.child(0).child(0).childCount() > 0 &&
+            shouye.child(0).child(0).child(0).childCount() > 2 &&
+            shouye.child(0).child(0).child(0).child(2).childCount() > 0 &&
+            shouye.child(0).child(0).child(0).child(2).child(0).childCount() > 0 &&
+            shouye.child(0).child(0).child(0).child(2).child(0).child(0).childCount() > 4 &&
+            shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).childCount() > 1 &&
+            shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).childCount() > 3 &&
+            shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).child(3).desc() != null &&
+            shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).child(3).desc() == "搜索") {
+            if (shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).child(3).clickable() == true && MangDian == true) {
+                shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).child(3).click();
+                toastLog("已尝试盲点“" + shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).child(3).desc() + "”按钮");
+            } else {
+                let a = shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).child(3).bounds();
+                click(a.centerX(), a.centerY());
+                toastLog("已尝试点击“" + shouye.child(0).child(0).child(0).child(2).child(0).child(0).child(4).child(1).child(3).desc() + "”按钮");
             }
             sleep(3000);
         } else if (Zhushouye != null &&
@@ -866,7 +959,10 @@ function openInTask() {
 }
 
 function makeA(mode) {
-    let a = className("com.uc.webkit.bb").findOnce();
+    var a = className("com.uc.webkit.bb").findOnce();
+    if (className("com.uc.webkit.ay").findOnce() != null) {
+        var a = className("com.uc.webkit.ay").findOnce();
+    }
     if (a != null &&
         a.childCount() > 0 &&
         a.child(0).childCount() > 0 &&
@@ -900,7 +996,10 @@ function makeA(mode) {
 
 function DoTask() {
     function makeB(mode) {
-        let a = className("com.uc.webkit.bb").findOnce();
+        var a = className("com.uc.webkit.bb").findOnce();
+        if (className("com.uc.webkit.ay").findOnce() != null) {
+            var a = className("com.uc.webkit.ay").findOnce();
+        }
         if (a != null &&
             a.childCount() > 0 &&
             a.child(0).childCount() > 0 &&
@@ -967,7 +1066,7 @@ function DoTask() {
             let nowCoin = A.child(3).child(1).child(0).child(1).text().replace("我的喵币,", "");
             toastLog("当前剩余：" + nowCoin + "喵币");
             if (nowCoin < 60000) {
-                toastLog("剩余喵币不足60000，停止撸猫升级");
+                toastLog("剩余喵币不足60000，停止喂猫升级");
                 break;
             }
         }
@@ -976,7 +1075,7 @@ function DoTask() {
             A.child(3).child(0).childCount() > 1 &&
             A.child(3).child(0).child(1).childCount() > 0 &&
             A.child(3).child(0).child(1).child(0).childCount() > 0 &&
-            A.child(3).child(0).child(1).child(0).child(0).text().search("撸猫升级") >= 0 ||
+            A.child(3).child(0).child(1).child(0).child(0).text().search("喂猫升级") >= 0 ||
             A.childCount() > 3 &&
             A.child(3).childCount() > 0 &&
             A.child(3).child(0).childCount() > 1 &&
@@ -1126,6 +1225,10 @@ function DoTask() {
                     RwTitle.search("开连续包月") < 0 &&
                     RwTitle.search("开通省钱卡") < 0 &&
                     RwTitle.search("蚂蚁庄园") < 0 &&
+                    RwTitle.search("开卡得") < 0 &&
+                    RwTitle.search("充话费") < 0 &&
+                    RwTitle.search("淘宝特价版") < 0 &&
+                    RwTitle.search("充值") < 0 &&
                     now != xz) {
                     if (Button.clickable() == true && MangDian == true) {
                         Button.click();
@@ -1139,12 +1242,15 @@ function DoTask() {
                     if (makeB("test") == false) {
                         for (let deng = 15; deng > 0; deng--) {
                             let W = className("com.uc.webview.export.WebView").findOnce();
+                            let WC = className("android.view.View").desc("任务完成").findOnce();
+                            let WCs=className("android.view.View").desc("任务已经").findOnce();
                             if (text("网络竟然崩溃了").findOnce() != null && className("android.widget.Button").text("刷新").clickable(true).findOnce() != null) {
                                 className("android.widget.Button").text("刷新").clickable(true).findOnce().click();
                                 toastLog("网络竟然崩溃了，已尝试点击“刷新”按钮");
                                 sleep(3000);
                             }
-                            if (W != null && W.childCount() > 1 &&
+                            if (WC != null ||
+                                W != null && W.childCount() > 1 &&
                                 W.child(1).childCount() > 0 &&
                                 W.child(1).child(0).childCount() > 0 &&
                                 W.child(1).child(0).child(0).childCount() > 2 &&

@@ -576,7 +576,7 @@ function WhatIsThis() {
         log(e);
     }
 }
-
+var PlWhile = null;
 function openInTask() {
     while (true) {
         if (WhatIsThis() == "新手任务") {
