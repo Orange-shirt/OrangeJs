@@ -330,7 +330,7 @@ function mainUi() {
                             </linear>
                             <card w="*" h="40" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 20 0" gravity="center" layout_gravity="center">
                                 <View bg="#90{{context_JDbgColor}}"/>
-                                <spinner id="sp_Jd1" entries="种豆得豆自动脚本|自动宠汪汪" textColor="#FFFFFF" align="center" marginLeft="10" textSize="15" gravity="center"/>
+                                <spinner id="sp_Jd1" entries="全民营业自动脚本|种豆得豆自动脚本|自动宠汪汪" textColor="#FFFFFF" align="center" marginLeft="10" textSize="15" gravity="center"/>
                             </card>
                         </card>
                     </linear>
@@ -727,14 +727,19 @@ function mainUi() {
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="'+context_SettingsCard+'";context_Logo="'+context_Logo+'";';
                 engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
         } else */
-        if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
+        if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
             let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E5%AE%A0%E6%B1%AA%E6%B1%AA_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
             let str = 'RunScript("' + Url + '","自动宠汪汪","com.jingdong.app.mall")';
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
             engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
             let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E7%A7%8D%E8%B1%86%E5%BE%97%E8%B1%86%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
             let str = 'RunScript("' + Url + '","种豆得豆自动脚本","com.jingdong.app.mall")';
+            let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
+            engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
+            let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E5%85%A8%E6%B0%91%E8%90%A5%E4%B8%9A%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
+            let str = 'RunScript("' + Url + '","全民营业自动脚本","com.jingdong.app.mall")';
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
             engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
         }

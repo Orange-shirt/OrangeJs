@@ -1061,7 +1061,9 @@ function DoTask() {
                                 }
                             }
 
-                        } else if (id("com.sina.weibo:id/element_editbox").findOnce() != null) {
+                        } else if (id("com.sina.weibo:id/element_editbox").findOnce() != null||
+                        id("com.sina.weibo:id/edit_view").findOnce()!=null&&
+                        id("com.sina.weibo:id/edit_view").findOnce().setText("CommentTest")==true) {
                             toastLog("已找到“评论框”");
                             setText("CommentTest");
                             sleep(1000);
@@ -1535,27 +1537,33 @@ function DoTask() {
             className("android.widget.FrameLayout").desc("我").findOnce().click();
         }
         toastLog("已尝试点击主页“我”按钮");
-        while (text("加载中").findOnce() != null) {
+        while (true) {
+            let j=text("加载中").findOnce();
+            if(j!=null){
             toastLog("正在等待“我的微博”加载……");
             sleep(2000);
+            }else{
+                break;
+                }
         }
         sleep(2000);
         if (id("com.sina.weibo:id/cabWeibo").findOnce() != null) {
             id("com.sina.weibo:id/cabWeibo").findOnce().click();
             toastLog("已尝试点击“我的微博”按钮");
             sleep(3000);
-            var WhileX = 1;
-            while (WhileX == 1) {
-                if (id("com.sina.weibo:id/lySearchInput").findOnce() != null) {
+            while (true) {
+                if (id("com.sina.weibo:id/common_search_root").findOnce() != null||
+                id("com.sina.weibo:id/contentTextView").findOnce()!=null||
+                id("com.sina.weibo:id/lySearchInput").findOnce() != null) {
                     toastLog("已进入“我的微博”界面");
                     sleep(2000);
-                    var WhileX = 0;
-                } else if (id("com.sina.weibo:id/lable").text("暂无微博").findOnce() != null) {
+                    break;
+                }else if (id("com.sina.weibo:id/lable").text("暂无微博").findOnce() != null) {
                     toastLog("已找到“暂无微博”提示");
-                    var WhileX = 0;
+                    break;
                 } else if (desc("暂无微博").findOnce() != null) {
                     toastLog("已找到“暂无微博”提示");
-                    var WhileX = 0;
+                    break;
                 } else {
                     toastLog("正在等待“我的微博”界面加载…");
                     sleep(2000);

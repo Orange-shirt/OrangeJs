@@ -1,6 +1,6 @@
 context_thisScriptName = "全民营业自动脚本";
 context_thisScriptVersion = "（Beta1.0）";
-
+Keyword = "全民营业";
 ScriptMENU();
 
 function ScriptMENU() {
@@ -501,7 +501,7 @@ if (ChangeToastLog == true) {
         });
     }
 }
-var SameTask = Number("0");
+var SameTaskRw=0;
 var RwTitle = null;
 if (files.listDir("/sdcard/").length == 0) {
     toastLog("未授予“存储权限”，使用默认配置");
@@ -683,6 +683,55 @@ function openInTask() {
             if (ClickRk() == undefined) {
                 break;
             }
+        } else if (id("com.jd.lib.category.feature:id/bt").clickable(true).className("android.widget.RelativeLayout").findOnce() != null && id("com.jd.lib.category.feature:id/bt").clickable(true).className("android.widget.RelativeLayout").findOnce().click() == true) {
+            toastLog("已尝试盲点分类“搜索框”");
+            sleep(3000);
+            let root = selector().findOnce();
+            if (root != null && root.childCount() > 0 &&
+                root.child(0).childCount() > 0 &&
+                root.child(0).child(0).childCount() > 0 &&
+                root.child(0).child(0).child(0).childCount() > 0 &&
+                root.child(0).child(0).child(0).child(0).childCount() > 1 &&
+                root.child(0).child(0).child(0).child(0).child(0).childCount() > 1 &&
+                root.child(0).child(0).child(0).child(0).child(0).child(1).childCount() > 2 &&
+                root.child(0).child(0).child(0).child(0).child(0).child(1).child(2).text() == "搜索" &&
+                root.child(0).child(0).child(0).child(0).child(1).childCount() > 1 &&
+                root.child(0).child(0).child(0).child(0).child(1).child(1).desc() != null &&
+                root.child(0).child(0).child(0).child(0).child(1).child(1).setText("") == true) {
+                toastLog("已尝试设置搜索框为：" + Keyword + "(" + root.child(0).child(0).child(0).child(0).child(1).child(1).setText(Keyword) + ")");
+                sleep(1000);
+                root.child(0).child(0).child(0).child(0).child(0).child(1).child(2).click();
+                toastLog("已尝试盲点“搜索”按钮");
+                sleep(2000);
+                for (let i = 10; i > 0; i--) {
+                    let h = className("androidx.recyclerview.widget.RecyclerView").findOnce();
+                    if (h != null &&
+                        h.childCount() > 1 &&
+                        h.child(1).childCount() > 0 &&
+                        h.child(1).child(0).childCount() > 0 &&
+                        h.child(1).child(0).child(0).className() == "android.widget.ImageView") {
+                        h.child(1).child(0).child(0).click();
+                        toastLog("已尝试盲点活动入口");
+                        break;
+                    } else {
+                        toastLog("正在等待活动入口加载，剩余" + i + "秒……");
+                        sleep(1000);
+                    }
+                }
+                let h = className("androidx.recyclerview.widget.RecyclerView").findOnce();
+                if (h != null &&
+                    h.childCount() > 1 &&
+                    h.child(1).childCount() > 0 &&
+                    h.child(1).child(0).childCount() > 0 &&
+                    h.child(1).child(0).child(0).className() == "android.widget.ImageView") {
+                    h.child(1).child(0).child(0).click();
+                    toastLog("已尝试盲点活动入口");
+                    break;
+                } else {
+                    toastLog("未找到活动入口界面，正在重新尝试");
+                    openInTask();
+                }
+            }
         } else if (className("android.view.View").desc("首页").clickable(true).findOnce() != null) {
             className("android.view.View").desc("首页").clickable(true).findOnce().click();
             toastLog("已尝试盲点京东主页“首页”按钮");
@@ -758,11 +807,15 @@ function DoTask() {
             for (let i = 0; A.child(0).child(0).childCount() > i; i++) {
                 if (equal == true &&
                     A.child(0).child(0).child(i).desc() != null &&
-                    A.child(0).child(0).child(i).desc() == text) {
+                    A.child(0).child(0).child(i).desc() == text ||
+                    equal == true &&
+                    A.child(0).child(0).child(i).text() == text) {
                     return A.child(0).child(0).child(i);
                 } else if (equal == false &&
                     A.child(0).child(0).child(i).desc() != null &&
-                    A.child(0).child(0).child(i).desc().search(text) >= 0) {
+                    A.child(0).child(0).child(i).desc().search(text) >= 0 ||
+                    equal == false &&
+                    A.child(0).child(0).child(i).text().search(text) >= 0) {
                     return A.child(0).child(0).child(i);
                 }
             }
@@ -781,11 +834,19 @@ function DoTask() {
                 if (Number(mycoin[0]) >= Number(mycoin[1])) {
                     if (jshop.clickable() == true && MangDian == true) {
                         jshop.click();
-                        toastLog("已尝试盲点：" + jshop.desc());
+                        if (jshop.desc() != null) {
+                            toastLog("已尝试盲点：" + jshop.desc());
+                        } else {
+                            toastLog("已尝试盲点：" + jshop.text());
+                        }
                     } else {
                         let a = jshop.bounds();
                         click(a.centerX(), jshop.centerY());
-                        toastLog("已尝试点击：" + jshop.desc());
+                        if (jshop.desc() != null) {
+                            toastLog("已尝试点击：" + jshop.desc());
+                        } else {
+                            toastLog("已尝试点击：" + jshop.text());
+                        }
                     }
                     sleep(3000);
                 } else {
@@ -826,6 +887,7 @@ function DoTask() {
     }
     DianSongHuo();
     let a = className("android.view.View").desc("领金币").findOnce();
+    let b = className("android.view.View").text("领金币").findOnce();
     if (a != null) {
         if (a.clickable() == true && MangDian == true) {
             a.click();
@@ -833,6 +895,16 @@ function DoTask() {
         } else {
             let b = a.bounds();
             click(b.centerX(), b.centerY());
+            toastLog("已尝试点击“领金币”按钮");
+        }
+        sleep(3000);
+    } else if (b != null) {
+        if (b.clickable() == true && MangDian == true) {
+            b.click();
+            toastLog("已尝试盲点“领金币”按钮");
+        } else {
+            let bb = b.bounds();
+            click(bb.centerX(), bb.centerY());
             toastLog("已尝试点击“领金币”按钮");
         }
         sleep(3000);
@@ -920,12 +992,12 @@ function DoTask() {
             } else {
                 if (B.child(a + 1).text() != "") {
                     if (RwTitle != null && RwTitle == B.child(a + 1).text()) {
-                        SameTask++;
-                        toastLog("上次任务未完成或京东任务标题刷新出现BUG*" + SameTask + "次");
+                        SameTaskRw++;
+                        toastLog("上次任务未完成或京东任务标题刷新出现BUG*" + SameTaskRw + "次");
                     }
-                    if (SameTask >= 2) {
-                        var SameTask = 0;
-                        toastLog("上次任务未完成或京东任务标题刷新出现BUG已达" + SameTask + "次，正在尝试重新进入完成");
+                    if (SameTaskRw >= 2) {
+                        var SameTaskRw = 0;
+                        toastLog("上次任务未完成或京东任务标题刷新出现BUG已达" + SameTaskRw + "次，正在尝试重新进入完成");
                         openInTask();
                         DoTask();
                     }
@@ -948,9 +1020,13 @@ function DoTask() {
                     B.child(a + 3).desc() != "") {
                     RwButton = B.child(a + 3);
                     RwButtonText = B.child(a + 3).desc();
+                } else if (B.child(a + 3).text() != null &&
+                    B.child(a + 3).text() != "") {
+                    RwButton = B.child(a + 3);
+                    RwButtonText = B.child(a + 3).text();
                 } else {
-                    toastLog("标题错误！：" + B.child(a + 3).desc() + "[" + a + "]");
-                    console.error("标题错误！：" + B.child(a + 3).desc() + "[" + a + "]");
+                    toastLog("按钮标题错误！：" + B.child(a + 3).desc() + B.child(a + 3).text() + "[" + a + "]");
+                    console.error("按钮标题错误！：" + B.child(a + 3).desc() + "[" + a + "]");
                     exit();
                 }
                 if (RwTitle.search("战队PK") < 0 &&
@@ -979,7 +1055,9 @@ function DoTask() {
                             let StopC = className("android.widget.FrameLayout").id("com.jd.lib.jshop.feature:id/n_").findOnce();
                             let liulan = className("android.view.View").textContains("任意浏览以下").findOnce();
                             let Jiagou = className("android.view.View").textContains("在当前页任意加购").findOnce();
-                            if (StopC != null &&
+                            let kaika=text("品牌会员联合开卡").id("com.jingdong.app.mall:id/fd").findOnce();
+                            if (kaika!=null||
+                                StopC != null &&
                                 StopC.childCount() > 0 &&
                                 StopC.child(0).childCount() > 0 &&
                                 StopC.child(0).child(0).childCount() > 1 &&
