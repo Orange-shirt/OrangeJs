@@ -309,17 +309,6 @@ function mainUi() {
                     </linear>
                     <card h="1" margin="5 5" cardCornerRadius="1dp" cardElevation="0dp" gravity="center_vertical" cardBackgroundColor="{{context_Fgx}}"/>
                     <linear orientation="horizontal" align="left" margin="0 5 0 0">
-                        <card layout_weight="50" h="120" cardCornerRadius="10dp" cardElevation="0dp" align="left" margin="5 0 3 5">
-                            <View id="Taobaobg" bg="#{{context_TBbgColor}}" h="*" w="*"/>
-                            <linear orientation="horizontal" align="center" margin="0" layout_gravity="left">
-                                <img src="https://pp.myapp.com/ma_icon/0/icon_5080_1587958433/96" w="20"  h="20" margin="20 23 0 0"/>
-                                <text text="手机淘宝" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="15" margin="5 23 0 0"/>
-                            </linear>
-                            <card w="*" h="40" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 20 0" gravity="center" layout_gravity="center">
-                                <View w="*" h="*" bg="#90{{context_TBbgColor}}"/>
-                                <text id="ScriptTwo" text="星秀猫喵币++" typeface="sans" color="#FFFFFF"  gravity="center" textSize="15" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
-                            </card>
-                        </card>
                         <card id="R_JD" layout_weight="50" h="120" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0 3 5" foreground="?selectableItemBackground">
                             <View id="Jingdongbg" bg="#{{context_JDbgColor}}" h="*" w="*"/>
                             <linear orientation="horizontal" align="left" margin="0">
@@ -330,11 +319,9 @@ function mainUi() {
                             </linear>
                             <card w="*" h="40" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 20 0" gravity="center" layout_gravity="center">
                                 <View bg="#90{{context_JDbgColor}}"/>
-                                <spinner id="sp_Jd1" entries="全民营业自动脚本|种豆得豆自动脚本|自动宠汪汪" textColor="#FFFFFF" align="center" marginLeft="10" textSize="15" gravity="center"/>
+                                <spinner id="sp_Jd1" entries="种豆得豆自动脚本|自动宠汪汪" textColor="#FFFFFF" align="center" marginLeft="10" textSize="15" gravity="center"/>
                             </card>
                         </card>
-                    </linear>
-                    <linear orientation="horizontal" align="left" margin="0">
                         <card h="120" layout_weight="50" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0 3 5">
                             <View id="Weibobg" bg="#{{context_WBbgColor}}" h="*" w="*"/>
                             <linear orientation="horizontal" align="left" margin="0">
@@ -348,6 +335,8 @@ function mainUi() {
                                 <text id="ScriptNine" text="微博任务自动脚本" typeface="sans" color="#FFFFFF"  gravity="center" size="15" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </card>
+                    </linear>
+                    <linear orientation="horizontal" align="left" margin="0">
                         <card h="120" layout_weight="50" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="3 0 5 5">
                             <View id="Weixinbg" bg="#{{context_WXbgColor}}" h="*" w="*"/>
                             <linear orientation="horizontal" align="left" margin="0">
@@ -361,17 +350,17 @@ function mainUi() {
                                 <text id="ScriptOne" text="自动微信发消息" typeface="sans" color="#FFFFFF"  gravity="center" textSize="15" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </card>
-                    </linear>
-                    <linear orientation="horizontal" align="left" margin="0" weightSum="100">
-                        <card layout_weight="50" h="120" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0 5 10">
+                        <card h="120" layout_weight="50" cardCornerRadius="10dp" cardElevation="2dp" align="left" margin="5 0 3 5">
                             <View id="QQbg" bg="#{{context_QQbgColor}}" h="*" w="*"/>
                             <linear orientation="horizontal" align="left" margin="0">
                                 <img src="http://pp.myapp.com/ma_icon/0/icon_6633_1584375640/256" w="20" h="20" margin="20 23 0 0"/>
-                                <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="15" margin="5 23 0 0"/>
+                                <vertical padding="0 0" h="auto">
+                                    <text text="QQ" typeface="sans" textStyle="bold" color="#FFFFFF"  gravity="center" size="15" margin="5 23 0 0"/>
+                                </vertical>
                             </linear>
                             <card w="*" h="40" cardCornerRadius="5dp" cardElevation="0dp" margin="20 20 20 0" gravity="center" layout_gravity="center">
                                 <View w="*" h="*" bg="#90{{context_QQbgColor}}"/>
-                                <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" textSize="15" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
+                                <text id="ScriptThi" text="自动动态点赞" typeface="sans" color="#FFFFFF"  gravity="center" size="15" marginTop="0" bg="?attr/selectableItemBackground" clickable="true"/>
                             </card>
                         </card>
                     </linear>
@@ -424,7 +413,7 @@ function mainUi() {
         ui.CopyrightBottom.setText(context_BottomPics_Copyright);
     }
     if (getStorageData("ColorSetting", "GradientColor") != undefined) {
-        ui.Taobaobg.backgroundDrawable = GradientDrawable("TL_BR", ["#50" + context_JBScolor, "#" + context_TBbgColor, "#" + context_TBbgColor, "#" + context_TBbgColor]);
+        //ui.Taobaobg.backgroundDrawable = GradientDrawable("TL_BR", ["#50" + context_JBScolor, "#" + context_TBbgColor, "#" + context_TBbgColor, "#" + context_TBbgColor]);
         //ui.Pddbg.backgroundDrawable = GradientDrawable("TL_BR", ["#50" + context_JBScolor, "#" + context_PDDbgColor, "#" + context_PDDbgColor, "#" + context_PDDbgColor]);
         ui.Weibobg.backgroundDrawable = GradientDrawable("TL_BR", ["#50" + context_JBScolor, "#" + context_WBbgColor, "#" + context_WBbgColor, "#" + context_WBbgColor]);
         ui.Weixinbg.backgroundDrawable = GradientDrawable("TL_BR", ["#50" + context_JBScolor, "#" + context_WXbgColor, "#" + context_WXbgColor, "#" + context_WXbgColor]);
@@ -727,19 +716,14 @@ function mainUi() {
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="'+context_SettingsCard+'";context_Logo="'+context_Logo+'";';
                 engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
         } else */
-        if (ui.sp_Jd1.getSelectedItemPosition() == 2) {
+        if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
             let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E5%AE%A0%E6%B1%AA%E6%B1%AA_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
             let str = 'RunScript("' + Url + '","自动宠汪汪","com.jingdong.app.mall")';
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
             engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
+        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
             let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E7%A7%8D%E8%B1%86%E5%BE%97%E8%B1%86%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
             let str = 'RunScript("' + Url + '","种豆得豆自动脚本","com.jingdong.app.mall")';
-            let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
-            engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
-        } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
-            let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E5%85%A8%E6%B0%91%E8%90%A5%E4%B8%9A%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
-            let str = 'RunScript("' + Url + '","全民营业自动脚本","com.jingdong.app.mall")';
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
             engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
         }
@@ -754,13 +738,6 @@ function mainUi() {
     ui.ScriptNine.click(() => {
         let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E5%BE%AE%E5%8D%9A%E4%BB%BB%E5%8A%A1%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E5%BE%AE%E5%8D%9A%E8%84%9A%E6%9C%AC.js";
         let str = 'RunScript("' + Url + '","微博任务自动脚本","com.sina.weibo")';
-        let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
-        engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
-    });
-
-    ui.ScriptTwo.click(() => {
-        let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E6%98%9F%E7%A7%80%E7%8C%AB%E5%96%B5%E5%B8%81%2B%2B_%E6%B7%98%E5%AE%9D%E8%84%9A%E6%9C%AC.js";
-        let str = 'RunScript("' + Url + '","星秀猫喵币++","com.taobao.taobao")';
         let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
         engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
     });
