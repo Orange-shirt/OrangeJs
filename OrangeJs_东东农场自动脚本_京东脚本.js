@@ -1,4 +1,4 @@
-log("*   ╉ The Animal Protecting ╊");
+log("*   ╉ The Animal Protecting ╊");//
 log("*　　┏┓　　　┏┓+ +");
 log("*　┏┛┻━━━┛┻┓ + +");
 log("*　┃　　　　　　　┃");
