@@ -1,5 +1,5 @@
 context_thisScriptName = "种豆得豆自动脚本";
-context_thisScriptVersion = "（Beta1.23）";
+context_thisScriptVersion = "（Beta1.24）";
 
 ScriptMENU();
 
@@ -477,20 +477,15 @@ if (files.listDir("/sdcard/").length == 0) {
 }
 
 function StopScriptWindowOn() {
-    //下面是悬浮窗
     var window = floaty.window(
         <frame>
             <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336"/>
         </frame>
     );
-    //setInterval(() => {}, 1000);
     var execution = null;
-    //记录按键被按下时的触摸坐标
     var x = 0,
         y = 0;
-    //记录按键被按下时的悬浮窗位置
     var windowX, windowY;
-    //记录按键被按下的时间以便判断长按等动作
     var downTime;
     window.action.setOnTouchListener(function(view, event) {
         switch (event.getAction()) {
@@ -502,16 +497,13 @@ function StopScriptWindowOn() {
                 downTime = new Date().getTime();
                 return true;
             case event.ACTION_MOVE:
-                //移动手指时调整悬浮窗位置
                 window.setPosition(windowX + (event.getRawX() - x),
                     windowY + (event.getRawY() - y));
-                //如果按下的时间超过1.5秒判断为长按，退出脚本
                 if (new Date().getTime() - downTime > 1500) {
                     toast("长按可以移动位置哦～");
                 }
                 return true;
             case event.ACTION_UP:
-                //手指弹起时如果偏移很小则判断为点击
                 if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
                     onClick();
                 }
@@ -584,16 +576,43 @@ function openInTask() {
 
         function ClickRk() {
             let a = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/gm").findOnce();
-            let b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h4").findOnce();
+            if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h4").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h4").findOnce();
+            } else if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h0").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h0").findOnce();
+            } else if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/ha").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/ha").findOnce();
+            } else if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/he").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/he").findOnce();
+            }
             let yhA = selector().findOnce();
-            if (b != null && b.childCount() > 0 &&
-                b.child(0).childCount() > 0 &&
-                b.child(0).child(0).childCount() > 4 &&
-                b.child(0).child(0).child(4).childCount() > 0 &&
-                b.child(0).child(0).child(4).child(0).scrollable() == true) {
-                b.child(0).child(0).child(4).child(0).scrollForward();
-                toastLog("已尝试左滑菜单控件");
-                sleep(2000);
+
+            for (let v = 3; v >= 0; v--) {
+                if (b != null && b.childCount() > 0 &&
+                    b.child(0).childCount() > 0 &&
+                    b.child(0).child(0).childCount() > 3 &&
+                    b.child(0).child(0).child(3).childCount() > 0 &&
+                    b.child(0).child(0).child(3).child(0).scrollable() == true) {
+                    let hd = b.child(0).child(0).child(3).child(0).scrollForward();
+                    toastLog("已尝试左滑菜单控件:" + hd);
+                    sleep(2000);
+                    if (hd == false) {
+                        toastLog("滑动停止");
+                        break;
+                    }
+                } else if (b != null && b.childCount() > 0 &&
+                    b.child(0).childCount() > 0 &&
+                    b.child(0).child(0).childCount() > 4 &&
+                    b.child(0).child(0).child(4).childCount() > 0 &&
+                    b.child(0).child(0).child(4).child(0).scrollable() == true) {
+                    let hd = b.child(0).child(0).child(4).child(0).scrollForward();
+                    toastLog("已尝试左滑菜单控件:" + hd);
+                    sleep(2000);
+                    if (hd == false) {
+                        toastLog("滑动停止");
+                        break;
+                    }
+                }
             }
             if (a != null && a.childCount() > 0 &&
                 a.child(0).childCount() > 0 &&
@@ -611,7 +630,7 @@ function openInTask() {
                         }
                     }
                 }
-            }else if (a != null && a.childCount() > 0 &&
+            } else if (a != null && a.childCount() > 0 &&
                 a.child(0).childCount() > 0 &&
                 a.child(0).child(0).childCount() > 4 &&
                 a.child(0).child(0).child(4).childCount() > 0 &&
@@ -640,6 +659,22 @@ function openInTask() {
                             b.child(0).child(0).child(4).child(0).child(ii).child(i).child(0).childCount() > 1 &&
                             b.child(0).child(0).child(4).child(0).child(ii).child(i).child(0).child(1).text() == "种豆得豆") {
                             return b.child(0).child(0).child(4).child(0).child(ii).child(i);
+                        }
+                    }
+                }
+            } else if (b != null && b.childCount() > 0 &&
+                b.child(0).childCount() > 0 &&
+                b.child(0).child(0).childCount() > 3 &&
+                b.child(0).child(0).child(3).childCount() > 0 &&
+                b.child(0).child(0).child(3).child(0).childCount() > 0 &&
+                b.child(0).child(0).child(3).child(0).child(0).className() == "androidx.recyclerview.widget.RecyclerView" &&
+                b.child(0).child(0).child(3).child(0).child(0).childCount() > 5) {
+                for (let ii = 0; ii < b.child(0).child(0).child(3).child(0).childCount(); ii++) {
+                    for (let i = 0; i < b.child(0).child(0).child(3).child(0).child(ii).childCount(); i++) {
+                        if (b.child(0).child(0).child(3).child(0).child(ii).child(i).childCount() > 0 &&
+                            b.child(0).child(0).child(3).child(0).child(ii).child(i).child(0).childCount() > 1 &&
+                            b.child(0).child(0).child(3).child(0).child(ii).child(i).child(0).child(1).text() == "种豆得豆") {
+                            return b.child(0).child(0).child(3).child(0).child(ii).child(i);
                         }
                     }
                 }
@@ -685,10 +720,9 @@ function openInTask() {
             sleep(2000);
         } else if (currentPackage() != "com.jingdong.app.mall") {
             app.startActivity({
-                action: "android.intent.action.VIEW", //此处可为其他值
+                action: "android.intent.action.VIEW",
                 packageName: "com.jingdong.app.mall",
                 className: "com.jingdong.app.mall.main.MainActivity"
-                //此处可以加入其他内容，如data、extras
             });
             toastLog("当前未处于京东APP中，正在重新打开京东……");
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));

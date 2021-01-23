@@ -301,7 +301,7 @@ function mainUi() {
                                 </card>
                                 <card w="150dp" h="50" marginLeft="2" cardCornerRadius="25dp" cardElevation="0dp" gravity="center" cardBackgroundColor="{{context_textColor}}" alpha="0.7">
                                     <card id="Settings" w="*" h="40" margin="5 0 5 0" cardCornerRadius="20dp" cardElevation="0dp" align="center" cardBackgroundColor="{{context_framebg}}" foreground="?selectableItemBackground" clickable="true">
-                                        <text text="脚本设置" textStyle="bold" color="{{context_textColor}}" gravity="center" size="12"/>
+                                        <text text="软件设置" textStyle="bold" color="{{context_textColor}}" gravity="center" size="12"/>
                                     </card>
                                 </card>
                             </linear>

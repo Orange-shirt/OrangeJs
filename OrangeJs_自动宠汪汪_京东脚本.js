@@ -1,5 +1,5 @@
 context_thisScriptName = "自动宠汪汪";
-context_thisScriptVersion = "（Beta1.63）";
+context_thisScriptVersion = "（Beta1.64）";
 
 ScriptMENU();
 
@@ -576,16 +576,42 @@ function openInTask() {
     while (true) {
         function ClickRk() {
             let a = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/gm").findOnce();
-            let b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h4").findOnce();
-            if(b!=null&&b.childCount()>0&&
-            b.child(0).childCount()>0&&
-            b.child(0).child(0).childCount()>4&&
-            b.child(0).child(0).child(4).childCount()>0&&
-            b.child(0).child(0).child(4).child(0).scrollable()==true){
-                b.child(0).child(0).child(4).child(0).scrollForward();
-                toastLog("已尝试左滑菜单控件");
-                sleep(2000);
+            if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h4").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h4").findOnce();
+            } else if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h0").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/h0").findOnce();
+            } else if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/ha").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/ha").findOnce();
+            } else if (className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/he").findOnce() != null) {
+                var b = className("android.widget.LinearLayout").id("com.jd.lib.personal.feature:id/he").findOnce();
+            }
+            for (let v = 3; v >= 0; v--) {
+                if (b != null && b.childCount() > 0 &&
+                    b.child(0).childCount() > 0 &&
+                    b.child(0).child(0).childCount() > 3 &&
+                    b.child(0).child(0).child(3).childCount() > 0 &&
+                    b.child(0).child(0).child(3).child(0).scrollable() == true) {
+                    let hd = b.child(0).child(0).child(3).child(0).scrollForward();
+                    toastLog("已尝试左滑菜单控件:" + hd);
+                    sleep(2000);
+                    if (hd == false) {
+                        toastLog("滑动停止");
+                        break;
+                    }
+                } else if (b != null && b.childCount() > 0 &&
+                    b.child(0).childCount() > 0 &&
+                    b.child(0).child(0).childCount() > 4 &&
+                    b.child(0).child(0).child(4).childCount() > 0 &&
+                    b.child(0).child(0).child(4).child(0).scrollable() == true) {
+                    let hd = b.child(0).child(0).child(4).child(0).scrollForward();
+                    toastLog("已尝试左滑菜单控件:" + hd);
+                    sleep(2000);
+                    if (hd == false) {
+                        toastLog("滑动停止");
+                        break;
+                    }
                 }
+            }
             if (a != null && a.childCount() > 0 &&
                 a.child(0).childCount() > 0 &&
                 a.child(0).child(0).childCount() > 3 &&
@@ -631,6 +657,22 @@ function openInTask() {
                             b.child(0).child(0).child(4).child(0).child(ii).child(i).child(0).childCount() > 1 &&
                             b.child(0).child(0).child(4).child(0).child(ii).child(i).child(0).child(1).text() == "宠汪汪") {
                             return b.child(0).child(0).child(4).child(0).child(ii).child(i);
+                        }
+                    }
+                }
+            } else if (b != null && b.childCount() > 0 &&
+                b.child(0).childCount() > 0 &&
+                b.child(0).child(0).childCount() > 3 &&
+                b.child(0).child(0).child(3).childCount() > 0 &&
+                b.child(0).child(0).child(3).child(0).childCount() > 0 &&
+                b.child(0).child(0).child(3).child(0).child(0).className() == "androidx.recyclerview.widget.RecyclerView" &&
+                b.child(0).child(0).child(3).child(0).child(0).childCount() > 5) {
+                for (let ii = 0; ii < b.child(0).child(0).child(3).child(0).childCount(); ii++) {
+                    for (let i = 0; i < b.child(0).child(0).child(3).child(0).child(ii).childCount(); i++) {
+                        if (b.child(0).child(0).child(3).child(0).child(ii).child(i).childCount() > 0 &&
+                            b.child(0).child(0).child(3).child(0).child(ii).child(i).child(0).childCount() > 1 &&
+                            b.child(0).child(0).child(3).child(0).child(ii).child(i).child(0).child(1).text() == "宠汪汪") {
+                            return b.child(0).child(0).child(3).child(0).child(ii).child(i);
                         }
                     }
                 }

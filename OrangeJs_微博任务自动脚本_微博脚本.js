@@ -1,5 +1,5 @@
 context_thisScriptName = "微博任务自动脚本";
-context_thisScriptVersion = "（Beta1.19）";
+context_thisScriptVersion = "（Beta1.20）";
 
 ScriptMENU();
 
@@ -577,6 +577,7 @@ function WhatIsThis() {
     }
 }
 var PlWhile = null;
+
 function openInTask() {
     while (true) {
         if (WhatIsThis() == "新手任务") {
@@ -986,14 +987,15 @@ function DoTask() {
     }
 
     function Pinglun() {
-        toastLog("已尝试点击“评论”任务按钮");
+        toastLog("已尝试点击“评论/抢沙发”任务按钮");
         sleep(1000);
         while (text("加载中").findOnce() != null) {
             toastLog("正在等待“评论列表”加载……");
             sleep(2000);
         }
         if (id("titleText").findOnce() != null) {
-            if (id("titleText").findOnce().text() == "热门微博") {
+            if (id("titleText").findOnce().text() == "热门微博" ||
+                id("titleText").findOnce().text() == "快来抢沙发") {
                 toastLog("已处于“评论列表”");
                 sleep(2000);
                 if (id("contentTextView").findOnce() != null) {
@@ -1061,9 +1063,9 @@ function DoTask() {
                                 }
                             }
 
-                        } else if (id("com.sina.weibo:id/element_editbox").findOnce() != null||
-                        id("com.sina.weibo:id/edit_view").findOnce()!=null&&
-                        id("com.sina.weibo:id/edit_view").findOnce().setText("CommentTest")==true) {
+                        } else if (id("com.sina.weibo:id/element_editbox").findOnce() != null ||
+                            id("com.sina.weibo:id/edit_view").findOnce() != null &&
+                            id("com.sina.weibo:id/edit_view").findOnce().setText("CommentTest") == true) {
                             toastLog("已找到“评论框”");
                             setText("CommentTest");
                             sleep(1000);
@@ -1244,6 +1246,26 @@ function DoTask() {
         } else if (className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 6 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).child(0).child(1).desc() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).child(0).child(1).desc() == "日常任务" ||
+            className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 6 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).childCount() > 2 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).childCount() > 0 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).child(0).childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).child(0).child(1).text() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2).child(0).child(1).text() == "日常任务") {
+            var A = className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(6).child(2);
+            var Rwmodel = "顺序";
+        } else if (className("android.webkit.WebView").text("用户任务中心").findOnce() != null &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().childCount() > 1 &&
+            className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).childCount() > 0 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).childCount() > 2 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).childCount() > 1 &&
             className("android.webkit.WebView").text("用户任务中心").findOnce().child(1).child(0).child(2).child(1).childCount() > 5 &&
@@ -1293,7 +1315,7 @@ function DoTask() {
             var Rwmodel = "遍历日常任务";
         } else {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
-            toastLog("当前未处于“任务中心”界面，正在重新尝试打开ddd");
+            toastLog("D当前未处于“任务中心”界面，正在重新尝试打开");
             openInTask();
             DoTask();
             break;
@@ -1414,22 +1436,38 @@ function DoTask() {
             Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 3 &&
             A.child(i).child(3).text() != null &&
-            A.child(i).child(3).text() == "评论") {
+            A.child(i).child(3).text() == "评论" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).desc() != null &&
+            A.child(i).child(3).desc() == "抢沙发" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 3 &&
+            A.child(i).child(3).text() != null &&
+            A.child(i).child(3).text() == "抢沙发") {
             A.child(i).child(3).click();
             Pinglun();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 2 &&
             A.child(i).child(2).desc() != null &&
-            A.child(i).child(2).desc() == "评论") {
+            A.child(i).child(2).desc() == "评论" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 2 &&
+            A.child(i).child(2).desc() != null &&
+            A.child(i).child(2).desc() == "抢沙发") {
             A.child(i).child(2).click();
             Pinglun();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 1 &&
             A.child(i).child(1).text() != null &&
-            A.child(i).child(1).text() == "评论") {
+            A.child(i).child(1).text() == "评论" ||
+            Rwmodel == "顺序" && A.childCount() > i &&
+            A.child(i).childCount() > 1 &&
+            A.child(i).child(1).text() != null &&
+            A.child(i).child(1).text() == "抢沙发") {
             A.child(i).child(1).click();
             Pinglun();
-        } else if (FindKJ.Pinglun() == "评论") {
+        } else if (FindKJ.Pinglun() == "评论" || FindKJ.Pinglun() == "抢沙发") {
             Pinglun();
         } else if (Rwmodel == "顺序" && A.childCount() > i &&
             A.child(i).childCount() > 3 &&
@@ -1538,13 +1576,13 @@ function DoTask() {
         }
         toastLog("已尝试点击主页“我”按钮");
         while (true) {
-            let j=text("加载中").findOnce();
-            if(j!=null){
-            toastLog("正在等待“我的微博”加载……");
-            sleep(2000);
-            }else{
+            let j = text("加载中").findOnce();
+            if (j != null) {
+                toastLog("正在等待“我的微博”加载……");
+                sleep(2000);
+            } else {
                 break;
-                }
+            }
         }
         sleep(2000);
         if (id("com.sina.weibo:id/cabWeibo").findOnce() != null) {
@@ -1552,13 +1590,13 @@ function DoTask() {
             toastLog("已尝试点击“我的微博”按钮");
             sleep(3000);
             while (true) {
-                if (id("com.sina.weibo:id/common_search_root").findOnce() != null||
-                id("com.sina.weibo:id/contentTextView").findOnce()!=null||
-                id("com.sina.weibo:id/lySearchInput").findOnce() != null) {
+                if (id("com.sina.weibo:id/common_search_root").findOnce() != null ||
+                    id("com.sina.weibo:id/contentTextView").findOnce() != null ||
+                    id("com.sina.weibo:id/lySearchInput").findOnce() != null) {
                     toastLog("已进入“我的微博”界面");
                     sleep(2000);
                     break;
-                }else if (id("com.sina.weibo:id/lable").text("暂无微博").findOnce() != null) {
+                } else if (id("com.sina.weibo:id/lable").text("暂无微博").findOnce() != null) {
                     toastLog("已找到“暂无微博”提示");
                     break;
                 } else if (desc("暂无微博").findOnce() != null) {
