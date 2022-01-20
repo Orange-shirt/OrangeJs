@@ -531,6 +531,7 @@ function mainUi() {
     });
 
     function RunScript(ScriptUrl, ScriptName, AppPackageName) {
+        log(ScriptUrl)
         if (app.getAppName(AppPackageName) != null && auto.service != null) {
             threads.start(function() {
                 let view = ui.inflate(
@@ -692,7 +693,7 @@ function mainUi() {
     });
     ui.RefreshUI.click(() => {
         ui.finish();
-        engines.execScript("重启刷新界面", "RefreshMainUI();\n" + RefreshMainUI.toString());
+        engines.execScript("重启刷新界面", "RefreshMainUI();\n" + RefreshMainUI.toString())
 
         function RefreshMainUI() {
             app.startActivity({
@@ -703,7 +704,7 @@ function mainUi() {
         }
     });
     ui.ScriptOne.click(() => {
-        let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E5%BE%AE%E4%BF%A1%E5%8F%91%E6%B6%88%E6%81%AF_%E5%BE%AE%E4%BF%A1%E8%84%9A%E6%9C%AC.js";
+        let Url = getStorageData('APPbasic', 'URLprefix') + encodeURI("/OrangeJs_自动微信发消息.js");
         let str = 'RunScript("' + Url + '","自动微信发消息","com.tencent.mm")';
         let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
         engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
@@ -717,33 +718,27 @@ function mainUi() {
                 engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
         } else */
         if (ui.sp_Jd1.getSelectedItemPosition() == 1) {
-            let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E5%AE%A0%E6%B1%AA%E6%B1%AA_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
+            let Url = getStorageData('APPbasic', 'URLprefix') + encodeURI("/OrangeJs_自动宠汪汪.js");
             let str = 'RunScript("' + Url + '","自动宠汪汪","com.jingdong.app.mall")';
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
             engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
         } else if (ui.sp_Jd1.getSelectedItemPosition() == 0) {
-            let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E7%A7%8D%E8%B1%86%E5%BE%97%E8%B1%86%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC.js";
+            let Url = getStorageData('APPbasic', 'URLprefix') + encodeURI("/OrangeJs_种豆得豆自动脚本.js");
             let str = 'RunScript("' + Url + '","种豆得豆自动脚本","com.jingdong.app.mall")';
             let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
             engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
         }
     });
 
-    /*ui.ScriptTen.click(() => {
-        let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E5%A4%9A%E5%A4%9A%E6%9E%9C%E5%9B%AD%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E6%8B%BC%E5%A4%9A%E5%A4%9A%E8%84%9A%E6%9C%AC.js";
-        let str = 'RunScript("' + Url + '","多多果园自动脚本","com.xunmeng.pinduoduo")';
-        let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="'+context_SettingsCard+'";context_Logo="'+context_Logo+'";';
-            engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
-    });*/
     ui.ScriptNine.click(() => {
-        let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E5%BE%AE%E5%8D%9A%E4%BB%BB%E5%8A%A1%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC_%E5%BE%AE%E5%8D%9A%E8%84%9A%E6%9C%AC.js";
+        let Url = getStorageData('APPbasic', 'URLprefix') + encodeURI("/OrangeJs_微博任务自动脚本.js");
         let str = 'RunScript("' + Url + '","微博任务自动脚本","com.sina.weibo")';
         let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
         engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
     });
 
     ui.ScriptThi.click(() => {
-        let Url = getStorageData('APPbasic', 'URLprefix') + "/OrangeJs_%E8%87%AA%E5%8A%A8%E5%8A%A8%E6%80%81%E7%82%B9%E8%B5%9E_QQ%E8%84%9A%E6%9C%AC.js";
+        let Url = getStorageData('APPbasic', 'URLprefix') + encodeURI("/OrangeJs_自动动态点赞.js");
         let str = 'RunScript("' + Url + '","自动动态点赞","com.tencent.mobileqq")';
         let sharevalue = 'context_framebg="' + context_framebg + '";context_textColor="' + context_textColor + '";context_DayOrNight="' + context_DayOrNight + '";context_SettingsCard="' + context_SettingsCard + '";context_Logo="' + context_Logo + '";';
         engines.execScript("请求脚本", "" + sharevalue + str + ";\n" + RunScript.toString());
